@@ -6,11 +6,9 @@ const Footer = () => {
   return (
     <footer>
       <Container fluid>
-        <Row className="footer text-white">
+        <Row className="bg-primary text-white">
           <Col className="d-flex align-items-center justify-content-center">
-          <div>
             <p className="my-3">BcShop &copy; {currentYear}</p>
-          </div>
           </Col>
         </Row>
       </Container>
