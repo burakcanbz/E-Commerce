@@ -17,7 +17,7 @@ const Rating = ({ value, text }) => {
     }
   return (
     <div style={{ display: 'flex', alignItems: 'center'}}>
-        {stars}
+        <span>{stars}</span>
         <span style={{fontWeight: '500', textDecoration: 'underline', marginLeft: 5}}>{ text && text }</span>
     </div>
   )
