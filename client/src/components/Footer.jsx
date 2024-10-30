@@ -8,7 +8,9 @@ const Footer = () => {
       <Container fluid>
         <Row className="bg-primary text-white">
           <Col className="d-flex align-items-center justify-content-center">
+          <div>
             <p className="my-3">BcShop &copy; {currentYear}</p>
+          </div>
           </Col>
         </Row>
       </Container>
