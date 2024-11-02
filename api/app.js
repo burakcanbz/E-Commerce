@@ -4,10 +4,17 @@ dotenv.config();
 const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware')
 const { productRouter } = require('./routes/productRoutes'); 
+const { userRouter } = require('./routes/userRoutes'); 
 
 const app = express();
 
+// Body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+
 app.use('/api/products', productRouter);
+app.use('/api/users', userRouter);
+
 app.use('/*', notFound);
 app.use(errorHandler);
 
