@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors')
 dotenv.config();
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
@@ -12,6 +13,12 @@ const app = express();
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
+
+// Cors for cross origin
+app.use(cors({
+    origin : 'http://localhost:5000',
+    credentials: true
+}))
 
 // Cookie parser middleware
 app.use(cookieParser());
