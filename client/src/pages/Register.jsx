@@ -100,7 +100,7 @@ const Register = () => {
       <Row>
         <Col className="mt-3">
           Already have an account ?{" "}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+          <Link to={redirect ? `/login?redirect=/` : '/login'}>
             Login
           </Link>
         </Col>
