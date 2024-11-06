@@ -7,4 +7,4 @@ router.get('/', getProducts);
 
 router.get('/:id', getProductsById);
 
-module.exports = { productRouter: router };
+module.exports = { productRoutes: router };
