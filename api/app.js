@@ -5,8 +5,9 @@ dotenv.config();
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware')
-const { productRouter } = require('./routes/productRoutes'); 
-const { userRouter } = require('./routes/userRoutes'); 
+const { productRoutes } = require('./routes/productRoutes'); 
+const { userRoutes } = require('./routes/userRoutes'); 
+const { orderRoutes} = require('./routes/orderRoutes');
 
 const app = express();
 
@@ -23,8 +24,9 @@ app.use(cors({
 // Cookie parser middleware
 app.use(cookieParser());
 
-app.use('/api/products', productRouter);
-app.use('/api/users', userRouter);
+app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.use('/*', notFound);
 app.use(errorHandler);
