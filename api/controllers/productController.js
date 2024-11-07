@@ -14,7 +14,7 @@ exports.getProducts = asyncHandler(async (req, res) => {
 // @access Public
 exports.getProductsById = asyncHandler(async(req, res) => {
     const id = req.params.id;
-    const product = await Product.findById(id).exec();
+    const product = await Product.findById(id);
 
     if (product) {
         return res.json(product)
