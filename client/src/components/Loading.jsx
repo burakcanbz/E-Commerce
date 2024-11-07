@@ -4,16 +4,24 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <Spinner
-      animation="border"
-      role="status"
-      style={{
-        width: "100px",
-        height: "100px",
-        margin: "auto",
-        display: "block",
-      }}
-    ></Spinner>
+    <div
+    style={{
+      height: "80vh", 
+      display: "flex",
+      justifyContent: "center", 
+      alignItems: "center",
+    }}>
+      <Spinner
+        animation="border"
+        role="status"
+        style={{
+          width: "100px",
+          height: "100px",
+          margin: "auto auto",
+          display: "block",
+        }}
+      ></Spinner>
+    </div>
   );
 };
 

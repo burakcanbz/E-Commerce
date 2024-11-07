@@ -25,7 +25,7 @@ exports.addOrderItems = asyncHandler(async (req, res) => {
         product: x._id,
         _id: undefined,
       })),
-      user: req.user_id,
+      user: req.user._id,
       shippingAddress,
       paymentMethod,
       itemsPrice,
@@ -33,8 +33,8 @@ exports.addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
-    const createdOrder = await order.save();
 
+    const createdOrder = await order.save();
     res.status(201).json(createdOrder);
   }
 });
@@ -51,14 +51,16 @@ exports.getMyOrders = asyncHandler(async (req, res) => {
 // @route POST /api/orders/:id
 // @access Private
 exports.getOrderById = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id).populate('user', 'name email');  // get user name and email with populating from user property in order model
-
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  ); // Get the user's name and email by populating the user field, which stores a reference to the User model
+  console.log(order);
   if (order) {
     res.status(200).json(order);
-  }
-  else{
+  } else {
     res.status(404);
-    throw new Error('Order not found!');
+    throw new Error("Order not found!");
   }
 });
 
