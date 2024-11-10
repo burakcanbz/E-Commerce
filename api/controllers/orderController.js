@@ -1,7 +1,6 @@
 const Order = require("../models/orderModel");
 const asyncHandler = require("express-async-handler");
 
-
 // @desc Create new Order
 // @route POST /api/orders
 // @access Private
@@ -56,7 +55,6 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     "user",
     "name email"
   ); // Get the user's name and email by populating the user field, which stores a reference to the User model
-  console.log(order);
   if (order) {
     res.status(200).json(order);
   } else {
@@ -69,27 +67,29 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 // @route PUT /api/orders/:id/pay
 // @access Private
 exports.updateOrderToPaid = asyncHandler(async (req, res) => {
-  const { amount } = req.body;
-  const order = await Order.findById(req.params.id);
-
-  if (order) {
-    order.isPaid = true;
-    order.paidAmount = amount;
-    order.paidAt = Date.now();
-    order.paymentResult = {
-      id: req.body.id,
-      status: req.body.status,
-      update_time: req.body.update_time,
-      email_address: req.body.payer.email_address,
-    };
-    const updatedOrder = await order.save();
-
-    res
-      .status(200)
-      .json({ ...updatedOrder, clientSecret: process.env.STRIPE_SECRET_KEY });
-  } else {
-    res.status(404);
-    throw new Error("Order not found.");
+  try {
+    const { amount } = req.body;
+    const order = await Order.findById(req.params.id);
+    console.log(order);
+    if (order) {
+      order.isPaid = true;
+      order.paidAmount = amount;
+      order.paidAt = Date.now();
+      order.paymentResult = {
+        id: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        email_address: req.user.email_address,
+      };
+      const updatedOrder = await order.save();
+      res.status(200).json({ updatedOrder });
+    } else {
+      res.status(404);
+      throw new Error("Order not found.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error saving order" });
   }
 });
 
@@ -106,4 +106,3 @@ exports.updateOrderToDelivered = asyncHandler(async (req, res) => {
 exports.getOrders = asyncHandler(async (req, res) => {
   res.send("get all Orders");
 });
-

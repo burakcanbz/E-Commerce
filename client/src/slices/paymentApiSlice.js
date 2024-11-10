@@ -15,7 +15,7 @@ export const paymentApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: `${PAYMENT_URL}/config`,
       }),
-      keepUnusedDataFor: 5, 
+      keepUnusedDataFor: 5,
     }),
   }),
 });

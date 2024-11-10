@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "../components/PaymentForm";
 import { Row, Col, Container } from "react-bootstrap";
 import { usePayOrderMutation, useGetConfigQuery } from "../slices/paymentApiSlice";
+import Loading from "../components/Loading";
 
 const OrderPayment = () => {
   const [stripePromise, setStripePromise] = useState(null);
@@ -24,7 +25,6 @@ const OrderPayment = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data)
       setStripePromise(loadStripe(data.publishableKey));
     }
   }, [data]); 
@@ -33,6 +33,7 @@ const OrderPayment = () => {
     <>
       <Container >
         <Row className="my-5">
+        { isLoading && <Loading />}
           <Col>
             {clientSecret && stripePromise && (
               <Elements stripe={stripePromise} options={{ clientSecret }}>
