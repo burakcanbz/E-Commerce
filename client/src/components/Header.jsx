@@ -1,10 +1,10 @@
 import React from "react";
 import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
-import { logout } from '../slices/authSlice';
+import { logout } from "../slices/authSlice";
 import { LinkContainer } from "react-router-bootstrap";
 import logo from "../assets/b.png";
 
@@ -18,33 +18,39 @@ const Header = () => {
   const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async () => {
-    try{
-      await logoutApiCall().unwrap(); // without unwrap the logoutApiCall returns redux action object, with it it returns promise-like object 
+    try {
+      await logoutApiCall().unwrap(); // without unwrap the logoutApiCall returns redux action object, with it it returns promise-like object
       dispatch(logout());
-      navigate('/login');
-    }
-    catch(err){
+      navigate("/login");
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="secondary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>
+            <Navbar.Brand className="d-flex align-items-center justify-content-center">
               <img
                 src={logo}
                 alt="Logo"
-                style={{ maxHeight: 50, borderRadius: "50%", marginRight: 10 }}
+                style={{
+                  maxHeight: 50,
+                  borderRadius: "50%",
+                  marginRight: 10,
+                }}
               ></img>
-              BcShop
+              <h2 style={{ marginTop: 6, marginLeft: 10 }}>BCS</h2>
             </Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Nav className="ms-auto">
+              <LinkContainer to="/">
+                <Nav.Link >Products</Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <FaShoppingCart /> Cart{" "}
@@ -59,10 +65,12 @@ const Header = () => {
               </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
-                  <LinkContainer to='/profile'>
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <LinkContainer to="/profile">
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
