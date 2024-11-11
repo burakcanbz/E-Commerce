@@ -25,7 +25,7 @@ export const ProductDetail = () => {
   
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }))
-    navigate('/cart')
+    navigate('/')
   }
 
   return (

@@ -45,11 +45,15 @@ const orderSlice = createSlice({
       localStorage.setItem('order', JSON.stringify(state))
       return state;
     },
-
+    clearOrder: (state, action) => {
+      state.orders = [];
+      localStorage.setItem('order', JSON.stringify(state));
+      return state;
+    }
 
   },
 });
 
-export const { setOrder, setPaidAmount } = orderSlice.actions;
+export const { setOrder, setPaidAmount, clearOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;
