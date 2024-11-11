@@ -48,7 +48,7 @@ const Product = ({ product }) => {
           <Link to={`/product/${product._id}`}>
             <button class="btn btn-dark">Details...</button>
           </Link>
-          <button className="btn btn-dark" onClick={addToCartHandler}>
+          <button className="btn btn-dark" onClick={addToCartHandler} disabled={product.countInStock === 0}>
             Add to <FaCartShopping />
           </button>
         </Card.Text>
