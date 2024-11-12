@@ -1,19 +1,30 @@
-import React, { useState} from "react";
-import { Row, Col, Carousel } from "react-bootstrap";
-import Product from "../components/Product";
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
+import Product from "../components/Product";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 import ProductCarousel from "../components/ProductCarousel";
+import { FaArrowRight } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
 
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
+  var settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    adaptiveHeight: true,
   };
+
   return (
     <div>
       {isLoading ? (
@@ -29,17 +40,29 @@ const Home = () => {
       ) : (
         <>
           <Row>
-            <ProductCarousel/>
+            <ProductCarousel />
           </Row>
-          <h2> Latest Products</h2>
-          <Row>
-            {products.map((product, index) => {
-              return (
-                <Col sm={12} md={6} lg={4} xl={3} key={index}>
-                  <Product product={product} />
-                </Col>
-              );
-            })}
+          <Row className="mb-5">
+            <Link to="/technology" style={{ textDecoration: 'none', color: 'black'}}>
+              <h4>Technology&nbsp;&nbsp;<FaArrowRight /></h4> 
+            </Link>
+            <Slider {...settings}>
+              {products.map((product, index) => {
+                return (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Col sm={12} md={6} lg={4} xl={3} key={index}>
+                      <Product product={product} />
+                    </Col>
+                  </div>
+                );
+              })}
+            </Slider>
           </Row>
         </>
       )}
