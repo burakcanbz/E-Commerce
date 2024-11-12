@@ -1,13 +1,19 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState} from "react";
+import { Row, Col, Carousel } from "react-bootstrap";
 import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
+import ProductCarousel from "../components/ProductCarousel";
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
 
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
   return (
     <div>
       {isLoading ? (
@@ -22,6 +28,9 @@ const Home = () => {
         </div>
       ) : (
         <>
+          <Row>
+            <ProductCarousel/>
+          </Row>
           <h2> Latest Products</h2>
           <Row>
             {products.map((product, index) => {
