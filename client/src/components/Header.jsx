@@ -43,7 +43,7 @@ const Header = () => {
       <Navbar
         variant="dark"
         expand="lg"
-        className="fixed-top caption shadow-sm"
+        className="fixed-top header shadow-sm"
         collapseOnSelect
       >
         <Container>

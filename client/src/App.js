@@ -17,7 +17,7 @@ const App = () => {
       minHeight:"100vh"
     }}>
       <Header />
-      <main className='py-3 d-flex' style={{flexGrow: 1, marginTop: 100}}>
+      <main className='py-3 d-flex' style={{flexGrow: 1, marginTop: 120}}>
         <Container>
           <Outlet/>
         </Container>
