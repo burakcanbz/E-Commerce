@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Row,
@@ -11,10 +11,14 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
+import { useDispatch } from "react-redux";
+import { setRefetch } from "../slices/orderSlice";
 import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
+import OrderPayment from "./OrderPayment";
 
 const Order = () => {
   const { id: orderId } = useParams();
+  const dispatch = useDispatch();
 
   const {
     data: order,
@@ -22,7 +26,6 @@ const Order = () => {
     isLoading,
     error,
   } = useGetOrderDetailsQuery(orderId);
-  console.log(order);
 
   return isLoading ? (
     <Loading />
@@ -61,7 +64,7 @@ const Order = () => {
                 <strong>Method: </strong> {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Delivered on {order.paidAt}</Message>
+                <Message variant="success">Paid at {order.paidAt}</Message>
               ) : (
                 <Message variant="danger">Not Paid yet.</Message>
               )}
@@ -88,30 +91,33 @@ const Order = () => {
         </Col>
         <Col md={4}>
           <Card>
-            <ListGroup variant='flush'>
-                <ListGroup.Item>
-                    <h2>Order Summary</h2>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <Row>
-                        <Col>Items</Col>
-                        <Col>${order.itemsPrice}</Col>
-                    </Row>
-                    <Row>
-                        <Col>Shipping</Col>
-                        <Col>${order.shippingPrice}</Col>
-                    </Row>
-                    <Row>
-                        <Col>Tax</Col>
-                        <Col>${order.taxPrice}</Col>
-                    </Row>
-                    <Row>
-                        <Col>Total</Col>
-                        <Col>${order.totalPrice}</Col>
-                    </Row>
-                </ListGroup.Item>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+                <h2>Order Summary</h2>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Items</Col>
+                  <Col>${order.itemsPrice}</Col>
+                </Row>
+                <Row>
+                  <Col>Shipping</Col>
+                  <Col>${order.shippingPrice}</Col>
+                </Row>
+                <Row>
+                  <Col>Tax</Col>
+                  <Col>${order.taxPrice}</Col>
+                </Row>
+                <Row>
+                  <Col>Total</Col>
+                  <Col>${order.totalPrice}</Col>
+                </Row>
+              </ListGroup.Item>
             </ListGroup>
           </Card>
+          <Row>
+            <OrderPayment />
+          </Row>
         </Col>
       </Row>
     </>

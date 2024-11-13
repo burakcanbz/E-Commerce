@@ -12,14 +12,14 @@ const orderSlice = createSlice({
       const order = action.payload;
 
       const existOrder = state.orders.find(
-        (currentItem) => 
-          currentItem._id === order._id
+        (currentItem) =>
+          currentItem.paymentResult._id === order.paymentResult._id
       );
 
       if (existOrder) {
         // update
         state.orders = state.orders.map((x) =>
-          x._id === existOrder._id ? order : x
+          x.paymentResult._id === existOrder.paymentResult._id ? order : x
         );
       } else {
         state.orders = [...state.orders, order];

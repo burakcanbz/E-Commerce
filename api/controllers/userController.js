@@ -2,9 +2,14 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const { generateToken } = require("../utils/generateToken");
 
-// @desc Auth user & get token
-// @route POST /api/users/login
-// @access Public
+/**
+ * @description Auth user & get token
+ * @route POST /api/users/login
+ * @access Public
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -25,9 +30,14 @@ exports.authUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Register user
-// @route POST /api/users
-// @access Public
+/**
+ * @description Register user
+ * @route POST /api/users
+ * @access Public
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -57,9 +67,14 @@ exports.registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Logout user / clear cookie
-// @route POST /api/users/logout
-// @access Private
+/**
+ * @description Logout user - clear cookie
+ * @route POST /api/users/logout
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.logoutUser = asyncHandler(async (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
@@ -71,9 +86,14 @@ exports.logoutUser = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc Get user profile
-// @route GET /api/users/profile
-// @access Private
+/**
+ * @description Get user profile
+ * @route GET /api/users/profile
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
@@ -90,9 +110,14 @@ exports.getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Update user profile
-// @route PUT /api/users/profile
-// @access Private
+/**
+ * @description Update user profile
+ * @route PUT /api/users/profile
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
@@ -119,30 +144,50 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc Get users
-// @route GET /api/users
-// @access Private/Admin
+/**
+ * @description Get users
+ * @route GET /api/users
+ * @access Private/Admin
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.getUsers = asyncHandler(async (req, res) => {
   res.send('get users')
 });
 
-// @desc Get user by ID
-// @route GET /api/users/:id
-// @access Private/Admin
+/**
+ * @description Get user by ID
+ * @route GET /api/users/:id
+ * @access Private/Admin
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.getUserById = asyncHandler(async (req, res) => {
   res.send("get user by id");
 });
 
-// @desc Delete user
-// @route DELETE /api/users/:id
-// @access Private/Admin
+/**
+ * @description Delete user
+ * @route DELETE /api/users/:id
+ * @access Private/Admin
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.deleteUser = asyncHandler(async (req, res) => {
   res.send("delete user");
 });
 
-// @desc Update user
-// @route PUT /api/users/:id
-// @access Private/Admin
+/**
+ * @description Update user
+ * @route PUT /api/users/:id
+ * @access Private/Admin
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.updateUser = asyncHandler(async (req, res) => {
   res.send("update users");
 });

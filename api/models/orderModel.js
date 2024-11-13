@@ -70,6 +70,11 @@ const orderSchema = new mongoose.Schema({
     },
     deliveredAt: {
         type: Date,
+    },
+    paidAmount: {
+        type: Number,
+        required: true,
+        default: 0.0
     }
 },
 {

@@ -8,6 +8,7 @@ import Message from "../components/Message";
 import Loading from "../components/Loading";
 import { useCreateOrderMutation } from "../slices/ordersApiSlice";
 import { clearCartItems } from "../slices/cartSlice";
+import { setOrder } from "../slices/orderSlice";
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
@@ -38,8 +39,8 @@ const PlaceOrder = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
+      dispatch(setOrder(resp));
       dispatch(clearCartItems());
-      console.log(resp._id);
       navigate(`/order/${resp._id}`);
     } catch (err) {
       const errorMessage = error?.message || JSON.stringify(error); // Extract message or stringify the error
