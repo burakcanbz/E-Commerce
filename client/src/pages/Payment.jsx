@@ -41,7 +41,6 @@ const Payment = () => {
 
   useEffect(() => {
     const errors = validateAddress(shippingAddress);
-    console.log(Object.keys(errors))
     if (Object.keys(errors).length > 0) {
       navigate("/shipping");
     }
