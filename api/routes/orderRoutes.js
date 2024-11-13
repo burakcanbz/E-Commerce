@@ -4,7 +4,7 @@ const {
   getOrderById,
   updateOrderToPaid,
   updateOrderToDelivered,
-  getOrders,
+  getOrders
 } = require("../controllers/orderController");
 const express = require("express");
 const { protect, admin } = require("../middleware/authMiddleware");
@@ -16,6 +16,5 @@ router.route('/myorders').get(protect, getMyOrders);
 router.route('/:id').get(protect, getOrderById);
 router.route('/:id/pay').put(protect, updateOrderToPaid);
 router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered);
-
 
 module.exports = { orderRoutes: router };
