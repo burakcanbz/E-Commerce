@@ -35,7 +35,6 @@ export const ProductDetail = () => {
           <Button variant="secondary">Go Back</Button>
         </Link>
       </Row>
-
       {isLoading ? (
         <Loading />
       ) : error ? (
@@ -48,20 +47,20 @@ export const ProductDetail = () => {
             <Image src={product.image} alt={product.name} fluid></Image>
           </Col>
           <Col md={4}>
-            <ListGroup variant="flush">
-              <ListGroup.Item className="my-2">
+            <ListGroup variant="flush" className='rounded mx-3'>
+              <ListGroup.Item className="my-2 p-3">
                 <h3>{product.name}</h3>
               </ListGroup.Item>
-              <ListGroup.Item className="my-2">
+              <ListGroup.Item className="my-2 p-3">
                 <Rating
                   value={product.rating}
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroup.Item>
-              <ListGroup.Item className="my-2">
-                Price: {product.price}$
+              <ListGroup.Item className="my-2 p-3">
+                <strong>Price: {product.price}$</strong>
               </ListGroup.Item>
-              <ListGroup.Item className="my-2">
+              <ListGroup.Item className="my-2 p-3">
                 Description: {product.description}$
               </ListGroup.Item>
             </ListGroup>

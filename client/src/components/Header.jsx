@@ -1,7 +1,16 @@
-import React from "react";
-import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Badge,
+  NavDropdown,
+  Form,
+  Button,
+  InputGroup,
+} from "react-bootstrap";
+import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
@@ -9,6 +18,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import logo from "../assets/b.png";
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(0);
+
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -29,7 +40,12 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="secondary" variant="dark" expand="lg" className="shadow-sm" collapseOnSelect>
+      <Navbar
+        variant="dark"
+        expand="lg"
+        className="fixed-top header shadow-sm"
+        collapseOnSelect
+      >
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand className="d-flex align-items-center justify-content-center">
@@ -45,11 +61,27 @@ const Header = () => {
               <h2 style={{ marginTop: 6, marginLeft: 10 }}>BCS</h2>
             </Navbar.Brand>
           </LinkContainer>
-          <Navbar.Collapse>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              <Form className="d-flex">
+                <InputGroup>
+                  <InputGroup.Text id="basic-addon1">
+                    <FaSearch />
+                  </InputGroup.Text>
+                  <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    size="sm"
+                    aria-label="Search"
+                  />
+                </InputGroup>
+                <Button variant="outline-light">Search</Button>
+              </Form>
               <LinkContainer to="/">
-                <Nav.Link >Products</Nav.Link>
+                <Nav.Link>Products</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/cart">
                 <Nav.Link>

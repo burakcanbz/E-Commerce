@@ -1,9 +1,14 @@
 const Order = require("../models/orderModel");
 const asyncHandler = require("express-async-handler");
 
-// @desc Create new Order
-// @route POST /api/orders
-// @access Private
+/**
+ * @description Create new Order
+ * @route POST /api/orders
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
@@ -39,17 +44,27 @@ exports.addOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Get logged in user orders
-// @route GET /api/orders/myorders
-// @access Private
+/**
+ * @description Get logged in user orders
+ * @route GET /api/orders/myorders
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.getMyOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
   res.status(200).json(orders);
 });
 
-// @desc Get Order by ID
-// @route POST /api/orders/:id
-// @access Private
+/**
+ * @description Get Order by ID
+ * @route POST /api/orders/:id
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate(
     "user",
@@ -63,9 +78,14 @@ exports.getOrderById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Update order to paid
-// @route PUT /api/orders/:id/pay
-// @access Private
+/**
+ * @description Update the order to paid status
+ * @route PUT /api/orders/:id/pay
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.updateOrderToPaid = asyncHandler(async (req, res) => {
   try {
     const { amount } = req.body;
@@ -93,16 +113,26 @@ exports.updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Update order to delivered
-// @route PUT /api/orders/:id/deliver
-// @access Private/Admin
+/**
+ * @description Update order to delivered
+ * @route PUT /api/orders/:id/deliver
+ * @access Private/Admin
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.updateOrderToDelivered = asyncHandler(async (req, res) => {
   res.send("update order to delivered");
 });
 
-// @desc Update order to paid
-// @route POST /api/orders/:id/pay
-// @access Private/Admin
+/**
+ * @description get orders
+ * @route GET /api/orders
+ * @access Private/Admin
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
 exports.getOrders = asyncHandler(async (req, res) => {
   res.send("get all Orders");
 });

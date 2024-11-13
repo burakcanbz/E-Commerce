@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import main from './assets/main.jpg';
+import './App.css';
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
       minHeight:"100vh"
     }}>
       <Header />
-      <main className='py-3 d-flex' style={{flexGrow: 1}}>
+      <main className='py-3 d-flex' style={{flexGrow: 1, marginTop: 120}}>
         <Container>
           <Outlet/>
         </Container>
