@@ -72,7 +72,7 @@ export default function PaymentForm() {
     }
   }, [paidAmount, totalPrice, paySelectedOrder, refetch]);
 
-  return (
+  return ( !order.isPaid && 
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
       <Button

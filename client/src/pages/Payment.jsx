@@ -20,8 +20,29 @@ const Payment = () => {
     navigate("/placeorder");
   };
 
+  const validateAddress = (data) => {
+    const errors = {};
+  
+    if (!shippingAddress.address || shippingAddress.address.trim() === '') {
+      errors.address = "Address is required.";
+    }
+    if (!shippingAddress.city || shippingAddress.city.trim() === '') {
+      errors.city = "City is required.";
+    }
+    if (!shippingAddress.postalCode || shippingAddress.postalCode.trim() === '') {
+      errors.postalCode = "Postal Code is required.";
+    }
+    if (!shippingAddress.country || shippingAddress.country.trim() === '') {
+      errors.country = "Country is required.";
+    }
+  
+    return errors;
+  };
+
   useEffect(() => {
-    if (!shippingAddress || Object.keys(shippingAddress).length === 0) {
+    const errors = validateAddress(shippingAddress);
+    console.log(Object.keys(errors))
+    if (Object.keys(errors).length > 0) {
       navigate("/shipping");
     }
   }, [shippingAddress, navigate]);
@@ -37,7 +58,7 @@ const Payment = () => {
             <Form.Check
               type="radio"
               className="my-2"
-              label="Paypal or Credit Card"
+              label="Credit Card"
               id="PayPal"
               name="paymentMethod"
               value="Paypal"

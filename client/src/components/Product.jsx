@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -46,7 +46,7 @@ const Product = ({ product }) => {
         </Link>
         <Card.Text className="d-flex justify-content-between align-items-center">
           <Link to={`/product/${product._id}`}>
-            <button class="btn btn-dark">Details...</button>
+            <button className="btn btn-dark">Details...</button>
           </Link>
           <button className="btn btn-dark" onClick={addToCartHandler} disabled={product.countInStock === 0}>
             Add to <FaCartShopping />

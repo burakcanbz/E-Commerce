@@ -16,6 +16,7 @@ import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { LinkContainer } from "react-router-bootstrap";
 import logo from "../assets/b.png";
+import { clearOrder } from "../slices/orderSlice";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(0);
@@ -32,6 +33,7 @@ const Header = () => {
     try {
       await logoutApiCall().unwrap(); // without unwrap the logoutApiCall returns redux action object, with it it returns promise-like object
       dispatch(logout());
+      dispatch(clearOrder());
       navigate("/login");
     } catch (err) {
       console.log(err);

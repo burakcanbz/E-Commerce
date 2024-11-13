@@ -55,6 +55,7 @@ const Home = () => {
                       justifyContent: "space-between",
                       alignItems: "center",
                     }}
+                    key={index}
                   >
                     <Col sm={12} md={6} lg={4} xl={3} key={index}>
                       <Product product={product} />
