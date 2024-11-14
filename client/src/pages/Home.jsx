@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
@@ -8,22 +8,17 @@ import Message from "../components/Message";
 import ProductCarousel from "../components/ProductCarousel";
 import { FaArrowRight } from "react-icons/fa";
 import Slider from "react-slick";
+import { slickSettings } from "../utils/helpers";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
 
-  var settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnHover: true,
-    adaptiveHeight: true,
-  };
+  const searchedProducts = useSelector(
+    (state) => state.product?.searchedProducts
+  );
 
   return (
     <div>
@@ -37,16 +32,32 @@ const Home = () => {
             </Message>
           }
         </div>
+      ) : searchedProducts && searchedProducts.length !== products.length ? (
+        <Row>
+          {searchedProducts.map((product, index) => {
+            return (
+              <Col sm={12} md={6} lg={4} xl={3} key={index}>
+                <Product product={product} />
+              </Col>
+            );
+          })}{" "}
+        </Row>
       ) : (
         <>
           <Row>
             <ProductCarousel />
           </Row>
           <Row className="mb-5">
-            <Link to="/technology" style={{ textDecoration: 'none', color: 'black'}}>
-              <h4>Technology&nbsp;&nbsp;<FaArrowRight /></h4> 
+            <Link
+              to="/technology"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <h4>
+                Technology&nbsp;&nbsp;
+                <FaArrowRight />
+              </h4>
             </Link>
-            <Slider {...settings}>
+            <Slider {...slickSettings}>
               {products.map((product, index) => {
                 return (
                   <div
