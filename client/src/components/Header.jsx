@@ -15,22 +15,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { LinkContainer } from "react-router-bootstrap";
-import { useGetProductsQuery } from "../slices/productsApiSlice";
+import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
 import { clearOrder } from "../slices/orderSlice";
-import { updateProduct } from "../slices/productSlice";
+import { updateProduct, clearProduct } from "../slices/productSlice";
 import logo from "../assets/b.png";
 
 const Header = () => {
-
-  
-
   const location = useLocation();
   const [searchItem, setSearchItem] = useState("");
 
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
-  const {data : products, isLoading, error} = useGetProductsQuery();
+  const { data, isLoading, error } = useGetPaginatedProductsQuery({
+    page: 1,
+    limit: 6,
+  });
+
+  const electronics = data?.electronics;
+  const casual = data?.casual;
+  const products = electronics && casual ? electronics.concat(casual) : null;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,13 +53,18 @@ const Header = () => {
   };
 
   const handleSearch = (e) => {
-    if (location.pathname === '/' && Array.isArray(products) && products.length > 0){
-    const value = e.target.value;
-    setSearchItem(value);
-    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(value.toLowerCase()));
-    dispatch(updateProduct(filteredProducts));
+    if (location.pathname === "/" && Array.isArray(products) && products.length > 0) {
+      const value = e.target.value;
+      setSearchItem(value);
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(value.toLowerCase()));
+      if (value === "") {
+        dispatch(clearProduct());
+      } else {
+        dispatch(updateProduct(filteredProducts));
+      }
     }
-  }
+  };
 
   return (
     <header>
@@ -90,10 +99,10 @@ const Header = () => {
                     <FaSearch />
                   </InputGroup.Text>
                   <Form.Control
-                  style={{
-                    minWidth: '250px',
-                    width: '300px'
-                  }}
+                    style={{
+                      minWidth: "250px",
+                      width: "300px",
+                    }}
                     type="search"
                     placeholder="Search"
                     className="me-2"
@@ -101,7 +110,7 @@ const Header = () => {
                     aria-label="Search"
                     value={searchItem}
                     onChange={handleSearch}
-                    disabled={location.pathname !== '/'}
+                    disabled={location.pathname !== "/"}
                   />
                 </InputGroup>
               </Form>
