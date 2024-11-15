@@ -15,6 +15,10 @@ import Payment from "../pages/Payment";
 import PlaceOrder from "../pages/PlaceOrder";
 import Order from "../pages/Order";
 import OrderPayment from "../pages/OrderPayment";
+import Profile from "../pages/Profile";
+import NotFound from "../pages/NotFound";
+import Technology from "../pages/Technology";
+import Casual from "../pages/Casual";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,13 +28,18 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<Cart />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
+      <Route path='/electronics' element={<Technology/>} />
+      <Route path='/casual' element={<Casual/>} />
+      <Route path="/*" element={<NotFound />} />
+      
       <Route path="" element={<PrivateRoute />}>
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
         <Route path="/order/:id" element={<Order />} />
         <Route path="/orderPayment" element={<OrderPayment />} />
+        <Route path="/profile" element={<Profile />} />
+        
       </Route>
     </Route>
   )

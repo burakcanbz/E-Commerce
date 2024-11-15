@@ -90,7 +90,6 @@ exports.updateOrderToPaid = asyncHandler(async (req, res) => {
   try {
     const { amount } = req.body;
     const order = await Order.findById(req.params.id);
-    console.log(order);
     if (order) {
       order.isPaid = true;
       order.paidAmount = amount;

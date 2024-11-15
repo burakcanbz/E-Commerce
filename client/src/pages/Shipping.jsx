@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 const Shipping = () => {
   const { shippingAddress } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector(state => state.cart);
 
   const [address, setAddress] = useState(shippingAddress?.address || '');
   const [city, setCity] = useState(shippingAddress?.city || '');
@@ -22,6 +23,12 @@ const Shipping = () => {
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     navigate("/payment");
   };
+
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      navigate("/");
+    }
+  }, [cartItems, navigate])
 
   return (
     <FormContainer>

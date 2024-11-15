@@ -119,8 +119,8 @@ exports.getUserProfile = asyncHandler(async (req, res) => {
  * @throws {Error} Throws an error if order not found or if saving the order fails
  */
 exports.updateUserProfile = asyncHandler(async (req, res) => {
+  
     const user = await User.findById(req.user._id);
-
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
