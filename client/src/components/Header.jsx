@@ -10,18 +10,31 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { LinkContainer } from "react-router-bootstrap";
+import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
+import { clearOrder } from "../slices/orderSlice";
+import { updateProduct, clearProduct } from "../slices/productSlice";
 import logo from "../assets/b.png";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(0);
+  const location = useLocation();
+  const [searchItem, setSearchItem] = useState("");
 
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
+
+  const { data, isLoading, error } = useGetPaginatedProductsQuery({
+    page: 1,
+    limit: 6,
+  });
+
+  const electronics = data?.electronics;
+  const casual = data?.casual;
+  const products = electronics && casual ? electronics.concat(casual) : null;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,11 +43,26 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      await logoutApiCall().unwrap(); // without unwrap the logoutApiCall returns redux action object, with it it returns promise-like object
+      await logoutApiCall().unwrap(); // without unwrap the logoutApiCall returns redux action object, with it, it returns promise-like object
       dispatch(logout());
+      dispatch(clearOrder());
       navigate("/login");
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleSearch = (e) => {
+    if (location.pathname === "/" && Array.isArray(products) && products.length > 0) {
+      const value = e.target.value;
+      setSearchItem(value);
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(value.toLowerCase()));
+      if (value === "") {
+        dispatch(clearProduct());
+      } else {
+        dispatch(updateProduct(filteredProducts));
+      }
     }
   };
 
@@ -71,14 +99,20 @@ const Header = () => {
                     <FaSearch />
                   </InputGroup.Text>
                   <Form.Control
+                    style={{
+                      minWidth: "250px",
+                      width: "300px",
+                    }}
                     type="search"
                     placeholder="Search"
                     className="me-2"
                     size="sm"
                     aria-label="Search"
+                    value={searchItem}
+                    onChange={handleSearch}
+                    disabled={location.pathname !== "/"}
                   />
                 </InputGroup>
-                <Button variant="outline-light">Search</Button>
               </Form>
               <LinkContainer to="/">
                 <Nav.Link>Products</Nav.Link>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import Slider from "react-slick";
@@ -19,11 +19,6 @@ const Category = ({ category }) => {
     limit: LIMIT,
   });
   const products = data?.products;
-  
-  const changedSlickSettings = {
-    ...slickSettings,
-    slidesToScroll: category === 'Electronics' ? 1 : 4,
-  };
 
   return isLoading ? (
     <Loading />
@@ -40,11 +35,15 @@ const Category = ({ category }) => {
           <FaArrowRight />
         </h4>
       </Link>
-      <Slider {...changedSlickSettings}>
+      <Slider {...slickSettings}>
         {products?.map((product, index) => {
           return (
             <div
-            className="d-flex justify-content-between align-items-center"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
               key={index}
             >
               <Col sm={12} md={6} lg={4} xl={3} key={index}>
