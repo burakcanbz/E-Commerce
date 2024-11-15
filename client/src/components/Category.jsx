@@ -19,6 +19,11 @@ const Category = ({ category }) => {
     limit: LIMIT,
   });
   const products = data?.products;
+  
+  const changedSlickSettings = {
+    ...slickSettings,
+    slidesToScroll: category === 'Electronics' ? 1 : 4,
+  };
 
   return isLoading ? (
     <Loading />
@@ -35,7 +40,7 @@ const Category = ({ category }) => {
           <FaArrowRight />
         </h4>
       </Link>
-      <Slider {...slickSettings}>
+      <Slider {...changedSlickSettings}>
         {products?.map((product, index) => {
           return (
             <div
