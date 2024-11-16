@@ -1,7 +1,13 @@
 .header{
-    background-color: rgba(60, 104, 97, 0.5);
-    height: 100px;
+    background-color: rgba(47, 19, 94, 0.5);
+    height: 110px;
+    font-size: 18px;
 }
+
+.header a {
+    color: rgb(204, 204, 202);
+    font-weight: 550;
+} 
 
 .caption{
     background-color: rgba(0, 0, 0, 0.5);
@@ -10,6 +16,16 @@
 @media (max-width: 991.98px) {
     .collapse-dark-bg {
       background-color: #343a40 !important; 
-      color: white !important;
+    }
+    .collapse-dark-bg a {
+        color: black !important;
     }
   }
+
+.nav-dropdown-items > * {
+    color: black !important;
+}
+
+.footer {
+    background-color: rgba(47, 19, 94, 0.5);
+}

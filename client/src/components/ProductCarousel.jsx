@@ -16,12 +16,12 @@ const ProductCarousel = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-        <Carousel hover="pause" className="bg-secondary mb-5 shadow-lg">
+        <Carousel hover="pause" className="bg-dark mb-5 shadow-lg rounded">
           {products.map((item) => {
             return (
               <Carousel.Item key={item._id}>
                 <Link to={`/product/${item._id}`}>
-                  <div className="d-flex justify-content-end">
+                  <div className="d-flex justify-content-center">
                     <Image src={item.image} alt={item.name} fluid />
                   </div>
                   <Carousel.Caption className="caption p-4 text-white">

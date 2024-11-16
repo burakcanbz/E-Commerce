@@ -79,17 +79,17 @@ const Header = () => {
       >
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand className="d-flex align-items-center justify-content-center">
+            <Navbar.Brand className="d-flex align-items-center text-white justify-content-center">
               <img
                 src={logo}
                 alt="Logo"
                 style={{
-                  maxHeight: 50,
-                  borderRadius: "50%",
+                  maxHeight: 80,
+                  borderRadius: "5%",
                   marginRight: 10,
                 }}
               ></img>
-              <h2 style={{ marginTop: 6, marginLeft: 10 }}>BCS</h2>
+              <h2 style={{ marginTop: 6, marginLeft: 10 }}>BCStore</h2>
             </Navbar.Brand>
           </LinkContainer>
 
@@ -131,12 +131,14 @@ const Header = () => {
               </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
+                  <div className="nav-dropdown-items">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
                   </NavDropdown.Item>
+                  </div>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
