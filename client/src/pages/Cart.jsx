@@ -35,7 +35,7 @@ const Cart = () => {
 
   return (
     <Row>
-      <Col md={8}>
+      <Col sm={4} md={8}>
         <h1 style={{ marginBottom: "20px" }}>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
@@ -48,7 +48,7 @@ const Cart = () => {
                 return (
                   <ListGroup.Item key={item._id}>
                     <Row>
-                      <Col md={2}>
+                      <Col sm={1} md={2}>
                         <Link to={`/product/${item._id}`}>
                           <Image
                             src={item.image}
@@ -58,7 +58,7 @@ const Cart = () => {
                           />
                         </Link>
                       </Col>
-                      <Col md={3}>
+                      <Col sm={2} md={4}>
                         <Link
                           style={{
                             textDecoration: "none",
@@ -71,9 +71,9 @@ const Cart = () => {
                           {item.name}{" "}
                         </Link>
                       </Col>
-                      <Col md={2}><strong>${item.price}</strong></Col>
-                      <Col md={2}>
+                      <Col sm={1} md={2}>
                         <Form.Control
+                          className="text-center"
                           as="select"
                           value={item.qty}
                           onChange={(e) => {
@@ -88,14 +88,22 @@ const Cart = () => {
                           ))}
                         </Form.Control>
                       </Col>
-                      <Col md={2}>
-                        <Button
-                          type="button"
-                          variant="light"
-                          onClick={(e) => removeFromCartHandler(item._id)}
-                        >
-                          <FaTrash />
-                        </Button>
+                      <Col sm={1} md={3} className="mt-1 ms-auto">
+                        <Row>
+                          <strong className="fs-6">Price: ${item.price}</strong>
+                        </Row>
+                        <Row className="ms-5 mt-3">
+                          <Col sm={1} md={1} >
+                            <Button
+                              type="button"
+                              variant="danger"
+                              onClick={(e) => removeFromCartHandler(item._id)}
+                              size="sm"
+                            >
+                              <FaTrash />
+                            </Button>
+                          </Col>
+                        </Row>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -105,7 +113,7 @@ const Cart = () => {
           </Card>
         )}
       </Col>
-      <Col md={4}>
+      <Col sm={2} md={4}>
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
