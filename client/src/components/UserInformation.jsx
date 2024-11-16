@@ -2,19 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Col, Button, Alert, Card, Form } from "react-bootstrap";
 import { useUpdateMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
-import { setScreenMode, setClearScreenMode } from "../slices/settingsSlice";
+import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
 const UserInformation = () => {
   const user = useSelector((state) => state.auth?.userInfo);
-  const modeColor = useSelector(state => state.settings.settings);
-
   const dispatch = useDispatch();
   const [update] = useUpdateMutation();
 
-  const [isChecked, setIsChecked] = useState(modeColor === '(0 0 0)' ? true: false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +37,6 @@ const UserInformation = () => {
         name,
         email,
         password,
-        image: user.image,
         confirmPassword,
       }).unwrap();
       if (resp) {
@@ -59,32 +55,11 @@ const UserInformation = () => {
     setInitials();
   }, [user, user.name, user.email]);
 
-  useEffect(() => {
-    if (isChecked) {
-      dispatch(setScreenMode('(0 0 0)'))
-    } else {
-      dispatch(setClearScreenMode())
-    }
-  }, [isChecked, setInitials, dispatch]); 
-
-
   return (
     <Col md={4}>
       <Alert variant="secondary" className="text-center">
-        <h2>PROFILE</h2>
+        <h2>USER INFORMATION</h2>
       </Alert>
-      <Card className="p-3 ps-3">
-      <Form>
-          <Form.Check
-            type="checkbox"
-            id="dark"
-            label="Dark Mode"
-            className="fs-5 fw-normal"
-            checked={isChecked}
-            onChange={(e) => setIsChecked(e.target.checked)}
-          />
-        </Form>
-      </Card>
       <Card
         className="shadow-lg my-3 p-3 rounded d-flex align-items-center justify-content-center bg-light"
         style={{ minHeight: 500 }}

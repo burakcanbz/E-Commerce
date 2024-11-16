@@ -19,6 +19,7 @@ import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
 import { clearOrder } from "../slices/orderSlice";
 import { updateProduct, clearProduct } from "../slices/productSlice";
 import logo from "../assets/b.png";
+import { clearCartItems, clearShippingAddress } from "../slices/cartSlice";
 
 const Header = () => {
   const location = useLocation();
@@ -46,6 +47,8 @@ const Header = () => {
       await logoutApiCall().unwrap(); // without unwrap the logoutApiCall returns redux action object, with it, it returns promise-like object
       dispatch(logout());
       dispatch(clearOrder());
+      dispatch(clearCartItems());
+      dispatch(clearShippingAddress());
       navigate("/login");
     } catch (err) {
       console.log(err);
@@ -91,13 +94,11 @@ const Header = () => {
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" className="collapse-dark-bg ms-auto ps-2 pt-3 rounded">
             <Nav className="ms-auto">
-              <Form className="d-flex">
+              <Form className="">
                 <InputGroup>
-                  <InputGroup.Text id="basic-addon1">
-                    <FaSearch />
-                  </InputGroup.Text>
+                  
                   <Form.Control
                     style={{
                       minWidth: "250px",
@@ -106,7 +107,6 @@ const Header = () => {
                     type="search"
                     placeholder="Search"
                     className="me-2"
-                    size="sm"
                     aria-label="Search"
                     value={searchItem}
                     onChange={handleSearch}
