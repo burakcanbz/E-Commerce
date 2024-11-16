@@ -6,3 +6,10 @@
 .caption{
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+@media (max-width: 991.98px) {
+    .collapse-dark-bg {
+      background-color: #343a40 !important; 
+      color: white !important;
+    }
+  }

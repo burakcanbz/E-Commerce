@@ -32,9 +32,9 @@ const Home = () => {
           <Row>
             <ProductCarousel />
           </Row>
-          {categories?.map((c) => {
+          {categories?.map((c, i) => {
             return (
-              <Row className="mb-5">
+              <Row className="mb-5" key={i}>
                 <Category category={c} />
               </Row>
             );
