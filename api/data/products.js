@@ -12,15 +12,15 @@ const products = [
     numReviews: 12,
   },
   {
-    name: 'iPhone 11 Pro 256GB Memory',
-    image: '/images/phone.jpg',
+    name: 'iPhone 16 Pro',
+    image: '/images/iphone16.jpg',
     description:
-      'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
+      'Introducing the iPhone 16 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
     brand: 'Apple',
     category: 'Electronics',
-    price: 599.99,
+    price: 2599.99,
     countInStock: 7,
-    rating: 4.0,
+    rating: 4.5,
     numReviews: 8,
   },
   {
@@ -36,13 +36,13 @@ const products = [
     numReviews: 12,
   },
   {
-    name: 'Sony Playstation 4 Pro White Version',
-    image: '/images/playstation.jpg',
+    name: 'Sony Playstation 5 Pro White Version',
+    image: '/images/ps5.jpg',
     description:
       'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
     brand: 'Sony',
     category: 'Electronics',
-    price: 399.99,
+    price: 499.99,
     countInStock: 11,
     rating: 5,
     numReviews: 12,
