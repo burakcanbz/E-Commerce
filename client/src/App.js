@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 const App = () => {
+
   return (
     <div
     style={{
@@ -16,7 +17,7 @@ const App = () => {
       flexDirection: "column", 
       minHeight:"100vh"
     }}>
-      <Header />
+      <Header/>
       <main className='py-3 d-flex' style={{flexGrow: 1, marginTop: 120}}>
         <Container>
           <Outlet/>
