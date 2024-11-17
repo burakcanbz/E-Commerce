@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Nav,
@@ -6,10 +6,9 @@ import {
   Badge,
   NavDropdown,
   Form,
-  Button,
   InputGroup,
 } from "react-bootstrap";
-import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
@@ -22,6 +21,8 @@ import logo from "../assets/b.png";
 import { clearCartItems, clearShippingAddress } from "../slices/cartSlice";
 
 const Header = () => {
+  const [showDropdown, setShowDropdown] = useState(null);
+
   const location = useLocation();
   const [searchItem, setSearchItem] = useState("");
 
@@ -56,17 +57,26 @@ const Header = () => {
   };
 
   const handleSearch = (e) => {
-    if (location.pathname === "/" && Array.isArray(products) && products.length > 0) {
+    if (
+      location.pathname === "/" &&
+      Array.isArray(products) &&
+      products.length > 0
+    ) {
       const value = e.target.value;
       setSearchItem(value);
       const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(value.toLowerCase()));
+        product.name.toLowerCase().includes(value.toLowerCase())
+      );
       if (value === "") {
         dispatch(clearProduct());
       } else {
         dispatch(updateProduct(filteredProducts));
       }
     }
+  };
+
+  const handleDropdown = (id) => {
+    setShowDropdown(showDropdown === id ? null : id);
   };
 
   return (
@@ -94,11 +104,13 @@ const Header = () => {
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav" className="collapse-dark-bg ms-auto ps-2 pt-3 rounded">
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className="collapse-dark-bg ms-auto ps-2 pt-3 rounded"
+          >
             <Nav className="ms-auto">
               <Form className="">
                 <InputGroup>
-                  
                   <Form.Control
                     style={{
                       minWidth: "250px",
@@ -115,8 +127,30 @@ const Header = () => {
                 </InputGroup>
               </Form>
               <LinkContainer to="/">
-                <Nav.Link>Products</Nav.Link>
+                <Nav.Link>Home</Nav.Link>
               </LinkContainer>
+              <NavDropdown
+                className="my-dropdown"
+                id="categories"
+                show={showDropdown === "categories"}
+                onMouseEnter={() => handleDropdown("categories")}
+                onMouseLeave={() => handleDropdown(null)}
+                variant="pills"
+                title="Categories"
+              >
+                <div className="nav-dropdown-items">
+                  <LinkContainer to="/electronics">
+                    <NavDropdown.Item className="my-dropdown-item">
+                      Technology
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/casual">
+                    <NavDropdown.Item className="my-dropdown-item">
+                      Casual
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                </div>
+              </NavDropdown>
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <FaShoppingCart /> Cart{" "}
@@ -130,14 +164,21 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
+                <NavDropdown
+                  className="my-dropdown"
+                  id="username"
+                  show={showDropdown === "username"}
+                  onMouseEnter={() => handleDropdown("username")}
+                  onMouseLeave={() => handleDropdown(null)}
+                  title={userInfo.name}
+                >
                   <div className="nav-dropdown-items">
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item className="my-dropdown-item">Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler} className="my-dropdown-item">
+                      Logout
+                    </NavDropdown.Item>
                   </div>
                 </NavDropdown>
               ) : (
