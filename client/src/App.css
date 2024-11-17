@@ -29,3 +29,29 @@
 .footer {
     background-color: rgba(47, 19, 94, 0.5);
 }
+
+.my-dropdown{
+    position: relative;
+}
+
+.my-dropdown .dropdown-menu {
+    background-color: rgba(105, 83, 143, 0.95); 
+    font-size: 15px;
+    padding: 3px;
+    position: absolute;
+    top: 35px;
+    left: 70px;
+}
+
+.my-dropdown-item {
+    color: #fff;
+}
+
+.my-dropdown-item.active {
+    background-color: #70adaa;
+}
+
+.my-dropdown-item:hover {
+    background-color: rgba(86, 80, 120, 0.95);
+    color: #ffffff;
+}
