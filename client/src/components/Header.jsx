@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Navbar,
   Nav,
@@ -6,7 +6,8 @@ import {
   Badge,
   NavDropdown,
   Form,
-  InputGroup,
+  Row,
+  Col,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -19,6 +20,7 @@ import { clearOrder } from "../slices/orderSlice";
 import { updateProduct, clearProduct } from "../slices/productSlice";
 import logo from "../assets/b.png";
 import { clearCartItems, clearShippingAddress } from "../slices/cartSlice";
+import { removeFromCart } from "../slices/cartSlice";
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(null);
@@ -79,17 +81,24 @@ const Header = () => {
     setShowDropdown(showDropdown === id ? null : id);
   };
 
+  const removeFromCartHandler = (e, id) => {
+    e.preventDefault();  // Prevents any default action (like navigation)
+    e.stopPropagation();
+    dispatch(removeFromCart(id));
+    
+  };
+
   return (
     <header>
       <Navbar
         variant="dark"
         expand="lg"
-        className="fixed-top header shadow-sm"
+        className="fixed-top header shadow-sm "
         collapseOnSelect
       >
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand className="d-flex align-items-center text-white justify-content-center">
+            <Navbar.Brand className="d-flex align-items-center text-white">
               <img
                 src={logo}
                 alt="Logo"
@@ -102,30 +111,26 @@ const Header = () => {
               <h2 style={{ marginTop: 6, marginLeft: 10 }}>BCStore</h2>
             </Navbar.Brand>
           </LinkContainer>
-
+          <Form className="d-none d-lg-flex justify-content-center w-50">
+            <Form.Control
+              style={{
+                minWidth: "250px",
+                width: "400px",
+              }}
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              value={searchItem}
+              onChange={handleSearch}
+              disabled={location.pathname !== "/"}
+            />
+          </Form>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
-            className="collapse-dark-bg ms-auto ps-2 pt-3 rounded"
+            className="collapse-dark-bg ms-auto ps-2 rounded d-flex justify-content-between align-items-center"
           >
-            <Nav className="ms-auto">
-              <Form className="">
-                <InputGroup>
-                  <Form.Control
-                    style={{
-                      minWidth: "250px",
-                      width: "300px",
-                    }}
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                    value={searchItem}
-                    onChange={handleSearch}
-                    disabled={location.pathname !== "/"}
-                  />
-                </InputGroup>
-              </Form>
+            <Nav>
               <LinkContainer to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
@@ -141,7 +146,7 @@ const Header = () => {
                 <div className="nav-dropdown-items">
                   <LinkContainer to="/electronics">
                     <NavDropdown.Item className="my-dropdown-item">
-                      Technology
+                      Electronics
                     </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/casual">
@@ -151,18 +156,60 @@ const Header = () => {
                   </LinkContainer>
                 </div>
               </NavDropdown>
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  <FaShoppingCart /> Cart{" "}
-                  {cartItems.length > 0 && (
-                    <Badge pill bg="success" style={{ margingLeft: "5px" }}>
-                      {cartItems.reduce((acc, cur) => {
-                        return acc + cur.qty;
-                      }, 0)}
-                    </Badge>
+              <NavDropdown
+                title={
+                  <LinkContainer to="/cart">
+                    <span>
+                      <FaShoppingCart />
+                      <span className="ms-1">Cart</span>{" "}
+                      {cartItems.length > 0 && (
+                        <Badge pill bg="success" className="ms-1">
+                          {cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
+                        </Badge>
+                      )}
+                    </span>
+                  </LinkContainer>
+                }
+                id="cart-dropdown"
+                show={showDropdown === "cart-dropdown"}
+                onMouseEnter={() => handleDropdown("cart-dropdown")}
+                onMouseLeave={() => handleDropdown(null)}
+                className="d-flex cart-dropdown my-dropdown"
+              >
+                <div>
+                  {cartItems.length === 0 ? (
+                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item" disabled>
+                      No items in cart
+                    </NavDropdown.Item>
+                  ) : (
+                    cartItems.map((item) => (
+                      <LinkContainer to={`/product/${item._id}`}>
+                        <NavDropdown.Item
+                          key={item._id}
+                          className="nav-dropdown-items my-dropdown-item"
+                        >
+                          <span>
+                            <img src={item.image} style={{ height: 36, width: 36, borderRadius: 50}}/> {item.name} (x{item.qty})
+                          </span>
+                          <button
+                            className="btn btn-link btn-sm"
+                            onClick={(e) => removeFromCartHandler(e, item._id)}
+                          >
+                            Remove
+                          </button>
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                    ))
                   )}
-                </Nav.Link>
-              </LinkContainer>
+                </div>
+                {cartItems.length > 0 && (
+                  <NavDropdown.Item className="nav-dropdown-items my-dropdown-item">
+                    <LinkContainer to="/cart">
+                      <span>Go to Cart</span>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                )}
+              </NavDropdown>
               {userInfo ? (
                 <NavDropdown
                   className="my-dropdown"
@@ -174,9 +221,14 @@ const Header = () => {
                 >
                   <div className="nav-dropdown-items">
                     <LinkContainer to="/profile">
-                      <NavDropdown.Item className="my-dropdown-item">Profile</NavDropdown.Item>
+                      <NavDropdown.Item className="my-dropdown-item">
+                        Profile
+                      </NavDropdown.Item>
                     </LinkContainer>
-                    <NavDropdown.Item onClick={logoutHandler} className="my-dropdown-item">
+                    <NavDropdown.Item
+                      onClick={logoutHandler}
+                      className="my-dropdown-item"
+                    >
                       Logout
                     </NavDropdown.Item>
                   </div>

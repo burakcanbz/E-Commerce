@@ -40,7 +40,7 @@
     padding: 3px;
     position: absolute;
     top: 35px;
-    left: 70px;
+    left: 25px;
 }
 
 .my-dropdown-item {
@@ -55,3 +55,4 @@
     background-color: rgba(86, 80, 120, 0.95);
     color: #ffffff;
 }
+
