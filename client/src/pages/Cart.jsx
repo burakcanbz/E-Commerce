@@ -8,6 +8,7 @@ import {
   Form,
   Button,
   Card,
+  ListGroupItem,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
@@ -19,7 +20,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, qty } = useSelector((state) => state.cart);
 
   const addToCartHandler = (product, qty) => {
     dispatch(addToCart({ ...product, qty }));
@@ -36,7 +37,9 @@ const Cart = () => {
   return (
     <Row>
       <Col sm={4} md={8}>
-        <h1 style={{ marginBottom: "20px" }}>Shopping Cart</h1>
+        <h1 style={{ marginBottom: "20px" }}>
+          My Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)} items)
+        </h1>
         {cartItems.length === 0 ? (
           <Message>
             Your Cart is empty <Link to="/"> Go Back</Link>
@@ -46,9 +49,9 @@ const Cart = () => {
             <ListGroup variant="flush">
               {cartItems.map((item) => {
                 return (
-                  <ListGroup.Item key={item._id}>
-                    <Row>
-                      <Col sm={1} md={2}>
+                  <ListGroup.Item style={{backgroundColor: 'rgba(208, 217, 220)'}} key={item._id}>
+                    <Row className="d-flex align-items-center">
+                      <Col sm={1} md={3}>
                         <Link to={`/product/${item._id}`}>
                           <Image
                             src={item.image}
@@ -93,7 +96,7 @@ const Cart = () => {
                           <strong className="fs-6">Price: ${item.price}</strong>
                         </Row>
                         <Row className="ms-5 mt-3">
-                          <Col sm={1} md={1} >
+                          <Col sm={1} md={1}>
                             <Button
                               type="button"
                               variant="danger"
@@ -113,33 +116,57 @@ const Cart = () => {
           </Card>
         )}
       </Col>
-      <Col sm={2} md={4}>
-        <Card>
+      <Col sm={2} md={3} className=" d-flex flex-column ms-auto">
+        <Card className="p-2">
           <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                items
-              </h2>
-              <strong>
-                $
+            <ListGroup.Item className="border-0 mt-2">
+              <h2>Cart Summary</h2>
+            </ListGroup.Item>
+            <ListGroup.Item className="border-0 mt-2">
+              <strong className="ms-3">
+                Total Price: $
                 {cartItems
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
                   .toFixed(2)}
               </strong>
             </ListGroup.Item>
+            <ListGroup.Item className="mt-1 mb-2">
+              <strong className="ms-3">
+                Shipping Price: $
+                {cartItems
+                  .reduce((acc, item) => acc + item.qty * item.price, 0)
+                  .toFixed(2) > 100
+                  ? 0
+                  : 10}
+              </strong>
+            </ListGroup.Item>
             <ListGroup.Item>
-              <Button
-                type="button"
-                className="btn-block"
-                disabled={cartItems.length === 0}
-                onClick={checkoutHandler}
-              >
-                Proceed To Checkout
-              </Button>
+              <strong className="ms-3">
+                Total: ${" "}
+                {Number(
+                  cartItems
+                    .reduce((acc, item) => acc + item.qty * item.price, 0)
+                    .toFixed(2)
+                ) +
+                  Number(
+                    cartItems
+                      .reduce((acc, item) => acc + item.qty * item.price, 0)
+                      .toFixed(2) > 100
+                      ? 0
+                      : 10
+                  )}
+              </strong>
             </ListGroup.Item>
           </ListGroup>
         </Card>
+        <Button
+          style={{ backgroundColor: "rgba(236, 105, 43)" }}
+          className="mt-3 align-self-center border-0 px-5"
+          disabled={cartItems.length === 0}
+          onClick={checkoutHandler}
+        >
+          Confirm Cart
+        </Button>
       </Col>
     </Row>
   );

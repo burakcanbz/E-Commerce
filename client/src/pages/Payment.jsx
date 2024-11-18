@@ -49,8 +49,8 @@ const Payment = () => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
-      <h1>Payment Method</h1>
-      <Form onSubmit={submitHandler}>
+      <h1 className="text-center">Payment Method</h1>
+      <Form id='checkout' onSubmit={submitHandler} className='d-flex flex-column justify-content-center align-items-center'>
         <Form.Group className="mt-2">
           <Form.Label as="legend">Select Method</Form.Label>
           <Col>
