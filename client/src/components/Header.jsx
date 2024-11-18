@@ -192,7 +192,7 @@ const Header = () => {
                             <img src={item.image} style={{ height: 36, width: 36, borderRadius: 50}}/> {item.name} (x{item.qty})
                           </span>
                           <button
-                            className="btn btn-link btn-sm"
+                            className="btn btn-sm bg-danger ms-3"
                             onClick={(e) => removeFromCartHandler(e, item._id)}
                           >
                             Remove
