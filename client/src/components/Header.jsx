@@ -28,7 +28,7 @@ const Header = () => {
   const location = useLocation();
   const [searchItem, setSearchItem] = useState("");
 
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, totalPrice } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
   const { data, isLoading, error } = useGetPaginatedProductsQuery({
@@ -82,10 +82,9 @@ const Header = () => {
   };
 
   const removeFromCartHandler = (e, id) => {
-    e.preventDefault();  // Prevents any default action (like navigation)
+    e.preventDefault(); // Prevents any default action (like navigation)
     e.stopPropagation();
     dispatch(removeFromCart(id));
-    
   };
 
   return (
@@ -178,7 +177,10 @@ const Header = () => {
               >
                 <div>
                   {cartItems.length === 0 ? (
-                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item" disabled>
+                    <NavDropdown.Item
+                      className="nav-dropdown-items my-dropdown-item"
+                      disabled
+                    >
                       No items in cart
                     </NavDropdown.Item>
                   ) : (
@@ -189,7 +191,15 @@ const Header = () => {
                           className="nav-dropdown-items my-dropdown-item"
                         >
                           <span>
-                            <img src={item.image} style={{ height: 36, width: 36, borderRadius: 50}}/> {item.name} (x{item.qty})
+                            <img
+                              src={item.image}
+                              style={{
+                                height: 36,
+                                width: 36,
+                                borderRadius: 50,
+                              }}
+                            />{" "}
+                            {item.name} (x{item.qty})
                           </span>
                           <button
                             className="btn btn-sm bg-danger ms-3"
@@ -203,11 +213,17 @@ const Header = () => {
                   )}
                 </div>
                 {cartItems.length > 0 && (
-                  <NavDropdown.Item className="nav-dropdown-items my-dropdown-item">
-                    <LinkContainer to="/cart">
-                      <span>Go to Cart</span>
-                    </LinkContainer>
-                  </NavDropdown.Item>
+                  <>
+                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item">
+                      <span>Total Price <small>(taxes included)</small>: ${totalPrice}</span>
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item">
+                      <LinkContainer to="/cart">
+                        <span>Go to Cart</span>
+                      </LinkContainer>
+                    </NavDropdown.Item>
+                  </>
                 )}
               </NavDropdown>
               {userInfo ? (

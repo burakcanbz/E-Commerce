@@ -45,6 +45,7 @@
 
 .my-dropdown-item {
     color: #fff;
+    margin-top: 5px;
 }
 
 .my-dropdown-item.active {
@@ -54,5 +55,6 @@
 .my-dropdown-item:hover {
     background-color: rgba(86, 80, 120, 0.95);
     color: #ffffff;
+    padding: 10px;
 }
 
