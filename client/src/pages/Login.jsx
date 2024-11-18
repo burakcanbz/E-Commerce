@@ -43,7 +43,7 @@ const Login = () => {
 
   return (
     <FormContainer>
-      <Card className="shadow-lg my-3 p-3 rounded d-flex align-items-center justify-content-center bg-light" style={{minHeight: 500}}>
+      <Card className="border-0 my-3 p-3 rounded d-flex align-items-center justify-content-center" style={{minHeight: 500, backgroundColor: "rgba(230, 230, 230)"}} >
       <BiLogIn style={{fontSize: 64, marginTop: 10, marginBottom: 4}}/>
         <h1>Sign In</h1>
         <Form onSubmit={submitHandler}>

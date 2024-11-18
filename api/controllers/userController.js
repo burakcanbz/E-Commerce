@@ -22,6 +22,7 @@ exports.authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      image: user.image,
       isAdmin: user.isAdmin,
     });
   } else {
@@ -39,8 +40,7 @@ exports.authUser = asyncHandler(async (req, res) => {
  * @throws {Error} Throws an error if order not found or if saving the order fails
  */
 exports.registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
-
+  const { name, email, password, image } = req.body;
   const userExists = await User.findOne({ email });
 
   if (userExists) {
@@ -52,6 +52,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    image
   });
 
   if (user) {
@@ -59,6 +60,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      image: user.image,
       isAdmin: user.isAdmin,
     });
   } else {
@@ -135,6 +137,7 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
+        image: updatedUser.image,
         isAdmin: updatedUser.isAdmin,
       });
     }
