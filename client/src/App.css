@@ -40,11 +40,12 @@
     padding: 3px;
     position: absolute;
     top: 35px;
-    left: 70px;
+    left: 25px;
 }
 
 .my-dropdown-item {
     color: #fff;
+    margin-top: 5px;
 }
 
 .my-dropdown-item.active {
@@ -54,4 +55,9 @@
 .my-dropdown-item:hover {
     background-color: rgba(86, 80, 120, 0.95);
     color: #ffffff;
+    padding: 10px;
+}
+
+#checkout > * {
+    min-width: 300px;
 }
