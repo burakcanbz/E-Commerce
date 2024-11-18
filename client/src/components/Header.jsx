@@ -214,7 +214,7 @@ const Header = () => {
                 </div>
                 {cartItems.length > 0 && (
                   <>
-                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item">
+                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item" disabled>
                       <span>Total Price <small>(taxes included)</small>: ${totalPrice}</span>
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
