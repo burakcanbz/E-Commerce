@@ -36,7 +36,7 @@ const Shipping = () => {
     <>
       <FormContainer>
           <CheckoutSteps step1 step2 />
-          <h1 className="text-center"> Shipping </h1>
+          <h1 className="text-center"> Address </h1>
           <Form id='checkout' className='d-flex flex-column justify-content-center align-items-center'>
             <Form.Group controlId="address" className="my-2">
               <Form.Label>Address</Form.Label>
