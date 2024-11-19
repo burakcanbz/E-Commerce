@@ -98,6 +98,7 @@ const Header = () => {
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
+
               <img
                 src={logo}
                 alt="Logo"

@@ -84,7 +84,6 @@
     border-radius: 50%;
     background-color: rgb(185, 175, 175);
 }
-
 .step-active {
     background-color: rgb(45, 94, 5) !important;
     color: white !important;
@@ -101,3 +100,4 @@
 .form-container-card {
     background-color: rgba(230, 230, 230);
 } 
+
