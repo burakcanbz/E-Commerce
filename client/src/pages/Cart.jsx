@@ -8,13 +8,11 @@ import {
   Form,
   Button,
   Card,
-  ListGroupItem,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
-import { LinkContainer } from "react-router-bootstrap";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -49,7 +47,10 @@ const Cart = () => {
             <ListGroup variant="flush">
               {cartItems.map((item) => {
                 return (
-                  <ListGroup.Item style={{backgroundColor: 'rgba(208, 217, 220)'}} key={item._id}>
+                  <ListGroup.Item
+                    style={{ backgroundColor: "rgba(208, 217, 220)" }}
+                    key={item._id}
+                  >
                     <Row className="d-flex align-items-center">
                       <Col sm={1} md={3}>
                         <Link to={`/product/${item._id}`}>

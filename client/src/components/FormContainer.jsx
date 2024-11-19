@@ -7,7 +7,7 @@ const FormContainer = ({ children }) => {
     <Container>
         <Row className='justify-content-md-center'>
             <Col xs={12} md={6}>
-            <Card style={{backgroundColor: "rgba(230, 230, 230)"}} className="p-5">
+            <Card className="form-container-card p-5">
                 { children }
                 </Card>
             </Col>

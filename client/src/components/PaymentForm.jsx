@@ -27,6 +27,7 @@ export default function PaymentForm() {
     (state) =>
       state.order.orders.find((item) => item._id === orderId)?.totalPrice
   );
+ 
   const paidAmount = useSelector(
     (state) =>
       state.order.orders.find((item) => item._id === orderId)?.paidAmount
@@ -38,39 +39,34 @@ export default function PaymentForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isProcessing) return;
-
     setIsProcessing(true);
-
     try {
-      await dispatch(setPaidAmount({ paidAmount: totalPrice, orderId }));
+      await dispatch(setPaidAmount({ paidAmount: order?.totalPrice, orderId }));
       await dispatch(clearOrder());
+      if (paidAmount && paidAmount === totalPrice || order.paidAmount === 0) {
+        paySelectedOrder({ amount: order?.totalPrice, orderId })
+          .then((resp) => {
+            if (resp?.data?.updatedOrder?.isPaid) {
+              setPaid(true);
+              toast.success("Payment succeeded");
+              refetch();
+              setTimeout(() => {
+                navigate('/');
+              }, 3000)
+            } else {
+              throw new Error("Payment not marked as paid");
+            }
+          })
+          .catch((error) => {
+            toast.error(`Payment failed: ${error.message}`);
+          });
+      }
     } catch (error) {
       toast.error("Failed to set paid amount.");
     } finally {
       setIsProcessing(false);
     }
   };
-
-  useEffect(() => {
-    if (paidAmount && paidAmount === totalPrice) {
-      paySelectedOrder({ amount: totalPrice, orderId })
-        .then((resp) => {
-          if (resp?.data?.updatedOrder?.isPaid) {
-            setPaid(true);
-            toast.success("Payment succeeded");
-            refetch();
-            setTimeout(() => {
-              navigate('/');
-            }, 3000)
-          } else {
-            throw new Error("Payment not marked as paid");
-          }
-        })
-        .catch((error) => {
-          toast.error(`Payment failed: ${error.message}`);
-        });
-    }
-  }, [paidAmount, totalPrice, paySelectedOrder, refetch]);
 
   return ( !order.isPaid && 
     <form id="payment-form" onSubmit={handleSubmit}>

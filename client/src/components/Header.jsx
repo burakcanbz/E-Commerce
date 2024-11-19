@@ -97,7 +97,7 @@ const Header = () => {
       >
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand className="d-flex align-items-center text-white">
+            <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
               <img
                 src={logo}
                 alt="Logo"
@@ -107,15 +107,12 @@ const Header = () => {
                   marginRight: 10,
                 }}
               ></img>
-              <h2 style={{ marginTop: 6, marginLeft: 10 }}>BCStore</h2>
+              <h2 className="brand-header">BCStore</h2>
             </Navbar.Brand>
           </LinkContainer>
           <Form className="d-none d-lg-flex justify-content-center w-50">
             <Form.Control
-              style={{
-                minWidth: "250px",
-                width: "400px",
-              }}
+            className="search-bar"
               type="search"
               placeholder="Search"
               aria-label="Search"
