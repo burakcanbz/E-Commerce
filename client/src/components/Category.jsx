@@ -44,11 +44,7 @@ const Category = ({ category }) => {
         {products?.map((product, index) => {
           return (
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
+            className="d-flex justify-content-between align-items-center"
               key={index}
             >
               <Col sm={12} md={6} lg={4} xl={3} key={index}>

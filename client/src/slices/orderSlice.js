@@ -12,16 +12,17 @@ const orderSlice = createSlice({
       const order = action.payload;
 
       const existOrder = state.orders.find(
-        (currentItem) =>
-          currentItem.paymentResult._id === order.paymentResult._id
+        (currentItem) => 
+          currentItem._id === order._id
       );
 
       if (existOrder) {
         // update
         state.orders = state.orders.map((x) =>
-          x.paymentResult._id === existOrder.paymentResult._id ? order : x
+          x._id === existOrder._id ? order : x
         );
       } else {
+        console.log('in else')
         state.orders = [...state.orders, order];
       }
       localStorage.setItem('order', JSON.stringify(state))

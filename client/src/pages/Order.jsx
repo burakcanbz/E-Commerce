@@ -39,7 +39,7 @@ const Order = () => {
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Shipping</h2>
+              <h2>Shipping Details</h2>
               <p>
                 <strong>Name: </strong> {order.user.name}
               </p>

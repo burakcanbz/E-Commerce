@@ -37,6 +37,7 @@ const UserInformation = () => {
         name,
         email,
         password,
+        image: user.image,
         confirmPassword,
       }).unwrap();
       if (resp) {

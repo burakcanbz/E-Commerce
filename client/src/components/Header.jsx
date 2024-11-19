@@ -30,7 +30,7 @@ const Header = () => {
 
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-
+  console.log(userInfo);
   const { data, isLoading, error } = useGetPaginatedProductsQuery({
     page: 1,
     limit: 6,
@@ -97,7 +97,8 @@ const Header = () => {
       >
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand className="d-flex align-items-center text-white">
+            <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
+
               <img
                 src={logo}
                 alt="Logo"
@@ -107,15 +108,12 @@ const Header = () => {
                   marginRight: 10,
                 }}
               ></img>
-              <h2 style={{ marginTop: 6, marginLeft: 10 }}>BCStore</h2>
+              <h2 className="brand-header">BCStore</h2>
             </Navbar.Brand>
           </LinkContainer>
           <Form className="d-none d-lg-flex justify-content-center w-50">
             <Form.Control
-              style={{
-                minWidth: "250px",
-                width: "400px",
-              }}
+            className="search-bar"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -227,13 +225,14 @@ const Header = () => {
                 )}
               </NavDropdown>
               {userInfo ? (
+                <>
                 <NavDropdown
                   className="my-dropdown"
                   id="username"
                   show={showDropdown === "username"}
                   onMouseEnter={() => handleDropdown("username")}
                   onMouseLeave={() => handleDropdown(null)}
-                  title={userInfo.name}
+                  title={ <>{userInfo.name}  {userInfo.image !== undefined &&<img src={userInfo.image} style={{ width:'30px', height: '28px', borderRadius: '50%'}} /> }</>}
                 >
                   <div className="nav-dropdown-items">
                     <LinkContainer to="/profile">
@@ -249,6 +248,7 @@ const Header = () => {
                     </NavDropdown.Item>
                   </div>
                 </NavDropdown>
+                </>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
