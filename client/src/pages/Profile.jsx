@@ -14,9 +14,12 @@ import { useDispatch } from "react-redux";
 import UserInformation from "../components/UserInformation";
 
 const Profile = () => {
-
-  const { data: orders, isLoading, error } = useGetOrdersQuery(undefined, {
-    select: data => data.orders
+  const {
+    data: orders,
+    isLoading,
+    error,
+  } = useGetOrdersQuery(undefined, {
+    select: (data) => data.orders,
   });
 
   return isLoading ? (
@@ -81,6 +84,16 @@ const Profile = () => {
           </Col>
         )}
         <UserInformation />
+        <Form>
+        {/* <div key='dark' className="mb-3"> */}
+
+          <Form.Check // prettier-ignore
+            type="checkbox"
+            id="dark"
+            label="dark mode"
+          />
+          {/* </div> */}
+        </Form>
       </Row>
     </>
   );
