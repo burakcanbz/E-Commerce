@@ -4,15 +4,18 @@ import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from "react-redux";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 const App = () => {
 
+  const color = useSelector(state => state.settings.settings);
+  
   return (
     <div
     style={{
-      backgroundColor: 'rgb(241 245 249)',
+      backgroundColor: `rgba${color}`,
       display: "flex",
       flexDirection: "column", 
       minHeight:"100vh"

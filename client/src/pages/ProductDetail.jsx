@@ -71,33 +71,35 @@ export const ProductDetail = () => {
       ) : (
         <Row>
           <Col md={5}>
-            <Image src={product.image} alt={product.name} fluid></Image>
+            <Image src={product.image} alt={product.name} fluid className="shadow-lg" rounded></Image>
           </Col>
           <Col md={4}>
+          <Card className="shadow-sm">
             <ListGroup variant="flush" className="rounded mx-3">
-              <ListGroup.Item className="my-2 p-3">
+              <ListGroup.Item className="my-2 p-3 rounded">
                 <h3>{product.name}</h3>
               </ListGroup.Item>
-              <ListGroup.Item className="my-2 p-3">
+              <ListGroup.Item className="my-2 p-3 rounded">
                 <Rating
                   value={product.rating}
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroup.Item>
-              <ListGroup.Item className="my-2 p-3">
+              <ListGroup.Item className="my-2 p-3 rounded fs-5">
                 <strong>Price: {product.price}$</strong>
               </ListGroup.Item>
-              <ListGroup.Item className="my-2 p-3">
-                Description: {product.description}$
+              <ListGroup.Item className="my-2 p-3 rounded">
+                <strong>Description: </strong><i>{product.description}</i>
               </ListGroup.Item>
             </ListGroup>
+            </Card>
           </Col>
           <Col md={3}>
             <Card className="shadow-sm">
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Price: </Col>
+                    <Col><strong>Price:</strong></Col>
                     <Col>
                       <strong>{product.price}$</strong>
                     </Col>
@@ -105,7 +107,7 @@ export const ProductDetail = () => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Status: </Col>
+                    <Col><strong>Status:</strong></Col>
                     <Col>
                       <strong>
                         {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
@@ -117,7 +119,7 @@ export const ProductDetail = () => {
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <Row>
-                      <Col>Qty: </Col>
+                      <Col><strong>Quantity:</strong></Col>
                       <Col>
                         <Form.Control
                           as="select"
