@@ -2,7 +2,6 @@ import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const productsApiSlice = apiSlice.injectEndpoints({
-<<<<<<< HEAD
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => ({
@@ -51,28 +50,3 @@ export const {
   useGetCategorizedProductsQuery,
   useGetTopRatedProductsQuery,
 } = productsApiSlice;
-=======
-    endpoints: (builder) => ({
-        getProducts: builder.query({
-            query: () => ({
-                url: PRODUCTS_URL,
-            }),
-            keepUnusedDataFor: 5,
-        }),
-        getProductDetails: builder.query({
-            query: (productId) => ({
-                url: `${PRODUCTS_URL}/${productId}`,
-            }),
-            keepUnusedDataFor: 5,
-        }),
-        getTopRatedProducts: builder.query({
-            query: () => ({
-                url: `${PRODUCTS_URL}/topRatedProducts`
-            }),
-            keepUnusedDataFor: 5,
-        }),
-    }), 
-});
-
-export const { useGetProductsQuery, useGetProductDetailsQuery, useGetTopRatedProductsQuery } = productsApiSlice;
->>>>>>> master

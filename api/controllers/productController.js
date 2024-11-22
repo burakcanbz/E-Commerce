@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 const asyncHandler = require("express-async-handler");
 const Product = require("../models/productModel");
 const { categories } = require("../constants/categories");
-=======
-const Product = require('../models/productModel');
-const asyncHandler = require('express-async-handler');
->>>>>>> master
 
 /**
  * @description Fetch all products
