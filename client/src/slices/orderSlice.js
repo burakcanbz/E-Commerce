@@ -22,7 +22,6 @@ const orderSlice = createSlice({
           x._id === existOrder._id ? order : x
         );
       } else {
-        console.log('in else')
         state.orders = [...state.orders, order];
       }
       localStorage.setItem('order', JSON.stringify(state))

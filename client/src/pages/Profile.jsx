@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Table, Row, Col, Button, Alert, Card, Form } from "react-bootstrap";
+import React from "react";
+import { Table, Row, Col, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useGetOrdersQuery } from "../slices/ordersApiSlice";
-import { useUpdateMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 import { convertToUTC } from "../utils/helpers";
 import StatusIcon from "../components/StatusIcon";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 import UserInformation from "../components/UserInformation";
 
 const Profile = () => {
@@ -84,16 +79,6 @@ const Profile = () => {
           </Col>
         )}
         <UserInformation />
-        <Form>
-        {/* <div key='dark' className="mb-3"> */}
-
-          <Form.Check // prettier-ignore
-            type="checkbox"
-            id="dark"
-            label="dark mode"
-          />
-          {/* </div> */}
-        </Form>
       </Row>
     </>
   );

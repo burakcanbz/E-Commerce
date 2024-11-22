@@ -106,7 +106,6 @@ exports.updateOrderToPaid = asyncHandler(async (req, res) => {
       throw new Error("Order not found.");
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Error saving order" });
   }
 });
