@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Nav,
@@ -6,8 +6,6 @@ import {
   Badge,
   NavDropdown,
   Form,
-  Row,
-  Col,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -30,7 +28,6 @@ const Header = () => {
 
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo);
   const { data, isLoading, error } = useGetPaginatedProductsQuery({
     page: 1,
     limit: 6,
@@ -54,7 +51,7 @@ const Header = () => {
       dispatch(clearShippingAddress());
       navigate("/login");
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   };
 
@@ -196,6 +193,7 @@ const Header = () => {
                                 width: 36,
                                 borderRadius: 50,
                               }}
+                              alt="product"
                             />{" "}
                             {item.name} (x{item.qty})
                           </span>
@@ -213,7 +211,7 @@ const Header = () => {
                 {cartItems.length > 0 && (
                   <>
                     <NavDropdown.Item className="nav-dropdown-items my-dropdown-item" disabled>
-                      <span>Total Price <small>(taxes included)</small>: ${totalPrice}</span>
+                      <span>Total Price <small>(taxes {totalPrice > 100 ? "included. Shipping free" : "+ shipping included"})</small>: ${totalPrice}</span>
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item className="nav-dropdown-items my-dropdown-item">
@@ -232,7 +230,7 @@ const Header = () => {
                   show={showDropdown === "username"}
                   onMouseEnter={() => handleDropdown("username")}
                   onMouseLeave={() => handleDropdown(null)}
-                  title={ <>{userInfo.name}  {userInfo.image !== undefined &&<img src={userInfo.image} style={{ width:'30px', height: '28px', borderRadius: '50%'}} /> }</>}
+                  title={ <>{userInfo.name}  {userInfo.image !== undefined &&<img alt='user' src={userInfo.image} style={{ width:'30px', height: '28px', borderRadius: '50%'}} /> }</>}
                 >
                   <div className="nav-dropdown-items">
                     <LinkContainer to="/profile">

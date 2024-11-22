@@ -3,17 +3,18 @@ import { Col, Button, Alert, Card, Form } from "react-bootstrap";
 import { useUpdateMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { setScreenMode, setClearScreenMode } from "../slices/settingsSlice";
-import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
 const UserInformation = () => {
   const user = useSelector((state) => state.auth?.userInfo);
+  const modeColor = useSelector(state => state.settings.settings);
+
   const dispatch = useDispatch();
   const [update] = useUpdateMutation();
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(modeColor === '(0 0 0)' ? true: false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,7 +65,7 @@ const UserInformation = () => {
     } else {
       dispatch(setClearScreenMode())
     }
-  }, [isChecked]); 
+  }, [isChecked, setInitials, dispatch]); 
 
 
   return (

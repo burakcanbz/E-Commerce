@@ -13,8 +13,9 @@ const settingsSlice = createSlice({
             localStorage.setItem('mode', JSON.stringify(action.payload));
         },
         setClearScreenMode: (state, action) => {
-            state.settings = '(241 245 249)';
-            localStorage.setItem('mode', JSON.stringify(state.settings));
+            const color = '(241 245 249)';
+            state.settings = color;
+            localStorage.setItem('mode', JSON.stringify(color));
         }
 }
 });
