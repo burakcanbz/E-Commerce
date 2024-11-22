@@ -1,24 +1,40 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../slices/cartSlice";
+import { useSelector } from "react-redux";
 import Rating from "./Rating";
 
 const Product = ({ product }) => {
+
+  const { cartItems } = useSelector(state => state.cart); 
 
   const dispatch = useDispatch();
 
   const [qty, setQty] = useState(0);
 
   const addToCartHandler = async () => {
+  const productExist = cartItems.find(item => item._id === product._id);
   if (product.countInStock && qty < product.countInStock) {
     setQty((prevQty) => {
-      const updatedQty = prevQty + 1; 
+      let updatedQty = null;
+      if(!productExist){
+        updatedQty = 1;
+      }
+      else{
+        updatedQty = prevQty + 1; 
+      }
       dispatch(addToCart({ ...product, qty: updatedQty })); 
       return updatedQty;
     });
+  }
+  else if (qty >= product.countInStock){
+    if(cartItems.length === 0){
+      dispatch(addToCart({ ...product, qty: 1 }))
+      setQty(1);
+    }
   }
 };
 
@@ -46,7 +62,7 @@ const Product = ({ product }) => {
         </Link>
         <Card.Text className="d-flex justify-content-between align-items-center">
           <Link to={`/product/${product._id}`}>
-            <button class="btn btn-dark">Details...</button>
+            <button className="btn btn-dark">Details...</button>
           </Link>
           <button className="btn btn-dark" onClick={addToCartHandler} disabled={product.countInStock === 0}>
             Add to <FaCartShopping />

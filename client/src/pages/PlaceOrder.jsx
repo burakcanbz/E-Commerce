@@ -39,10 +39,19 @@ const PlaceOrder = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
+<<<<<<< HEAD
+
+      navigate(`/order/${resp._id}`);
+      dispatch(setOrder(resp));
+      dispatch(clearCartItems());
+    } catch (err) {
+
+=======
       dispatch(setOrder(resp));
       dispatch(clearCartItems());
       navigate(`/order/${resp._id}`);
     } catch (err) {
+>>>>>>> master
       const errorMessage = error?.message || JSON.stringify(error); // Extract message or stringify the error
       toast.error(errorMessage); // Pass the string to toast.error
     }

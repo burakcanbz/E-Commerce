@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setRefetch } from "../slices/orderSlice";
 import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
 import OrderPayment from "./OrderPayment";
+import { convertToUTC } from "../utils/helpers";
 
 const Order = () => {
   const { id: orderId } = useParams();
@@ -38,7 +39,7 @@ const Order = () => {
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Shipping</h2>
+              <h2>Shipping Details</h2>
               <p>
                 <strong>Name: </strong> {order.user.name}
               </p>
@@ -64,7 +65,7 @@ const Order = () => {
                 <strong>Method: </strong> {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Paid at {order.paidAt}</Message>
+                <Message variant="success">Paid at {convertToUTC(order.paidAt)}</Message>
               ) : (
                 <Message variant="danger">Not Paid yet.</Message>
               )}

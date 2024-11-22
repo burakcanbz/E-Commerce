@@ -38,7 +38,10 @@ exports.addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
   }
@@ -90,7 +93,6 @@ exports.updateOrderToPaid = asyncHandler(async (req, res) => {
   try {
     const { amount } = req.body;
     const order = await Order.findById(req.params.id);
-    console.log(order);
     if (order) {
       order.isPaid = true;
       order.paidAmount = amount;
@@ -108,7 +110,6 @@ exports.updateOrderToPaid = asyncHandler(async (req, res) => {
       throw new Error("Order not found.");
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Error saving order" });
   }
 });
