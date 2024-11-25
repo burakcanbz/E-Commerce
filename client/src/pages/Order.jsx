@@ -62,7 +62,7 @@ const Order = () => {
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <p>
-                <strong>Method: </strong> {order.paymentMethod}
+                <strong>Method: </strong> Credit Card
               </p>
               {order.isPaid ? (
                 <Message variant="success">Paid at {convertToUTC(order.paidAt)}</Message>
