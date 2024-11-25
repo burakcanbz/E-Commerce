@@ -79,7 +79,7 @@ const Login = () => {
 
         <Row>
           <Col className="mt-3">
-            New Customer?{" "}
+            Already have an account ?{" "}
             <Link to={redirect ? `/register?redirect=/login` : "/register"}>
               Register
             </Link>
