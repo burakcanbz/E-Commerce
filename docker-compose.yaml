@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .  # Path to the backend source code
+      dockerfile: ./api/Dockerfile  # Dockerfile for the backend service
+    container_name: E-Commerce-backEnd  # Name of the container
+    ports:
+      - "3000:3000"  # Expose port 3000 on the host machine to port 3000 in the container
+    networks:
+      - app-network  # Connect the container to the 'app-network'
+    environment:
+      - NODE_ENV=production  # Set environment variable for production environment
+
+  frontend:
+    build:
+      context: ./client  # Path to the frontend source code
+      dockerfile: Dockerfile  # Dockerfile for the frontend service
+    container_name: E-Commerce-frontEnd  # Name of the container
+    ports:
+      - "5000:5000"  # Expose port 5000 on the host machine to port 5000 in the container
+    networks:
+      - app-network  # Connect the container to the 'app-network'
+    depends_on:
+      - backend  # Ensure the backend service starts before the frontend service
+
+networks:
+  app-network:
+    driver: bridge  # Use the default bridge network for communication between services
