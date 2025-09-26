@@ -1,17 +1,20 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import Message from '../components/Message'
+import { Row, Col, Image } from "react-bootstrap";
+import notFound from "../assets/404.png";
 
 const NotFound = () => {
   return (
-    <Container>
-        <Row>
-            <Col md={12} >
-                <Message  variant='secondary'> <h2>The Page you looking for is not available right now!</h2></Message>
-            </Col>
-        </Row>
-    </Container>
-)
-}
+    <Row>
+      <Col md={10} sx={12} className="mx-auto text-center">
+        <Image
+          src={notFound}
+          alt="404 Not Found"
+          fluid
+          className="my-5"
+          style={{ borderRadius: "20px", height: "70vh", width: "80vw" }}
+        />
+      </Col>
+    </Row>
+  );
+};
 
-export default NotFound
+export default NotFound;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Navbar,
   Nav,
@@ -11,27 +11,23 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
-import { logout } from "../slices/authSlice";
 import { LinkContainer } from "react-router-bootstrap";
+
+import { logout } from "../slices/authSlice";
 import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
 import { clearOrder } from "../slices/orderSlice";
 import { updateProduct, clearProduct } from "../slices/productSlice";
-import logo from "../assets/b.png";
-import { clearCartItems, clearShippingAddress } from "../slices/cartSlice";
-import { removeFromCart } from "../slices/cartSlice";
+import logo from "../assets/buyzy.png";
+import { clearCartItems, clearShippingAddress, removeFromCart } from "../slices/cartSlice";
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(null);
-
   const location = useLocation();
   const [searchItem, setSearchItem] = useState("");
 
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  const { data, isLoading, error } = useGetPaginatedProductsQuery({
-    page: 1,
-    limit: 6,
-  });
+  const { data } = useGetPaginatedProductsQuery({ page: 1, limit: 6 });
 
   const electronics = data?.electronics;
   const casual = data?.casual;
@@ -39,28 +35,23 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async () => {
     try {
-      await logoutApiCall().unwrap(); // without unwrap the logoutApiCall returns redux action object, with it, it returns promise-like object
+      await logoutApiCall().unwrap();
       dispatch(logout());
       dispatch(clearOrder());
       dispatch(clearCartItems());
       dispatch(clearShippingAddress());
       navigate("/login");
     } catch (err) {
-      throw new Error(err);
+      console.error(err);
     }
   };
 
   const handleSearch = (e) => {
-    if (
-      location.pathname === "/" &&
-      Array.isArray(products) &&
-      products.length > 0
-    ) {
+    if (location.pathname === "/" && Array.isArray(products)) {
       const value = e.target.value;
       setSearchItem(value);
       const filteredProducts = products.filter((product) =>
@@ -79,79 +70,65 @@ const Header = () => {
   };
 
   const removeFromCartHandler = (e, id) => {
-    e.preventDefault(); // Prevents any default action (like navigation)
+    e.preventDefault();
     e.stopPropagation();
     dispatch(removeFromCart(id));
   };
 
   return (
     <header>
-      <Navbar
-        variant="dark"
-        expand="lg"
-        className="fixed-top header shadow-sm "
-        collapseOnSelect
-      >
-        <Container>
+      <Navbar expand="lg" className="fixed-top header shadow-sm" collapseOnSelect>
+        <Container fluid className="d-flex align-items-center justify-content-between gap-5" style={{ padding: '0 100px 0 200px' }}>
           <LinkContainer to="/">
             <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
-
               <img
                 src={logo}
                 alt="Logo"
-                style={{
-                  maxHeight: 80,
-                  borderRadius: "5%",
-                  marginRight: 10,
-                }}
-              ></img>
-              <h2 className="brand-header">BCStore</h2>
+                style={{ maxHeight: 80, borderRadius: "50%", marginRight: 8 }}
+              />
+              <h2 className="brand-header">Buyzy</h2>
             </Navbar.Brand>
           </LinkContainer>
-          <Form className="d-none d-lg-flex justify-content-center w-50">
+
+          <Form className="d-none d-lg-flex mx-3" style={{ width: '30%', margin: '0 auto' }}>
             <Form.Control
-            className="search-bar"
               type="search"
+              size='lg'
               placeholder="Search"
-              aria-label="Search"
               value={searchItem}
               onChange={handleSearch}
               disabled={location.pathname !== "/"}
             />
           </Form>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse
-            id="basic-navbar-nav"
-            className="collapse-dark-bg ms-auto ps-2 rounded d-flex justify-content-between align-items-center"
-          >
-            <Nav>
-              <LinkContainer to="/">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-              <NavDropdown
-                className="my-dropdown"
-                id="categories"
-                show={showDropdown === "categories"}
-                onMouseEnter={() => handleDropdown("categories")}
-                onMouseLeave={() => handleDropdown(null)}
-                variant="pills"
-                title="Categories"
-              >
-                <div className="nav-dropdown-items">
+
+          <div className="d-flex align-items-center">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="d-flex align-items-center gap-4">
+                <LinkContainer to="/">
+                  <Nav.Link>Home</Nav.Link>
+                </LinkContainer>
+
+                {/* Categories */}
+                <NavDropdown
+                  className="my-dropdown"
+                  id="categories"
+                  show={showDropdown === "categories"}
+                  onMouseEnter={() => handleDropdown("categories")}
+                  onMouseLeave={() => handleDropdown(null)}
+                  title="Categories"
+                >
                   <LinkContainer to="/electronics">
-                    <NavDropdown.Item className="my-dropdown-item">
-                      Electronics
-                    </NavDropdown.Item>
+                    <NavDropdown.Item>Electronics</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/casual">
-                    <NavDropdown.Item className="my-dropdown-item">
-                      Casual
-                    </NavDropdown.Item>
+                    <NavDropdown.Item>Casual</NavDropdown.Item>
                   </LinkContainer>
-                </div>
-              </NavDropdown>
-              <NavDropdown
-                title={
+                </NavDropdown>
+
+                <NavDropdown
+                  title={
+                    
                   <LinkContainer to="/cart">
                     <span>
                       <FaShoppingCart />
@@ -163,99 +140,90 @@ const Header = () => {
                       )}
                     </span>
                   </LinkContainer>
-                }
-                id="cart-dropdown"
-                show={showDropdown === "cart-dropdown"}
-                onMouseEnter={() => handleDropdown("cart-dropdown")}
-                onMouseLeave={() => handleDropdown(null)}
-                className="d-flex cart-dropdown my-dropdown"
-              >
-                <div>
-                  {cartItems.length === 0 ? (
-                    <NavDropdown.Item
-                      className="nav-dropdown-items my-dropdown-item"
-                      disabled
-                    >
-                      No items in cart
-                    </NavDropdown.Item>
-                  ) : (
-                    cartItems.map((item) => (
-                      <LinkContainer to={`/product/${item._id}`}>
-                        <NavDropdown.Item
-                          key={item._id}
-                          className="nav-dropdown-items my-dropdown-item"
-                        >
-                          <span>
-                            <img
-                              src={item.image}
-                              style={{
-                                height: 36,
-                                width: 36,
-                                borderRadius: 50,
-                              }}
-                              alt="product"
-                            />{" "}
-                            {item.name} (x{item.qty})
-                          </span>
-                          <button
-                            className="btn btn-sm bg-danger ms-3"
-                            onClick={(e) => removeFromCartHandler(e, item._id)}
-                          >
-                            Remove
-                          </button>
-                        </NavDropdown.Item>
-                      </LinkContainer>
-                    ))
-                  )}
-                </div>
-                {cartItems.length > 0 && (
-                  <>
-                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item" disabled>
-                      <span>Total Price <small>(taxes {totalPrice > 100 ? "included. Shipping free" : "+ shipping included"})</small>: ${totalPrice}</span>
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="nav-dropdown-items my-dropdown-item">
-                      <LinkContainer to="/cart">
-                        <span>Go to Cart</span>
-                      </LinkContainer>
-                    </NavDropdown.Item>
-                  </>
-                )}
-              </NavDropdown>
-              {userInfo ? (
-                <>
-                <NavDropdown
-                  className="my-dropdown"
-                  id="username"
-                  show={showDropdown === "username"}
-                  onMouseEnter={() => handleDropdown("username")}
+                  }
+                  id="cart-dropdown"
+                  show={showDropdown === "cart-dropdown"}
+                  onMouseEnter={() => handleDropdown("cart-dropdown")}
                   onMouseLeave={() => handleDropdown(null)}
-                  title={ <>{userInfo.name}  {userInfo.image !== undefined &&<img alt='user' src={userInfo.image} style={{ width:'30px', height: '28px', borderRadius: '50%'}} /> }</>}
                 >
-                  <div className="nav-dropdown-items">
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item className="my-dropdown-item">
-                        Profile
-                      </NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item
-                      onClick={logoutHandler}
-                      className="my-dropdown-item"
-                    >
-                      Logout
-                    </NavDropdown.Item>
+                  <div>
+                    {cartItems.length === 0 ? (
+                      <NavDropdown.Item disabled>No items in cart</NavDropdown.Item>
+                    ) : (
+                      cartItems.map((item) => (
+                        <LinkContainer to={`/product/${item._id}`} key={item._id}>
+                          <NavDropdown.Item className="d-flex align-items-center justify-content-between">
+                            <span className="d-flex align-items-center gap-2">
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                style={{ width: 36, height: 36, borderRadius: "50%" }}
+                              />
+                              {item.name} (x{item.qty})
+                            </span>
+                            <button
+                              className="btn btn-sm btn-danger"
+                              onClick={(e) => removeFromCartHandler(e, item._id)}
+                            >
+                              Remove
+                            </button>
+                          </NavDropdown.Item>
+                        </LinkContainer>
+                      ))
+                    )}
                   </div>
+
+                  {cartItems.length > 0 && (
+                    <>
+                      <NavDropdown.Item disabled>
+                        Total: ${totalPrice}{" "}
+                        <small>
+                          (taxes {totalPrice > 100 ? "included. Shipping free" : "+ shipping included"})
+                        </small>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <LinkContainer to="/cart">
+                        <NavDropdown.Item>Go to Cart</NavDropdown.Item>
+                      </LinkContainer>
+                    </>
+                  )}
                 </NavDropdown>
-                </>
-              ) : (
-                <LinkContainer to="/login">
-                  <Nav.Link>
-                    <FaUser /> Sign In
-                  </Nav.Link>
-                </LinkContainer>
-              )}
-            </Nav>
-          </Navbar.Collapse>
+
+                {/* User */}
+                {userInfo ? (
+                  <NavDropdown
+                    title={
+                      <>
+                        {userInfo.name}{" "}
+                        {userInfo.image && (
+                          <img
+                            alt=""
+                            src={userInfo.image}
+                            style={{ width: 30, height: 28, borderRadius: "50%" }}
+                          />
+                        )}
+                      </>
+                    }
+                    id="username"
+                    show={showDropdown === "username"}
+                    onMouseEnter={() => handleDropdown("username")}
+                    onMouseLeave={() => handleDropdown(null)}
+                  >
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <LinkContainer to="/login">
+                    <Nav.Link>
+                      <FaUser /> Sign In
+                    </Nav.Link>
+                  </LinkContainer>
+                )}
+              </Nav>
+            </Navbar.Collapse>
+          </div>
         </Container>
       </Navbar>
     </header>

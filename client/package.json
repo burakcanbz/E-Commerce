@@ -4,7 +4,12 @@
   "private": true,
   "_comment": "it behaves like backend and frontend at same origin, so don't need to use cors",
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.2",
+    "@mui/material": "^7.3.2",
     "@reduxjs/toolkit": "^2.3.0",
+    "@sentry/react": "^10.15.0",
     "@stripe/react-stripe-js": "^2.8.1",
     "@stripe/stripe-js": "^4.9.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -27,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": " set PORT=5000 && react-scripts start",
+    "start": "PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
