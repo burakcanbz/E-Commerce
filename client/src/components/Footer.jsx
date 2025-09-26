@@ -6,10 +6,12 @@ const Footer = () => {
     <footer>
       <Container fluid>
         <Row className="footer text-white">
-          <Col className="d-flex align-items-center justify-content-center">
+          <Col className="d-flex align-items-center justify-content-start">
+          <Container>
           <div>
-            <p className="my-3">Buyzy &copy; {currentYear}</p>
+            <p className="my-3 p-3">Copyright &copy; Buyzy {currentYear}</p>
           </div>
+          </Container>
           </Col>
         </Row>
       </Container>

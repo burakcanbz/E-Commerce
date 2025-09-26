@@ -84,7 +84,7 @@ const Header = () => {
               <img
                 src={logo}
                 alt="Logo"
-                style={{ maxHeight: 80, borderRadius: "50%", marginRight: 8 }}
+                style={{ maxHeight: 65, borderRadius: "50%", marginRight: 8 }}
               />
               <h2 className="brand-header">Buyzy</h2>
             </Navbar.Brand>
@@ -93,8 +93,8 @@ const Header = () => {
           <Form className="d-none d-lg-flex mx-3" style={{ width: '30%', margin: '0 auto' }}>
             <Form.Control
               type="search"
-              size='lg'
-              placeholder="Search"
+              placeholder="Search product with name..."
+              style={{ fontSize: '0.9rem', height: '38px' }}
               value={searchItem}
               onChange={handleSearch}
               disabled={location.pathname !== "/"}
@@ -106,12 +106,12 @@ const Header = () => {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="d-flex align-items-center gap-4">
                 <LinkContainer to="/">
-                  <Nav.Link>Home</Nav.Link>
+                  <Nav.Link className="menu-item">Home</Nav.Link>
                 </LinkContainer>
 
                 {/* Categories */}
                 <NavDropdown
-                  className="my-dropdown"
+                  className="menu-item my-dropdown"
                   id="categories"
                   show={showDropdown === "categories"}
                   onMouseEnter={() => handleDropdown("categories")}
@@ -128,11 +128,10 @@ const Header = () => {
 
                 <NavDropdown
                   title={
-                    
                   <LinkContainer to="/cart">
                     <span>
                       <FaShoppingCart />
-                      <span className="ms-1">Cart</span>{" "}
+                      <span className="menu-item ms-1">Cart</span>{" "}
                       {cartItems.length > 0 && (
                         <Badge pill bg="success" className="ms-1">
                           {cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
@@ -148,7 +147,7 @@ const Header = () => {
                 >
                   <div>
                     {cartItems.length === 0 ? (
-                      <NavDropdown.Item disabled>No items in cart</NavDropdown.Item>
+                      <NavDropdown.Item style={{color: 'white'}}disabled>No items in cart</NavDropdown.Item>
                     ) : (
                       cartItems.map((item) => (
                         <LinkContainer to={`/product/${item._id}`} key={item._id}>
@@ -159,7 +158,12 @@ const Header = () => {
                                 alt={item.name}
                                 style={{ width: 36, height: 36, borderRadius: "50%" }}
                               />
-                              {item.name} (x{item.qty})
+                              <span style={{ maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {item.name}
+                              </span>
+                              <span>
+                                (x{item.qty})
+                              </span>
                             </span>
                             <button
                               className="btn btn-sm btn-danger"
@@ -175,11 +179,11 @@ const Header = () => {
 
                   {cartItems.length > 0 && (
                     <>
-                      <NavDropdown.Item disabled>
+                      <NavDropdown.Item disabled style={{color: 'white'}}>
                         Total: ${totalPrice}{" "}
-                        <small>
+                        <small><small><small>
                           (taxes {totalPrice > 100 ? "included. Shipping free" : "+ shipping included"})
-                        </small>
+                        </small></small></small>
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <LinkContainer to="/cart">
@@ -212,12 +216,12 @@ const Header = () => {
                     <LinkContainer to="/profile">
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
-                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                    <NavDropdown.Item className="menu-item" onClick={logoutHandler}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <LinkContainer to="/login">
-                    <Nav.Link>
-                      <FaUser /> Sign In
+                    <Nav.Link className="menu-item">
+                      <FaUser /> Login
                     </Nav.Link>
                   </LinkContainer>
                 )}
