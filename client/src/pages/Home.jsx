@@ -17,7 +17,7 @@ const Home = () => {
     <div>
       {searchedProducts && searchedProducts.length !== 0 ? (
         <Row>
-          {searchedProducts.map((product, index) => {
+          {searchedProducts?.map((product, index) => {
             return (
               <Col sm={12} md={6} lg={4} xl={3} key={index}>
                 <Product product={product} />

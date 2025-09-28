@@ -8,39 +8,39 @@ import { useSelector } from "react-redux";
 import Rating from "./Rating";
 
 const Product = ({ product }) => {
-
-  const { cartItems } = useSelector(state => state.cart); 
+  const { cartItems } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
   const [qty, setQty] = useState(0);
 
   const addToCartHandler = async () => {
-  const productExist = cartItems.find(item => item._id === product._id);
-  if (product.countInStock && qty < product.countInStock) {
-    setQty((prevQty) => {
-      let updatedQty = null;
-      if(!productExist){
-        updatedQty = 1;
+    const productExist = cartItems.find((item) => item._id === product._id);
+    if (product.countInStock && qty < product.countInStock) {
+      setQty((prevQty) => {
+        let updatedQty = null;
+        if (!productExist) {
+          updatedQty = 1;
+        } else {
+          updatedQty = prevQty + 1;
+        }
+        dispatch(addToCart({ ...product, qty: updatedQty }));
+        return updatedQty;
+      });
+    } else if (qty >= product.countInStock) {
+      if (cartItems.length === 0) {
+        dispatch(addToCart({ ...product, qty: 1 }));
+        setQty(1);
       }
-      else{
-        updatedQty = prevQty + 1; 
-      }
-      dispatch(addToCart({ ...product, qty: updatedQty })); 
-      return updatedQty;
-    });
-  }
-  else if (qty >= product.countInStock){
-    if(cartItems.length === 0){
-      dispatch(addToCart({ ...product, qty: 1 }))
-      setQty(1);
     }
-  }
-};
+  };
 
   return (
-    <Card className="my-3 p-3 rounded shadow-lg" style={{minWidth: 300, minHeight: 350}}>
-      <Link to={`/product/${product._id}`}>
+    <Card
+      className="my-3 p-3 rounded shadow-lg"
+      style={{ minWidth: 300, minHeight: 350 }}
+    >
+      <Link to={`/product/${product._id}`} target="_blank">
         <Card.Img src={product.image} variant="top" />
       </Link>
       <Card.Body>
@@ -61,10 +61,14 @@ const Product = ({ product }) => {
           </Card.Title>
         </Link>
         <Card.Text className="d-flex justify-content-between align-items-center">
-          <Link to={`/product/${product._id}`}>
+          <Link to={`/product/${product._id}`} target="_blank">
             <button className="btn btn-dark">Details...</button>
           </Link>
-          <button className="btn btn-dark" onClick={addToCartHandler} disabled={product.countInStock === 0}>
+          <button
+            className="btn btn-dark"
+            onClick={addToCartHandler}
+            disabled={product.countInStock === 0}
+          >
             Add to <FaCartShopping />
           </button>
         </Card.Text>

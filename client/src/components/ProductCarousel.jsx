@@ -52,7 +52,7 @@ const ProductCarousel = () => {
                       Popular
                     </div>
                   </div>
-                  <Link to={`/product/${item._id}`}>
+                  <Link to={`/product/${item._id}`} target="_blank">
                     <div className="d-flex justify-content-center">
                       <Image src={item.image} alt={item.name} fluid />
                     </div>

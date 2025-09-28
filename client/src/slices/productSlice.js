@@ -11,7 +11,7 @@ const productSlice = createSlice({
             return state;
         },
         updateProduct: (state, action) => {
-            state.searchedProducts = action.payload;
+            state.searchedProducts = action.payload.filteredProducts;
             return state;
         },
         clearProduct: (state, action) => {
