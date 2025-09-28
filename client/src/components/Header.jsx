@@ -24,8 +24,10 @@ import {
   clearShippingAddress,
   removeFromCart,
 } from "../slices/cartSlice";
+import Typewriter from "typewriter-effect";
 
 const Header = () => {
+  const pathName = window.location.pathname.split("/")[1];
   const [showDropdown, setShowDropdown] = useState(null);
   const location = useLocation();
   const [searchItem, setSearchItem] = useState("");
@@ -113,21 +115,36 @@ const Header = () => {
               <h2 className="brand-header">Buyzy</h2>
             </Navbar.Brand>
           </LinkContainer>
-
-          <Form
-            className="d-none d-lg-flex mx-3"
-            style={{ width: "30%", margin: "0 auto" }}
-          >
-            <Form.Control
-              type="search"
-              placeholder="Search product with name..."
-              style={{ fontSize: "0.9rem", height: "38px" }}
-              value={searchItem}
-              onChange={handleSearch}
-              disabled={location.pathname !== "/"}
+          {pathName === "" ? (
+            <Form
+              className="d-none d-lg-flex mx-3"
+              style={{ width: "30%", margin: "0 auto" }}
+            >
+              <Form.Control
+                type="search"
+                placeholder="Search product with name..."
+                style={{ fontSize: "0.9rem", height: "38px" }}
+                value={searchItem}
+                onChange={handleSearch}
+                disabled={location.pathname !== "/"}
+              />
+            </Form>
+          ) : (
+            <Typewriter
+            className="buyzy"
+              options={{
+                strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}` ],
+                autoStart: true,
+                loop: true,
+                delay: 100,
+                pauseFor: 1000 * 60 * 60,
+                deleteSpeed: 100,
+                cursor: "",
+                wrapperClassName: "buyzy",
+                cursorClassName: "typewriter-cursor",
+              }}
             />
-          </Form>
-
+          )}
           <div className="d-flex align-items-center">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -210,11 +227,10 @@ const Header = () => {
                             <span>(x{item.qty})</span>
                           </span>
                           <FaTrash
-                          className="mt-1"
-                          color="red"
+                            className="mt-1"
+                            color="red"
                             onClick={(e) => removeFromCartHandler(e, item._id)}
                           />
-
                         </NavDropdown.Item>
                       ))
                     )}
