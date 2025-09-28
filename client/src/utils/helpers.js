@@ -10,7 +10,7 @@ export const convertToUTC = (time) => {
 export const slickSettings = {
   dots: true,
   infinite: true,
-  slidesToShow: 4,
+  slidesToShow: 5,
   slidesToScroll: 4,
   autoplay: true,
   autoplaySpeed: 3000,

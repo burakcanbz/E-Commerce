@@ -201,7 +201,7 @@
     position: fixed;
     top: 50%;
     transform: translateY(-45%);
-    height: 60vh;
+    height: 70vh;
     width: 200px;
     padding: 10px;
     background-color: rgb(238, 199, 199);
@@ -225,6 +225,7 @@
 
   .buyzy {
     font-size: 25px !important;
+    font-weight: 600;
     letter-spacing: 3px;
     color: white !important;
     background: linear-gradient(to right, #dbe0df, #fdfdfd);
@@ -235,3 +236,36 @@
     margin-bottom: -10px;
     animation: pulse 2s infinite;
   }
+
+.col-custom {
+  flex: 0 0 20% !important;
+  max-width: 20% !important;
+}
+
+@media (max-width: 1200px) {
+  .col-custom {
+    flex: 0 0 25% !important;   /* 4 sütun */
+    max-width: 25% !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .col-custom {
+    flex: 0 0 33.3333% !important; /* 3 sütun */
+    max-width: 33.3333% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-custom {
+    flex: 0 0 50% !important; /* 2 sütun */
+    max-width: 50% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-custom {
+    flex: 0 0 100% !important; /* 1 sütun */
+    max-width: 100% !important;
+  }
+}

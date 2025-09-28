@@ -1,9 +1,10 @@
 import { Table, Row, Col, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useGetOrdersQuery } from "../slices/ordersApiSlice";
+import { convertToUTC } from "../utils/helpers";
+import { motion } from "framer-motion";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
-import { convertToUTC } from "../utils/helpers";
 import StatusIcon from "../components/StatusIcon";
 import UserInformation from "../components/UserInformation";
 
@@ -21,7 +22,9 @@ const Profile = () => {
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
-    <>
+    <motion.div initial={{ y: -200, opacity: 0 }}  
+      animate={{ y: 0, opacity: 1 }}     
+      transition={{ duration: 0.5, ease: "easeOut" }}>
       <Row>
         {orders.length >= 1 ? (
           <Col md={8}>
@@ -94,7 +97,7 @@ const Profile = () => {
         )}
         <UserInformation />
       </Row>
-    </>
+    </motion.div>
   );
 };
 

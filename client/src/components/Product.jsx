@@ -38,7 +38,7 @@ const Product = ({ product }) => {
   return (
     <Card
       className="my-3 p-3 rounded shadow-lg"
-      style={{ minWidth: 300, minHeight: 350 }}
+      style={{ minWidth: 250, width: 250, minHeight: 420, cursor: "pointer" }}
     >
       <Link to={`/product/${product._id}`} target="_blank">
         <Card.Img src={product.image} variant="top" />
@@ -62,7 +62,7 @@ const Product = ({ product }) => {
         </Link>
         <Card.Text className="d-flex justify-content-between align-items-center">
           <Link to={`/product/${product._id}`} target="_blank">
-            <button className="btn btn-dark">Details...</button>
+            <button className="btn btn-dark">Details</button>
           </Link>
           <button
             className="btn btn-dark"

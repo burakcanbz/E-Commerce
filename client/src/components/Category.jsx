@@ -22,7 +22,7 @@ const Category = ({ category }) => {
   
   const changedSlickSettings = {
     ...slickSettings,
-    slidesToScroll: category === 'Electronics' ? 1 : 4,
+    slidesToScroll: category === 'Electronics' ? 1 : 2,
   };
 
   return isLoading ? (
@@ -43,16 +43,11 @@ const Category = ({ category }) => {
       <Slider {...changedSlickSettings}>
         {products?.map((product, index) => {
           return (
-            <div
-            className="d-flex justify-content-between align-items-center"
-              key={index}
-            >
               <Col sm={12} md={6} lg={4} xl={3} key={index}>
                 <Product product={product} />
               </Col>
-            </div>
-          );
-        })}
+            );
+          })}
       </Slider>
     </>
   );

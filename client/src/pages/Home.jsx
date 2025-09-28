@@ -1,7 +1,7 @@
 import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
-
 import { useGetProductCategoriesQuery } from "../slices/productsApiSlice";
+import { motion } from "framer-motion";
 import ProductCarousel from "../components/ProductCarousel";
 import Category from "../components/Category";
 import Product from "../components/Product";
@@ -16,17 +16,19 @@ const Home = () => {
   return (
     <div>
       {searchedProducts && searchedProducts.length !== 0 ? (
-        <Row>
+          <Row>
           {searchedProducts?.map((product, index) => {
             return (
-              <Col sm={12} md={6} lg={4} xl={3} key={index}>
+              <Col className="col-custom" key={index}>
                 <Product product={product} />
               </Col>
             );
           })}{" "}
         </Row>
       ) : (
-        <>
+        <motion.div initial={{ y: -200, opacity: 0 }}  
+                    animate={{ y: 0, opacity: 1 }}     
+                    transition={{ duration: 0.5, ease: "easeOut" }}>
           <Row>
             <ProductCarousel />
           </Row>
@@ -37,7 +39,7 @@ const Home = () => {
               </Row>
             );
           })}
-        </>
+        </motion.div>
       )}
     </div>
   );

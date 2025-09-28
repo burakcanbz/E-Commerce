@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
+import { motion } from 'framer-motion';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
 import Product from '../components/Product';
@@ -14,18 +15,21 @@ const Casual = () => {
     ) : isError ? (
       <Message variant="danger">{isError}</Message>
     ) : (
-      <>
+      <motion.div
+      initial={{ y: -200, opacity: 0 }}  
+      animate={{ y: 0, opacity: 1 }}     
+      transition={{ duration: 0.5, ease: "easeOut" }}>
         <Row>
           {products &&
             products.map((product, index) => {
               return (
-                <Col sm={12} md={6} lg={4} xl={3} key={index}>
+                <Col className='col-custom' key={index}>
                   <Product product={product} />
                 </Col>
               );
             })}
         </Row>
-      </>
+      </motion.div>
     );
 }
 

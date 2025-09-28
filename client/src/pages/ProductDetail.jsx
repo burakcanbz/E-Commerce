@@ -57,7 +57,9 @@ const ProductDetail = () => {
   }, [showMessage]);
 
   return (
-    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
+    <motion.div initial={{ x: -200, opacity: 0 }}  
+      animate={{ x: 0, opacity: 1 }}     
+      transition={{ duration: 0.5, ease: "easeOut" }}>
       <Row className="mb-3">
         <Link to="/">
           <Button variant="secondary">Go Back</Button>
