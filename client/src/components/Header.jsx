@@ -18,6 +18,7 @@ import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
 import { clearOrder } from "../slices/orderSlice";
 import { updateProduct, clearProduct } from "../slices/productSlice";
 import logo from "../assets/buyzy.png";
+import { FaTrash } from "react-icons/fa";
 import {
   clearCartItems,
   clearShippingAddress,
@@ -107,7 +108,7 @@ const Header = () => {
               <img
                 src={logo}
                 alt="Logo"
-                style={{ maxHeight: 65, borderRadius: "50%", marginRight: 8 }}
+                style={{ maxHeight: 70, borderRadius: "50%", marginRight: 8 }}
               />
               <h2 className="brand-header">Buyzy</h2>
             </Navbar.Brand>
@@ -198,7 +199,7 @@ const Header = () => {
                             />
                             <span
                               style={{
-                                maxWidth: 120,
+                                maxWidth: 150,
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -208,12 +209,12 @@ const Header = () => {
                             </span>
                             <span>(x{item.qty})</span>
                           </span>
-                          <button
-                            className="btn btn-sm btn-danger"
+                          <FaTrash
+                          className="mt-1"
+                          color="red"
                             onClick={(e) => removeFromCartHandler(e, item._id)}
-                          >
-                            Remove
-                          </button>
+                          />
+
                         </NavDropdown.Item>
                       ))
                     )}

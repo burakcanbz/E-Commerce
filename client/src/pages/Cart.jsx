@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Row,
@@ -8,12 +7,11 @@ import {
   Form,
   Button,
   Card,
-  ListGroupItem,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
-import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
+import Message from "../components/Message";
 
 const Cart = () => {
   const navigate = useNavigate();

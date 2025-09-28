@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Col, Button, Alert, Card, Form } from "react-bootstrap";
 import { useUpdateMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
@@ -9,23 +9,25 @@ import { useDispatch } from "react-redux";
 
 const UserInformation = () => {
   const user = useSelector((state) => state.auth?.userInfo);
-  const modeColor = useSelector(state => state.settings.settings);
+  const modeColor = useSelector((state) => state.settings.settings);
 
   const dispatch = useDispatch();
   const [update] = useUpdateMutation();
 
-  const [isChecked, setIsChecked] = useState(modeColor === '(0 0 0)' ? true: false);
+  const [isChecked, setIsChecked] = useState(
+    modeColor === "(0 0 0)" ? true : false
+  );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const setInitials = () => {
-    setName(user.name);
-    setEmail(user.email);
-    setPassword('');
-    setConfirmPassword('');
-  };
+  const setInitials = useCallback(() => {
+    setName(user?.name ?? "");
+    setEmail(user?.email ?? "");
+    setPassword("");
+    setConfirmPassword("");
+  }, [user?.name, user?.email]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -47,7 +49,6 @@ const UserInformation = () => {
         toast.success("Updated successfully!");
         setInitials();
         dispatch(setCredentials(resp));
-
       } else {
         setInitials();
         toast.error("Update Failed!");
@@ -57,82 +58,100 @@ const UserInformation = () => {
 
   useEffect(() => {
     setInitials();
-  }, [user, user.name, user.email]);
+  }, [setInitials]);
 
   useEffect(() => {
     if (isChecked) {
-      dispatch(setScreenMode('(0 0 0)'))
+      dispatch(setScreenMode("(28 26 29)"));
     } else {
-      dispatch(setClearScreenMode())
+      dispatch(setClearScreenMode());
     }
-  }, [isChecked, setInitials, dispatch]); 
-
+  }, [isChecked, dispatch]);
 
   return (
     <Col md={4}>
-      <Alert variant="secondary" className="text-center">
-        <h2>PROFILE</h2>
-      </Alert>
-      <Card className="p-3 ps-3">
-      <Form>
-          <Form.Check
-            type="checkbox"
-            id="dark"
-            label="Dark Mode"
-            className="fs-5 fw-normal"
-            checked={isChecked}
-            onChange={(e) => setIsChecked(e.target.checked)}
-          />
-        </Form>
-      </Card>
+      
+        
       <Card
-        className="shadow-lg my-3 p-3 rounded d-flex align-items-center justify-content-center bg-light"
-        style={{ minHeight: 500 }}
+        id="user-information"
+        className="shadow-lg p-4 rounded-4 border-0 glass-card d-flex flex-column align-items-center"
+        border="light"
+        style={{
+          minHeight: 520,
+          maxWidth: 600,
+          margin: "0 auto",
+          background: "linear-gradient(to right, #393d47, #666970ff)",
+          color: "white",
+        }}
       >
+        <h3
+          className="text-center mb-4 fw-semibold"
+          style={{ letterSpacing: 1 }}
+        >
+          Update Profile
+        </h3>
+
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name" className="my-4">
-            <Form.Label>Name</Form.Label>
+          <Form.Group controlId="name" className="mb-4">
+            <Form.Label className="fw-semibold ">Name</Form.Label>
             <Form.Control
-              type="name"
-              placeholder="Enter name"
+              type="text"
+              placeholder="Enter your name"
+              className="rounded-3 py-2"
               value={name}
               onChange={(e) => setName(e.target.value)}
-            ></Form.Control>
+            />
           </Form.Group>
-          <Form.Group controlId="email" className="my-4">
-            <Form.Label>Email Address</Form.Label>
+
+          <Form.Group controlId="email" className="mb-4">
+            <Form.Label className="fw-semibold">Email Address</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="Enter your email"
+              className="rounded-3 py-2"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
+            />
           </Form.Group>
-          <Form.Group controlId="password" className="my-4">
-            <Form.Label>Password</Form.Label>
+
+          <Form.Group controlId="password" className="mb-4">
+            <Form.Label className="fw-semibold">Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Enter password"
+              placeholder="Enter new password"
+              className="rounded-3 py-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
+            />
           </Form.Group>
-          <Form.Group controlId="confirmPassword" className="my-4">
-            <Form.Label>Confirm Password</Form.Label>
+
+          <Form.Group controlId="confirmPassword" className="mb-4">
+            <Form.Label className="fw-semibold">Confirm Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Enter password"
+              placeholder="Confirm your password"
+              className="rounded-3 py-2"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
+            />
           </Form.Group>
-          <Button
-            type="submit"
-            variant="primary"
-            className="my-4"
-          >
-            Update
-          </Button>
+
+          <div className="text-center">
+            <Button
+              id="update-button"
+              type="submit"
+              variant="light"
+              className="mt-2 px-4 py-2 fw-semibold rounded-pill shadow-sm"
+              style={{
+                background: "#138836ff",
+                border: "1px solid #1a7b19ff",
+                backdropFilter: "blur(4px)",
+                color: "white",
+              }}
+            >
+              Update
+            </Button>
+          </div>
         </Form>
       </Card>
     </Col>

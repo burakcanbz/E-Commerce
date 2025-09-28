@@ -1,4 +1,3 @@
-import React from "react";
 import { Table, Row, Col, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useGetOrdersQuery } from "../slices/ordersApiSlice";
@@ -26,10 +25,25 @@ const Profile = () => {
       <Row>
         {orders.length >= 1 ? (
           <Col md={8}>
-            <Alert variant="secondary" className="text-center">
-              <h2>ORDERS STATUS</h2>
+            <Alert
+              className="text-center text-white d-flex align-items-center justify-content-center"
+              variant="dark"
+              style={{
+                background: "linear-gradient(to right, #666970ff, #393d47)",
+                height: "100px",
+              }}
+            >
+              {" "}
+              <h2 className="fw-bold">ORDERS STATUS</h2>
             </Alert>
-            <Table variant="dark" responsive="md" striped bordered hover>
+            <Table
+              responsive="md"
+              variant="dark"
+              striped
+              bordered
+              hover
+              
+            >
               <thead>
                 <tr>
                   <th className="text-center">#</th>
