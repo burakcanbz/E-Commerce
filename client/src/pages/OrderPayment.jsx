@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import PaymentForm from "../components/PaymentForm";
+// import PaymentForm from "../components/PaymentForm";
 import { Row, Col, Container } from "react-bootstrap";
 import { usePayOrderMutation, useGetConfigQuery } from "../slices/paymentApiSlice";
 import Loading from "../components/Loading";
@@ -37,7 +37,7 @@ const OrderPayment = () => {
           <Col>
             {clientSecret && stripePromise && (
               <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <PaymentForm />
+                {/* <PaymentForm /> */}
               </Elements>
             )}
           </Col>

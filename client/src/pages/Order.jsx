@@ -1,29 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Row,
   Col,
   ListGroup,
   Image,
-  Form,
-  Button,
   Card,
 } from "react-bootstrap";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
 import { useDispatch } from "react-redux";
-import { setRefetch } from "../slices/orderSlice";
 import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
-import OrderPayment from "./OrderPayment";
 import { convertToUTC } from "../utils/helpers";
 
 const Order = () => {
   const { id: orderId } = useParams();
-  const dispatch = useDispatch();
 
   const {
     data: order,
-    refetch,
     isLoading,
     error,
   } = useGetOrderDetailsQuery(orderId);
@@ -117,7 +111,7 @@ const Order = () => {
             </ListGroup>
           </Card>
           <Row>
-            <OrderPayment />
+            {/* <OrderPayment /> */}
           </Row>
         </Col>
       </Row>
