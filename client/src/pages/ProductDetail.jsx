@@ -11,13 +11,14 @@ import {
   Button,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Rating from "../components/Rating";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
-import Loading from "../components/Loading";
-import Message from "../components/Message";
 import { addToCart } from "../slices/cartSlice";
+import { motion } from "framer-motion";
+import Loading from "../components/Loading";
+import Rating from "../components/Rating";
+import Message from "../components/Message";
 
-export const ProductDetail = () => {
+const ProductDetail = () => {
   const { id: productId } = useParams();
 
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ export const ProductDetail = () => {
   }, [showMessage]);
 
   return (
-    <>
+    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
       <Row className="mb-3">
         <Link to="/">
           <Button variant="secondary">Go Back</Button>
@@ -158,6 +159,8 @@ export const ProductDetail = () => {
           </Col>
         </Row>
       )}
-    </>
+    </motion.div>
   );
 };
+
+export default ProductDetail;

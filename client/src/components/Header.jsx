@@ -18,7 +18,11 @@ import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
 import { clearOrder } from "../slices/orderSlice";
 import { updateProduct, clearProduct } from "../slices/productSlice";
 import logo from "../assets/buyzy.png";
-import { clearCartItems, clearShippingAddress, removeFromCart } from "../slices/cartSlice";
+import {
+  clearCartItems,
+  clearShippingAddress,
+  removeFromCart,
+} from "../slices/cartSlice";
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(null);
@@ -60,11 +64,10 @@ const Header = () => {
 
   const filteredProducts = useMemo(() => {
     if (!Array.isArray(products)) return [];
-    return products?.filter(product =>
+    return products?.filter((product) =>
       product.name.toLowerCase().includes(deferredValue.toLowerCase())
     );
   }, [deferredValue, products]);
-
 
   const handleDropdown = (id) => {
     setShowDropdown(showDropdown === id ? null : id);
@@ -80,17 +83,25 @@ const Header = () => {
     if (deferredValue === "") {
       dispatch(clearProduct());
       return;
-      }
+    }
     if (Array.isArray(filteredProducts)) {
-      dispatch(updateProduct({filteredProducts}));
-      return
+      dispatch(updateProduct({ filteredProducts }));
+      return;
     }
   }, [deferredValue, filteredProducts, dispatch]);
 
   return (
     <header>
-      <Navbar expand="lg" className="fixed-top header shadow-sm" collapseOnSelect>
-        <Container fluid className="d-flex align-items-center justify-content-between gap-5" style={{ padding: '0 100px 0 200px' }}>
+      <Navbar
+        expand="lg"
+        className="fixed-top header shadow-sm"
+        collapseOnSelect
+      >
+        <Container
+          fluid
+          className="d-flex align-items-center justify-content-between gap-5"
+          style={{ padding: "0 100px 0 200px" }}
+        >
           <LinkContainer to="/">
             <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
               <img
@@ -102,11 +113,14 @@ const Header = () => {
             </Navbar.Brand>
           </LinkContainer>
 
-          <Form className="d-none d-lg-flex mx-3" style={{ width: '30%', margin: '0 auto' }}>
+          <Form
+            className="d-none d-lg-flex mx-3"
+            style={{ width: "30%", margin: "0 auto" }}
+          >
             <Form.Control
               type="search"
               placeholder="Search product with name..."
-              style={{ fontSize: '0.9rem', height: '38px' }}
+              style={{ fontSize: "0.9rem", height: "38px" }}
               value={searchItem}
               onChange={handleSearch}
               disabled={location.pathname !== "/"}
@@ -140,17 +154,17 @@ const Header = () => {
 
                 <NavDropdown
                   title={
-                  <LinkContainer to="/cart">
-                    <span>
-                      <FaShoppingCart />
-                      <span className="menu-item ms-1">Cart</span>{" "}
-                      {cartItems.length > 0 && (
-                        <Badge pill bg="success" className="ms-1">
-                          {cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
-                        </Badge>
-                      )}
-                    </span>
-                  </LinkContainer>
+                    <LinkContainer to="/cart">
+                      <span>
+                        <FaShoppingCart />
+                        <span className="menu-item ms-1">Cart</span>{" "}
+                        {cartItems.length > 0 && (
+                          <Badge pill bg="success" className="ms-1">
+                            {cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
+                          </Badge>
+                        )}
+                      </span>
+                    </LinkContainer>
                   }
                   id="cart-dropdown"
                   show={showDropdown === "cart-dropdown"}
@@ -159,43 +173,67 @@ const Header = () => {
                 >
                   <div>
                     {cartItems.length === 0 ? (
-                      <NavDropdown.Item style={{color: 'white'}}disabled>No items in cart</NavDropdown.Item>
+                      <NavDropdown.Item style={{ color: "white" }} disabled>
+                        No items in cart
+                      </NavDropdown.Item>
                     ) : (
                       cartItems.map((item) => (
-                        <LinkContainer to={`/product/${item._id}`} key={item._id}>
-                          <NavDropdown.Item className="d-flex align-items-center justify-content-between">
-                            <span className="d-flex align-items-center gap-2">
-                              <img
-                                src={item.image}
-                                alt={item.name}
-                                style={{ width: 36, height: 36, borderRadius: "50%" }}
-                              />
-                              <span style={{ maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                {item.name}
-                              </span>
-                              <span>
-                                (x{item.qty})
-                              </span>
-                            </span>
-                            <button
-                              className="btn btn-sm btn-danger"
-                              onClick={(e) => removeFromCartHandler(e, item._id)}
+                        <NavDropdown.Item
+                          className="d-flex align-items-center justify-content-between"
+                          onClick={() =>
+                            window.open(`/product/${item._id}`, "_blank")
+                          }
+                          key={item._id}
+                          style={{ minWidth: 250, maxWidth: 300 }}
+                        >
+                          <span className="d-flex align-items-center gap-2">
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              style={{
+                                width: 36,
+                                height: 36,
+                                borderRadius: "50%",
+                              }}
+                            />
+                            <span
+                              style={{
+                                maxWidth: 120,
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
                             >
-                              Remove
-                            </button>
-                          </NavDropdown.Item>
-                        </LinkContainer>
+                              {item.name}
+                            </span>
+                            <span>(x{item.qty})</span>
+                          </span>
+                          <button
+                            className="btn btn-sm btn-danger"
+                            onClick={(e) => removeFromCartHandler(e, item._id)}
+                          >
+                            Remove
+                          </button>
+                        </NavDropdown.Item>
                       ))
                     )}
                   </div>
 
                   {cartItems.length > 0 && (
                     <>
-                      <NavDropdown.Item disabled style={{color: 'white'}}>
+                      <NavDropdown.Item disabled style={{ color: "white" }}>
                         Total: ${totalPrice}{" "}
-                        <small><small><small>
-                          (taxes {totalPrice > 100 ? "included. Shipping free" : "+ shipping included"})
-                        </small></small></small>
+                        <small>
+                          <small>
+                            <small>
+                              (taxes{" "}
+                              {totalPrice > 100
+                                ? "included. Shipping free"
+                                : "+ shipping included"}
+                              )
+                            </small>
+                          </small>
+                        </small>
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <LinkContainer to="/cart">
@@ -211,11 +249,15 @@ const Header = () => {
                     title={
                       <>
                         {userInfo.name}{" "}
-                        {userInfo.image && (
+                        {Object.keys(userInfo.image).length !== 0 && (
                           <img
                             alt=""
                             src={userInfo.image}
-                            style={{ width: 30, height: 28, borderRadius: "50%" }}
+                            style={{
+                              width: 30,
+                              height: 28,
+                              borderRadius: "50%",
+                            }}
                           />
                         )}
                       </>
@@ -228,7 +270,12 @@ const Header = () => {
                     <LinkContainer to="/profile">
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
-                    <NavDropdown.Item className="menu-item" onClick={logoutHandler}>Logout</NavDropdown.Item>
+                    <NavDropdown.Item
+                      className="menu-item"
+                      onClick={logoutHandler}
+                    >
+                      Logout
+                    </NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <LinkContainer to="/login">
