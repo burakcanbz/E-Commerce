@@ -17,6 +17,7 @@ const Profile = () => {
     select: (data) => data.orders,
   });
 
+  console.log(orders);
   return isLoading ? (
     <Loading />
   ) : error ? (

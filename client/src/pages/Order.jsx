@@ -2,18 +2,22 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
-import Message from "../components/Message";
-import Loading from "../components/Loading";
 import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
 import { convertToUTC } from "../utils/helpers";
+import { useDispatch } from "react-redux";
+import { logout } from "../slices/authSlice";
+import Message from "../components/Message";
+import Loading from "../components/Loading";
 
 const Order = () => {
+  const dispatch = useDispatch();
   const { id: orderId } = useParams();
-
   const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
   const [hasError, setHasError] = useState(false);
 
   if (hasError) {
+    dispatch(logout());
+    setHasError(false);
     throw new Error("Order component error.");
   }
 
