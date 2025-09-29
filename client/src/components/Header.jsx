@@ -129,7 +129,11 @@ const Header = () => {
                 disabled={location.pathname !== "/"}
               />
             </Form>
-          ) : (
+          ) : 
+          pathName === "login" || pathName === "register" ? 
+          (<></>)
+          :
+          (
             <Typewriter
             className="buyzy"
               options={{

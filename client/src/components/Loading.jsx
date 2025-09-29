@@ -15,6 +15,7 @@ const Loading = () => {
         animation="border"
         role="status"
         style={{
+          color: "#0d6efd",
           width: "100px",
           height: "100px",
           margin: "auto auto",

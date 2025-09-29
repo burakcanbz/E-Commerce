@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Card,
-  Form,
-  Button,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Card, Form, Button, Row, Col, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { FaRegUserCircle } from "react-icons/fa";
-import FormContainer from "../components/FormContainer";
-import Loading from "../components/Loading";
+import { BiLogIn } from "react-icons/bi";
 import { useRegisterMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
-import { imageToBase64 } from "../utils/helpers";
-import Message from "../components/Message";
+import Loading from "../components/Loading";
+import Logo from "../assets/buyzy.png";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [image, setImage] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,143 +37,105 @@ const Register = () => {
       toast.error("Passwords do not match");
     } else {
       try {
-        await register({ name, email, password, image }).unwrap();
+        await register({ name, email, password }).unwrap();
         toast.success("Successfully registered.");
         navigate(redirect);
       } catch (err) {
         toast.error(err?.data?.message || err.error);
-        toast.error('Maybe image size bigger than expected.')
       }
     }
   };
 
-  const handleImageChange = async(e) => {
-    const file = e.target.files[0];
-    const image = await imageToBase64(file)
-    if (image) {
-      setImage(image);
-    }
-  };
-
   return (
-    <FormContainer>
-      <Card className=" my-3 p-3 rounded d-flex align-items-center border-0" style={{backgroundColor: "rgba(230, 230, 230)"}}>
-        <Form.Group controlId="image" className="position-relative mb-3">
-          <Form.Label
-            className="position-absolute"
-            style={{
-              color: 'black',
-              top: "230%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 1,
-              fontSize: "16px",
-              cursor: "pointer",
-              borderRadius: '20%'
-            }}
-          >{
-            image ? (<strong><span>Edit Image</span></strong>): (<strong><span>Upload Image</span></strong>)
-          }
-          </Form.Label>
-          <Form.Control
-            style={{ visibility: "hidden" }}
-            type="file"
-            onChange={handleImageChange}
-          />
-          {image ? (
-            <img
-              src={image}
-              alt="Preview"
-              style={{
-                marginTop: 20,
-                width: "82px",
-                height: "82px",
-                borderRadius: "50%",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 0,
-              }}
+    <div
+      className="d-flex flex-column align-items-center justify-content-center"
+      style={{ minHeight: "60vh" }}
+    >
+      <Image src={`${Logo}`} alt="Buyzy Logo" style={{ width: 150, marginBottom: 20, borderRadius: '50%' }} />
+      <h2 className="mb-4">Sign Up to Buyzy!</h2>
+      {isLoading ? <Loading /> :(
+      <Card
+        className="p-5 shadow-lg rounded-4"
+        style={{
+          maxWidth: 450,
+          minHeight: 500,
+          width: "100%",
+          margin: "auto",
+          background: "white",
+        }}
+      >
+        
+        <div className="text-center mb-2">
+          <BiLogIn size={50} color="#0d6efd" />
+          <h2 className="mt-2">Sign Up</h2>
+        </div>
+
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId="name" className="mb-3">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{ borderRadius: 8, padding: "10px 12px" }}
             />
-          ) : (
-            <FaRegUserCircle
-              style={{
-                marginTop: 20,
-                fontSize: 80,
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 0,
-              }}
+          </Form.Group>
+
+          <Form.Group controlId="email" className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ borderRadius: 8, padding: "10px 12px" }}
             />
-          )}
-        </Form.Group>
+          </Form.Group>
 
-        <h1 className="mt-5">Sign Up</h1>
-        <Card.Body>
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Form.Group>
+          <Form.Group controlId="password" className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter yourpassword"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ borderRadius: 8, padding: "10px 12px" }}
+            />
+          </Form.Group>
 
-            <Form.Group controlId="email" className="my-3">
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
+          <Form.Group controlId="confirmPassword" className="mb-3">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              style={{ borderRadius: 8, padding: "10px 12px" }}
+            />
+          </Form.Group>
 
-            <Form.Group controlId="password" className="my-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
+          <Button
+            type="submit"
+            variant="primary"
+            className="w-100 py-2 mt-3 mb-3"
+            disabled={isLoading}
+          >
+            Register
+          </Button>
+        </Form>
 
-            <Form.Group controlId="confirmPassword" className="my-3">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </Form.Group>
-
-            <Button
-              type="submit"
-              variant="primary"
-              className="mt-2"
-              disabled={isLoading}
-            >
-              Register
-            </Button>
-            {isLoading && <Loading />}
-          </Form>
-
-          <Row>
-            <Col className="mt-3">
-              Already have an account?{" "}
-              <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>Login</Link>
-            </Col>
-          </Row>
-        </Card.Body>
+        <Row className="text-center mt-3">
+          <Col>
+            Already have an account?{" "}
+            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+              Sign In
+            </Link>
+          </Col>
+        </Row>
       </Card>
-    </FormContainer>
+      )}
+    </div>
   );
 };
 
