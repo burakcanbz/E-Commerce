@@ -35,49 +35,80 @@ const Shipping = () => {
   return (
     <>
       <FormContainer>
-          <CheckoutSteps step1 step2 />
-          <h1 className="text-center"> Address </h1>
-          <Form id='checkout' className='d-flex flex-column justify-content-center align-items-center'>
-            <Form.Group controlId="address" className="my-2">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="city" className="my-2">
-              <Form.Label>City</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="postalCode" className="my-2">
-              <Form.Label>Postal Code</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Postal Code"
-                value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="country" className="my-2">
-              <Form.Label>Country</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-          </Form>
-            <Button onClick={submitHandler} variant="primary" className="mt-5 mx-auto">
-              Continue
-            </Button>
+        <CheckoutSteps step1 step2 />
+        <h1 className="text-center"> Address </h1>
+        <Form
+          id="checkout"
+          className="d-flex flex-column justify-content-center align-items-center"
+        >
+          <Form.Group controlId="address" className="my-2">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              type="text"
+              className="placeholder-secondary"
+              placeholder="Enter address"
+              style={{
+                borderRadius: 8,
+                padding: "10px 12px",
+                borderColor: "#68a7e6ff",
+              }}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="city" className="my-2">
+            <Form.Label>City</Form.Label>
+            <Form.Control
+              type="text"
+              className="placeholder-secondary"
+              placeholder="Enter city"
+              style={{
+                borderRadius: 8,
+                padding: "10px 12px",
+                borderColor: "#68a7e6ff",
+              }}
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="postalCode" className="my-2">
+            <Form.Label>Postal Code</Form.Label>
+            <Form.Control
+              type="text"
+              className="placeholder-secondary"
+              placeholder="Enter Postal Code"
+              style={{
+                borderRadius: 8,
+                padding: "10px 12px",
+                borderColor: "#68a7e6ff",
+              }}
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="country" className="my-2">
+            <Form.Label>Country</Form.Label>
+            <Form.Control
+              type="text"
+              className="placeholder-secondary"
+              placeholder="Enter Country"
+              style={{
+                borderRadius: 8,
+                padding: "10px 12px",
+                borderColor: "#68a7e6ff",
+              }}
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+        </Form>
+        <Button
+          onClick={submitHandler}
+          variant="primary"
+          className="mt-5 mx-auto"
+        >
+          Continue
+        </Button>
       </FormContainer>
     </>
   );

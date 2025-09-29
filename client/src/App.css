@@ -273,3 +273,8 @@
 .order-details > p {
     line-height: 1 !important;
 }
+
+.placeholder-secondary::placeholder {
+  color: #888f93 !important; /* secondary color */
+  opacity: 1 !important; /* gerekirse */
+}
