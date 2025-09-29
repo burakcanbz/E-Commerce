@@ -1,12 +1,6 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Button,
-  Card,
-} from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
@@ -16,31 +10,42 @@ import { convertToUTC } from "../utils/helpers";
 const Order = () => {
   const { id: orderId } = useParams();
 
-  const {
-    data: order,
-    isLoading,
-    error,
-  } = useGetOrderDetailsQuery(orderId);
+  const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
+  const [hasError, setHasError] = useState(false);
 
-
-  const handleCancelOrder = () => {
-    alert("Order cancelled");
+  if (hasError) {
+    throw new Error("Order component error.");
   }
 
+  const handleCancelOrder = () => {
+    try{
+      throw new Error("Order cancellation error.");
+    }
+    catch(err){
+      setHasError(true);
+    }
+  };
+  
   return isLoading ? (
     <Loading />
   ) : error ? (
     <Message variant="danger" />
   ) : (
-    <motion.div initial={{ y: -200, opacity: 0 }}  
-      animate={{ y: 0, opacity: 1 }}     
-      transition={{ duration: 0.5, ease: "easeOut" }}>
+    <motion.div
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item className="order-details">
               <h2 className="mb-4">Shipping Details</h2>
-              <p> <strong>Order id: </strong>{order._id} </p>
+              <p>
+                {" "}
+                <strong>Order id: </strong>
+                {order._id}{" "}
+              </p>
               <p>
                 <strong>Name: </strong> {order.user.name}
               </p>
@@ -66,7 +71,9 @@ const Order = () => {
                 <strong>Method: </strong> Credit Card
               </p>
               {order.isPaid ? (
-                <Message variant="success">Paid at {convertToUTC(order.paidAt)}</Message>
+                <Message variant="success">
+                  Paid at {convertToUTC(order.paidAt)}
+                </Message>
               ) : (
                 <Message variant="danger">Not Paid yet.</Message>
               )}
@@ -90,7 +97,12 @@ const Order = () => {
               ))}
             </ListGroup.Item>
             <ListGroup.Item className="text-end">
-              <Button className="btn btn-danger mt-3 mb-2" onClick={handleCancelOrder}>Cancel Order</Button>
+              <Button
+                className="btn btn-danger mt-3 mb-2"
+                onClick={handleCancelOrder}
+              >
+                Cancel Order
+              </Button>
             </ListGroup.Item>
           </ListGroup>
         </Col>
@@ -120,9 +132,7 @@ const Order = () => {
               </ListGroup.Item>
             </ListGroup>
           </Card>
-          <Row>
-            {/* <OrderPayment /> */}
-          </Row>
+          <Row>{/* <OrderPayment /> */}</Row>
         </Col>
       </Row>
     </motion.div>
