@@ -7,7 +7,6 @@ import Message from "./Message";
 
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopRatedProductsQuery();
-  console.log(error);
   return (
     <Row className="mx-auto">
       {isLoading ? (

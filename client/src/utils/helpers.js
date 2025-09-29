@@ -60,3 +60,10 @@ export const imageToBase64 = async(img) => {
 
   return data;
 }
+
+export const getUserInfoFromLocalStorage = () => {
+  const userInfo = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
+    : null;
+  return userInfo;
+}

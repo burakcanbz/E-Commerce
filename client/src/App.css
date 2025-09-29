@@ -269,3 +269,7 @@
     max-width: 100% !important;
   }
 }
+
+.order-details > p {
+    line-height: 1 !important;
+}

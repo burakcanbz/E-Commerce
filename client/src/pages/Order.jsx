@@ -1,15 +1,15 @@
-import React from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Row,
   Col,
   ListGroup,
   Image,
+  Button,
   Card,
 } from "react-bootstrap";
+import { motion } from "framer-motion";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
-import { useDispatch } from "react-redux";
 import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
 import { convertToUTC } from "../utils/helpers";
 
@@ -22,18 +22,25 @@ const Order = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
 
+
+  const handleCancelOrder = () => {
+    alert("Order cancelled");
+  }
+
   return isLoading ? (
     <Loading />
   ) : error ? (
     <Message variant="danger" />
   ) : (
-    <>
-      <h1> Order {order._id} </h1>
+    <motion.div initial={{ y: -200, opacity: 0 }}  
+      animate={{ y: 0, opacity: 1 }}     
+      transition={{ duration: 0.5, ease: "easeOut" }}>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2>Shipping Details</h2>
+            <ListGroup.Item className="order-details">
+              <h2 className="mb-4">Shipping Details</h2>
+              <p> <strong>Order id: </strong>{order._id} </p>
               <p>
                 <strong>Name: </strong> {order.user.name}
               </p>
@@ -82,6 +89,9 @@ const Order = () => {
                 </ListGroup.Item>
               ))}
             </ListGroup.Item>
+            <ListGroup.Item className="text-end">
+              <Button className="btn btn-danger mt-3 mb-2" onClick={handleCancelOrder}>Cancel Order</Button>
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={4}>
@@ -115,7 +125,7 @@ const Order = () => {
           </Row>
         </Col>
       </Row>
-    </>
+    </motion.div>
   );
 };
 

@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Outlet, Navigate } from "react-router-dom";
+import { logout } from "../slices/authSlice";
 
 const PrivateRoute = () => {
-  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth); 
+  
+  const userInfoFromStorage = !!localStorage.getItem("userInfo");
+  if(!userInfoFromStorage){
+    dispatch(logout());
+  }
+  const isAuthenticated = !!userInfo && !!userInfoFromStorage;
 
-  return userInfo ? <Outlet /> : <Navigate to='/login' replace />
+  return isAuthenticated ? <Outlet /> : <Navigate to='/login' replace />
 };
 
 export default PrivateRoute;

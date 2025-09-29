@@ -22,34 +22,29 @@ const Profile = () => {
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
-    <motion.div initial={{ y: -200, opacity: 0 }}  
-      animate={{ y: 0, opacity: 1 }}     
-      transition={{ duration: 0.5, ease: "easeOut" }}>
+    <motion.div
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <Row>
-        {orders.length >= 1 ? (
+        {orders?.length >= 1 ? (
           <Col md={8}>
             <Alert
               className="text-center text-white d-flex align-items-center justify-content-center"
               variant="dark"
               style={{
                 background: "linear-gradient(to right, #666970ff, #393d47)",
-                height: "100px",
+                height: "80px",
               }}
             >
               {" "}
-              <h2 className="fw-bold">ORDERS STATUS</h2>
+              <h2 className="fw-bold">Orders Status</h2>
             </Alert>
-            <Table
-              responsive="md"
-              variant="dark"
-              striped
-              bordered
-              hover
-              
-            >
+            <Table responsive="md" variant="dark" striped bordered hover>
               <thead>
                 <tr>
-                  <th className="text-center">#</th>
+                  <th className="text-center align-middle">#</th>
                   <th className="text-center">Payment Method</th>
                   <th className="text-center">Paid Status</th>
                   <th className="text-center">Paid Time</th>
@@ -59,7 +54,7 @@ const Profile = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((item) => {
+                {orders?.map((item) => {
                   return (
                     <tr key={item._id}>
                       <td className="text-center">{item._id}</td>
@@ -70,7 +65,7 @@ const Profile = () => {
                       <td className="text-center">
                         {convertToUTC(item.paidAt)}
                       </td>
-                      <td className="text-center ">{item.totalPrice}</td>
+                      <td className="text-center ">{item.totalPrice} $</td>
                       <td className="text-center">
                         {<StatusIcon isActive={item.isDelivered} />}
                       </td>
