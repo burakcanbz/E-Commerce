@@ -37,6 +37,7 @@ exports.addOrderItems = asyncHandler(async (req, res) => {
       taxPrice,
       shippingPrice,
       totalPrice,
+      status: "Processing",
     });
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
@@ -121,13 +122,13 @@ exports.updateOrderToPaid = asyncHandler(async (req, res) => {
 
 exports.cancelOrder = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
-  if(!order) {
-   return res.status(404).json({ message: "Order not found." });
+  if (!order) {
+    return res.status(404).json({ message: "Order not found." });
   }
-  order.status = "cancelled";
+  order.status = "Cancelled";
   order.cancelledAt = Date.now();
   const cancelledOrder = await order.save();
-  return res.status(200).json({ cancelledOrder});
+  return res.status(200).json({ cancelledOrder });
 });
 
 /**

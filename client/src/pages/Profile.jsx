@@ -8,6 +8,7 @@ import Loading from "../components/Loading";
 import Message from "../components/Message";
 import StatusIcon from "../components/StatusIcon";
 import UserInformation from "../components/UserInformation";
+import { useEffect } from "react";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -15,11 +16,15 @@ const Profile = () => {
     data: orders,
     isLoading,
     error,
+    refetch
   } = useGetOrdersQuery(undefined, {
     select: (data) => data.orders,
   });
 
-  console.log(orders);
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
   return isLoading ? (
     <Loading />
   ) : error ? (
@@ -66,17 +71,17 @@ const Profile = () => {
                         {<StatusIcon isActive={item.isPaid} />}
                       </td>
                       <td className="text-center">
-                        {convertToUTC(item.paidAt)}
+                        {item.status === "Cancelled" ? <StatusIcon isActive={false} /> : convertToUTC(item.paidAt)}
                       </td>
                       <td className="text-center ">{item.totalPrice} $</td>
                       <td className="text-center">
-                        {<StatusIcon isActive={item.isDelivered} />}
+                        {item.status}
                       </td>
                       <td className="text-center">
                         <Button
                           variant="warning"
                           size="sm"
-                          disabled={item.isCancelled}
+                          disabled={item.status === "Cancelled"}
                           onClick={() => {
                             navigate(`/order/${item._id}`);
                           }}
