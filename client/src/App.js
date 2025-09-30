@@ -11,7 +11,6 @@ import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import "./App.css";
 
 const App = () => {
-
   const color = useSelector((state) => state.settings.settings);
 
   return (
@@ -21,7 +20,8 @@ const App = () => {
           backgroundColor: `rgba${color}`,
           display: "flex",
           flexDirection: "column",
-          minHeight: "100vh",
+          minHeight: "100dvh",
+          overflowX: "hidden",
         }}
       >
         <div className="d-none d-xl-block">
@@ -29,13 +29,22 @@ const App = () => {
           <Flag side="right" />
         </div>
         <Header />
-        <main className="py-3 d-flex" style={{ flexGrow: 1, marginTop: 120 }}>
+        <main className="py-3" style={{ flexGrow: 1, marginTop: 120 }}>
           <Container>
             <Outlet />
           </Container>
         </main>
         <Footer />
-        <ToastContainer />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          limit={3}
+          newestOnTop
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </ErrorBoundary>
   );

@@ -16,6 +16,7 @@ export const slickSettings = {
   autoplaySpeed: 3000,
   pauseOnHover: true,
   adaptiveHeight: true,
+  centerMode: false,
   responsive: [
     {
       breakpoint: 1024,        // For medium screens
@@ -24,6 +25,7 @@ export const slickSettings = {
         slidesToScroll: 1,     // Scroll 1 slide at a time
         infinite: true,        // Infinite scroll
         dots: true,            // Show dots navigation
+        centerMode: false,     // Disable center mode
       }
     },
     {
@@ -34,6 +36,7 @@ export const slickSettings = {
         initialSlide: 0,       // Initial slide index
         arrows: false,         // Disable arrows on small screens
         dots: true,            // Show dots navigation
+        centerMode: false,     // Disable center mode
       }
     },
     {
@@ -44,6 +47,7 @@ export const slickSettings = {
         initialSlide: 0,       // Initial slide index
         arrows: false,         // Disable arrows on mobile
         dots: true,            // Show dots navigation
+        centerMode: true,   // Center the slide
       }
     }
   ]

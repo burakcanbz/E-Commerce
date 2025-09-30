@@ -106,8 +106,8 @@ const ProductDetail = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Row className="mb-3">
-        <Link to="/">
-          <Button variant="secondary">Go Back</Button>
+        <Link to="/" className="text-center text-md-start">
+          <Button  variant="secondary">Go Back</Button>
         </Link>
       </Row>
       {isLoading ? (
@@ -119,7 +119,7 @@ const ProductDetail = () => {
       ) : (
         <>
           <Row>
-            <Col md={5}>
+            <Col xs={10} md={5} className="mx-auto">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -128,7 +128,7 @@ const ProductDetail = () => {
                 rounded
               ></Image>
             </Col>
-            <Col md={4}>
+            <Col xs={10} md={4} className="mx-auto mt-1">
               <Card className="shadow-sm">
                 <ListGroup variant="flush" className="rounded mx-3">
                   <ListGroup.Item className="my-2 p-3 rounded">
@@ -150,7 +150,7 @@ const ProductDetail = () => {
                 </ListGroup>
               </Card>
             </Col>
-            <Col md={3}>
+            <Col xs={10} md={3} className="mx-auto mt-1">
               <Card className="shadow-sm">
                 <ListGroup variant="flush">
                   <ListGroup.Item>
@@ -181,7 +181,7 @@ const ProductDetail = () => {
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
-                        <Col>
+                        <Col style={{ display: "flex", alignItems: "center" }}>
                           <strong>Quantity:</strong>
                         </Col>
                         <Col>

@@ -4,7 +4,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer>
-      <Container fluid>
+      <Container fluid className="px-0">
         <Row className="footer text-white">
           <Col className="d-flex align-items-center justify-content-start">
           <Container>

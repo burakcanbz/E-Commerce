@@ -27,6 +27,7 @@ import {
 import Typewriter from "typewriter-effect";
 
 const Header = () => {
+  const isDesktop = window.innerWidth >= 992;
   const pathName = window.location.pathname.split("/")[1];
   const [showDropdown, setShowDropdown] = useState(null);
   const location = useLocation();
@@ -102,8 +103,7 @@ const Header = () => {
       >
         <Container
           fluid
-          className="d-flex align-items-center justify-content-between gap-5"
-          style={{ padding: "0 100px 0 200px" }}
+          className="px-3 px-md-5 d-flex align-items-center justify-content-between"
         >
           <LinkContainer to="/">
             <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
@@ -129,15 +129,13 @@ const Header = () => {
                 disabled={location.pathname !== "/"}
               />
             </Form>
-          ) : 
-          pathName === "login" || pathName === "register" ? 
-          (<></>)
-          :
-          (
+          ) : (pathName === "login" || pathName === "register" || !isDesktop) ? (
+            <></>
+          ) : (
             <Typewriter
-            className="buyzy"
+              className="buyzy"
               options={{
-                strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}` ],
+                strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}`],
                 autoStart: true,
                 loop: true,
                 delay: 100,
@@ -152,7 +150,11 @@ const Header = () => {
           <div className="d-flex align-items-center">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="d-flex align-items-center gap-4">
+              <Nav
+                className={`ms-auto align-items-center ${
+                  window.innerWidth < 992 ? "flex-column" : "d-flex gap-4"
+                }`}
+              >
                 <LinkContainer to="/">
                   <Nav.Link className="menu-item">Home</Nav.Link>
                 </LinkContainer>
@@ -161,9 +163,9 @@ const Header = () => {
                 <NavDropdown
                   className="menu-item my-dropdown"
                   id="categories"
-                  show={showDropdown === "categories"}
-                  onMouseEnter={() => handleDropdown("categories")}
-                  onMouseLeave={() => handleDropdown(null)}
+                  show={isDesktop ? showDropdown === "categories" : undefined}
+                  onMouseEnter={() => isDesktop && handleDropdown("categories")}
+                  onMouseLeave={() => isDesktop && handleDropdown(null)}
                   title="Categories"
                 >
                   <LinkContainer to="/electronics">
@@ -267,11 +269,7 @@ const Header = () => {
                 {/* User */}
                 {userInfo ? (
                   <NavDropdown
-                    title={
-                      <>
-                        {userInfo.name}{" "}
-                      </>
-                    }
+                    title={<>{userInfo.name} </>}
                     id="username"
                     show={showDropdown === "username"}
                     onMouseEnter={() => handleDropdown("username")}

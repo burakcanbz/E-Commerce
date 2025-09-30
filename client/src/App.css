@@ -265,8 +265,11 @@
 
 @media (max-width: 576px) {
   .col-custom {
+    display: flex !important;
     flex: 0 0 100% !important; /* 1 sütun */
     max-width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 }
 
@@ -287,4 +290,9 @@ textarea.form-control:focus {
 textarea.form-control:hover:focus {
   box-shadow: none !important;
   border-color: white !important;
+}
+
+select.form-control {
+  text-align: center !important;
+  text-align-last: center !important; /* IE, Firefox için */
 }

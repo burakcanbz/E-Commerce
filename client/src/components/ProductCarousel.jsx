@@ -1,4 +1,4 @@
-import { Carousel, Row, Image, Badge } from "react-bootstrap";
+import { Carousel, Row, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { useGetTopRatedProductsQuery } from "../slices/productsApiSlice";
@@ -55,7 +55,7 @@ const ProductCarousel = () => {
                     <div className="d-flex justify-content-center">
                       <Image src={item.image} alt={item.name} fluid />
                     </div>
-                    <Carousel.Caption className="caption p-2 text-white">
+                    <Carousel.Caption className="d-none d-md-block caption p-2 text-white">
                       <div>
                         <h5>{item.name}</h5>
                         <p>

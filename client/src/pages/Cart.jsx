@@ -35,7 +35,9 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    const items = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cartItems : [];
+    const items = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart")).cartItems
+      : [];
     dispatch(setCart(items));
   }, [dispatch]);
 
@@ -46,8 +48,8 @@ const Cart = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Row>
-        <Col sm={4} md={8}>
-          <h1 style={{ marginBottom: "20px" }}>
+        <Col xs={10} sm={4} md={8} className="mx-auto mt-4">
+          <h1 className="text-center" style={{ marginBottom: "20px" }}>
             My Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)} items)
           </h1>
           {cartItems.length === 0 ? (
@@ -60,12 +62,16 @@ const Cart = () => {
                 {cartItems.map((item) => {
                   return (
                     <ListGroup.Item
-                      style={{ backgroundColor: "rgba(208, 217, 220)" }}
+                      style={{
+                        backgroundColor: "rgba(208, 217, 220)",
+                        margin: 10,
+                        borderRadius: 10,
+                      }}
                       key={item._id}
                     >
                       <LinkContainer to={`/product/${item._id}`}>
                         <Row className="d-flex align-items-center">
-                          <Col sm={1} md={3}>
+                          <Col xs={11} sm={1} md={3} className="mx-auto">
                             <Link to={`/product/${item._id}`}>
                               <Image
                                 src={item.image}
@@ -75,7 +81,7 @@ const Cart = () => {
                               />
                             </Link>
                           </Col>
-                          <Col sm={2} md={4}>
+                          <Col xs={10} sm={2} md={4} className="mx-auto mt-1">
                             <Link
                               style={{
                                 textDecoration: "none",
@@ -88,9 +94,8 @@ const Cart = () => {
                               {item.name}{" "}
                             </Link>
                           </Col>
-                          <Col sm={1} md={2}>
+                          <Col xs={6} sm={1} md={2} className="mt-2 mx-auto">
                             <Form.Control
-                              className="text-center"
                               as="select"
                               value={item.qty}
                               onClick={(e) => e.stopPropagation()}
@@ -99,35 +104,39 @@ const Cart = () => {
                               }}
                             >
                               {[...Array(item.countInStock).keys()].map((x) => (
-                                <option key={x + 1} value={x + 1}>
+                                <option
+                                  key={x + 1}
+                                  value={x + 1}
+                                >
                                   {" "}
                                   {x + 1}{" "}
                                 </option>
                               ))}
                             </Form.Control>
                           </Col>
-                          <Col sm={1} md={3} className="mt-1 ms-auto">
-                            <Row>
-                              <strong className="fs-6">
+                          <Col
+                            xs={10}
+                            sm={1}
+                            md={3}
+                            className="mt-3 mb-2 mx-auto"
+                          >
+                            <div className="d-flex flex-row align-items-center justify-content-between">
+                              <strong className="fs-6 me-sm-3">
                                 Price: ${item.price}
                               </strong>
-                            </Row>
-                            <Row className="ms-5 mt-3">
-                              <Col sm={1} md={1}>
-                                <Button
-                                  type="button"
-                                  variant="danger"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    removeFromCartHandler(item._id);
-                                  }}
-                                  size="sm"
-                                >
-                                  <FaTrash />
-                                </Button>
-                              </Col>
-                            </Row>
+                              <Button
+                                type="button"
+                                variant="danger"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  removeFromCartHandler(item._id);
+                                }}
+                                size="sm"
+                              >
+                                <FaTrash />
+                              </Button>
+                            </div>
                           </Col>
                         </Row>
                       </LinkContainer>
@@ -138,7 +147,7 @@ const Cart = () => {
             </Card>
           )}
         </Col>
-        <Col sm={2} md={3} className=" d-flex flex-column ms-auto">
+        <Col xs={10} sm={2} md={3} className=" d-flex flex-column mx-auto mt-4">
           <Card className="p-2">
             <ListGroup variant="flush">
               <ListGroup.Item className="border-0 mt-2">
