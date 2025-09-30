@@ -67,3 +67,13 @@ export const getUserInfoFromLocalStorage = () => {
     : null;
   return userInfo;
 }
+
+export const hideUserName = (name) => {
+  if (!name) return '';
+  const names = name.split(' ');
+  if (names.length === 1) {
+    return names[0][0] + '*'.repeat(names[0].length - 1);
+  } else {
+    return names.map(n => n[0] + '*'.repeat(n.length - 1)).join(' ');
+  }
+}

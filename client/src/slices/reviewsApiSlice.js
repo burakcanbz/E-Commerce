@@ -4,11 +4,13 @@ import { REVIEWS_URL } from "../constants";
 export const reviewsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createReview: builder.mutation({
-      query: (data) => ({
-        url: `${REVIEWS_URL}`,
-        method: "POST",
-        body: data,
-      }),
+      query: ({ productId, review }) => {
+        return {
+          url: `${REVIEWS_URL}/product/${productId}`,
+          method: "POST",
+          body: review,
+        };
+      },
       invalidatesTags: (result, error, { productId }) => [
         { type: "Reviews", id: productId },
       ],

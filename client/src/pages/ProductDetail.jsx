@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   Form,
@@ -10,16 +10,21 @@ import {
   Card,
   Button,
 } from "react-bootstrap";
+import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
-import { useGetProductReviewsQuery } from "../slices/reviewsApiSlice";
+import { useGetProductReviewsQuery, useCreateReviewMutation } from "../slices/reviewsApiSlice";
 import { addToCart } from "../slices/cartSlice";
-import { motion } from "framer-motion";
+import { hideUserName } from "../utils/helpers";
 import Loading from "../components/Loading";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
+  const {userInfo} = useSelector((state) => state.auth);
+  const [createReview, { isLoading: loadingReviewCreate, error: errorReviewCreate }] = useCreateReviewMutation();
+  const [comment, setComment] = useState('');
   const { id: productId } = useParams();
   const { data: reviews, isLoading: loadingReviews } =
     useGetProductReviewsQuery(productId);
@@ -52,6 +57,31 @@ const ProductDetail = () => {
       return count;
     });
   };
+
+  const handleCommentChange = async (e) => {
+    setComment(e.target.value);
+  }
+
+  const commentSubmitHandler = async (e) => {
+    e.preventDefault();
+    if (comment.trim() === '') {
+      alert('Please enter a comment');
+      return;
+    }
+    if (!userInfo) {
+      toast.warning('Please log in to submit a review');
+      navigate('/login?redirect=/product/' + productId);
+      return;
+    }
+    try {
+      console.log('Submitting review:', { comment, rating: 5 });
+      await createReview({ productId, review: { comment, rating: 5 } }).unwrap();
+      toast.success('Review submitted successfully');
+      setComment('');
+    } catch (err) {
+      console.error('Failed to submit review:', err);
+    }
+  }
 
   useEffect(() => {
     if (showMessage) {
@@ -186,7 +216,6 @@ const ProductDetail = () => {
           </Row>
           <Row>
             <Col className="mt-5" md={6}>
-              <h2>Reviews</h2>
               {loadingReviews ? (
                 <Loading />
               ) : reviews?.length === 0 ? (
@@ -196,20 +225,28 @@ const ProductDetail = () => {
                   <Form.Control
                     as={"textarea"}
                     rows={4}
-                    max
+                    value={comment}
                     maxLength={500}
                     className="placeholder-secondary"
+                    placeholder="Write your comment..."
                     type="text"
                     style={{ borderRadius: 8, padding: "10px 12px", resize: 'none' }}
+                    onChange={handleCommentChange}
                   />
+                  <div className="text-end">
+                    <Button className="mt-2 mb-4" variant="primary" onClick={commentSubmitHandler}>
+                      Comment
+                    </Button>
+                  </div>
+                  <h3>User Reviews</h3>
                   <ListGroup>
                     {reviews?.reviews.map((review, index) => (
                       <ListGroup.Item
                         key={index}
-                        className="my-1 rounded shadow-sm"
+                        className="mb-2 rounded shadow-sm"
                       >
-                        <p style={{ display: "flex", alignItems: "center", justifyContent:"space-between", margin: '7px 0px', gap: '10px' }}>
-                          <strong>{review.user.name}</strong>
+                        <p style={{ display: "flex", alignItems: "center", justifyContent:"space-between", margin: '2px 0px', gap: '10px' }}>
+                          <strong>{hideUserName(review.user.name)}</strong>
                           <Rating value={review.rating} />
                         </p>
                         <p className="mb-2">
