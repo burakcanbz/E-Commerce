@@ -87,6 +87,7 @@ const Cart = () => {
                               className="text-center"
                               as="select"
                               value={item.qty}
+                              onClick={(e) => e.stopPropagation()}
                               onChange={(e) => {
                                 addToCartHandler(item, Number(e.target.value));
                               }}

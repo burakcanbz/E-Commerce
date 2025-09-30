@@ -8,6 +8,7 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware')
 const { productRoutes } = require('./routes/productRoutes'); 
 const { userRoutes } = require('./routes/userRoutes'); 
 const { orderRoutes} = require('./routes/orderRoutes');
+const { reviewRoutes } = require('./routes/reviewRoutes');
 const { paymentRoutes } = require('./routes/paymentRoutes');
 // const stripe = require('./config/payment'); // Import the stripe instance from config/payment.js
 
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/reviews', reviewRoutes);
 // app.use('/api/payment', paymentRoutes);
 
 app.use('/*', notFound);
