@@ -9,7 +9,7 @@ const products = [
     price: 89.99,
     countInStock: 10,
     rating: 4.5,
-    numReviews: 12,
+    numReviews: 5,
   },
   {
     name: 'iPhone 16 Pro',
@@ -21,7 +21,7 @@ const products = [
     price: 999.99,
     countInStock: 7,
     rating: 4.5,
-    numReviews: 8,
+    numReviews: 4,
   },
   {
     name: 'Cannon EOS 80D DSLR Camera',
@@ -33,7 +33,7 @@ const products = [
     price: 929.99,
     countInStock: 5,
     rating: 3,
-    numReviews: 12,
+    numReviews: 2,
   },
   {
     name: 'Sony Playstation 5 Pro White Version',
@@ -45,7 +45,7 @@ const products = [
     price: 499.99,
     countInStock: 11,
     rating: 5,
-    numReviews: 12,
+    numReviews: 5,
   },
   {
     name: 'Logitech G-Series Gaming Mouse',
@@ -57,7 +57,7 @@ const products = [
     price: 49.99,
     countInStock: 7,
     rating: 3.5,
-    numReviews: 10,
+    numReviews: 3,
   },
   {
     name: 'Amazon Echo Dot 3rd Generation',
@@ -69,7 +69,7 @@ const products = [
     price: 29.99,
     countInStock: 0,
     rating: 4,
-    numReviews: 12,
+    numReviews: 0,
   },
   {
     name: 'Macbook Pro',
@@ -81,7 +81,7 @@ const products = [
     price: 1599.00,
     countInStock: 12,
     rating: 5,
-    numReviews: 32,
+    numReviews: 4,
   },
   {
     name: 'Mechanical Gaming Wireless Bluetooth Keyboard',
@@ -93,7 +93,7 @@ const products = [
     price: 61.99,
     countInStock: 8,
     rating: 4,
-    numReviews: 6,
+    numReviews: 1,
   },
   {
     name: 'Apple Tv 4K',
@@ -129,7 +129,7 @@ const products = [
     price: 89.99,
     countInStock: 4,
     rating: 4.5,
-    numReviews: 6,
+    numReviews: 3,
   },
   {
     name: 'Harley Davidson Boots',
@@ -141,7 +141,7 @@ const products = [
     price: 149.98,
     countInStock: 24,
     rating: 5,
-    numReviews: 23,
+    numReviews: 2,
   },
   {
     name: 'Woman Bootie',
@@ -153,7 +153,7 @@ const products = [
     price: 94.99,
     countInStock: 0,
     rating: 3,
-    numReviews: 2,
+    numReviews: 3,
   },
   {
     name: 'Entella Top Boots',
@@ -165,7 +165,7 @@ const products = [
     price: 119.99,
     countInStock: 18,
     rating: 5,
-    numReviews: 21,
+    numReviews: 4,
   },
   {
     name: 'Katusa Purse',
@@ -177,7 +177,7 @@ const products = [
     price: 49.99,
     countInStock: 9,
     rating: 4.5,
-    numReviews: 46,
+    numReviews: 3,
   },
   {
     name: 'Nothing Purse',
@@ -189,7 +189,7 @@ const products = [
     price: 59.99,
     countInStock: 19,
     rating: 5,
-    numReviews: 67,
+    numReviews: 3,
   },
   {
     name: 'Pasyone Shoes',

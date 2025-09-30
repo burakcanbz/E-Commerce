@@ -23,6 +23,7 @@ import Loading from "../components/Loading";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
 import { toast } from "react-toastify";
+import { set } from "mongoose";
 
 const ProductDetail = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -30,6 +31,7 @@ const ProductDetail = () => {
     createReview,
     { isLoading: loadingReviewCreate, error: errorReviewCreate },
   ] = useCreateReviewMutation();
+  const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const { id: productId } = useParams();
   const { data: reviews, isLoading: loadingReviews } =
@@ -80,10 +82,11 @@ const ProductDetail = () => {
     try {
       await createReview({
         productId,
-        review: { comment, rating: 5 },
+        review: { comment, rating: rating },
       }).unwrap();
       toast.success("Review submitted successfully");
       setComment("");
+      setRating(0);
     } catch (err) {
       console.error("Failed to submit review:", err);
     }
@@ -253,9 +256,15 @@ const ProductDetail = () => {
                       onChange={handleCommentChange}
                     />
                     <div className="d-flex justify-content-between p-1">
-                      <Rating />
+                      <Rating
+                        value={rating}
+                        text={`Rating: ${rating}`}
+                        onChange={(newValue) => {
+                          setRating(newValue);
+                        }}
+                      />{" "}
                       <Button
-                        className="mt-1 mb-1 mx-2"
+                        className="mt-0 mb-1 mx-2"
                         variant="primary"
                         onClick={commentSubmitHandler}
                       >
@@ -263,8 +272,7 @@ const ProductDetail = () => {
                       </Button>
                     </div>
                   </div>
-
-                  <h3>User Reviews</h3>
+                  {reviews?.reviews.length !== 0 ? <h3>User Reviews</h3> : null}
                   <ListGroup>
                     {reviews?.reviews.map((review, index) => (
                       <ListGroup.Item

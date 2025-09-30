@@ -30,12 +30,11 @@ const importData = async () => {
 
     for (const product of createdProducts) {
       const sampleReviews = reviews.map((review) => {
-        const randomUser =
-          createdUsers[Math.floor(Math.random() * createdUsers.length)];
+        const randomUser = createdUsers[Math.floor(Math.random() * createdUsers.length)];
         return { ...review, user: randomUser, product: product._id };
       });
-
-      await Review.insertMany(sampleReviews);
+      const reviewDocs = sampleReviews.slice(0, product.numReviews);
+      await Review.insertMany(reviewDocs);
     }
 
     console.log("Data Imported!".green.inverse);
