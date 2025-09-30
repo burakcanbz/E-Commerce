@@ -13,7 +13,10 @@ import {
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
-import { useGetProductReviewsQuery, useCreateReviewMutation } from "../slices/reviewsApiSlice";
+import {
+  useGetProductReviewsQuery,
+  useCreateReviewMutation,
+} from "../slices/reviewsApiSlice";
 import { addToCart } from "../slices/cartSlice";
 import { hideUserName } from "../utils/helpers";
 import Loading from "../components/Loading";
@@ -22,14 +25,15 @@ import Message from "../components/Message";
 import { toast } from "react-toastify";
 
 const ProductDetail = () => {
-  const {userInfo} = useSelector((state) => state.auth);
-  const [createReview, { isLoading: loadingReviewCreate, error: errorReviewCreate }] = useCreateReviewMutation();
-  const [comment, setComment] = useState('');
+  const { userInfo } = useSelector((state) => state.auth);
+  const [
+    createReview,
+    { isLoading: loadingReviewCreate, error: errorReviewCreate },
+  ] = useCreateReviewMutation();
+  const [comment, setComment] = useState("");
   const { id: productId } = useParams();
   const { data: reviews, isLoading: loadingReviews } =
     useGetProductReviewsQuery(productId);
-    console.log(reviews);
-  console.log(reviews);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -60,28 +64,30 @@ const ProductDetail = () => {
 
   const handleCommentChange = async (e) => {
     setComment(e.target.value);
-  }
+  };
 
   const commentSubmitHandler = async (e) => {
     e.preventDefault();
-    if (comment.trim() === '') {
-      alert('Please enter a comment');
+    if (comment.trim() === "") {
+      alert("Please enter a comment");
       return;
     }
     if (!userInfo) {
-      toast.warning('Please log in to submit a review');
-      navigate('/login?redirect=/product/' + productId);
+      toast.warning("Please log in to submit a review");
+      navigate("/login?redirect=/product/" + productId);
       return;
     }
     try {
-      console.log('Submitting review:', { comment, rating: 5 });
-      await createReview({ productId, review: { comment, rating: 5 } }).unwrap();
-      toast.success('Review submitted successfully');
-      setComment('');
+      await createReview({
+        productId,
+        review: { comment, rating: 5 },
+      }).unwrap();
+      toast.success("Review submitted successfully");
+      setComment("");
     } catch (err) {
-      console.error('Failed to submit review:', err);
+      console.error("Failed to submit review:", err);
     }
-  }
+  };
 
   useEffect(() => {
     if (showMessage) {
@@ -222,24 +228,42 @@ const ProductDetail = () => {
                 <Message>No Reviews</Message>
               ) : (
                 <>
-                <div style={{ border: '1px solid #dee2e6', borderRadius: '8px', background: "white", marginBottom: '50px'}}>
-                  <Form.Control
-                    as={"textarea"}
-                    rows={3}
-                    value={comment}
-                    maxLength={500}
-                    className="placeholder-secondary"
-                    placeholder="Write your comment..."
-                    type="text"
-                    style={{ borderRadius: 8, padding: "10px 12px", resize: 'none', borderColor: "white" }}
-                    onChange={handleCommentChange}
-                  />
-                  <div className="text-end p-1">
-                    <Button className="mt-1 mb-1 mx-2" variant="primary" onClick={commentSubmitHandler}>
-                      Comment
-                    </Button>
-                </div>
+                  <div
+                    style={{
+                      border: "1px solid #dee2e6",
+                      borderRadius: "8px",
+                      background: "white",
+                      marginBottom: "50px",
+                    }}
+                  >
+                    <Form.Control
+                      as={"textarea"}
+                      rows={3}
+                      value={comment}
+                      maxLength={500}
+                      className="placeholder-secondary"
+                      placeholder="Write your comment..."
+                      type="text"
+                      style={{
+                        borderRadius: 8,
+                        padding: "10px 12px",
+                        resize: "none",
+                        borderColor: "white",
+                      }}
+                      onChange={handleCommentChange}
+                    />
+                    <div className="d-flex justify-content-between p-1">
+                      <Rating />
+                      <Button
+                        className="mt-1 mb-1 mx-2"
+                        variant="primary"
+                        onClick={commentSubmitHandler}
+                      >
+                        Comment
+                      </Button>
+                    </div>
                   </div>
+
                   <h3>User Reviews</h3>
                   <ListGroup>
                     {reviews?.reviews.map((review, index) => (
@@ -247,13 +271,19 @@ const ProductDetail = () => {
                         key={index}
                         className="mb-2 rounded shadow-sm"
                       >
-                        <p style={{ display: "flex", alignItems: "center", justifyContent:"space-between", margin: '2px 0px', gap: '10px' }}>
+                        <p
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            margin: "2px 0px",
+                            gap: "10px",
+                          }}
+                        >
                           <strong>{hideUserName(review.user.name)}</strong>
                           <Rating value={review.rating} />
                         </p>
-                        <p className="mb-2">
-                          {review.comment}
-                        </p>
+                        <p className="mb-2">{review.comment}</p>
                         <p className="text-muted mb-1 mt-0">
                           {review.createdAt.split("T")[0]}
                         </p>

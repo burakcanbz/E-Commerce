@@ -4,7 +4,7 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 const Rating = ({ value, text }) => {
 
     const stars = [];
-
+    
     const starStyle={ color: 'gold', marginRight: '2px' }
     for (let i = 1; i <= 5; i++) {
       if (value >= i) {
@@ -16,7 +16,7 @@ const Rating = ({ value, text }) => {
       }
     }
   return (
-    <div style={{ display: 'flex', alignItems: 'center'}}>
+    <div style={{ display: 'flex', alignItems: 'center', cursor: "pointer", marginLeft: 10 }}>
         <span>{stars}</span>
         <span style={{fontWeight: '500', textDecoration: 'underline', marginLeft: 5}}>{ text && text }</span>
     </div>

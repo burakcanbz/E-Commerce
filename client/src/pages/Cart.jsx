@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Row,
@@ -12,7 +13,7 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../slices/cartSlice";
+import { addToCart, removeFromCart, setCart } from "../slices/cartSlice";
 import Message from "../components/Message";
 
 const Cart = () => {
@@ -32,6 +33,11 @@ const Cart = () => {
   const checkoutHandler = () => {
     navigate("/login?redirect=/shipping");
   };
+
+  useEffect(() => {
+    const items = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).cartItems : [];
+    dispatch(setCart(items));
+  }, [dispatch]);
 
   return (
     <motion.div

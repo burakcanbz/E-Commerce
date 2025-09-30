@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
@@ -9,31 +9,22 @@ import Rating from "./Rating";
 
 const Product = ({ product }) => {
   const { cartItems } = useSelector((state) => state.cart);
+    const productExist = cartItems.find((item) => item._id === product._id);
 
   const dispatch = useDispatch();
 
-  const [qty, setQty] = useState(0);
-
   const addToCartHandler = async () => {
     const productExist = cartItems.find((item) => item._id === product._id);
-    if (product.countInStock && qty < product.countInStock) {
-      setQty((prevQty) => {
-        let updatedQty = null;
-        if (!productExist) {
-          updatedQty = 1;
-        } else {
-          updatedQty = prevQty + 1;
-        }
-        dispatch(addToCart({ ...product, qty: updatedQty }));
-        return updatedQty;
-      });
-    } else if (qty >= product.countInStock) {
-      if (cartItems.length === 0) {
-        dispatch(addToCart({ ...product, qty: 1 }));
-        setQty(1);
-      }
+    const currentQty = productExist ? productExist.qty : 0;
+    if (product.countInStock && currentQty < product.countInStock) {
+      dispatch(addToCart({ ...product, qty: currentQty + 1 }));
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify({ cartItems }));
+  }, [cartItems]);
+
   return (
     <Card
       className="my-3 p-3 rounded shadow-lg"
@@ -66,7 +57,7 @@ const Product = ({ product }) => {
           <button
             className="btn btn-dark"
             onClick={addToCartHandler}
-            disabled={product.countInStock === 0}
+            disabled={product.countInStock === 0 || productExist?.qty >= product.countInStock}
           >
             Add to <FaCartShopping />
           </button>

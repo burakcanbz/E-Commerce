@@ -12,7 +12,7 @@ export const reviewsApiSlice = apiSlice.injectEndpoints({
         };
       },
       invalidatesTags: (result, error, { productId }) => [
-        { type: "Reviews", id: productId },
+        { type: "Reviews", id: productId }, // invalidate and trigger refetch reviews for the product
       ],
     }),
     getProductReviews: builder.query({
@@ -21,7 +21,7 @@ export const reviewsApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: (result, error, productId) => [
-        { type: "Reviews", id: productId },
+        { type: "Reviews", id: productId }, // for auto refetching when a new review is added
       ],
     }),
   }),

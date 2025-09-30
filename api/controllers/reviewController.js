@@ -4,9 +4,7 @@ const User = require('../models/userModel');
 
 exports.addReview = asyncHandler(async (req, res) => {
   const productId = req.params.id;
-  console.log("Product ID:", productId);
   const { rating, comment } = req.body;
-  console.log(comment);
   
   if (!rating || !comment) {
     res.status(400);
