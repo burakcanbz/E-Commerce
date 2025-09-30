@@ -222,21 +222,23 @@ const ProductDetail = () => {
                 <Message>No Reviews</Message>
               ) : (
                 <>
+                <div style={{ border: '1px solid #dee2e6', borderRadius: '8px', background: "white", marginBottom: '50px'}}>
                   <Form.Control
                     as={"textarea"}
-                    rows={4}
+                    rows={3}
                     value={comment}
                     maxLength={500}
                     className="placeholder-secondary"
                     placeholder="Write your comment..."
                     type="text"
-                    style={{ borderRadius: 8, padding: "10px 12px", resize: 'none' }}
+                    style={{ borderRadius: 8, padding: "10px 12px", resize: 'none', borderColor: "white" }}
                     onChange={handleCommentChange}
                   />
-                  <div className="text-end">
-                    <Button className="mt-2 mb-4" variant="primary" onClick={commentSubmitHandler}>
+                  <div className="text-end p-1">
+                    <Button className="mt-1 mb-1 mx-2" variant="primary" onClick={commentSubmitHandler}>
                       Comment
                     </Button>
+                </div>
                   </div>
                   <h3>User Reviews</h3>
                   <ListGroup>

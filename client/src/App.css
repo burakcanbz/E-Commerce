@@ -278,3 +278,13 @@
   color: #888f93 !important; /* secondary color */
   opacity: 1 !important; /* gerekirse */
 }
+
+textarea.form-control:focus {
+  box-shadow: none !important;
+  border-color: white !important;
+}
+
+textarea.form-control:hover:focus {
+  box-shadow: none !important;
+  border-color: white !important;
+}
