@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import FormContainer from "../components/FormContainer";
 import { saveShippingAddress } from "../slices/cartSlice";
-import CheckoutSteps from "../components/CheckoutSteps";
+import FormContainer from "../components/FormContainer";
+import CheckoutStepper from "../components/CheckoutStepper";
 
 const Shipping = () => {
   const { shippingAddress } = useSelector((state) => state.cart);
@@ -35,7 +35,7 @@ const Shipping = () => {
   return (
     <>
       <FormContainer>
-        <CheckoutSteps step1 step2 />
+        <CheckoutStepper activeStep={0} />
         <h1 className="text-center"> Address </h1>
         <Form
           id="checkout"

@@ -23,8 +23,10 @@ const App = () => {
           minHeight: "100vh",
         }}
       >
+        <div className="d-none d-xl-block">
         <Flag side="left"/>
         <Flag side="right"/>
+        </div>
         <Header />
         <main className="py-3 d-flex" style={{ flexGrow: 1, marginTop: 120 }}>
           <Container>

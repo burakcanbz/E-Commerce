@@ -1,14 +1,22 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import CheckoutSteps from "../components/CheckoutSteps";
+import {
+  Container,
+  Button,
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Card,
+} from "react-bootstrap";
 import { toast } from "react-toastify";
-import Message from "../components/Message";
-import Loading from "../components/Loading";
 import { useCreateOrderMutation } from "../slices/ordersApiSlice";
 import { clearCartItems } from "../slices/cartSlice";
 import { setOrder } from "../slices/orderSlice";
+import Message from "../components/Message";
+import Loading from "../components/Loading";
+import CheckoutStepper from "../components/CheckoutStepper";
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
@@ -44,7 +52,6 @@ const PlaceOrder = () => {
       dispatch(setOrder(resp));
       dispatch(clearCartItems());
     } catch (err) {
-
       const errorMessage = error?.message || JSON.stringify(error); // Extract message or stringify the error
       toast.error(errorMessage); // Pass the string to toast.error
     }
@@ -52,7 +59,23 @@ const PlaceOrder = () => {
 
   return (
     <>
-      <CheckoutSteps step1 step2 step3 step4 />
+      <Container>
+        <Row className="justify-content-md-center">
+          <Col xs={12} md={6}>
+            <div
+              className="p-4 rounded-4 mt-5"
+              style={{
+                maxWidth: 600,
+                background: "#f1f5f9",
+                width: "100%",
+                margin: "auto",
+              }}
+            >
+              <CheckoutStepper activeStep={2} />
+            </div>
+          </Col>
+        </Row>
+      </Container>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">

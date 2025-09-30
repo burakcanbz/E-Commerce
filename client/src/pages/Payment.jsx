@@ -4,8 +4,7 @@ import { Form, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../slices/cartSlice";
 import FormContainer from "../components/FormContainer";
-import CheckoutSteps from "../components/CheckoutSteps";
-
+import CheckoutStepper from "../components/CheckoutStepper";
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("Paypal");
@@ -22,20 +21,23 @@ const Payment = () => {
 
   const validateAddress = (data) => {
     const errors = {};
-  
-    if (!shippingAddress.address || shippingAddress.address.trim() === '') {
+
+    if (!shippingAddress.address || shippingAddress.address.trim() === "") {
       errors.address = "Address is required.";
     }
-    if (!shippingAddress.city || shippingAddress.city.trim() === '') {
+    if (!shippingAddress.city || shippingAddress.city.trim() === "") {
       errors.city = "City is required.";
     }
-    if (!shippingAddress.postalCode || shippingAddress.postalCode.trim() === '') {
+    if (
+      !shippingAddress.postalCode ||
+      shippingAddress.postalCode.trim() === ""
+    ) {
       errors.postalCode = "Postal Code is required.";
     }
-    if (!shippingAddress.country || shippingAddress.country.trim() === '') {
+    if (!shippingAddress.country || shippingAddress.country.trim() === "") {
       errors.country = "Country is required.";
     }
-  
+
     return errors;
   };
 
@@ -48,9 +50,13 @@ const Payment = () => {
 
   return (
     <FormContainer>
-      <CheckoutSteps step1 step2 step3 />
+      <CheckoutStepper activeStep={1} />
       <h1 className="text-center">Payment Method</h1>
-      <Form id='checkout' onSubmit={submitHandler} className='d-flex flex-column justify-content-center align-items-center'>
+      <Form
+        id="checkout"
+        onSubmit={submitHandler}
+        className="d-flex flex-column justify-content-center align-items-center"
+      >
         <Form.Group className="mt-2">
           <Form.Label as="legend">Select Method</Form.Label>
           <Col>

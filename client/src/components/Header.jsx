@@ -270,17 +270,6 @@ const Header = () => {
                     title={
                       <>
                         {userInfo.name}{" "}
-                        {Object.keys(userInfo.image).length !== 0 && (
-                          <img
-                            alt=""
-                            src={userInfo.image}
-                            style={{
-                              width: 30,
-                              height: 28,
-                              borderRadius: "50%",
-                            }}
-                          />
-                        )}
                       </>
                     }
                     id="username"
