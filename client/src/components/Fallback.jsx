@@ -106,17 +106,17 @@ const Fallback = () => {
               color="textSecondary"
               sx={{ mb: 2, mt: 1 }}
             >
-              We encountered an unexpected error. Try refreshing or come back
+              We encountered an unexpected error.
               later.
             </Typography>
 
             <Button
               variant="contained"
               color="primary"
-              onClick={() => window.location.reload()}
+              onClick={() => window.location.href = '/'}
               sx={{ borderRadius: 1, px: 2, py: 1 }}
             >
-              Refresh
+              Home Page
             </Button>
           </Box>
         </Container>

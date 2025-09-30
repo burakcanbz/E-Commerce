@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
-import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
+import { useCancelOrderMutation, useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
 import { convertToUTC } from "../utils/helpers";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
+import { toast } from "react-toastify";
 
 const Order = () => {
   const { id: orderId } = useParams();
+  const navigate = useNavigate();
   const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
+  const [cancelOrder, { isLoading: isCancelling }] = useCancelOrderMutation();
   const [hasError, setHasError] = useState(false);
 
   if (hasError) {
@@ -17,9 +20,11 @@ const Order = () => {
     throw new Error("Order component error.");
   }
 
-  const handleCancelOrder = () => {
+  const handleCancelOrder = async() => {
     try{
-      throw new Error("Order cancellation error.");
+      await cancelOrder(orderId).unwrap();
+      toast.success("Order cancelled");
+      navigate('/profile');
     }
     catch(err){
       setHasError(true);

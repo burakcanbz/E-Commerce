@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Table, Row, Col, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useGetOrdersQuery } from "../slices/ordersApiSlice";
@@ -9,6 +10,7 @@ import StatusIcon from "../components/StatusIcon";
 import UserInformation from "../components/UserInformation";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const {
     data: orders,
     isLoading,
@@ -50,7 +52,7 @@ const Profile = () => {
                   <th className="text-center">Paid Status</th>
                   <th className="text-center">Paid Time</th>
                   <th className="text-center">Total Price</th>
-                  <th className="text-center">Order Delivered</th>
+                  <th className="text-center">Order Status</th>
                   <th className="text-center">Order Page</th>
                 </tr>
               </thead>
@@ -71,14 +73,16 @@ const Profile = () => {
                         {<StatusIcon isActive={item.isDelivered} />}
                       </td>
                       <td className="text-center">
-                        <Link
-                          style={{ textDecoration: "none", color: "white" }}
-                          to={`/order/${item._id}`}
+                        <Button
+                          variant="warning"
+                          size="sm"
+                          disabled={item.isCancelled}
+                          onClick={() => {
+                            navigate(`/order/${item._id}`);
+                          }}
                         >
-                          <Button variant="warning" size="sm">
-                            Details
-                          </Button>
-                        </Link>
+                          Details
+                        </Button>
                       </td>
                     </tr>
                   );

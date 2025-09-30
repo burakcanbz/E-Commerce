@@ -111,6 +111,26 @@ exports.updateOrderToPaid = asyncHandler(async (req, res) => {
 });
 
 /**
+ * @description Cancel order
+ * @route PUT /api/orders/:id/cancel
+ * @access Private
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
+
+exports.cancelOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if(!order) {
+   return res.status(404).json({ message: "Order not found." });
+  }
+  order.status = "cancelled";
+  order.cancelledAt = Date.now();
+  const cancelledOrder = await order.save();
+  return res.status(200).json({ cancelledOrder});
+});
+
+/**
  * @description Update order to delivered
  * @route PUT /api/orders/:id/deliver
  * @access Private/Admin
