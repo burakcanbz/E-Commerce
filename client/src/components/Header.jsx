@@ -181,9 +181,6 @@ const [showCanvas, setShowCanvas] = useState(false);
                   {/* Categories */}
                   <NavDropdown
                     title="Categories"
-                    show={showDropdown === "categories"}
-                    onMouseEnter={() => handleDropdown("categories")}
-                    onMouseLeave={() => handleDropdown(null)}
                   >
                     <NavDropdown.Item
                       as={Link}
@@ -214,9 +211,6 @@ const [showCanvas, setShowCanvas] = useState(false);
                         )}
                       </span>
                     }
-                    show={showDropdown === "cart-dropdown"}
-                    onMouseEnter={() => handleDropdown("cart-dropdown")}
-                    onMouseLeave={() => handleDropdown(null)}
                   >
                     {cartItems.length === 0 ? (
                       <NavDropdown.Item style={{ color: "white" }} disabled>
