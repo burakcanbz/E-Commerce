@@ -162,7 +162,7 @@ const [showCanvas, setShowCanvas] = useState(false);
             <Navbar.Offcanvas
               id="offcanvasNavbar"
               aria-labelledby="offcanvasNavbarLabel"
-              placement="end"
+              placement="top"
               show={showCanvas}
               onHide={handleCloseOffcanvas}
             >

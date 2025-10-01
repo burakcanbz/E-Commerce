@@ -48,7 +48,7 @@ const Cart = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Row>
-        <Col xs={8} sm={12} md={10} xl={8} className="mx-auto mt-4">
+        <Col xs={10} sm={12} md={10} xl={8} className="mx-auto mt-4">
           <h1 className="text-center" style={{ marginBottom: "20px" }}>
             My Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)} items)
           </h1>

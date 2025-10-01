@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Card, Form, Button, Row, Col, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import { BiUserCircle } from "react-icons/bi";
 import { useRegisterMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
@@ -47,9 +48,12 @@ const Register = () => {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{ minHeight: "60vh" }}
+      style={{ minHeight: "60vh" }}   
     >
       <Image
         src={`${Logo}`}
@@ -147,7 +151,7 @@ const Register = () => {
           </Row>
         </Card>
       )}
-    </div>
+    </motion.div>
   );
 };
 

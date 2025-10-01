@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import { BiLogIn } from "react-icons/bi";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
@@ -39,7 +40,10 @@ const Login = () => {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className="d-flex flex-column align-items-center justify-content-center"
       style={{ minHeight: "60vh" }}
     >
@@ -118,7 +122,7 @@ const Login = () => {
           </Row>
         </Card>
       )}
-    </div>
+    </motion.div>
   );
 };
 
