@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
-import { useCancelOrderMutation, useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
+import {
+  useCancelOrderMutation,
+  useGetOrderDetailsQuery,
+} from "../slices/ordersApiSlice";
 import { convertToUTC } from "../utils/helpers";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
@@ -20,17 +23,16 @@ const Order = () => {
     throw new Error("Order component error.");
   }
 
-  const handleCancelOrder = async() => {
-    try{
+  const handleCancelOrder = async () => {
+    try {
       await cancelOrder(orderId).unwrap();
       toast.success("Order cancelled");
-      navigate('/profile');
-    }
-    catch(err){
+      navigate("/profile");
+    } catch (err) {
       setHasError(true);
     }
   };
-  
+
   return isLoading ? (
     <Loading />
   ) : error ? (
@@ -42,15 +44,10 @@ const Order = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Row>
-        <Col md={8}>
+        <Col xs={10} md={8} className="mx-auto mb-4">
           <ListGroup variant="flush">
             <ListGroup.Item className="order-details">
               <h2 className="mb-4">Shipping Details</h2>
-              <p>
-                {" "}
-                <strong>Order id: </strong>
-                {order._id}{" "}
-              </p>
               <p>
                 <strong>Name: </strong> {order.user.name}
               </p>
@@ -67,7 +64,7 @@ const Order = () => {
                   Delivered on {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant="danger">Not Delivered</Message>
+                <Message variant="danger">Not delivered yet.</Message>
               )}
             </ListGroup.Item>
             <ListGroup.Item>
@@ -80,22 +77,31 @@ const Order = () => {
                   Paid at {convertToUTC(order.paidAt)}
                 </Message>
               ) : (
-                <Message variant="danger">Not Paid yet.</Message>
+                <Message variant="danger">Not paid yet.</Message>
               )}
             </ListGroup.Item>
             <ListGroup.Item>
               <h2>Order Items</h2>
               {order.orderItems.map((item, index) => (
-                <ListGroup.Item key={index}>
+                <ListGroup.Item
+                  key={index}
+                  style={{
+                    border:
+                      window.innerWidth >= 768 ? "1px solid #dee2e6" : "none",
+                  }}
+                >
                   <Row>
                     <Col md={1}>
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
-                    <Col>
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
+                    <Col md={4} className="my-2 my-md-auto">
+                      <Link to={`/product/${item.product}`}>
+                        <strong>{item.name}</strong>
+                      </Link>
                     </Col>
-                    <Col md={4}>
-                      {item.qty} x ${item.price} = ${item.qty * item.price}
+                    <Col md={4} className="my-0 my-md-auto mb-1 mb-md-0">
+                      {item.qty} x ${item.price} ={" "}
+                      <strong>${(item.qty * item.price).toFixed(2)}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -111,28 +117,46 @@ const Order = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}>
+        <Col xs={10} md={3} lg={4} className="mx-auto">
           <Card>
             <ListGroup variant="flush">
-              <ListGroup.Item>
-                <h2>Order Summary</h2>
+              <ListGroup.Item className="bg-light">
+                <div className="text-center fs-3 fw-semibold">Order Summary</div>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
-                </Row>
-                <Row>
-                  <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
-                </Row>
-                <Row>
-                  <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
-                </Row>
-                <Row>
-                  <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+              <ListGroup.Item className="p-2">
+                <Row className="gap-2 text-center mx-auto">
+                  <Row>
+                    <Col>
+                      <strong>Items:</strong>
+                    </Col>
+                    <Col>
+                      <strong>${order.itemsPrice.toFixed(2)}</strong>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <strong>Shipping:</strong>
+                    </Col>
+                    <Col>
+                      <strong>${order.shippingPrice.toFixed(2)}</strong>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <strong>Tax:</strong>
+                    </Col>
+                    <Col>
+                      <strong>${order.taxPrice.toFixed(2)}</strong>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <strong>Total:</strong>
+                    </Col>
+                    <Col>
+                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                    </Col>
+                  </Row>
                 </Row>
               </ListGroup.Item>
             </ListGroup>

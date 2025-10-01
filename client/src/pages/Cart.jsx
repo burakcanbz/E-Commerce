@@ -122,7 +122,7 @@ const Cart = () => {
                           >
                             <div className="d-flex flex-row align-items-center justify-content-between">
                               <strong className="fs-6 me-sm-3">
-                                Price: ${item.price}
+                                Price: ${item.price.toFixed(2)}
                               </strong>
                               <Button
                                 type="button"

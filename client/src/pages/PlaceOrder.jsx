@@ -47,13 +47,13 @@ const PlaceOrder = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
-
+      console.log(resp);
       navigate(`/order/${resp._id}`);
       dispatch(setOrder(resp));
       dispatch(clearCartItems());
     } catch (err) {
-      const errorMessage = error?.message || JSON.stringify(error); // Extract message or stringify the error
-      toast.error(errorMessage); // Pass the string to toast.error
+      const errorMessage = error?.message || JSON.stringify(error);
+      toast.error(errorMessage);
     }
   };
 
@@ -112,14 +112,17 @@ const PlaceOrder = () => {
                             />
                           </Col>
                           <Col className="mt-2 mt-md-0">
-                          <strong>
-                            <Link to={`/product/${item._id}`}>{item.name}</Link>
-                          </strong>
+                            <strong>
+                              <Link to={`/product/${item._id}`}>
+                                {item.name}
+                              </Link>
+                            </strong>
                           </Col>
                           <Col md={4} className="mt-2 mt-md-0">
-                              {item.qty} x ${item.price} =
+                            {item.qty} x ${item.price} =
                             <strong>
-                              {" "}${ (item.qty * item.price).toFixed(2)}
+                              {" "}
+                              ${(item.qty * item.price).toFixed(2)}
                             </strong>
                           </Col>
                         </Row>
@@ -139,25 +142,33 @@ const PlaceOrder = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col><strong>Items:</strong></Col>
+                  <Col>
+                    <strong>Items:</strong>
+                  </Col>
                   <Col>${cart.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col><strong>Shipping:</strong></Col>
+                  <Col>
+                    <strong>Shipping:</strong>
+                  </Col>
                   <Col>${cart.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col><strong>Tax:</strong></Col>
+                  <Col>
+                    <strong>Tax:</strong>
+                  </Col>
                   <Col>${cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col><strong>Total:</strong></Col>
+                  <Col>
+                    <strong>Total:</strong>
+                  </Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
