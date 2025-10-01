@@ -63,7 +63,7 @@ const PlaceOrder = () => {
         <Row className="justify-content-md-center">
           <Col xs={12} md={6}>
             <div
-              className="p-4 rounded-4 mt-5"
+              className="p-4 rounded-4 mt-1 mt-md-5"
               style={{
                 maxWidth: 600,
                 background: "#f1f5f9",
@@ -77,7 +77,7 @@ const PlaceOrder = () => {
         </Row>
       </Container>
       <Row>
-        <Col md={8}>
+        <Col xs={10} md={8} className="mx-auto mt-2 mt-md-4 mb-4">
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
@@ -111,12 +111,16 @@ const PlaceOrder = () => {
                               rounded
                             />
                           </Col>
-                          <Col>
+                          <Col className="mt-2 mt-md-0">
+                          <strong>
                             <Link to={`/product/${item._id}`}>{item.name}</Link>
+                          </strong>
                           </Col>
-                          <Col md={4}>
-                            {item.qty} x ${item.price} = $
-                            {(item.qty * item.price).toFixed(2)}
+                          <Col md={4} className="mt-2 mt-md-0">
+                              {item.qty} x ${item.price} =
+                            <strong>
+                              {" "}${ (item.qty * item.price).toFixed(2)}
+                            </strong>
                           </Col>
                         </Row>
                       </ListGroup.Item>
@@ -127,7 +131,7 @@ const PlaceOrder = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}>
+        <Col xs={10} md={4} className="mx-auto mt-0 mt-md-4">
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
@@ -135,25 +139,25 @@ const PlaceOrder = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Items:</Col>
+                  <Col><strong>Items:</strong></Col>
                   <Col>${cart.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Shipping:</Col>
+                  <Col><strong>Shipping:</strong></Col>
                   <Col>${cart.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax:</Col>
+                  <Col><strong>Tax:</strong></Col>
                   <Col>${cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Total:</Col>
+                  <Col><strong>Total:</strong></Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
