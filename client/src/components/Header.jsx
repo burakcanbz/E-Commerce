@@ -103,7 +103,8 @@ const Header = () => {
       >
         <Container
           fluid
-          className="px-3 px-md-5 d-flex align-items-center justify-content-between"
+          className="custom-header d-flex align-items-center justify-content-between"
+
         >
           <LinkContainer to="/">
             <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
@@ -117,7 +118,7 @@ const Header = () => {
           </LinkContainer>
           {pathName === "" ? (
             <Form
-              className="d-none d-lg-flex mx-3"
+              className="d-none d-xl-flex mx-3"
               style={{ width: "30%", margin: "0 auto" }}
             >
               <Form.Control
@@ -152,7 +153,7 @@ const Header = () => {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav
                 className={`ms-auto align-items-center ${
-                  window.innerWidth < 992 ? "flex-column" : "d-flex gap-4"
+                  window.innerWidth < 992 ? "flex-column" : "d-flex gap-3"
                 }`}
               >
                 <LinkContainer to="/">
