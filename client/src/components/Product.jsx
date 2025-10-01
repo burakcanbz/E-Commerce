@@ -27,8 +27,8 @@ const Product = ({ product }) => {
 
   return (
     <Card
-      className="my-3 p-3 rounded shadow-lg"
-      style={{ minWidth: 250, width: 250, minHeight: 420, cursor: "pointer" }}
+      className="my-3 p-3 rounded shadow-lg ms-2 me-2"
+      style={{ minWidth: 250, maxWidth:275, minHeight: 410, cursor: "pointer" }}
     >
       <Link to={`/product/${product._id}`} target="_blank">
         <Card.Img src={product.image} variant="top" />

@@ -28,7 +28,7 @@ import {
 import Typewriter from "typewriter-effect";
 
 const Header = () => {
-  const isDesktop = window.innerWidth >= 992;
+  const isDesktop = window.innerWidth >= 1200;
   const pathName = window.location.pathname.split("/")[1];
   const [showDropdown, setShowDropdown] = useState(null);
   const location = useLocation();

@@ -37,7 +37,7 @@ const Profile = () => {
     >
       <Row>
         {orders?.length >= 1 ? (
-          <Col md={8}>
+          <Col sm={10} lg={8} className="mx-sm-auto my-4">
             <Alert
               className="text-center text-white d-flex align-items-center justify-content-center"
               variant="dark"
@@ -49,7 +49,7 @@ const Profile = () => {
               {" "}
               <h2 className="fw-bold">Orders Status</h2>
             </Alert>
-            <Table responsive="md" variant="dark" striped bordered hover>
+            <Table responsive="xl" variant="dark" striped bordered hover>
               <thead>
                 <tr>
                   <th className="text-center align-middle">#</th>

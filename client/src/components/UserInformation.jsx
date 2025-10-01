@@ -69,9 +69,7 @@ const UserInformation = () => {
   }, [isChecked, dispatch]);
 
   return (
-    <Col md={4}>
-      
-        
+    <Col sm={6} lg={4} className="mx-sm-auto mt-4">
       <Card
         id="user-information"
         className="shadow-lg p-4 rounded-4 border-0 glass-card d-flex flex-column align-items-center"

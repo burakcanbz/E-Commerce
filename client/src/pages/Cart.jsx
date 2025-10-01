@@ -48,7 +48,7 @@ const Cart = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Row>
-        <Col xs={10} sm={4} md={8} className="mx-auto mt-4">
+        <Col xs={8} sm={12} md={10} xl={8} className="mx-auto mt-4">
           <h1 className="text-center" style={{ marginBottom: "20px" }}>
             My Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)} items)
           </h1>
@@ -71,7 +71,7 @@ const Cart = () => {
                     >
                       <LinkContainer to={`/product/${item._id}`}>
                         <Row className="d-flex align-items-center">
-                          <Col xs={11} sm={1} md={3} className="mx-auto">
+                          <Col xs={11} sm={2} md={3} className="mx-auto">
                             <Link to={`/product/${item._id}`}>
                               <Image
                                 src={item.image}
@@ -81,7 +81,7 @@ const Cart = () => {
                               />
                             </Link>
                           </Col>
-                          <Col xs={10} sm={2} md={4} className="mx-auto mt-1">
+                          <Col xs={10} sm={3} md={4} className="mx-auto mt-1">
                             <Link
                               style={{
                                 textDecoration: "none",
@@ -94,7 +94,7 @@ const Cart = () => {
                               {item.name}{" "}
                             </Link>
                           </Col>
-                          <Col xs={6} sm={1} md={2} className="mt-2 mx-auto">
+                          <Col xs={6} sm={2} md={2} className="mt-2 mx-auto">
                             <Form.Control
                               as="select"
                               value={item.qty}
@@ -116,7 +116,7 @@ const Cart = () => {
                           </Col>
                           <Col
                             xs={10}
-                            sm={1}
+                            sm={3}
                             md={3}
                             className="mt-3 mb-2 mx-auto"
                           >
@@ -147,7 +147,7 @@ const Cart = () => {
             </Card>
           )}
         </Col>
-        <Col xs={10} sm={2} md={3} className=" d-flex flex-column mx-auto mt-4">
+        <Col xs={7} sm={6} md={5} xl={3} className=" d-flex flex-column mx-auto mt-5 mt-xl-5">
           <Card className="p-2">
             <ListGroup variant="flush">
               <ListGroup.Item className="border-0 mt-2">

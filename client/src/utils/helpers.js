@@ -49,7 +49,7 @@ export const slickSettings = {
       },
     },
     {
-      breakpoint: 992, // For medium screens
+      breakpoint: 991, // For medium screens
       settings: {
         slidesToShow: 2.5, // Show 3 slides on medium screens
         slidesToScroll: 1, // Scroll 1 slide at a time
@@ -59,7 +59,7 @@ export const slickSettings = {
       },
     },
     {
-      breakpoint: 768, // For smaller screens (tablets and below)
+      breakpoint: 767, // For smaller screens (tablets and below)
       settings: {
         slidesToShow: 2, // Show 2 slides on small screens
         slidesToScroll: 1, // Scroll 1 slide at a time
@@ -83,6 +83,17 @@ export const slickSettings = {
     {
       breakpoint: 480, // For very small screens (mobile)
       settings: {
+        slidesToShow: 1.2, // Show 1 slide on mobile
+        slidesToScroll: 1, // Scroll 1 slide at a time
+        initialSlide: 0, // Initial slide index
+        arrows: false, // Disable arrows on mobile
+        dots: true, // Show dots navigation
+        centerMode: true, // Center the slide
+      },
+    },
+    {
+      breakpoint: 425, // For very small screens (mobile)
+      settings: {
         slidesToShow: 1, // Show 1 slide on mobile
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
@@ -95,17 +106,6 @@ export const slickSettings = {
       breakpoint: 375, // For very small screens (mobile)
       settings: {
         slidesToShow: 0.9, // Show 1 slide on mobile
-        slidesToScroll: 1, // Scroll 1 slide at a time
-        initialSlide: 0, // Initial slide index
-        arrows: false, // Disable arrows on mobile
-        dots: true, // Show dots navigation
-        centerMode: true, // Center the slide
-      },
-    },
-    {
-      breakpoint: 355, // For very small screens (mobile)
-      settings: {
-        slidesToShow: 0.8, // Show 1 slide on mobile
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
         arrows: false, // Disable arrows on mobile
