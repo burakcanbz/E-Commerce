@@ -164,6 +164,7 @@ const [showCanvas, setShowCanvas] = useState(false);
               aria-labelledby="offcanvasNavbarLabel"
               placement="top"
               show={showCanvas}
+              className="half-height-canvas-menu"
               onHide={handleCloseOffcanvas}
             >
               <Offcanvas.Header closeButton>
@@ -274,9 +275,6 @@ const [showCanvas, setShowCanvas] = useState(false);
                   {userInfo ? (
                     <NavDropdown
                       title={userInfo.name}
-                      show={showDropdown === "username"}
-                      onMouseEnter={() => handleDropdown("username")}
-                      onMouseLeave={() => handleDropdown(null)}
                     >
                       <NavDropdown.Item
                         as={Link}

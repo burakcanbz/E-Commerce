@@ -75,11 +75,12 @@ const PlaceOrder = () => {
           </Col>
         </Row>
       </Container>
-      <Row>
-        <Col xs={10} md={8} className="mx-auto mt-2 mt-md-4 mb-4">
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2>Shipping</h2>
+      <Container>
+        <Row>
+          <Col xs={10} md={8} className="mx-auto mt-2 mt-md-4 mb-4">
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+                <h2>Shipping</h2>
               <p>
                 <strong>Address:</strong>
                 {cart.shippingAddress.address} {cart.shippingAddress.city},{" "}
@@ -193,6 +194,7 @@ const PlaceOrder = () => {
           </Card>
         </Col>
       </Row>
+      </Container>
     </>
   );
 };

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
+  Container,
   Row,
   Col,
   ListGroup,
@@ -47,6 +48,7 @@ const Cart = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
+      <Container>
       <Row>
         <Col xs={10} sm={12} md={10} xl={8} className="mx-auto mt-4">
           <h1 className="text-center" style={{ marginBottom: "20px" }}>
@@ -200,6 +202,7 @@ const Cart = () => {
           </Button>
         </Col>
       </Row>
+      </Container>
     </motion.div>
   );
 };
