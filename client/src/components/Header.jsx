@@ -6,6 +6,7 @@ import {
   Badge,
   NavDropdown,
   Form,
+  Offcanvas,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -96,120 +97,126 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar
-        expand="lg"
-        className="fixed-top header shadow-sm"
-        collapseOnSelect
-      >
-        <Container
-          fluid
-          className="custom-header d-flex align-items-center justify-content-between"
-
+        <Navbar
+          expand="lg"
+          className="fixed-top header shadow-sm"
+          collapseOnSelect
         >
-          <LinkContainer to="/">
-            <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
-              <img
-                src={logo}
-                alt="Logo"
-                style={{ maxHeight: 70, borderRadius: "50%", marginRight: 8 }}
-              />
-              <h2 className="brand-header">Buyzy</h2>
-            </Navbar.Brand>
-          </LinkContainer>
-          {pathName === "" ? (
-            <Form
-              className="d-none d-xl-flex mx-3"
-              style={{ width: "30%", margin: "0 auto" }}
-            >
-              <Form.Control
-                type="search"
-                placeholder="Search product with name..."
-                style={{ fontSize: "0.9rem", height: "38px" }}
-                value={searchItem}
-                onChange={handleSearch}
-                disabled={location.pathname !== "/"}
-              />
-            </Form>
-          ) : (pathName === "login" || pathName === "register" || !isDesktop) ? (
-            <></>
-          ) : (
-            <Typewriter
-              className="buyzy"
-              options={{
-                strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}`],
-                autoStart: true,
-                loop: true,
-                delay: 100,
-                pauseFor: 1000 * 60 * 60,
-                deleteSpeed: 100,
-                cursor: "",
-                wrapperClassName: "buyzy",
-                cursorClassName: "typewriter-cursor",
-              }}
-            />
-          )}
-          <div className="d-flex align-items-center">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav
-                className={`ms-auto align-items-center ${
-                  window.innerWidth < 992 ? "flex-column" : "d-flex gap-3"
-                }`}
+          <Container
+            fluid
+            className="custom-header d-flex align-items-center justify-content-between"
+          >
+            <LinkContainer to="/">
+              <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
+                <img
+                  src={logo}
+                  alt="Logo"
+                  style={{ maxHeight: 70, borderRadius: "50%", marginRight: 8 }}
+                />
+                <h2 className="brand-header">Buyzy</h2>
+              </Navbar.Brand>
+            </LinkContainer>
+            {pathName === "" ? (
+              <Form
+                className="d-none d-xl-flex mx-3"
+                style={{ width: "30%", margin: "0 auto" }}
               >
-                <LinkContainer to="/">
-                  <Nav.Link className="menu-item">Home</Nav.Link>
-                </LinkContainer>
+                <Form.Control
+                  type="search"
+                  placeholder="Search product with name..."
+                  style={{ fontSize: "0.9rem", height: "38px" }}
+                  value={searchItem}
+                  onChange={handleSearch}
+                  disabled={location.pathname !== "/"}
+                />
+              </Form>
+            ) : pathName === "login" ||
+              pathName === "register" ||
+              !isDesktop ? (
+              <></>
+            ) : (
+              <Typewriter
+                className="buyzy"
+                options={{
+                  strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}`],
+                  autoStart: true,
+                  loop: true,
+                  delay: 100,
+                  pauseFor: 1000 * 60 * 60,
+                  deleteSpeed: 100,
+                  cursor: "",
+                  wrapperClassName: "buyzy",
+                  cursorClassName: "typewriter-cursor",
+                }}
+              />
+            )}
+            <div className="d-flex align-items-center">
 
-                {/* Categories */}
-                <NavDropdown
-                  className="menu-item my-dropdown"
-                  id="categories"
-                  show={isDesktop ? showDropdown === "categories" : undefined}
-                  onMouseEnter={() => isDesktop && handleDropdown("categories")}
-                  onMouseLeave={() => isDesktop && handleDropdown(null)}
-                  title="Categories"
-                >
-                  <LinkContainer to="/electronics">
-                    <NavDropdown.Item>Electronics</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/casual">
-                    <NavDropdown.Item>Casual</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
+            <Navbar.Toggle aria-controls="offcanvasNavbar" />
 
-                <NavDropdown
-                  title={
-                    <LinkContainer to="/cart">
+            {/* Offcanvas */}
+            <Navbar.Offcanvas
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id="offcanvasNavbarLabel">
+                  Menu
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+
+              <Offcanvas.Body>
+                <Nav className="d-flex flex-lg-row align-items-start gap-2">
+                  <LinkContainer to="/">
+                    <Nav.Link>Home</Nav.Link>
+                  </LinkContainer>
+
+                  {/* Categories */}
+                  <NavDropdown
+                    title="Categories"
+                    show={showDropdown === "categories"}
+                    onMouseEnter={() => handleDropdown("categories")}
+                    onMouseLeave={() => handleDropdown(null)}
+                  >
+                    <LinkContainer to="/electronics">
+                      <NavDropdown.Item>Electronics</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/casual">
+                      <NavDropdown.Item>Casual</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+
+                  {/* Cart */}
+                  <NavDropdown
+                    title={
                       <span>
                         <FaShoppingCart />
-                        <span className="menu-item ms-1">Cart</span>{" "}
+                        <span className="ms-1">Cart</span>
                         {cartItems.length > 0 && (
                           <Badge pill bg="success" className="ms-1">
                             {cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
                           </Badge>
                         )}
                       </span>
-                    </LinkContainer>
-                  }
-                  id="cart-dropdown"
-                  show={showDropdown === "cart-dropdown"}
-                  onMouseEnter={() => handleDropdown("cart-dropdown")}
-                  onMouseLeave={() => handleDropdown(null)}
-                >
-                  <div>
+                    }
+                    show={showDropdown === "cart-dropdown"}
+                    onMouseEnter={() => handleDropdown("cart-dropdown")}
+                    onMouseLeave={() => handleDropdown(null)}
+                  >
                     {cartItems.length === 0 ? (
-                      <NavDropdown.Item style={{ color: "white" }} disabled>
+                      <NavDropdown.Item disabled>
                         No items in cart
                       </NavDropdown.Item>
                     ) : (
                       cartItems.map((item) => (
                         <NavDropdown.Item
+                          key={item._id}
                           className="d-flex align-items-center justify-content-between"
+                          style={{ minWidth: 250, maxWidth: 300 }}
                           onClick={() =>
                             window.open(`/product/${item._id}`, "_blank")
                           }
-                          key={item._id}
-                          style={{ minWidth: 250, maxWidth: 300 }}
                         >
                           <span className="d-flex align-items-center gap-2">
                             <img
@@ -234,70 +241,52 @@ const Header = () => {
                             <span>(x{item.qty})</span>
                           </span>
                           <FaTrash
-                            className="mt-1"
                             color="red"
                             onClick={(e) => removeFromCartHandler(e, item._id)}
                           />
                         </NavDropdown.Item>
                       ))
                     )}
-                  </div>
-
-                  {cartItems.length > 0 && (
-                    <>
-                      <NavDropdown.Item disabled style={{ color: "white" }}>
-                        Total: ${totalPrice}{" "}
-                        <small>
-                          <small>
-                            <small>
-                              (taxes{" "}
-                              {totalPrice > 100
-                                ? "included. Shipping free"
-                                : "+ shipping included"}
-                              )
-                            </small>
-                          </small>
-                        </small>
-                      </NavDropdown.Item>
-                      <NavDropdown.Divider />
-                      <LinkContainer to="/cart">
-                        <NavDropdown.Item>Go to Cart</NavDropdown.Item>
-                      </LinkContainer>
-                    </>
-                  )}
-                </NavDropdown>
-
-                {/* User */}
-                {userInfo ? (
-                  <NavDropdown
-                    title={<>{userInfo.name} </>}
-                    id="username"
-                    show={showDropdown === "username"}
-                    onMouseEnter={() => handleDropdown("username")}
-                    onMouseLeave={() => handleDropdown(null)}
-                  >
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item
-                      className="menu-item"
-                      onClick={logoutHandler}
-                    >
-                      Logout
-                    </NavDropdown.Item>
+                    {cartItems.length > 0 && (
+                      <>
+                        <NavDropdown.Divider />
+                        <div>
+                        <LinkContainer className="w-100" to="/cart">
+                          <NavDropdown.Item>Go to Cart</NavDropdown.Item>
+                        </LinkContainer>
+                        </div>
+                      </>
+                    )}
                   </NavDropdown>
-                ) : (
-                  <LinkContainer to="/login">
-                    <Nav.Link className="menu-item">
-                      <FaUser /> Login
-                    </Nav.Link>
-                  </LinkContainer>
-                )}
-              </Nav>
-            </Navbar.Collapse>
-          </div>
-        </Container>
-      </Navbar>
+
+                  {/* User */}
+                  {userInfo ? (
+                    <NavDropdown
+                      title={userInfo.name}
+                      show={showDropdown === "username"}
+                      onMouseEnter={() => handleDropdown("username")}
+                      onMouseLeave={() => handleDropdown(null)}
+                    >
+                      <LinkContainer to="/profile">
+                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                      </LinkContainer>
+                      <NavDropdown.Item onClick={logoutHandler}>
+                        Logout
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  ) : (
+                    <LinkContainer to="/login">
+                      <Nav.Link>
+                        <FaUser /> Login
+                      </Nav.Link>
+                    </LinkContainer>
+                  )}
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+            </div>
+          </Container>
+        </Navbar>
     </header>
   );
 };
