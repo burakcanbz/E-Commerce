@@ -47,7 +47,6 @@ const PlaceOrder = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
-      console.log(resp);
       navigate(`/order/${resp._id}`);
       dispatch(setOrder(resp));
       dispatch(clearCartItems());

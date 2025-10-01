@@ -9,7 +9,6 @@ exports.protect = asyncHandler(async(req, res, next) => {
 
     // Read the JWT from cookie
     token = req.cookies.jwt;
-    console.log("Token from cookie:", token);
     if(token){
         try{
             const decoded = jwt.verify(token, process.env.JWT_SECRET);

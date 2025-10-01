@@ -40,7 +40,7 @@ app.use(errorHandler);
 const port = process.env.PORT || 3000;
 connectDB().then(() => {
     app.listen(port, '0.0.0.0',() => {
-        console.log(`Server running on port ${port}`)
+        process.env.NODE_ENV === 'development' && console.log(`Server running on port ${port}`)
     })
 })
 

@@ -147,7 +147,7 @@ const Cart = () => {
             </Card>
           )}
         </Col>
-        <Col xs={7} sm={6} md={5} xl={3} className=" d-flex flex-column mx-auto mt-5 mt-xl-5">
+        <Col xs={8} sm={6} md={5} xl={3} className=" d-flex flex-column mx-auto mt-5 mt-xl-5">
           <Card className="p-2">
             <ListGroup variant="flush">
               <ListGroup.Item className="border-0 mt-2">

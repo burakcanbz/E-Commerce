@@ -78,7 +78,6 @@ exports.registerUser = asyncHandler(async (req, res) => {
  * @throws {Error} Throws an error if order not found or if saving the order fails
  */
 exports.logoutUser = asyncHandler(async (req, res) => {
-  console.log("in logoutUser controller");
   res.cookie("jwt", "", {
     httpOnly: true,
     expires: new Date(0),

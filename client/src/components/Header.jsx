@@ -1,4 +1,5 @@
-import { useDeferredValue, useState, useMemo, useEffect } from "react";
+import { useDeferredValue, useState, useMemo, useEffect, useRef } from "react";
+import * as bootstrap from "bootstrap";
 import {
   Navbar,
   Nav,
@@ -9,10 +10,9 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
-import { LinkContainer } from "react-router-bootstrap";
 
 import { logout } from "../slices/authSlice";
 import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
@@ -29,6 +29,8 @@ import Typewriter from "typewriter-effect";
 
 const Header = () => {
   const isDesktop = window.innerWidth >= 1200;
+  const isTouch = window.innerWidth <= 992;
+const [showCanvas, setShowCanvas] = useState(false);
   const pathName = window.location.pathname.split("/")[1];
   const [showDropdown, setShowDropdown] = useState(null);
   const location = useLocation();
@@ -59,6 +61,9 @@ const Header = () => {
       console.error(err);
     }
   };
+
+  const handleCloseOffcanvas = () => setShowCanvas(false);
+  const handleShowOffcanvas = () => setShowCanvas(true);
 
   const handleSearch = (e) => {
     if (location.pathname === "/" && Array.isArray(products)) {
@@ -97,68 +102,69 @@ const Header = () => {
 
   return (
     <header>
-        <Navbar
-          expand="lg"
-          className="fixed-top header shadow-sm"
-          collapseOnSelect
+      <Navbar
+        expand="lg"
+        className="fixed-top header shadow-sm"
+        collapseOnSelect
+      >
+        <Container
+          fluid
+          className="custom-header d-flex align-items-center justify-content-between"
         >
-          <Container
-            fluid
-            className="custom-header d-flex align-items-center justify-content-between"
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            className="nav-brand d-flex align-items-center text-white"
           >
-            <LinkContainer to="/">
-              <Navbar.Brand className="nav-brand d-flex align-items-center text-white">
-                <img
-                  src={logo}
-                  alt="Logo"
-                  style={{ maxHeight: 70, borderRadius: "50%", marginRight: 8 }}
-                />
-                <h2 className="brand-header">Buyzy</h2>
-              </Navbar.Brand>
-            </LinkContainer>
-            {pathName === "" ? (
-              <Form
-                className="d-none d-xl-flex mx-3"
-                style={{ width: "30%", margin: "0 auto" }}
-              >
-                <Form.Control
-                  type="search"
-                  placeholder="Search product with name..."
-                  style={{ fontSize: "0.9rem", height: "38px" }}
-                  value={searchItem}
-                  onChange={handleSearch}
-                  disabled={location.pathname !== "/"}
-                />
-              </Form>
-            ) : pathName === "login" ||
-              pathName === "register" ||
-              !isDesktop ? (
-              <></>
-            ) : (
-              <Typewriter
-                className="buyzy"
-                options={{
-                  strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}`],
-                  autoStart: true,
-                  loop: true,
-                  delay: 100,
-                  pauseFor: 1000 * 60 * 60,
-                  deleteSpeed: 100,
-                  cursor: "",
-                  wrapperClassName: "buyzy",
-                  cursorClassName: "typewriter-cursor",
-                }}
+            <img
+              src={logo}
+              alt="Logo"
+              style={{ maxHeight: 70, borderRadius: "50%", marginRight: 8 }}
+            />
+            <h2 className="brand-header">Buyzy</h2>
+          </Navbar.Brand>
+          {pathName === "" ? (
+            <Form
+              className="d-none d-xl-flex mx-3"
+              style={{ width: "30%", margin: "0 auto" }}
+            >
+              <Form.Control
+                type="search"
+                placeholder="Search product with name..."
+                style={{ fontSize: "0.9rem", height: "38px" }}
+                value={searchItem}
+                onChange={handleSearch}
+                disabled={location.pathname !== "/"}
               />
-            )}
-            <div className="d-flex align-items-center">
-
-            <Navbar.Toggle aria-controls="offcanvasNavbar" />
+            </Form>
+          ) : pathName === "login" || pathName === "register" || !isDesktop ? (
+            <></>
+          ) : (
+            <Typewriter
+              className="buyzy"
+              options={{
+                strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}`],
+                autoStart: true,
+                loop: true,
+                delay: 100,
+                pauseFor: 1000 * 60 * 60,
+                deleteSpeed: 100,
+                cursor: "",
+                wrapperClassName: "buyzy",
+                cursorClassName: "typewriter-cursor",
+              }}
+            />
+          )}
+          <div className="d-flex align-items-center">
+            <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShowOffcanvas} />
 
             {/* Offcanvas */}
             <Navbar.Offcanvas
               id="offcanvasNavbar"
               aria-labelledby="offcanvasNavbarLabel"
               placement="end"
+              show={showCanvas}
+              onHide={handleCloseOffcanvas}
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id="offcanvasNavbarLabel">
@@ -168,9 +174,9 @@ const Header = () => {
 
               <Offcanvas.Body>
                 <Nav className="d-flex flex-lg-row align-items-start gap-2">
-                  <LinkContainer to="/">
-                    <Nav.Link>Home</Nav.Link>
-                  </LinkContainer>
+                  <Nav.Link as={Link} to="/" onClick={handleCloseOffcanvas}>
+                    Home
+                  </Nav.Link>
 
                   {/* Categories */}
                   <NavDropdown
@@ -179,12 +185,20 @@ const Header = () => {
                     onMouseEnter={() => handleDropdown("categories")}
                     onMouseLeave={() => handleDropdown(null)}
                   >
-                    <LinkContainer to="/electronics">
-                      <NavDropdown.Item>Electronics</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/casual">
-                      <NavDropdown.Item>Casual</NavDropdown.Item>
-                    </LinkContainer>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/electronics"
+                      onClick={handleCloseOffcanvas}
+                    >
+                      Electronics
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/casual"
+                      onClick={handleCloseOffcanvas}
+                    >
+                      Casual
+                    </NavDropdown.Item>
                   </NavDropdown>
 
                   {/* Cart */}
@@ -205,7 +219,7 @@ const Header = () => {
                     onMouseLeave={() => handleDropdown(null)}
                   >
                     {cartItems.length === 0 ? (
-                      <NavDropdown.Item disabled>
+                      <NavDropdown.Item style={{ color: "white" }} disabled>
                         No items in cart
                       </NavDropdown.Item>
                     ) : (
@@ -250,11 +264,14 @@ const Header = () => {
                     {cartItems.length > 0 && (
                       <>
                         <NavDropdown.Divider />
-                        <div>
-                        <LinkContainer className="w-100" to="/cart">
-                          <NavDropdown.Item>Go to Cart</NavDropdown.Item>
-                        </LinkContainer>
-                        </div>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/cart"
+                          className="w-100"
+                          onClick={handleCloseOffcanvas}
+                        >
+                          Go to Cart
+                        </NavDropdown.Item>
                       </>
                     )}
                   </NavDropdown>
@@ -267,26 +284,28 @@ const Header = () => {
                       onMouseEnter={() => handleDropdown("username")}
                       onMouseLeave={() => handleDropdown(null)}
                     >
-                      <LinkContainer to="/profile">
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                      </LinkContainer>
+                      <NavDropdown.Item
+                        as={Link}
+                        to="/profile"
+                        onClick={handleCloseOffcanvas}
+                      >
+                        Profile
+                      </NavDropdown.Item>
                       <NavDropdown.Item onClick={logoutHandler}>
                         Logout
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
-                    <LinkContainer to="/login">
-                      <Nav.Link>
-                        <FaUser /> Login
-                      </Nav.Link>
-                    </LinkContainer>
+                    <Nav.Link as={Link} to="/login" onClick={handleCloseOffcanvas}>
+                      <FaUser /> Login
+                    </Nav.Link>
                   )}
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
-            </div>
-          </Container>
-        </Navbar>
+          </div>
+        </Container>
+      </Navbar>
     </header>
   );
 };
