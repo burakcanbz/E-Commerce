@@ -1,5 +1,4 @@
-import { useDeferredValue, useState, useMemo, useEffect, useRef } from "react";
-import * as bootstrap from "bootstrap";
+import { useDeferredValue, useState, useMemo, useEffect } from "react";
 import {
   Navbar,
   Nav,
@@ -12,25 +11,24 @@ import {
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Typewriter from "typewriter-effect";
 import { useLogoutMutation } from "../slices/usersApiSlice";
-
 import { logout } from "../slices/authSlice";
 import { useGetPaginatedProductsQuery } from "../slices/productsApiSlice";
 import { clearOrder } from "../slices/orderSlice";
 import { updateProduct, clearProduct } from "../slices/productSlice";
 import logo from "../assets/buyzy.png";
+import { spacer } from "../utils/helpers";
 import { FaTrash } from "react-icons/fa";
 import {
   clearCartItems,
   clearShippingAddress,
   removeFromCart,
 } from "../slices/cartSlice";
-import Typewriter from "typewriter-effect";
 
 const Header = () => {
-  const isDesktop = window.innerWidth >= 1200;
-  const isTouch = window.innerWidth <= 992;
-const [showCanvas, setShowCanvas] = useState(false);
+  const isDesktop = window.innerWidth >= 1400;
+  const [showCanvas, setShowCanvas] = useState(false);
   const pathName = window.location.pathname.split("/")[1];
   const [showDropdown, setShowDropdown] = useState(null);
   const location = useLocation();
@@ -137,17 +135,15 @@ const [showCanvas, setShowCanvas] = useState(false);
                 disabled={location.pathname !== "/"}
               />
             </Form>
-          ) : pathName === "login" || pathName === "register" || !isDesktop ? (
-            <></>
-          ) : (
+          ) : ( isDesktop &&
             <Typewriter
               className="buyzy"
               options={{
-                strings: [`${pathName[0].toUpperCase() + pathName.slice(1)}`],
+                strings: [`${spacer()}Welcome to Buyzy!`, `${spacer()}Enjoy your shopping`, `${spacer()}Fast delivery to your door`],
                 autoStart: true,
                 loop: true,
                 delay: 100,
-                pauseFor: 1000 * 60 * 60,
+                pauseFor: 5000,
                 deleteSpeed: 100,
                 cursor: "",
                 wrapperClassName: "buyzy",

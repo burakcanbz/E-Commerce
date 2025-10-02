@@ -1,13 +1,13 @@
 const {
-  paymentConfig,
-  orderPaymentStripe,
+  getPayment,
+  refundPayment,
 } = require("../controllers/paymentController");
 const express = require("express");
 const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.route("/config").get(protect, paymentConfig);
-router.route("/payment-intent").post(protect, orderPaymentStripe);
+router.route("/").post(getPayment);
+router.route("/refundPayment").post(refundPayment);
 
 module.exports = { paymentRoutes: router };

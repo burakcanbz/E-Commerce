@@ -9,7 +9,7 @@ const FormContainer = ({ children }) => {
             className="p-4 shadow-lg rounded-4 mt-5"
             style={{
               maxWidth: 600,
-              minHeight: 350,
+              minHeight: 300,
               width: "100%",
               margin: "auto",
               background: "white",

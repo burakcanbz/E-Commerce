@@ -40,7 +40,7 @@ const router = createBrowserRouter(
         <Route path="/payment" element={<Payment />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
         <Route path="/order/:id" element={<Order />} />
-        {/* <Route path="/orderPayment" element={<OrderPayment />} /> */}
+        <Route path="/pay" element={<OrderPayment />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
     </Route>

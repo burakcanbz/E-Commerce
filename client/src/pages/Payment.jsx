@@ -7,7 +7,7 @@ import FormContainer from "../components/FormContainer";
 import CheckoutStepper from "../components/CheckoutStepper";
 
 const Payment = () => {
-  const [paymentMethod, setPaymentMethod] = useState("Paypal");
+  const [paymentMethod, setPaymentMethod] = useState("Credit Card");
   const { shippingAddress } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
@@ -51,28 +51,27 @@ const Payment = () => {
   return (
     <FormContainer>
       <CheckoutStepper activeStep={1} />
-      <h1 className="text-center">Payment Method</h1>
       <Form
         id="checkout"
         onSubmit={submitHandler}
         className="d-flex flex-column justify-content-center align-items-center"
       >
-        <Form.Group className="mt-2">
-          <Form.Label as="legend">Select Method</Form.Label>
+        <Form.Group className="mt-4">
+          <Form.Label as="legend">Select Payment Method</Form.Label>
           <Col>
             <Form.Check
               type="radio"
-              className="my-2"
+              className="mt-5"
               label="Credit Card"
-              id="PayPal"
+              id="CreditCard"
               name="paymentMethod"
-              value="Paypal"
+              value="Credit Card"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
           </Col>
         </Form.Group>
-        <Button type="submit" variant="primary" className="my-2">
+        <Button type="submit" variant="primary" className="my-4">
           Continue
         </Button>
       </Form>

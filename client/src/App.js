@@ -30,9 +30,7 @@ const App = () => {
         </div>
         <Header />
         <main className="py-3" style={{ flexGrow: 1, marginTop: 120 }}>
-          {/* <Container> */}
             <Outlet />
-          {/* </Container> */}
         </main>
         <Footer />
         <ToastContainer

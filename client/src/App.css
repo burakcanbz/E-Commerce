@@ -229,19 +229,27 @@
     border-radius: 5px;
   }
 
-  .buyzy {
-    font-size: 25px !important;
-    font-weight: 600;
-    letter-spacing: 3px;
-    color: white !important;
-    background: linear-gradient(to right, #dbe0df, #fdfdfd);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-right: 15px;
-    margin-top: -10px;
-    margin-bottom: -10px;
-    animation: pulse 2s infinite;
-  }
+.buyzy {
+  font-size: 30px !important;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: transparent;
+  background: linear-gradient(to right, #fff, #00BFFF); /* Turuncu-mavi gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 15px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  white-space: nowrap; /* satır kaymasını önler */
+  overflow: hidden; /* gizli kısımları keser */
+  animation: typing 3s steps(30, end) forwards; /* sadece yazma animasyonu */
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
 
 .col-custom {
   flex: 0 0 20% !important;
@@ -410,4 +418,19 @@ select.form-control {
 .offcanvas-top {
   height: 100vh !important;       /* Yükseklik %50 */
   max-height: 100vh !important;   /* Maks yükseklik %50 */
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset !important; /* arka plan rengini resetler */
+  -webkit-text-fill-color: #000 !important; /* yazı rengini resetler */
+}
+
+input:-internal-autofill-previewed {
+  display: none !important; /* tooltip görünürlüğünü engeller */
+}
+
+/* Eğer tooltip halen görünüyorsa aşağısını ekleyebilirsin */
+input::-webkit-autofill-button,
+input::-webkit-autofill-preview {
+  display: none !important;
 }

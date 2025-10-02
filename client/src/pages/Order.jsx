@@ -1,15 +1,24 @@
 import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { Container, Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Button,
+  Card,
+} from "react-bootstrap";
 import { motion } from "framer-motion";
 import {
   useCancelOrderMutation,
   useGetOrderDetailsQuery,
 } from "../slices/ordersApiSlice";
+import { toast } from "react-toastify";
 import { convertToUTC } from "../utils/helpers";
+import OrderPayment from "../pages/OrderPayment";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
-import { toast } from "react-toastify";
 
 const Order = () => {
   const { id: orderId } = useParams();
@@ -161,11 +170,18 @@ const Order = () => {
                         <strong>${order.totalPrice.toFixed(2)}</strong>
                       </Col>
                     </Row>
+                    <Row>
+                      <Col className="mt-3">
+                      <Button className="w-50" style={{border: "none", backgroundColor: "#e9682a"}} onClick={() => navigate('/pay')}>Pay Now</Button>
+                      </Col>
+                    </Row>
                   </Row>
                 </ListGroup.Item>
               </ListGroup>
             </Card>
-            <Row>{/* <OrderPayment /> */}</Row>
+            <Row className="mt-3">
+              <Col></Col>
+            </Row>
           </Col>
         </Row>
       </Container>

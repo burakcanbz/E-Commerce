@@ -144,3 +144,8 @@ export const hideUserName = (name) => {
     return names.map((n) => n[0] + "*".repeat(n.length - 1)).join(" ");
   }
 };
+
+export const spacer = () => {
+  const length = 18;
+  return "\u00A0".repeat(length);
+}

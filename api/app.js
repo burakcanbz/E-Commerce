@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors')
 dotenv.config();
+const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware')
@@ -32,7 +32,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/reviews', reviewRoutes);
-// app.use('/api/payment', paymentRoutes);
+app.use('/api/payment', paymentRoutes);
 
 app.use('/*', notFound);
 app.use(errorHandler);

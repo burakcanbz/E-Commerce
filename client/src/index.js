@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import store from "./store/store";
 import router from "./routes/Routes";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import "./index.css";
 
 Sentry.init({

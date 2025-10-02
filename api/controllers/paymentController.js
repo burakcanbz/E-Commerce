@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
-const stripe = require('../config/payment'); 
+const { paymentCreate, refundRequest, createPaymentRequestBody, refundPaymentRequestBody } = require("../utils/paymentUtils");
+
 
 /**
  * @description get config of stripe
@@ -9,36 +10,27 @@ const stripe = require('../config/payment');
  * @param {Object} res - The response object to send the updated order
  * @throws {Error} Throws an error if order not found or if saving the order fails
  */
-exports.paymentConfig = asyncHandler(async (req, res) => {
-  res.status(200).json({
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-  });
+exports.getPayment = asyncHandler(async (req, res) => {
+
+  const {price, paidPrice, basketId, paymentCard, buyer, shippingAddress, billingAddress, basketItems} = req.body; 
+
+  try{
+      const result = await paymentCreate(createPaymentRequestBody);
+      res.json(result);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-/**
- * @description POST payment
- * @route POST /api/payment/payment-intent
- * @access Private
- * @param {Object} req - The request object containing the payment details
- * @param {Object} res - The response object to send the updated order
- * @throws {Error} Throws an error if order not found or if saving the order fails
- */
-exports.orderPaymentStripe = asyncHandler(async (req, res) => {
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      currency: "EUR",
-      amount: 1999,
-      automatic_payment_methods: { enabled: true },
-    });
 
-    res.status(200).json({
-      clientSecret: paymentIntent.client_secret,
-    });
-  } catch (e) {
-    return res.status(400).json({
-      error: {
-        message: e.message,
-      },
-    });
+exports.refundPayment = asyncHandler(async (req, res) => {
+  
+  try{
+    const result = await refundRequest(refundPaymentRequestBody);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
+
 });
