@@ -1,11 +1,14 @@
 import { Container, Row, Col } from "react-bootstrap";
 import PaymentForm from "../components/PaymentForm";
-import BuyerInfo from "../components/BuyerInformation";
+import { motion } from "framer-motion";
 import { FaLock } from "react-icons/fa";
 
 const OrderPayment = () => {
   return (
-    <div
+    <motion.div
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       style={{
         backgroundColor: "#fdfdfd",
         minHeight: "80dvh",
@@ -48,7 +51,7 @@ const OrderPayment = () => {
           </p>
         </Row>
       </Container>
-    </div>
+    </motion.div>
   );
 };
 

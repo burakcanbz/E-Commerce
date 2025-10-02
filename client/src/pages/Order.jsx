@@ -172,7 +172,7 @@ const Order = () => {
                     </Row>
                     <Row>
                       <Col className="mt-3">
-                      <Button className="w-50" style={{border: "none", backgroundColor: "#e9682a"}} onClick={() => navigate('/pay')}>Pay Now</Button>
+                      <Button className="w-50" style={{border: "none", backgroundColor: "#e9682a"}} onClick={(e) => {e.preventDefault(); navigate('/pay')}}>Pay Now</Button>
                       </Col>
                     </Row>
                   </Row>

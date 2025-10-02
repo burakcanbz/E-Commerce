@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
+  Container,
   Form,
   Row,
   Col,
@@ -105,6 +106,7 @@ const ProductDetail = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
+      <Container>
       <Row className="mb-3">
         <Link to="/" className="text-center text-md-start">
           <Button  variant="secondary">Go Back</Button>
@@ -304,6 +306,7 @@ const ProductDetail = () => {
           </Row>
         </>
       )}
+      </Container>
     </motion.div>
   );
 };
