@@ -1,7 +1,7 @@
-# E-commerce Web Application
+# Buyzy E-commerce Web Application
 
 ## Description
- This project is a full-stack e-commerce web application designed to provide a smooth and intuitive shopping experience for users. The platform supports features like browsing products, managing a shopping cart, and secure checkout. It's built using modern web technologies to ensure high performance, scalability, and ease of use for both customers and administrators.
+ Buyzy is a full-stack responsive e-commerce web application designed to provide a smooth and intuitive shopping experience for users. The platform supports features like browsing products, managing a shopping cart, and secure checkout. It built using modern web technologies to ensure high performance, scalability, and ease of use for both customers and administrators.
 
 ## Features
 - Shopping cart
