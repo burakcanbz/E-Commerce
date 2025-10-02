@@ -8,7 +8,7 @@ const OrderPayment = () => {
     <div
       style={{
         backgroundColor: "#fdfdfd",
-        minHeight: "100vh",
+        minHeight: "80dvh",
         paddingTop: "60px",
         paddingBottom: "60px",
       }}
@@ -39,6 +39,13 @@ const OrderPayment = () => {
           <Col xs={12} md={10} lg={8}>
             <PaymentForm />
           </Col>
+        </Row>
+        <Row className="justify-content-center text-muted" style={{ marginTop: "100px" }}>
+          We are here to help! If you have any questions or need assistance,
+          please contact our customer support team at{" "}
+          <p className="text-center mt-2">
+          <a href="mailto:burak.canbaz.web@gmail.com">burak.canbaz.web@gmail.com</a>
+          </p>
         </Row>
       </Container>
     </div>

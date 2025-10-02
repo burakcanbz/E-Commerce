@@ -28,7 +28,7 @@ const PaymentForm = () => {
 
   return (
     <Card
-      className="p-4 rounded-4 shadow mt-2"
+      className="px-4 py-5 rounded-4 shadow mt-2"
       style={{
         maxWidth: "850px",
         backgroundColor: "#f8f9fa",
@@ -37,27 +37,29 @@ const PaymentForm = () => {
     >
       <Row className="align-items-center">
         <Col md={6} className="mb-4 mb-md-0">
-          <Row className="mb-4">
-            <Cards
-              number={state.number}
-              expiry={state.expiry}
-              cvc={state.cvc}
-              name={state.name}
-              focused={state.focus !== "cvc"}
-            />
-          </Row>
           <Row>
-            <Cards
-              number={state.number}
-              expiry={state.expiry}
-              cvc={state.cvc}
-              name={state.name}
-              focused="cvc"
-            />
+            <Row className="mb-4">
+              <Cards
+                number={state.number}
+                expiry={state.expiry}
+                cvc={state.cvc}
+                name={state.name}
+                focused={state.focus !== "cvc"}
+              />
+            </Row>
+            <Row>
+              <Cards
+                number={state.number}
+                expiry={state.expiry}
+                cvc={state.cvc}
+                name={state.name}
+                focused="cvc"
+              />
+            </Row>
           </Row>
         </Col>
         <Col md={6}>
-          <Form onSubmit={handleSubmit} className="px-3">
+          <Form onSubmit={handleSubmit} className="ps-0 ps-md-5">
             {[
               {
                 id: "cardNumber",
