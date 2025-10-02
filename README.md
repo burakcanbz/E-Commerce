@@ -10,9 +10,11 @@
 - Products slider with pagination and limit
 - Products category
 - Product search feature
-- User profile with orders
+- Order Creation 
 - Checkout process (shipping, payment method, etc)
-- Stripe card integration demonstration
+- User profile with orders
+- Payment Integration with iyzico
+- Authentication - Authorization with JWT
 - Database seeder (products & users)
 
 ## Installation
