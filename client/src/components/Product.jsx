@@ -27,10 +27,10 @@ const Product = ({ product }) => {
 
   return (
     <Card
-      className="my-3 p-2 rounded shadow-lg ms-2 me-2"
+      className="my-3 p-2 rounded shadow-lg"
       style={{
-        minWidth: 190,
-        maxWidth: 190,
+        minWidth: 180,
+        maxWidth: 180,
         maxHeight: 350,
         cursor: "pointer",
       }}
