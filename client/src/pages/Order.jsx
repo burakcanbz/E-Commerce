@@ -176,7 +176,7 @@ const Order = () => {
                           style={{ border: "none", backgroundColor: "#e9682a" }}
                           onClick={(e) => {
                             e.preventDefault();
-                            navigate("/pay");
+                            navigate(`/pay/${orderId}`);
                           }}
                         >
                           Pay Now

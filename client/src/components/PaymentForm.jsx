@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import {useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
+import { usePayOrderMutation } from "../slices/paymentApiSlice";
 import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
+import { createPaymentData } from "../utils/helpers";
+import { toast } from "react-toastify";
 
 const PaymentForm = () => {
+  const { id: orderId } = useParams();
+  const { data: orderDetails } = useGetOrderDetailsQuery(orderId);
+  console.log(orderDetails && orderDetails);
+  const [ payOrder, { isLoading } ] = usePayOrderMutation();
   const [state, setState] = useState({
     number: "",
     expiry: "",
@@ -20,6 +29,24 @@ const PaymentForm = () => {
   const handleInputFocus = (evt) => {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   };
+
+  const handlePayment = async() => {
+    try{
+      if(!orderDetails) throw new Error("Order details not found");
+      const paymentResult = await payOrder(createPaymentData(orderDetails, state)).unwrap();
+      console.log(paymentResult)
+      if (paymentResult.status === "success") {
+        toast.success("Payment successful!");
+      }
+      else {
+        toast.error("Payment failed. Please try again.");
+      }
+    }
+    catch(err){
+      console.error("Payment failed:", err);
+      toast.error("Payment failed. Please try again.");
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -114,14 +141,13 @@ const PaymentForm = () => {
                 type="submit"
                 className="w-50 py-2 rounded-3"
                 style={{
-                  backgroundColor: "#343a40", // elegant dark gray
+                  backgroundColor: "#343a40", 
                   color: "#fff",
                   border: "none",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                   transition: "all 0.3s",
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.opacity = 0.85)}
-                onMouseOut={(e) => (e.currentTarget.style.opacity = 1)}
+                onClick={handlePayment}
               >
                 Pay Now
               </Button>

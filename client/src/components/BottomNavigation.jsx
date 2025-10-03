@@ -1,29 +1,58 @@
 import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const BottomNavigation = () => {
-    
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
   const handleClick = () => {
-    navigate('/shipping')
-  }
+    navigate("/shipping");
+  };
 
   return (
-    <div className="bg-light py-1 fixed-bottom shadow-lg" onClick={handleClick}>
-      <Row className=" mx-2 g-0" style={{ border: '1px solid #ff7300', borderRadius: '5px' }}>
+    <motion.div
+      initial={{ y: 200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="bg-light py-1 fixed-bottom shadow-lg"
+      onClick={handleClick}
+    >
+      <Row
+        className=" mx-2 g-0"
+        style={{ border: "1px solid #ff7300", borderRadius: "5px" }}
+      >
         <Col
           xs={5}
           className="d-flex flex-column align-items-center py-1 justify-content-center text-dark"
-          style={{ background: "white", borderRadius: '5px' }}
+          style={{ background: "white", borderRadius: "5px" }}
         >
           <div className="py-2 text-center">
             <div className="lh-1 text-black" style={{ fontWeight: "bold" }}>
-              <small>{cartItems?.reduce((acc, item) => acc + Number(item.price) * Number(item.qty), 0).toFixed(2)}$</small>
+              <small>
+                {cartItems
+                  ?.reduce(
+                    (acc, item) => acc + Number(item.price) * Number(item.qty),
+                    0
+                  )
+                  .toFixed(2)}
+                $
+              </small>
             </div>
-            <div className="small lh-1" style={{ fontWeight: "bold", color: "#1bd20bff" }}>
-              <small>{cartItems?.reduce((acc, item) => acc + Number(item.price) * Number(item.qty), 0).toFixed(2) > 100 ? "Shipping Free" : "Shipping 10$"}</small>
+            <div
+              className="small lh-1"
+              style={{ fontWeight: "bold", color: "#1bd20bff" }}
+            >
+              <small>
+                {cartItems
+                  ?.reduce(
+                    (acc, item) => acc + Number(item.price) * Number(item.qty),
+                    0
+                  )
+                  .toFixed(2) > 100
+                  ? "Shipping Free"
+                  : "Shipping 10$"}
+              </small>
             </div>
           </div>
         </Col>
@@ -31,7 +60,7 @@ const BottomNavigation = () => {
           <button className="btn-cart w-100">Confirm Cart</button>
         </Col>
       </Row>
-    </div>
+    </motion.div>
   );
 };
 

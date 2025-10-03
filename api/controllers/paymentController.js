@@ -1,6 +1,10 @@
 const asyncHandler = require("express-async-handler");
-const { paymentCreate, refundRequest, createPaymentRequestBody, refundPaymentRequestBody } = require("../utils/paymentUtils");
-
+const {
+  paymentCreate,
+  refundRequest,
+  refundPaymentRequestBody,
+  fillPaymentRequestBody,
+} = require("../utils/paymentUtils");
 
 /**
  * @description get config of stripe
@@ -11,26 +15,22 @@ const { paymentCreate, refundRequest, createPaymentRequestBody, refundPaymentReq
  * @throws {Error} Throws an error if order not found or if saving the order fails
  */
 exports.getPayment = asyncHandler(async (req, res) => {
+  const fulfilledPaymentReqBody = fillPaymentRequestBody(req.body.paymentInfo);
+  console.log(fulfilledPaymentReqBody)
 
-  const {price, paidPrice, basketId, paymentCard, buyer, shippingAddress, billingAddress, basketItems} = req.body; 
-
-  try{
-      const result = await paymentCreate(createPaymentRequestBody);
-      res.json(result);
-  }
-  catch (error) {
+  try {
+    const result = await paymentCreate(fulfilledPaymentReqBody);
+    res.json(result);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-
 exports.refundPayment = asyncHandler(async (req, res) => {
-  
-  try{
+  try {
     const result = await refundRequest(refundPaymentRequestBody);
     res.json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-
 });

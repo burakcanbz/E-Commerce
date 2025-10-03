@@ -4,20 +4,19 @@ import { PAYMENT_URL } from "../constants";
 export const paymentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     payOrder: builder.mutation({
-      query: (payInfo) => ({
-        url: `${PAYMENT_URL}/payment-intent`,
+      query: (data) => ({
+        url: `${PAYMENT_URL}`,
         method: "POST",
-        body: payInfo,
+        body: {paymentInfo: data},
       }),
     }),
-
-    getConfig: builder.query({
+    cancelOrder: builder.query({
       query: () => ({
-        url: `${PAYMENT_URL}/config`,
+        url: `${PAYMENT_URL}/refundPayment`,
       }),
       keepUnusedDataFor: 5,
     }),
   }),
 });
 
-export const { usePayOrderMutation, useGetConfigQuery } = paymentApiSlice;
+export const { usePayOrderMutation, useCancelOrderQuery } = paymentApiSlice;

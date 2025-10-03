@@ -180,6 +180,64 @@ export const hideUserName = (name) => {
 export const spacer = () => {
   const length = 18;
   return "\u00A0".repeat(length);
-}
+};
 
 export const bottomNavigationPaths = ["/", "/electronics", "/casual"];
+
+export const createPaymentData = (orderDetails, state) => {
+  return {
+    locale: "",
+    conversationId: "123456789",
+    price: orderDetails?.itemsPrice.toString(),
+    paidPrice: (orderDetails?.totalPrice * 1.2).toString(),
+    currency: "",
+    installment: "1",
+    basketId: orderDetails?._id,
+    paymentChannel: "",
+    paymentGroup: "",
+    paymentCard: {
+      cardHolderName: state.name,
+      cardNumber: state.number,
+      expireMonth: state.expiry.split("/")[0].trim(),
+      expireYear: state.expiry.split("/")[1].trim(),
+      cvc: state.cvc,
+      registerCard: '0',
+    },
+    buyer: {
+      id: orderDetails?.user._id,
+      name: state.name.split(" ")[0],
+      surname: state.name.split(" ")[1] || " ",
+      gsmNumber: orderDetails?.user.phone || "+905350000000",
+      email: orderDetails?.user.email,
+      identityNumber: "74300864791",
+      lastLoginDate: "2015-10-05 12:43:35",
+      registrationDate: "2013-04-21 15:12:09",
+      registrationAddress: "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+      ip: "85.34.78.112",
+      city: orderDetails?.shippingAddress.city,
+      country: orderDetails?.shippingAddress.country,
+      zipCode: orderDetails?.shippingAddress.postalCode,
+    },
+    shippingAddress: {
+      contactName: "Jane Doe",
+      city: orderDetails?.shippingAddress.city,
+      country: orderDetails?.shippingAddress.country,
+      address: orderDetails?.shippingAddress.address,
+      zipCode: orderDetails?.shippingAddress.postalCode,
+    },
+    billingAddress: {
+      contactName: state.name,
+      city: orderDetails?.shippingAddress.city,
+      country: orderDetails?.shippingAddress.country,
+      address: orderDetails?.shippingAddress.address,
+      zipCode: orderDetails?.shippingAddress.postalCode,
+    },
+    basketItems: orderDetails?.orderItems.map((item) => ({
+      id: item._id,
+      name: item.name,
+      category1: item.category || "General",
+      itemType: "",
+      price: item.price.toString(),
+    })),
+  };
+};
