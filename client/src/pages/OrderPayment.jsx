@@ -1,7 +1,8 @@
-import { Container, Row, Col } from "react-bootstrap";
-import PaymentForm from "../components/PaymentForm";
+import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaLock } from "react-icons/fa";
+import PaymentForm from "../components/PaymentForm";
+import CustomContainer from "../components/CustomContainer";
 
 const OrderPayment = () => {
   return (
@@ -16,7 +17,7 @@ const OrderPayment = () => {
         paddingBottom: "60px",
       }}
     >
-      <Container>
+      <CustomContainer>
         <Row className="justify-content-center">
           <Col xs={12} md={10} lg={8}>
             <div className="text-center mb-5">
@@ -50,7 +51,7 @@ const OrderPayment = () => {
           <a href="mailto:burak.canbaz.web@gmail.com">burak.canbaz.web@gmail.com</a>
           </p>
         </Row>
-      </Container>
+      </CustomContainer>
     </motion.div>
   );
 };

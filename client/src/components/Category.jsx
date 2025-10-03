@@ -1,7 +1,5 @@
-import React from "react";
 import { Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,9 +8,11 @@ import Product from "./Product";
 import { useGetCategorizedProductsQuery } from "../slices/productsApiSlice";
 import { LIMIT, PAGE } from "../constants";
 import Loading from "./Loading";
+import { FaArrowRight } from "react-icons/fa";
 import Message from "./Message";
 
 const Category = ({ category }) => {
+  const navigate = useNavigate();
   const { data, isLoading, error } = useGetCategorizedProductsQuery({
     category,
     page: PAGE,
@@ -31,15 +31,12 @@ const Category = ({ category }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <Link
-        to={`/${category.toLowerCase()}`}
-        style={{ textDecoration: "none", color: "black" }}
-      >
-        <h4>
+      <span>
+        <button className="btn btn-secondary mb-3" onClick={(e ) => {e.preventDefault(); navigate(`/${category.toLowerCase()}`)}}>
           {category}&nbsp;&nbsp;
           <FaArrowRight />
-        </h4>
-      </Link>
+        </button>
+        </span>
       <Slider {...changedSlickSettings}>
         {products?.map((product, index) => {
           return (

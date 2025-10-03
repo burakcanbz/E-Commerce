@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useGetProductCategoriesQuery } from "../slices/productsApiSlice";
 import { motion } from "framer-motion";
 import ProductCarousel from "../components/ProductCarousel";
 import Category from "../components/Category";
 import Product from "../components/Product";
+import CustomContainer from "../components/CustomContainer";
 
 const Home = () => {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 992);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
   const { data: categories } = useGetProductCategoriesQuery();
 
   const searchedProducts = useSelector(
@@ -17,7 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1200);
+      setIsDesktop(window.innerWidth >= 768);
     };
 
     window.addEventListener("resize", handleResize);
@@ -45,17 +46,17 @@ const Home = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           {isDesktop ? (
-            <Container>
+            <CustomContainer>
               <Row>
                 <ProductCarousel />
               </Row>
-            </Container>
+            </CustomContainer>
           ) : (
             <Row>
               <ProductCarousel />
             </Row>
           )}
-          <Container>
+          <CustomContainer>
             {categories?.map((c, i) => {
               return (
                 <Row className="mb-5" key={i}>
@@ -63,7 +64,7 @@ const Home = () => {
                 </Row>
               );
             })}
-          </Container>
+          </CustomContainer>
         </motion.div>
       )}
     </div>

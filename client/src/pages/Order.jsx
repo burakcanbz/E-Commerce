@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
-  Container,
   Row,
   Col,
   ListGroup,
@@ -16,9 +15,9 @@ import {
 } from "../slices/ordersApiSlice";
 import { toast } from "react-toastify";
 import { convertToUTC } from "../utils/helpers";
-import OrderPayment from "../pages/OrderPayment";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
+import CustomContainer from "../components/CustomContainer";
 
 const Order = () => {
   const { id: orderId } = useParams();
@@ -52,7 +51,7 @@ const Order = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <Container>
+      <CustomContainer>
         <Row>
           <Col xs={10} md={8} className="mx-auto mb-4">
             <ListGroup variant="flush">
@@ -172,7 +171,16 @@ const Order = () => {
                     </Row>
                     <Row>
                       <Col className="mt-3">
-                      <Button className="w-50" style={{border: "none", backgroundColor: "#e9682a"}} onClick={(e) => {e.preventDefault(); navigate('/pay')}}>Pay Now</Button>
+                        <Button
+                          className="w-50"
+                          style={{ border: "none", backgroundColor: "#e9682a" }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigate("/pay");
+                          }}
+                        >
+                          Pay Now
+                        </Button>
                       </Col>
                     </Row>
                   </Row>
@@ -184,7 +192,7 @@ const Order = () => {
             </Row>
           </Col>
         </Row>
-      </Container>
+      </CustomContainer>
     </motion.div>
   );
 };

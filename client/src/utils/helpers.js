@@ -19,9 +19,19 @@ export const slickSettings = {
   centerMode: false,
   responsive: [
     {
+      breakpoint: 2000, // For large screens
+      settings: {
+        slidesToShow: 6, // Show 4 slides on large screens
+        slidesToScroll: 1, // Scroll 1 slide at a time
+        infinite: true, // Infinite scroll
+        dots: true, // Show dots navigation
+        centerMode: false, // Disable center mode
+      },
+    },
+    {
       breakpoint: 1400, // For large screens
       settings: {
-        slidesToShow: 4, // Show 4 slides on large screens
+        slidesToShow: 5.3, // Show 4 slides on large screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -31,7 +41,7 @@ export const slickSettings = {
     {
       breakpoint: 1200, // For large screens
       settings: {
-        slidesToShow: 3.5, // Show 4 slides on large screens
+        slidesToShow: 4.5, // Show 4 slides on large screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -41,7 +51,7 @@ export const slickSettings = {
     {
       breakpoint: 1024, // For medium screens
       settings: {
-        slidesToShow: 3, // Show 3 slides on medium screens
+        slidesToShow: 4.5, // Show 3 slides on medium screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -51,7 +61,7 @@ export const slickSettings = {
     {
       breakpoint: 991, // For medium screens
       settings: {
-        slidesToShow: 2.5, // Show 3 slides on medium screens
+        slidesToShow: 3, // Show 3 slides on medium screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -61,7 +71,7 @@ export const slickSettings = {
     {
       breakpoint: 767, // For smaller screens (tablets and below)
       settings: {
-        slidesToShow: 2, // Show 2 slides on small screens
+        slidesToShow: 2.5, // Show 2 slides on small screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
         arrows: false, // Disable arrows on small screens
@@ -72,7 +82,7 @@ export const slickSettings = {
     {
       breakpoint: 550, // For very small screens (small tablets)
       settings: {
-        slidesToShow: 1.75, // Show 1.5 slides on very small screens
+        slidesToShow: 2.2, // Show 1.5 slides on very small screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
         arrows: false, // Disable arrows on very small screens
@@ -83,7 +93,7 @@ export const slickSettings = {
     {
       breakpoint: 480, // For very small screens (mobile)
       settings: {
-        slidesToShow: 1.2, // Show 1 slide on mobile
+        slidesToShow: 1.5, // Show 1 slide on mobile
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
         arrows: false, // Disable arrows on mobile
@@ -94,7 +104,7 @@ export const slickSettings = {
     {
       breakpoint: 425, // For very small screens (mobile)
       settings: {
-        slidesToShow: 1, // Show 1 slide on mobile
+        slidesToShow: 1.3, // Show 1 slide on mobile
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
         arrows: false, // Disable arrows on mobile
@@ -103,9 +113,31 @@ export const slickSettings = {
       },
     },
     {
-      breakpoint: 375, // For very small screens (mobile)
+      breakpoint: 390, // For very small screens (mobile)
       settings: {
-        slidesToShow: 0.9, // Show 1 slide on mobile
+        slidesToShow: 1.2, // Show 1 slide on mobile
+        slidesToScroll: 1, // Scroll 1 slide at a time
+        initialSlide: 0, // Initial slide index
+        arrows: false, // Disable arrows on mobile
+        dots: true, // Show dots navigation
+        centerMode: true, // Center the slide
+      },
+    },
+    {
+      breakpoint: 365, // For very small screens (mobile)
+      settings: {
+        slidesToShow: 1.1, // Show 1 slide on mobile
+        slidesToScroll: 1, // Scroll 1 slide at a time
+        initialSlide: 0, // Initial slide index
+        arrows: false, // Disable arrows on mobile
+        dots: true, // Show dots navigation
+        centerMode: true, // Center the slide
+      },
+    },
+    {
+      breakpoint: 344, // For very small screens (mobile)
+      settings: {
+        slidesToShow: 1, // Show 1 slide on mobile
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
         arrows: false, // Disable arrows on mobile
@@ -149,3 +181,5 @@ export const spacer = () => {
   const length = 18;
   return "\u00A0".repeat(length);
 }
+
+export const bottomNavigationPaths = ["/", "/electronics", "/casual"];

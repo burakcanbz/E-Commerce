@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
-  Container,
   Form,
   Row,
   Col,
@@ -25,6 +24,7 @@ import Rating from "../components/Rating";
 import Message from "../components/Message";
 import { toast } from "react-toastify";
 import { set } from "mongoose";
+import CustomContainer from "../components/CustomContainer";
 
 const ProductDetail = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -106,7 +106,7 @@ const ProductDetail = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <Container>
+      <CustomContainer>
       <Row className="mb-3">
         <Link to="/" className="text-center text-md-start">
           <Button  variant="secondary">Go Back</Button>
@@ -306,7 +306,7 @@ const ProductDetail = () => {
           </Row>
         </>
       )}
-      </Container>
+      </CustomContainer>
     </motion.div>
   );
 };

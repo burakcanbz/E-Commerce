@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  Container,
   Row,
   Col,
   ListGroup,
@@ -16,6 +15,7 @@ import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, setCart } from "../slices/cartSlice";
 import Message from "../components/Message";
+import CustomContainer from "../components/CustomContainer";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Cart = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <Container>
+      <CustomContainer>
       <Row>
         <Col xs={10} sm={12} md={10} xl={8} className="mx-auto mt-4">
           <h1 className="text-center" style={{ marginBottom: "20px" }}>
@@ -202,7 +202,7 @@ const Cart = () => {
           </Button>
         </Col>
       </Row>
-      </Container>
+      </CustomContainer>
     </motion.div>
   );
 };

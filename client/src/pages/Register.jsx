@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Container, Card, Form, Button, Row, Col, Image } from "react-bootstrap";
+import { Card, Form, Button, Row, Col, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { BiUserCircle } from "react-icons/bi";
@@ -8,6 +8,7 @@ import { useRegisterMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 import Logo from "../assets/buyzy.png";
+import CustomContainer from "../components/CustomContainer";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -55,7 +56,7 @@ const Register = () => {
       className="d-flex flex-column align-items-center justify-content-center"
       style={{ minHeight: "60vh" }}
     >
-      <Container>
+      <CustomContainer>
         <div className="text-center">
         <Image
           src={`${Logo}`}
@@ -154,7 +155,7 @@ const Register = () => {
             </Row>
           </Card>
         )}
-      </Container>
+      </CustomContainer>
     </motion.div>
   );
 };

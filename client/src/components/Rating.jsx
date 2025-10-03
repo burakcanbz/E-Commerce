@@ -28,9 +28,9 @@ const Rating = ({ value, text, onChange }) => {
   }
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', marginLeft: 10 }}>
-      <span>{stars}</span>
-      <span style={{ fontWeight: '500', marginLeft: 5, marginTop: 2.8 }}>
+    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', marginTop: -9, marginLeft: .5}}>
+      <span style={{ fontSize: '.8em' }}>{stars}</span>
+      <span style={{ fontWeight: '500', fontSize: '0.8em', marginLeft: 5, marginTop: 2 }}>
         {text && text}
       </span>
     </div>

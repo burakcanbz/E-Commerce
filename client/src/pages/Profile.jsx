@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Container, Table, Row, Col, Button, Alert } from "react-bootstrap";
+import { Table, Row, Col, Button, Alert } from "react-bootstrap";
 import { useGetOrdersQuery } from "../slices/ordersApiSlice";
 import { convertToUTC } from "../utils/helpers";
 import { motion } from "framer-motion";
@@ -8,6 +8,7 @@ import Message from "../components/Message";
 import StatusIcon from "../components/StatusIcon";
 import UserInformation from "../components/UserInformation";
 import { useEffect } from "react";
+import CustomContainer from "../components/CustomContainer";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -34,10 +35,10 @@ const Profile = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <Container>
+      <CustomContainer>
         <Row>
           {orders?.length >= 1 ? (
-            <Col sm={10} lg={8} className="mx-sm-auto my-4">
+            <Col sm={12} lg={8} className="mx-sm-auto my-4">
               <Alert
                 className="text-center text-white d-flex align-items-center justify-content-center"
                 variant="dark"
@@ -104,7 +105,7 @@ const Profile = () => {
           )}
           <UserInformation />
         </Row>
-      </Container>
+      </CustomContainer>
     </motion.div>
   );
 };

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  Container,
   Button,
   Row,
   Col,
@@ -17,6 +16,7 @@ import { setOrder } from "../slices/orderSlice";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
 import CheckoutStepper from "../components/CheckoutStepper";
+import CustomContainer from "../components/CustomContainer";
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ const PlaceOrder = () => {
 
   return (
     <>
-      <Container>
+      <CustomContainer>
         <Row className="justify-content-md-center">
           <Col xs={12} md={6}>
             <div
@@ -74,8 +74,8 @@ const PlaceOrder = () => {
             </div>
           </Col>
         </Row>
-      </Container>
-      <Container>
+      </CustomContainer>
+      <CustomContainer>
         <Row>
           <Col xs={10} md={8} className="mx-auto mt-2 mt-md-4 mb-4">
             <ListGroup variant="flush" className="border rounded-2">
@@ -194,7 +194,7 @@ const PlaceOrder = () => {
           </Card>
         </Col>
       </Row>
-      </Container>
+      </CustomContainer>
     </>
   );
 };

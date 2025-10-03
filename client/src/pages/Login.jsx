@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  Container,
   Form,
   Button,
   Row,
@@ -17,6 +16,7 @@ import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 import Logo from "../assets/buyzy.png";
+import CustomContainer from "../components/CustomContainer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -55,7 +55,7 @@ const Login = () => {
       className="d-flex flex-column align-items-center justify-content-center"
       style={{ minHeight: "60vh" }}
     >
-      <Container>
+      <CustomContainer>
         <div className="text-center">
           <Image
             src={`${Logo}`}
@@ -133,7 +133,7 @@ const Login = () => {
             </Row>
           </Card>
         )}
-      </Container>
+      </CustomContainer>
     </motion.div>
   );
 };

@@ -9,7 +9,7 @@ import Rating from "./Rating";
 
 const Product = ({ product }) => {
   const { cartItems } = useSelector((state) => state.cart);
-    const productExist = cartItems.find((item) => item._id === product._id);
+  const productExist = cartItems.find((item) => item._id === product._id);
 
   const dispatch = useDispatch();
 
@@ -27,37 +27,50 @@ const Product = ({ product }) => {
 
   return (
     <Card
-      className="my-3 p-3 rounded shadow-lg ms-2 me-2"
-      style={{ minWidth: 250, maxWidth:275, minHeight: 410, cursor: "pointer" }}
+      className="my-3 p-2 rounded shadow-lg ms-2 me-2"
+      style={{
+        minWidth: 190,
+        maxWidth: 190,
+        maxHeight: 350,
+        cursor: "pointer",
+      }}
     >
       <Link to={`/product/${product._id}`} target="_blank">
-        <Card.Img src={product.image} variant="top" />
+        <Card.Img
+          src={product.image}
+          variant="top"
+          style={{ height: "150px", objectFit: "cover" }}
+        />
       </Link>
-      <Card.Body>
+      <Card.Title
+        as="div"
+        className="mt-3 ms-1"
+        style={{
+          textAlign: "left",
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          fontSize: ".9em",
+        }}
+      >
+        <strong>{product.name}</strong>
+      </Card.Title>
+      <Card.Body style={{ marginTop: -25, marginLeft: -14, marginRight: -14 }}>
         <Link
           to={`/product/${product._id}`}
           style={{ textDecoration: "none", color: "black" }}
-        >
-          <Card.Title
-            as="div"
-            style={{
-              height: "2.5em",
-              textOverflow: "ellipsis",
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-            }}
-          >
-            <strong>{product.name}</strong>
-          </Card.Title>
-        </Link>
-        <Card.Text className="d-flex justify-content-between align-items-center">
+        ></Link>
+        <Card.Text className="d-flex justify-content-between align-items-center" style={{ marginTop: 11}}>
           <Link to={`/product/${product._id}`} target="_blank">
-            <button className="btn btn-dark">Details</button>
+            <button className="btn btn-sm btn-dark" >Details</button>
           </Link>
           <button
-            className="btn btn-dark"
+            className="btn btn-sm btn-dark"
             onClick={addToCartHandler}
-            disabled={product.countInStock === 0 || productExist?.qty >= product.countInStock}
+            disabled={
+              product.countInStock === 0 ||
+              productExist?.qty >= product.countInStock
+            }
           >
             Add to <FaCartShopping />
           </button>
@@ -69,8 +82,9 @@ const Product = ({ product }) => {
           />
         </Card.Text>
         <Card.Text
-          as="h3"
+          as="h5"
           className="d-flex justify-content-center align-items-center"
+          style={{ fontWeight: "bold", marginTop: -5, marginBottom: -15 }}
         >
           {product.price}${" "}
         </Card.Text>

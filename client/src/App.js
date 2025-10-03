@@ -1,7 +1,8 @@
 import { Container } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
+import BottomNavigation from "./components/BottomNavigation";
 import "react-toastify/dist/ReactToastify.css";
 
 import Flag from "./components/Flag";
@@ -9,9 +10,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import "./App.css";
+import { bottomNavigationPaths } from "./utils/helpers";
 
 const App = () => {
   const color = useSelector((state) => state.settings.settings);
+  const { cartItems } = useSelector((state) => state.cart);
+  const location = useLocation();
+  const shouldBottomNavigationShown = window.innerWidth <= 480;
 
   return (
     <ErrorBoundary>
@@ -30,9 +35,15 @@ const App = () => {
         </div>
         <Header />
         <main className="py-3" style={{ flexGrow: 1, marginTop: 120 }}>
-            <Outlet />
+          <Outlet />
         </main>
-        <Footer />
+        {shouldBottomNavigationShown &&
+        cartItems.length &&
+        bottomNavigationPaths.includes(location.pathname) ? (
+          <BottomNavigation />
+        ) : (
+          <Footer />
+        )}
         <ToastContainer
           position="bottom-center"
           autoClose={3000}
