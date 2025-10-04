@@ -19,7 +19,6 @@ const Category = ({ category }) => {
     limit: LIMIT,
   });
   const products = data?.products;
-  
   const changedSlickSettings = {
     ...slickSettings,
     slidesToScroll: category === 'Electronics' ? 1 : 2,

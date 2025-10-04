@@ -25,6 +25,7 @@ import {
   clearShippingAddress,
   removeFromCart,
 } from "../slices/cartSlice";
+import { LIMIT, PAGE } from "../constants";
 
 const Header = () => {
   const isDesktop = window.innerWidth >= 1400;
@@ -37,7 +38,7 @@ const Header = () => {
 
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  const { data } = useGetPaginatedProductsQuery({ page: 1, limit: 6 });
+  const { data } = useGetPaginatedProductsQuery({ page: PAGE, limit: LIMIT });
 
   const electronics = data?.electronics;
   const casual = data?.casual;

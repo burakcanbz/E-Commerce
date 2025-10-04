@@ -21,7 +21,7 @@ export const slickSettings = {
     {
       breakpoint: 2000, // For large screens
       settings: {
-        slidesToShow: 6, // Show 4 slides on large screens
+        slidesToShow: 7, // Show 4 slides on large screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -31,7 +31,7 @@ export const slickSettings = {
     {
       breakpoint: 1400, // For large screens
       settings: {
-        slidesToShow: 5.3, // Show 4 slides on large screens
+        slidesToShow: 6.3, // Show 4 slides on large screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -41,7 +41,7 @@ export const slickSettings = {
     {
       breakpoint: 1200, // For large screens
       settings: {
-        slidesToShow: 4.5, // Show 4 slides on large screens
+        slidesToShow: 5.3, // Show 4 slides on large screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -61,7 +61,7 @@ export const slickSettings = {
     {
       breakpoint: 991, // For medium screens
       settings: {
-        slidesToShow: 3, // Show 3 slides on medium screens
+        slidesToShow: 4, // Show 3 slides on medium screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         infinite: true, // Infinite scroll
         dots: true, // Show dots navigation
@@ -71,7 +71,7 @@ export const slickSettings = {
     {
       breakpoint: 767, // For smaller screens (tablets and below)
       settings: {
-        slidesToShow: 2.5, // Show 2 slides on small screens
+        slidesToShow: 3, // Show 2 slides on small screens
         slidesToScroll: 1, // Scroll 1 slide at a time
         initialSlide: 0, // Initial slide index
         arrows: false, // Disable arrows on small screens
