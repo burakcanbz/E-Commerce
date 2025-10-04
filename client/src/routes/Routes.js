@@ -5,22 +5,22 @@ import {
   Route,
 } from "react-router-dom";
 import App from "../App";
-import Home from "../pages/Home";
-import PrivateRoute from "../components/PrivateRoute";
+import Home from "../pages/Home/Home";
+import PrivateRoute from "../components/Auth/PrivateRoute";
 
-const ProductDetail = lazy(() => import("../pages/ProductDetail"));
-const Cart = lazy(() => import("../pages/Cart"));
-const Login = lazy(() => import("../pages/Login"));
-const Register = lazy(() => import("../pages/Register"));
-const Shipping = lazy(() => import("../pages/Shipping"));
-const Payment = lazy(() => import("../pages/Payment"));
-const PlaceOrder = lazy(() => import("../pages/PlaceOrder"));
-const Order = lazy(() => import("../pages/Order"));
-const OrderPayment = lazy(() => import("../pages/OrderPayment"));
-const Profile = lazy(() => import("../pages/Profile"));
-const NotFound = lazy(() => import("../pages/NotFound"));
-const Technology = lazy(() => import("../pages/Technology"));
-const Casual = lazy(() => import("../pages/Casual"));
+const ProductDetail = lazy(() => import("../pages/Product/ProductDetail"));
+const Cart = lazy(() => import("../pages/Cart/Cart"));
+const Login = lazy(() => import("../pages/Registration/Login"));
+const Register = lazy(() => import("../pages/Registration/Register"));
+const Shipping = lazy(() => import("../pages/Shipping/Shipping"));
+const Payment = lazy(() => import("../pages/Payment/Payment"));
+const PlaceOrder = lazy(() => import("../pages/Order/PlaceOrder"));
+const Order = lazy(() => import("../pages/Order/Order"));
+const OrderPayment = lazy(() => import("../pages/Payment/OrderPayment"));
+const Profile = lazy(() => import("../pages/Profile/Profile"));
+const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
+const Technology = lazy(() => import("../pages/Category/Technology"));
+const Casual = lazy(() => import("../pages/Category/Casual"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(

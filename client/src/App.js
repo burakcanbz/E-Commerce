@@ -1,34 +1,24 @@
-import { Container } from "react-bootstrap";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
-import BottomNavigation from "./components/BottomNavigation";
-import "react-toastify/dist/ReactToastify.css";
 
-import Flag from "./components/Flag";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
-import "./App.css";
 import { bottomNavigationPaths } from "./utils/helpers";
+import Flag from "./components/Common/Flag";
+import Header from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
+import CardCheckoutBanner from "./components/Payment/CardCheckoutBanner";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 const App = () => {
-  const color = useSelector((state) => state.settings.settings);
   const { cartItems } = useSelector((state) => state.cart);
   const location = useLocation();
   const shouldBottomNavigationShown = window.innerWidth <= 480;
 
   return (
     <ErrorBoundary>
-      <div
-        style={{
-          backgroundColor: `rgba${color}`,
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100dvh",
-          overflowX: "hidden",
-        }}
-      >
+      <div className="main-div">
         <div className="d-none d-xl-block">
           <Flag side="left" />
           <Flag side="right" />
@@ -40,7 +30,7 @@ const App = () => {
         {shouldBottomNavigationShown &&
         cartItems.length &&
         bottomNavigationPaths.includes(location.pathname) ? (
-          <BottomNavigation />
+          <CardCheckoutBanner />
         ) : (
           <Footer />
         )}
