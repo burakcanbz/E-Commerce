@@ -1,5 +1,5 @@
 import { apiSlice } from "./apiSlice";
-import { REVIEWS_URL } from "../constants";
+import { REVIEWS_URL } from "../constants/constants";
 
 export const reviewsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

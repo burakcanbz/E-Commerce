@@ -10,7 +10,7 @@ import {
 import { useGetPaginatedProductsQuery } from "../../slices/productsApiSlice";
 import { updateProduct, clearProduct } from "../../slices/productSlice";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
-import { LIMIT, PAGE } from "../../constants";
+import { LIMIT, PAGE } from "../../constants/constants";
 import { clearOrder } from "../../slices/orderSlice";
 import { logout } from "../../slices/authSlice";
 import HeaderPresenter from "./HeaderPresenter";

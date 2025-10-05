@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { useGetCategorizedProductsQuery } from "../../slices/productsApiSlice";
 import { slickSettings } from "../../utils/helpers";
 import { FaArrowRight } from "react-icons/fa";
-import { LIMIT, PAGE } from "../../constants";
+import { LIMIT, PAGE } from "../../constants/constants";
 import ProductCard from "../../components/Product/ProductCard";
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
