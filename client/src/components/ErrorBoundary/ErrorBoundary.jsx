@@ -1,5 +1,6 @@
 import React from "react";
 import * as Sentry from "@sentry/react";
+
 import Fallback from "./Fallback";
 
 class ErrorBoundary extends React.Component {

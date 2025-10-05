@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Form,
   Button,
@@ -8,15 +9,15 @@ import {
   Card,
   Image,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { BiLogIn } from "react-icons/bi";
+import { toast } from "react-toastify";
+
 import { useLoginMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
-import { toast } from "react-toastify";
+import CustomContainer from "../../components/Common/CustomContainer";
 import Loading from "../../components/Common/Loading";
 import Logo from "../../assets/buyzy.png";
-import CustomContainer from "../../components/Common/CustomContainer";
 
 const Login = () => {
   const [email, setEmail] = useState("");

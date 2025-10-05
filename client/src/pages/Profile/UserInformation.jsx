@@ -1,11 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Button, Card, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import { setCredentials } from "../../slices/authSlice";
 import { useUpdateMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
 import "./Profile.css";
 
 const UserInformation = () => {

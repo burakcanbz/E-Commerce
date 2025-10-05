@@ -1,8 +1,9 @@
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaLock } from "react-icons/fa";
-import PaymentForm from "./PaymentForm";
+
 import CustomContainer from "../../components/Common/CustomContainer";
+import PaymentForm from "./PaymentForm";
 
 const OrderPayment = () => {
 
@@ -39,13 +40,14 @@ const OrderPayment = () => {
             </div>
           </Col>
         </Row>
-
-        <Row className="justify-content-center">
-          <Col xs={12} md={10} lg={8}>
+        <div className="d-flex justify-content-center">
+        <Row>
+          <Col xs={12} md={12} lg={12}>
             <PaymentForm />
           </Col>
         </Row>
-        <Row className="justify-content-center text-muted" style={{ marginTop: "100px" }}>
+        </div>
+        <Row className="d-flex justify-content-center text-muted" style={{ marginTop: "100px" }}>
           We are here to help! If you have any questions or need assistance,
           please contact our customer support team at{" "}
           <p className="text-center mt-2">

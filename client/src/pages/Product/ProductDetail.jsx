@@ -3,13 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import { useGetProductDetailsQuery } from "../../slices/productsApiSlice";
-import { addToCart } from "../../slices/cartSlice";
 import {
   useGetProductReviewsQuery,
   useCreateReviewMutation,
 } from "../../slices/reviewsApiSlice";
-
+import { useGetProductDetailsQuery } from "../../slices/productsApiSlice";
+import { addToCart } from "../../slices/cartSlice";
 import ProductDetailPresenter from "./ProductDetailPresenter";
 
 const ProductDetail = () => {
@@ -23,7 +22,7 @@ const ProductDetail = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
-  
+
   const [
     createReview,
     { isLoading: loadingReviewCreate, error: errorReviewCreate },

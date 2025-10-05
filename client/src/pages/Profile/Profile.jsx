@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 
 import { convertToUTC } from "../../utils/helpers";
 import { useGetOrdersQuery } from "../../slices/ordersApiSlice";
-import Loading from "../../components/Common/Loading";
-import Message from "../../components/Common/Message";
-import StatusIcon from "../../components/Common/StatusIcon";
 import UserInformation from "./UserInformation";
 import CustomContainer from "../../components/Common/CustomContainer";
+import StatusIcon from "../../components/Common/StatusIcon";
+import Loading from "../../components/Common/Loading";
+import Message from "../../components/Common/Message";
 import './Profile.css';
 
 const Profile = () => {

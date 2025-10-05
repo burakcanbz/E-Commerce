@@ -9,15 +9,16 @@ import {
   Card,
 } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+
 import {
   useCancelOrderMutation,
   useGetOrderDetailsQuery,
 } from "../../slices/ordersApiSlice";
-import { toast } from "react-toastify";
 import { convertToUTC } from "../../utils/helpers";
+import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
-import CustomContainer from "../../components/Common/CustomContainer";
 
 const Order = () => {
   const { id: orderId } = useParams();

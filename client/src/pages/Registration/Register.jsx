@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Card, Form, Button, Row, Col, Image } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
 import { BiUserCircle } from "react-icons/bi";
-import { useRegisterMutation } from "../../slices/usersApiSlice";
+import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+
+import { useRegisterMutation } from "../../slices/usersApiSlice";
+import CustomContainer from "../../components/Common/CustomContainer";
 import Loading from "../../components/Common/Loading";
 import Logo from "../../assets/buyzy.png";
-import CustomContainer from "../../components/Common/CustomContainer";
 
 const Register = () => {
   const [name, setName] = useState("");

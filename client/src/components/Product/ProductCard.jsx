@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
 import { FaCartShopping } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+
 import { addToCart } from "../../slices/cartSlice";
-import { useSelector } from "react-redux";
 import Rating from "../Common/Rating";
 
 const ProductCard = ({ product }) => {

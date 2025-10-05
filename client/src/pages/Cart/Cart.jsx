@@ -1,5 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Row,
@@ -12,10 +13,10 @@ import {
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaTrash } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+
 import { addToCart, removeFromCart, setCart } from "../../slices/cartSlice";
-import Message from "../../components/Common/Message";
 import CustomContainer from "../../components/Common/CustomContainer";
+import Message from "../../components/Common/Message";
 
 const Cart = () => {
   const navigate = useNavigate();

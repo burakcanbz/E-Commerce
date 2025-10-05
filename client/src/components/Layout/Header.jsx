@@ -1,17 +1,18 @@
 import { useDeferredValue, useState, useMemo, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useLogoutMutation } from "../../slices/usersApiSlice";
-import { logout } from "../../slices/authSlice";
-import { useGetPaginatedProductsQuery } from "../../slices/productsApiSlice";
-import { clearOrder } from "../../slices/orderSlice";
-import { updateProduct, clearProduct } from "../../slices/productSlice";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import {
   clearCartItems,
   clearShippingAddress,
   removeFromCart,
 } from "../../slices/cartSlice";
+import { useGetPaginatedProductsQuery } from "../../slices/productsApiSlice";
+import { updateProduct, clearProduct } from "../../slices/productSlice";
+import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { LIMIT, PAGE } from "../../constants";
+import { clearOrder } from "../../slices/orderSlice";
+import { logout } from "../../slices/authSlice";
 import HeaderPresenter from "./HeaderPresenter";
 
 const Header = () => {

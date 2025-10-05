@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Outlet, Navigate } from "react-router-dom";
+
 import { logout } from "../../slices/authSlice";
 
 const PrivateRoute = () => {

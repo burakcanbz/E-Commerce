@@ -1,7 +1,7 @@
-import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
+import { motion } from "framer-motion";
 
 const CardCheckoutBanner = () => {
   const navigate = useNavigate();

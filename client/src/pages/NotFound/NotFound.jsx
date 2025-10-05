@@ -1,4 +1,5 @@
 import { Row, Col, Image } from "react-bootstrap";
+
 import notFound from "../../assets/404.png";
 
 const NotFound = () => {

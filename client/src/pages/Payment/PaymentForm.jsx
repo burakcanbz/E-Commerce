@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import {useGetOrderDetailsQuery } from "../../slices/ordersApiSlice";
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
-import { usePayOrderMutation } from "../../slices/paymentApiSlice";
 import Cards from "react-credit-cards-2";
-import "react-credit-cards-2/dist/es/styles-compiled.css";
+
+import {useGetOrderDetailsQuery } from "../../slices/ordersApiSlice";
+import { usePayOrderMutation } from "../../slices/paymentApiSlice";
 import { createPaymentData } from "../../utils/helpers";
 import { toast } from "react-toastify";
+import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 const PaymentForm = () => {
   const { id: orderId } = useParams();

@@ -11,10 +11,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { hideUserName } from "../../utils/helpers";
+import CustomContainer from "../../components/Common/CustomContainer";
 import Rating from "../../components/Common/Rating";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
-import CustomContainer from "../../components/Common/CustomContainer";
 import './Product.css';
 
 const ProductDetailPresenter = ({
