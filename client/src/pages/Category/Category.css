@@ -1,0 +1,17 @@
+.category-page {
+    padding: 0 0;
+}
+
+.category-page .category-div {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.category-page h2 {
+    background: linear-gradient(90deg, #797c82ff, #4f6aacff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}

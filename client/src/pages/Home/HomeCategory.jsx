@@ -1,17 +1,18 @@
 import { Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
+
+import { useGetCategorizedProductsQuery } from "../../slices/productsApiSlice";
+import { slickSettings } from "../../utils/helpers";
+import { FaArrowRight } from "react-icons/fa";
+import { LIMIT, PAGE } from "../../constants";
+import ProductCard from "../../components/Product/ProductCard";
+import Loading from "../../components/Common/Loading";
+import Message from "../../components/Common/Message";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { slickSettings } from "../../utils/helpers";
-import ProductCard from "../../components/Product/ProductCard";
-import { useGetCategorizedProductsQuery } from "../../slices/productsApiSlice";
-import { LIMIT, PAGE } from "../../constants";
-import Loading from "../../components/Common/Loading";
-import { FaArrowRight } from "react-icons/fa";
-import Message from "../../components/Common/Message";
 
-const Category = ({ category }) => {
+const HomeCategory = ({ category }) => {
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetCategorizedProductsQuery({
     category,
@@ -31,7 +32,7 @@ const Category = ({ category }) => {
   ) : (
     <>
       <span>
-        <button className="btn btn-secondary mb-3" onClick={(e ) => {e.preventDefault(); navigate(`/${category.toLowerCase()}`)}}>
+        <button className="btn btn-secondary mb-3" onClick={(e ) => {e.preventDefault(); navigate(`/category?category=${category.toLowerCase()}`)}}>
           {category}&nbsp;&nbsp;
           <FaArrowRight />
         </button>
@@ -49,4 +50,4 @@ const Category = ({ category }) => {
   );
 };
 
-export default Category;
+export default HomeCategory;

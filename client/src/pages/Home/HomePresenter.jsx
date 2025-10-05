@@ -1,7 +1,8 @@
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
+
 import ProductCarousel from "../../components/Product/ProductCarousel";
-import Category from "../Category/Category";
+import HomeCategory from "./HomeCategory";
 import ProductCard from "../../components/Product/ProductCard";
 import CustomContainer from "../../components/Common/CustomContainer";
 import './Home.css';
@@ -37,7 +38,7 @@ const HomePresenter = ({ isDesktop, categories, searchedProducts }) => {
       <CustomContainer>
         {categories?.map((c, i) => (
           <Row className="mb-5" key={i}>
-            <Category category={c} />
+            <HomeCategory category={c} />
           </Row>
         ))}
       </CustomContainer>

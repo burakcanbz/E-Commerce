@@ -19,8 +19,7 @@ const Order = lazy(() => import("../pages/Order/Order"));
 const OrderPayment = lazy(() => import("../pages/Payment/OrderPayment"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
-const Technology = lazy(() => import("../pages/Category/Technology"));
-const Casual = lazy(() => import("../pages/Category/Casual"));
+const CategoryPage = lazy(() => import("../pages/Category/CategoryPage"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,8 +30,7 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<Cart />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/electronics" element={<Technology />} />
-      <Route path="/casual" element={<Casual />} />
+      <Route path="/category" element={<CategoryPage />} />
       <Route path="/*" element={<NotFound />} />
 
       <Route element={<PrivateRoute />}>

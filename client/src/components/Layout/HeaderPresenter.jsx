@@ -8,9 +8,10 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { spacer } from "../../utils/helpers";
 import { FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+import { spacer } from "../../utils/helpers";
 import Typewriter from "typewriter-effect";
 import logo from "../../assets/buyzy.png";
 
@@ -109,14 +110,14 @@ const HeaderPresenter = ({
                   >
                     <NavDropdown.Item
                       as={Link}
-                      to="/electronics"
+                      to="/category?category=electronics"
                       onClick={handleCloseOffcanvas}
                     >
                       Electronics
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       as={Link}
-                      to="/casual"
+                      to="/category?category=casual"
                       onClick={handleCloseOffcanvas}
                     >
                       Casual

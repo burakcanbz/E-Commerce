@@ -33,6 +33,12 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getAllProductsByCategory: builder.query({
+      query: (category) => ({
+        url: `${PRODUCTS_URL}/category?category=${category}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
     getTopRatedProducts: builder.query({
       query: () => ({
         url: `${PRODUCTS_URL}/topRatedProducts`,
@@ -48,5 +54,6 @@ export const {
   useGetProductCategoriesQuery,
   useGetProductDetailsQuery,
   useGetCategorizedProductsQuery,
+  useGetAllProductsByCategoryQuery,
   useGetTopRatedProductsQuery,
 } = productsApiSlice;

@@ -65,7 +65,7 @@ exports.getProductCategories = asyncHandler(async (req, res) => {
 });
 
 /**
- * @description Fetch categorized products
+ * @description Fetch categorized products with pagination
  * @route GET /api/products/categorized?category=...
  * @access Public
  * @param {Object} req - The request object containing the payment details
@@ -73,7 +73,7 @@ exports.getProductCategories = asyncHandler(async (req, res) => {
  * @throws {Error} Throws an error if order not found or if saving the order fails
  */
 
-exports.getCategorizedProducts = asyncHandler(async (req, res) => {
+exports.getCategorizedProductsByPagination = asyncHandler(async (req, res) => {
   const searchedCategory = req.query.category;
   const page = req.query.page || 1;
   const limit = req.query.limit || 6;
@@ -88,6 +88,21 @@ exports.getCategorizedProducts = asyncHandler(async (req, res) => {
     totalProductCount,
     totalPages,
   });
+});
+
+/**
+ * @description Fetch all products by category
+ * @route GET /api/products/allproducts/:id
+ * @access Public
+ * @param {Object} req - The request object containing the payment details
+ * @param {Object} res - The response object to send the updated order
+ * @throws {Error} Throws an error if order not found or if saving the order fails
+ */
+
+exports.getProductsByCategory = asyncHandler(async (req, res) => {
+  const searchedCategory = req.query.category;
+  const products = await Product.find({ category: searchedCategory });
+  res.status(200).json(products);
 });
 
 /**

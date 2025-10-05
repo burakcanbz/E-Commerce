@@ -1,15 +1,19 @@
-import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { useGetProductsQuery } from "../../slices/productsApiSlice";
+import { useLocation } from "react-router-dom";
+import { useGetAllProductsByCategoryQuery } from "../../slices/productsApiSlice";
 import { motion } from "framer-motion";
+
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
 import ProductCard from "../../components/Product/ProductCard";
 import CustomContainer from "../../components/Common/CustomContainer";
+import './Category.css';
 
-const Casual = () => {
-  const { data: allProducts, isLoading, isError } = useGetProductsQuery();
-  const products = allProducts?.filter((p) => p.category === "Casual");
+const CategoryPage = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const category = queryParams.get("category")[0].toUpperCase() + queryParams.get("category").slice(1);
+  const { data: products, isLoading, isError } = useGetAllProductsByCategoryQuery(category);
 
   return isLoading ? (
     <Loading />
@@ -20,16 +24,11 @@ const Casual = () => {
       initial={{ y: -200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
+      className="category-page"
     >
-      <div className="d-flex justify-content-center align-items-center">
+      <div className="category-div">
         <h2
           className="fw-bold"
-          style={{
-            background: "linear-gradient(90deg, #797c82ff, #4f6aacff", // turuncu → mavi
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            display: "inline-block",
-          }}
         >
           Casual
         </h2>
@@ -50,4 +49,4 @@ const Casual = () => {
   );
 };
 
-export default Casual;
+export default CategoryPage;
