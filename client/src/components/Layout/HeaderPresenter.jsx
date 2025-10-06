@@ -61,7 +61,7 @@ const HeaderPresenter = ({
                 style={{ fontSize: "0.9rem", height: "38px" }}
                 value={searchItem}
                 onChange={handleSearch}
-                disabled={pathName !== "/"}
+                disabled={pathName !== ""}
               />
             </Form>
           ) : ( isDesktop &&

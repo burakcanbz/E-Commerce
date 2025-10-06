@@ -5,17 +5,19 @@ import ProductCarousel from "../../components/Product/ProductCarousel";
 import HomeCategory from "./HomeCategory";
 import ProductCard from "../../components/Product/ProductCard";
 import CustomContainer from "../../components/Common/CustomContainer";
-import './Home.css';
+import "./Home.css";
 
 const HomePresenter = ({ isDesktop, categories, searchedProducts }) => {
-    const renderSearchedProducts = () => (
-    <Row>
-      {searchedProducts.map((product, index) => (
-        <Col className="col-custom" key={index}>
-          <ProductCard product={product} />
-        </Col>
-      ))}
-    </Row>
+  const renderSearchedProducts = () => (
+    <CustomContainer>
+      <Row>
+        {searchedProducts.map((product, index) => (
+          <Col className="col-custom" key={index}>
+            <ProductCard product={product} />
+          </Col>
+        ))}
+      </Row>
+    </CustomContainer>
   );
 
   const renderDefaultContent = () => (
@@ -45,15 +47,12 @@ const HomePresenter = ({ isDesktop, categories, searchedProducts }) => {
     </motion.div>
   );
 
-  const hasSearchResults = Array.isArray(searchedProducts) && searchedProducts.length > 0;
-  
+  const hasSearchResults =
+    Array.isArray(searchedProducts) && searchedProducts.length > 0;
+
   return (
     <div>
-      {hasSearchResults ? (
-        renderSearchedProducts()
-      ) : (
-        renderDefaultContent()
-      )}
+      {hasSearchResults ? renderSearchedProducts() : renderDefaultContent()}
     </div>
   );
 };
