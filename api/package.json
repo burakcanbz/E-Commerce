@@ -4,10 +4,10 @@
   "description": "eCommerce app with MERN stack",
   "main": "app.js",
   "scripts": {
-    "start": "node api/app.js",
-    "server": "nodemon api/app.js",
-    "data:import": "node api/seeder",
-    "data:destroy": "node api/seeder -d"
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "data:import": "node seeder",
+    "data:destroy": "node seeder -d"
   },
   "author": "Burak CANBAZ",
   "license": "MIT",
