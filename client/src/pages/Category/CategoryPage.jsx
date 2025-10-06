@@ -30,7 +30,7 @@ const CategoryPage = () => {
         <h2
           className="fw-bold"
         >
-          Casual
+          {category}
         </h2>
       </div>
       <CustomContainer>
