@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { saveShippingAddress } from "../../slices/cartSlice";
 import FormContainer from "../../components/Common/FormContainer";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
+import './main.scss';
 
 const Shipping = () => {
   const { shippingAddress } = useSelector((state) => state.cart);

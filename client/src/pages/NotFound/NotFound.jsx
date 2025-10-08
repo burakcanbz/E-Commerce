@@ -1,6 +1,7 @@
 import { Row, Col, Image } from "react-bootstrap";
 
 import notFound from "../../assets/404.png";
+import './main.scss';
 
 const NotFound = () => {
   return (

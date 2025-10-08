@@ -7,7 +7,7 @@ import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
 import ProductCard from "../../components/Product/ProductCard";
 import CustomContainer from "../../components/Common/CustomContainer";
-import './Category.css';
+import './main.scss';
 
 const CategoryPage = () => {
   const location = useLocation();

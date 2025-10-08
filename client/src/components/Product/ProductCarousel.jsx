@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useGetTopRatedProductsQuery } from "../../slices/productsApiSlice";
 import Loading from "../Common/Loading";
 import Message from "../Common/Message";
-import './ProductCarousel.css';
+import './main.scss';
 
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopRatedProductsQuery();

@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 import { useUpdateMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
-import "./Profile.css";
 
 const UserInformation = () => {
   const user = useSelector((state) => state.auth?.userInfo);

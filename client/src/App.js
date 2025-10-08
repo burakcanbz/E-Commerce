@@ -10,7 +10,7 @@ import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import CardCheckoutBanner from "./components/Payment/CardCheckoutBanner";
 import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
+import "./App.scss";
 
 const App = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -41,7 +41,7 @@ const App = () => {
     <Profiler onRender={onRenderCallback}>
       <ErrorBoundary>
         <div className="main-div">
-          <div className="d-none d-xl-block">
+          <div>
             <Flag side="left" />
             <Flag side="right" />
           </div>

@@ -1,0 +1,122 @@
+$color_primary: #fff;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-div {
+  background-color: #f0f4f8;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+#checkout > * {
+  min-width: 300px;
+}
+
+.checkout-steps {
+  @include flex-center;
+  flex-direction: row;
+  margin-left: 25px;
+  margin-right: 25px;
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+  background-color: rgb(185, 175, 175);
+}
+
+.step-active {
+  background-color: rgb(45, 94, 5);
+  color: $color_primary;
+  font-weight: 600;
+}
+
+.flag {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-45%);
+  height: 60vh;
+  width: 200px;
+  padding: 10px;
+  background-color: rgb(238, 199, 199);
+  color: $color_primary;
+  text-align: center;
+  font-weight: bold;
+
+  .flag-close {
+    position: absolute;
+    top: -8;
+    color: "white";
+    font-size: "24px";
+    user-select: "none";
+    cursor: "pointer";
+    font-weight: 700;
+  }
+}
+
+.left-flag {
+  margin-left: 5px;
+  left: 0;
+  border-radius: 5px;
+}
+
+.right-flag {
+  margin-right: 5px;
+  right: 0;
+  border-radius: 5px;
+}
+
+.col-custom {
+  flex: 0 0 14% !important;
+  max-width: 14% !important;
+
+  @media (max-width: 1400px) {
+    @include flex-center;
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+  }
+  @media (max-width: 1200px) {
+    @include flex-center;
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+  }
+  @media (max-width: 992px) {
+    @include flex-center;
+    flex: 0 0 33% !important;
+    max-width: 33% !important;
+  }
+
+  @media (max-width: 768px) {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  @media (max-width: 510px) {
+    @include flex-center;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  @media (max-width: 380px) {
+    @include flex-center;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px $color_primary inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+input:-internal-autofill-previewed {
+  display: none !important;
+}
+
+input::-webkit-autofill-button,
+input::-webkit-autofill-preview {
+  display: none !important;
+}

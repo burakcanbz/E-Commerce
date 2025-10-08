@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../../slices/cartSlice";
 import FormContainer from "../../components/Common/FormContainer";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
+import './main.scss';
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");

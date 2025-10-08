@@ -10,7 +10,7 @@ import CustomContainer from "../../components/Common/CustomContainer";
 import StatusIcon from "../../components/Common/StatusIcon";
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
-import './Profile.css';
+import './main.scss';
 
 const Profile = () => {
   const navigate = useNavigate();

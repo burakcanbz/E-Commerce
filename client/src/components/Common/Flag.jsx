@@ -1,46 +1,50 @@
-import rightFlag from '../../assets/flag-right.jpg';
-import leftFlag from '../../assets/flag-left.jpg';
+import FlagPortal from "./FlagPortal";
+import rightFlag from "../../assets/flag-right.jpg";
+import leftFlag from "../../assets/flag-left.jpg";
 
 const Flag = ({ side }) => {
-  const bg = side === 'left' ? leftFlag : rightFlag;
-  
-return (
-    <div
+  const bg = side === "left" ? leftFlag : rightFlag;
+
+  return (
+    <FlagPortal>
+      <div
         className={`flag ${side}-flag relative`}
         style={{
-            backgroundImage: `url(${bg})`,
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "100% 100%",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
         onClick={(e) => {
-            e.preventDefault();
-            window.open(`${side === 'right' ? 'https://www.apple.com/tr/iphone-16/specs/' : 'https://www.playstation.com/tr-tr/ps5/buy-now/'}`, '_blank');
+          e.preventDefault();
+          window.open(
+            `${
+              side === "right"
+                ? "https://www.apple.com/tr/iphone-16/specs/"
+                : "https://www.playstation.com/tr-tr/ps5/buy-now/"
+            }`,
+            "_blank"
+          );
         }}
-    >
+      >
         <span
-            style={{
-                position: 'absolute',
-                top: -8,
-                left: side === 'right' ? 5 : 'auto',
-                right: side === 'left' ? 5 : 'auto',
-                color: 'white',
-                fontSize: '24px',
-                userSelect: 'none',
-                cursor: 'pointer',
-                fontWeight: 700,
-            }}
-            aria-label="close"
-            onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                e.target.parentElement.style.display = 'none';
-            }}
+        className="flag-close"
+          style={{
+            left: side === "right" ? 5 : "auto",
+            right: side === "left" ? 5 : "auto",
+          }}
+          aria-label="close"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.target.parentElement.style.display = "none";
+          }}
         >
-            ×
+          ×
         </span>
-    </div>
-);
+      </div>
+    </FlagPortal>
+  );
 };
 
 export default Flag;

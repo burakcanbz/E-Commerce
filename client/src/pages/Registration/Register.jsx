@@ -10,6 +10,7 @@ import { useRegisterMutation } from "../../slices/usersApiSlice";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Loading from "../../components/Common/Loading";
 import Logo from "../../assets/buyzy.png";
+import './main.scss';
 
 const Register = () => {
   const [name, setName] = useState("");

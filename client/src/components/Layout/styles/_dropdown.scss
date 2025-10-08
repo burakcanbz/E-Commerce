@@ -1,0 +1,22 @@
+.dropdown-item {
+    padding: 6px 20px !important;
+    margin-bottom: 2px !important;
+    
+    &:hover {
+      background-color: #92a5ac !important;
+      color: white !important;
+      border-radius: 5px !important;
+    }
+    
+    .active {
+      background-color: #226880 !important;
+      border-radius: 5px !important;
+      color: white !important;
+    }
+}
+
+.dropdown-menu {
+    background-color: $primary_background_color !important;
+    border: .1px solid white !important;
+    top: 40px !important;
+}

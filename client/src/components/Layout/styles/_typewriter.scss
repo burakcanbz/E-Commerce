@@ -1,0 +1,20 @@
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.buyzy {
+  font-size: 30px !important;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: transparent;
+  background: linear-gradient(to right, #fff, #00BFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 15px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3s steps(30, end) forwards;
+}

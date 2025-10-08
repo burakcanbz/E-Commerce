@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
-import './CardCheckoutBanner.css';
+import './main.scss';
 
 const CardCheckoutBanner = () => {
   const navigate = useNavigate();

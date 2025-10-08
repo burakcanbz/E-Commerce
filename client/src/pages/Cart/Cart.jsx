@@ -17,7 +17,7 @@ import { FaTrash } from "react-icons/fa";
 import { addToCart, removeFromCart, setCart } from "../../slices/cartSlice";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
-import './Cart.css';
+import './main.scss';
 
 const Cart = () => {
   const navigate = useNavigate();

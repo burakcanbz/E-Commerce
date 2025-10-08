@@ -5,7 +5,6 @@ import ProductCarousel from "../../components/Product/ProductCarousel";
 import HomeCategory from "./HomeCategory";
 import ProductCard from "../../components/Product/ProductCard";
 import CustomContainer from "../../components/Common/CustomContainer";
-import "./Home.css";
 
 const HomePresenter = ({ isDesktop, categories, searchedProducts }) => {
   const renderSearchedProducts = () => (

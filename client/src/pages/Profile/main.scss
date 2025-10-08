@@ -1,0 +1,33 @@
+$primary_color: #fff;
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-row { 
+    .profile-alert{
+        @extend .flex-center;
+        color: $primary_color;
+        background: linear-gradient(to right, #666970ff, #393d47);
+        height: 80px;
+    }
+
+}
+
+.user-info {
+    @extend .flex-center;
+    min-height: 520px;
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(to right, #393d47, #666970ff);
+    color: $primary_color;    
+    border: light;
+    
+    .update-button {
+        background: #138836ff;
+        border: 1px solid #1a7b19ff;
+        color: $primary_color;
+    }
+}

@@ -1,0 +1,42 @@
+@import './styles/variables';
+@import './styles/mixins';
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviews {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background: white;
+  margin-bottom: 50px;
+
+  .text-area{
+    border-radius: 8px;
+    padding: 10px 12px;
+    resize: none;
+    border-color: $border_color_light;
+  }
+}
+
+.review-item .list-group-item-text {
+  @extend .flex-between;
+  margin: px 0px;
+  gap: 10px;
+}
+
+.placeholder-secondary::placeholder {
+  color: $place_holder_color !important;
+  opacity: 1 !important;
+}
+
+textarea.form-control {
+  &:hover {
+    @extend .form-control-att;
+  }
+  &:focus {
+    @extend .form-control-att;
+  }
+}

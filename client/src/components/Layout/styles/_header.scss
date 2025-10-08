@@ -1,0 +1,59 @@
+@mixin circle($width: null, $height:null) {
+    @if $width != null {
+        width: $width;
+    }
+    @if height != null {
+        height: $height;
+    }
+    border-radius: 50%;
+}
+
+@mixin text-ellipsis($width: null) {
+    @if $width != null {
+        width: $width;
+    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header{
+    background-color: $primary_background_color;
+    height: 100px;
+    font-size: 18px;
+
+    a {
+      color: $nav_link_color;
+      font-weight: 550;
+    }
+
+    .logo {
+      @include circle(null, 70px);
+      margin-right: 8px;
+    }
+
+    .brand {
+      margin-top: 6px;
+      margin-left: 10px;
+      font-size: 40px;
+      font-family: 'Fredoka One', sans-serif;
+    }
+}
+
+.header-search-bar {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.header-cart {
+  min-width: 250px;
+  max-width: 300px;
+  
+  .cart-item-img {
+    @include circle(36px, 36px);
+  }
+
+  .cart-item-name{
+    @include text-ellipsis(150px);
+  }
+}

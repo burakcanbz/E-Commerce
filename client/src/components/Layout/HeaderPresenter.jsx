@@ -37,7 +37,7 @@ const HeaderPresenter = ({
       >
         <Container
           fluid
-          className="custom-header d-flex align-items-center justify-content-between"
+          className="page-top-padding d-flex align-items-center justify-content-between"
         >
           <Navbar.Brand
             as={Link}
@@ -47,9 +47,9 @@ const HeaderPresenter = ({
             <img
               src={logo}
               alt="Logo"
-              className="header-logo"
+              className="logo"
             />
-            <h2 className="brand-header">Buyzy</h2>
+            <h2 className="brand">Buyzy</h2>
           </Navbar.Brand>
           {pathName === "" ? (
             <Form
