@@ -1,4 +1,4 @@
-import { lazy, Suspense, Component } from "react";
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -7,7 +7,7 @@ import {
 import App from "../App.tsx";
 import Home from "../pages/Home/Home.jsx";
 import PrivateRoute from "../components/Auth/PrivateRoute.jsx";
-import Loading from "../components/Common/Loading.jsx";
+import Loading from "../components/Common/Loading";
 
 const ProductDetail = lazy(() => import("../pages/Product/ProductDetail.jsx"));
 const Cart = lazy(() => import("../pages/Cart/Cart.jsx"));

@@ -1,6 +1,7 @@
+import React, { JSX } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
-const FormContainer = ({ children }) => {
+const FormContainer = ({ children }: {children: React.ReactNode}): JSX.Element => {
   return (
     <Container>
       <Row className="justify-content-md-center">

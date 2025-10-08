@@ -1,6 +1,12 @@
+import { JSX } from "react";
 import { Alert } from 'react-bootstrap';
 
-const Message = ({ variant, children }) => {
+interface MessageProps {
+    variant?: string;
+    children: React.ReactNode;
+} 
+
+const Message = ({ variant, children }: MessageProps): JSX.Element => {
   return (
     <Alert variant={variant}>
         {children}

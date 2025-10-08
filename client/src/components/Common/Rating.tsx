@@ -1,6 +1,7 @@
+import { JSX } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
-const Rating = ({ value, text, onChange }) => {
+const Rating = ({ value, text, onChange }: { value: number; text?: string; onChange?: (newValue: number) => void }): JSX.Element => {
   const stars = [];
   const starStyle = { color: 'gold', marginRight: '2px' };
 

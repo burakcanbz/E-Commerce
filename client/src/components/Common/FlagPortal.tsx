@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import ReactDOM from "react-dom";
 import { FlagPortalProps } from "../../types/components";
 

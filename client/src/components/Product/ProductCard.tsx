@@ -6,7 +6,7 @@ import { FaCartShopping } from "react-icons/fa6";
 
 import { addToCart } from "../../slices/cartSlice.ts";
 import { RootState, CartItem, SearchedProducts } from "../../types/redux.ts";
-import Rating from "../Common/Rating.jsx";
+import Rating from "../Common/Rating";
 
 type ProductCardProps =
   | { product: CartItem; searchedProduct?: never }
