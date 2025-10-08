@@ -12,7 +12,7 @@ import {
 import { toast } from "react-toastify"
 ;
 import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
-import { clearCartItems } from "../../slices/cartSlice";
+import { clearCartItems } from "../../slices/cartSlice.ts";
 import { setOrder } from "../../slices/orderSlice";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";

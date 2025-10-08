@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import ProductCarousel from "../../components/Product/ProductCarousel";
 import HomeCategory from "./HomeCategory";
-import ProductCard from "../../components/Product/ProductCard";
+import ProductCard from "../../components/Product/ProductCard.tsx";
 import CustomContainer from "../../components/Common/CustomContainer";
 
 const HomePresenter = ({ isDesktop, categories, searchedProducts }) => {

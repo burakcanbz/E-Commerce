@@ -107,16 +107,3 @@ $color_primary: #fff;
   }
 }
 
-input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px $color_primary inset !important;
-  -webkit-text-fill-color: #000 !important;
-}
-
-input:-internal-autofill-previewed {
-  display: none !important;
-}
-
-input::-webkit-autofill-button,
-input::-webkit-autofill-preview {
-  display: none !important;
-}

@@ -19,7 +19,14 @@ Sentry.init({
   environment: process.env.NODE_ENV,
 });
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const container = document.getElementById("root");
+
+if (!container) {
+  throw new Error("Root element not found");
+}
+
+const root = ReactDOM.createRoot(container);
+
 root.render(
   <Provider store={store}>
     <Suspense fallback={<div></div>}>

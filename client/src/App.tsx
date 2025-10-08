@@ -29,14 +29,14 @@ const App = (): JSX.Element => {
     interactions?: Set<any>
   ) => {
     if(process.env.NODE_ENV !== "development") return;
-    console.log(`[Profiler: ${id}]`);
-    console.log(`Phase: ${phase}`);
-    console.log(`Actual render duration: ${actualDuration.toFixed(2)}ms`);
-    console.log(`Base duration: ${baseDuration.toFixed(2)}ms`);
-    console.log(`Start time: ${startTime}`);
-    console.log(`Commit time: ${commitTime}`);
-    console.log(`Interactions:`, interactions);
-    console.log("---------------");
+    // console.log(`[Profiler: ${id}]`);
+    // console.log(`Phase: ${phase}`);
+    // console.log(`Actual render duration: ${actualDuration.toFixed(2)}ms`);
+    // console.log(`Base duration: ${baseDuration.toFixed(2)}ms`);
+    // console.log(`Start time: ${startTime}`);
+    // console.log(`Commit time: ${commitTime}`);
+    // console.log(`Interactions:`, interactions);
+    // console.log("---------------");
   }
 
   return (

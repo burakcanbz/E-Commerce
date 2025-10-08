@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
-import ProductCard from "../../components/Product/ProductCard";
+import ProductCard from "../../components/Product/ProductCard.tsx";
 import CustomContainer from "../../components/Common/CustomContainer";
 import './main.scss';
 

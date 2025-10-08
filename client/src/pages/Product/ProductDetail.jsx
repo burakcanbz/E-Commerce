@@ -8,7 +8,7 @@ import {
   useCreateReviewMutation,
 } from "../../slices/reviewsApiSlice";
 import { useGetProductDetailsQuery } from "../../slices/productsApiSlice";
-import { addToCart } from "../../slices/cartSlice";
+import { addToCart } from "../../slices/cartSlice.ts";
 import ProductDetailPresenter from "./ProductDetailPresenter";
 import './main.scss';
 

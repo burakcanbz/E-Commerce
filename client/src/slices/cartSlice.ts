@@ -1,25 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { updateCart } from "../utils/cartUtils";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { updateCart } from "../utils/cartUtils.js";
+import { CartRootState, CartItem, shippingAddress } from "../types/redux.ts";
 
-const initialState = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [], shippingAddress: {}, paymentMethod: "Paypal" };
+const initialState: CartRootState = localStorage.getItem("cart")
+  ? JSON.parse(localStorage.getItem("cart")!)
+  : { cartItems: [], shippingAddress: {}, paymentMethod: "Credit Card" };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
-      // action.type is cart/addToCart
+    addToCart: (state, action: PayloadAction<CartItem>) => {
       const item = action.payload;
-
       const existItem = state.cartItems.find(
         (currentItem) => currentItem._id === item._id
       );
 
       if (existItem) {
         // update
-        state.cartItems = state.cartItems.map((x) =>
+        state.cartItems = state.cartItems?.map((x) =>
           x._id === existItem._id ? item : x
         );
       } else {
@@ -27,31 +26,30 @@ const cartSlice = createSlice({
       }
       return updateCart(state);
     },
-    setCart: (state, action) => {
+    setCart: (state, action: PayloadAction<CartItem[]>) => {
       state.cartItems = action.payload;
       return  updateCart(state);
     },
-    removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      state.cartItems = state.cartItems?.filter((x) => x._id !== action.payload);
       return updateCart(state);
     },
-
-    saveShippingAddress: (state, action) => {
+    saveShippingAddress: (state, action: PayloadAction<shippingAddress>) => {
       state.shippingAddress = action.payload;
       return updateCart(state);
     },
 
-    savePaymentMethod: (state, action) => {
+    savePaymentMethod: (state, action: PayloadAction<string>) => {
       state.paymentMethod = action.payload;
       return updateCart(state);
     },
 
-    clearCartItems: (state, action) => {
+    clearCartItems: (state, action: PayloadAction<void>) => {
       state.cartItems = [];
       return updateCart(state);
     },
 
-    clearShippingAddress: (state, action) => {
+    clearShippingAddress: (state, action: PayloadAction<void>) => {
       state.shippingAddress = {};
       return updateCart(state);
     },

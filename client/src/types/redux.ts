@@ -6,7 +6,7 @@ export interface CartItem {
     description: string;
     image: string;
     name: string;
-    numReviesws: number;
+    numReviews: number;
     price: number;
     qty: number;
     rating: number;
@@ -18,13 +18,13 @@ export interface CartItem {
 }
 
 export interface shippingAddress {
-    address: string;
-    city: string;
-    postalCode: string;
-    country: string;
+    address?: string;
+    city?: string;
+    postalCode?: string;
+    country?: string;
 }
 
-interface AuthRootState {
+export interface AuthRootState {
     auth: {
         userInfo: {
             _id: string;
@@ -55,7 +55,7 @@ export interface OrderItem {
     _id: string;
 }
 
-interface OrderRootState {
+export interface OrderRootState {
     order: {
         orders: OrderItem[];
         paymentMethod: string | null;
@@ -65,22 +65,20 @@ interface OrderRootState {
 
 export type SearchedProducts = Omit<CartItem, 'qty'>;
 
-interface ProductRootState {
+export interface ProductRootState {
     product: {
         searchedProducts: SearchedProducts[];
      }
 }
 
-interface CartRootState {
-  cart: {
+export interface CartRootState {
     cartItems: CartItem[];
     shippingAddress: shippingAddress | null;
     paymentMethod: string | null;
-  };
 }
 
 export interface RootState {
-    cart: CartRootState['cart'];
+    cart: CartRootState;
     auth: AuthRootState['auth'];
     order: OrderRootState['order'];
     product: ProductRootState['product'];

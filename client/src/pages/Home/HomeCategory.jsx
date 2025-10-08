@@ -6,7 +6,7 @@ import { useGetCategorizedProductsQuery } from "../../slices/productsApiSlice";
 import { slickSettings } from "../../utils/helpers";
 import { FaArrowRight } from "react-icons/fa";
 import { LIMIT, PAGE } from "../../constants/constants";
-import ProductCard from "../../components/Product/ProductCard";
+import ProductCard from "../../components/Product/ProductCard.tsx";
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
 import "slick-carousel/slick/slick.css";

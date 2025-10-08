@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { apiSlice } from '../slices/apiSlice';
-import cartSliceReducer from '../slices/cartSlice';
-import authSliceReducer from '../slices/authSlice';
-import orderSliceReducer from '../slices/orderSlice';
-import productSliceReducer from '../slices/productSlice';
+import { apiSlice } from '../slices/apiSlice.js';
+import cartSliceReducer from '../slices/cartSlice.ts';
+import authSliceReducer from '../slices/authSlice.js';
+import orderSliceReducer from '../slices/orderSlice.js';
+import productSliceReducer from '../slices/productSlice.js';
 
 const store = configureStore({
     reducer: {
@@ -16,5 +16,8 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
     devTools: true,
 })
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

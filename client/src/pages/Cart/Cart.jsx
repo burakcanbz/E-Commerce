@@ -14,7 +14,7 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { FaTrash } from "react-icons/fa";
 
-import { addToCart, removeFromCart, setCart } from "../../slices/cartSlice";
+import { addToCart, removeFromCart, setCart } from "../../slices/cartSlice.ts";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
 import './main.scss';

@@ -6,7 +6,7 @@ import {
   clearCartItems,
   clearShippingAddress,
   removeFromCart,
-} from "../../slices/cartSlice";
+} from "../../slices/cartSlice.ts";
 import { useGetPaginatedProductsQuery } from "../../slices/productsApiSlice";
 import { updateProduct, clearProduct } from "../../slices/productSlice";
 import { useLogoutMutation } from "../../slices/usersApiSlice";

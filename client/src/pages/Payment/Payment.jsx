@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import { savePaymentMethod } from "../../slices/cartSlice";
+import { savePaymentMethod } from "../../slices/cartSlice.ts";
 import FormContainer from "../../components/Common/FormContainer";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
 import './main.scss';
