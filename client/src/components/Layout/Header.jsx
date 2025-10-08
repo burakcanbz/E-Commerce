@@ -14,6 +14,7 @@ import { LIMIT, PAGE } from "../../constants/constants";
 import { clearOrder } from "../../slices/orderSlice";
 import { logout } from "../../slices/authSlice";
 import HeaderPresenter from "./HeaderPresenter";
+import './Header.css';
 
 const Header = () => {
   const isDesktop = window.innerWidth >= 1400;

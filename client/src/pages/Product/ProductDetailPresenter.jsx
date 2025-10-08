@@ -15,7 +15,6 @@ import CustomContainer from "../../components/Common/CustomContainer";
 import Rating from "../../components/Common/Rating";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
-import './Product.css';
 
 const ProductDetailPresenter = ({
   product,

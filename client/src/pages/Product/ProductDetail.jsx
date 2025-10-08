@@ -10,6 +10,7 @@ import {
 import { useGetProductDetailsQuery } from "../../slices/productsApiSlice";
 import { addToCart } from "../../slices/cartSlice";
 import ProductDetailPresenter from "./ProductDetailPresenter";
+import './ProductDetail.css';
 
 const ProductDetail = () => {
   const [rating, setRating] = useState(0);

@@ -19,6 +19,7 @@ import { convertToUTC } from "../../utils/helpers";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
+import './Order.css';
 
 const Order = () => {
   const { id: orderId } = useParams();

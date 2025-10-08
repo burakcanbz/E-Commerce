@@ -24,3 +24,13 @@
     margin: px 0px !important;
     gap: 10px !important;
 }
+
+textarea.form-control:focus {
+  box-shadow: none !important;
+  border-color: white !important;
+}
+
+textarea.form-control:hover:focus {
+  box-shadow: none !important;
+  border-color: white !important;
+}

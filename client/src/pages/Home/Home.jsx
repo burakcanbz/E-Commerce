@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useGetProductCategoriesQuery } from "../../slices/productsApiSlice";
 
 import HomePresenter from "./HomePresenter";
+import './Home.css';
 
 const Home = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
