@@ -1,12 +1,27 @@
-import FlagPortal from "./FlagPortal";
+import { JSX } from "react";
+import FlagPortal from "./FlagPortal.tsx";
 import rightFlag from "../../assets/flag-right.jpg";
 import leftFlag from "../../assets/flag-left.jpg";
 
-const Flag = ({ side }) => {
+
+interface FlagProps {
+  side: "left" | "right";
+}
+
+const Flag = ({ side }: FlagProps): JSX.Element => {
   const bg = side === "left" ? leftFlag : rightFlag;
 
+  const handleClose = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const parent = e.currentTarget.parentElement;
+    if (parent) {
+      parent.style.display = "none";
+    }
+  }
+
   return (
-    <FlagPortal>
+    <FlagPortal id="flag-root" render={() => (
       <div
         className={`flag ${side}-flag relative`}
         style={{
@@ -34,16 +49,12 @@ const Flag = ({ side }) => {
             right: side === "left" ? 5 : "auto",
           }}
           aria-label="close"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            e.target.parentElement.style.display = "none";
-          }}
+          onClick={handleClose}
         >
           ×
         </span>
-      </div>
-    </FlagPortal>
+      </div>)}/>
+      
   );
 };
 

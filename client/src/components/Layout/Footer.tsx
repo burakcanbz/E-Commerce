@@ -1,8 +1,9 @@
+import { JSX } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import './Footer.css';
+import './Footer.scss';
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
   const currentYear = new Date().getFullYear();
   return (
     <footer>

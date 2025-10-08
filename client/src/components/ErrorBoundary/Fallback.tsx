@@ -1,6 +1,7 @@
+import { JSX } from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
 
-const Fallback = () => {
+const Fallback = (): JSX.Element => {
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>
           <Box

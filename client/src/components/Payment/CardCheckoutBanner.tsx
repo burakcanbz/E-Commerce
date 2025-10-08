@@ -1,13 +1,16 @@
+import { JSX } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
+import { RootState, CartItem } from "../../types/redux";
 import './main.scss';
 
-const CardCheckoutBanner = () => {
-  const navigate = useNavigate();
-  const { cartItems } = useSelector((state) => state.cart);
+
+const CardCheckoutBanner = (): JSX.Element => {
+  const navigate: ReturnType<typeof useNavigate> = useNavigate();
+  const cartItems: CartItem[] = useSelector((state: RootState) => state.cart.cartItems);
   const handleClick = () => {
     navigate("/shipping");
   };
@@ -46,12 +49,11 @@ const CardCheckoutBanner = () => {
               style={{ fontWeight: "bold", color: "#1bd20bff" }}
             >
               <small>
-                {cartItems
-                  ?.reduce(
+                {Number(cartItems.reduce(
                     (acc, item) => acc + Number(item.price) * Number(item.qty),
                     0
                   )
-                  .toFixed(2) > 100
+                  .toFixed(2)) > 100
                   ? "Shipping Free"
                   : "Shipping 10$"}
               </small>

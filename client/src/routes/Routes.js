@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import App from "../App";
+import App from "../App.tsx";
 import Home from "../pages/Home/Home";
 import PrivateRoute from "../components/Auth/PrivateRoute";
 

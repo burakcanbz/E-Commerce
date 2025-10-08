@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                       // Hangi JS sürümüne compile edilecek
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,                     // JS dosyalarını da derlemeye dahil et
+    "allowImportingTsExtensions": true,                  
+    "skipLibCheck": true,                   // Tip kontrolünü kütüphanelerde atlar
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,                         // Tüm strict tip kontrolleri açık
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,              // JSON importları için
+    "isolatedModules": true,                // Her dosya bağımsız module
+    "noEmit": true,                         // Derleme yapma, sadece tip kontrol
+    "jsx": "react-jsx"                       // React 17+ JSX dönüşümü
+  },
+  "include": ["src"],                        // Tip kontrolü yapılacak klasör
+  "exclude": ["node_modules", "build"]       // Hariç tutulacak klasörler
+}
