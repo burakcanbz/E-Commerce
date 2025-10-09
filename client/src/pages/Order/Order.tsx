@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, JSX } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Row,
@@ -17,15 +17,16 @@ import {
 } from "../../slices/ordersApiSlice";
 import { convertToUTC } from "../../utils/helpers";
 import { OrderItem } from "../../types/redux";
+
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
 import './main.scss';
 
-const Order = () => {
+const Order = (): JSX.Element => {
   const { id: orderId } = useParams();
   const navigate = useNavigate();
-  const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
+  const { data: order, isLoading, error }: { data?: OrderItem; isLoading: boolean; error?: any } = useGetOrderDetailsQuery(orderId);
   const [cancelOrder] = useCancelOrderMutation();
   const [hasError, setHasError] = useState(false);
 
@@ -72,13 +73,6 @@ const Order = () => {
                   {order?.shippingAddress?.postalCode},{" "}
                   {order?.shippingAddress?.country}
                 </p>
-                {order?.isDelivered ? (
-                  <Message variant="success">
-                    Delivered on {order?.deliveredAt}
-                  </Message>
-                ) : (
-                  <Message variant="danger">Not delivered yet.</Message>
-                )}
               </ListGroup.Item>
               <ListGroup.Item>
                 <h2>Payment Method</h2>
@@ -95,7 +89,7 @@ const Order = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <h2>Order Items</h2>
-                {order?.orderItems.map((item, index) => (
+                {order?.orderItems?.map((item, index: number) => (
                   <ListGroup.Item
                     key={index}
                     style={{
@@ -145,7 +139,7 @@ const Order = () => {
                         <strong>Items:</strong>
                       </Col>
                       <Col>
-                        <strong>${order.itemsPrice.toFixed(2)}</strong>
+                        <strong>${order?.itemsPrice.toFixed(2)}</strong>
                       </Col>
                     </Row>
                     <Row>
@@ -153,7 +147,7 @@ const Order = () => {
                         <strong>Shipping:</strong>
                       </Col>
                       <Col>
-                        <strong>${order.shippingPrice.toFixed(2)}</strong>
+                        <strong>${order?.shippingPrice.toFixed(2)}</strong>
                       </Col>
                     </Row>
                     <Row>
@@ -161,7 +155,7 @@ const Order = () => {
                         <strong>Tax:</strong>
                       </Col>
                       <Col>
-                        <strong>${order.taxPrice.toFixed(2)}</strong>
+                        <strong>${order?.taxPrice.toFixed(2)}</strong>
                       </Col>
                     </Row>
                     <Row>
@@ -169,7 +163,7 @@ const Order = () => {
                         <strong>Total:</strong>
                       </Col>
                       <Col>
-                        <strong>${order.totalPrice.toFixed(2)}</strong>
+                        <strong>${order?.totalPrice.toFixed(2)}</strong>
                       </Col>
                     </Row>
                     <Row>

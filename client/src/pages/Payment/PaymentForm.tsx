@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import Cards from "react-credit-cards-2";
 
-import {useGetOrderDetailsQuery } from "../../slices/ordersApiSlice";
+import { useGetOrderDetailsQuery } from "../../slices/ordersApiSlice";
 import { usePayOrderMutation } from "../../slices/paymentApiSlice";
 import { createPaymentData } from "../../utils/helpers";
 import { toast } from "react-toastify";
@@ -22,7 +22,6 @@ interface CardState {
 const PaymentForm = () => {
   const { id: orderId } = useParams();
   const { data: orderDetails } = useGetOrderDetailsQuery(orderId);
-  console.log(orderDetails && orderDetails);
   const [ payOrder] = usePayOrderMutation();
   const [state, setState] = useState<CardState>({
     number: "",
@@ -45,7 +44,6 @@ const PaymentForm = () => {
     try{
       if(!orderDetails) throw new Error("Order details not found");
       const paymentResult = await payOrder(createPaymentData(orderDetails, state)).unwrap();
-      console.log(paymentResult)
       if (paymentResult.status === "success") {
         toast.success("Payment successful!");
       }
@@ -61,7 +59,6 @@ const PaymentForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Payment data:", state);
   };
 
   return (

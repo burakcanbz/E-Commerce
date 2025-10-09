@@ -7,6 +7,7 @@ export interface CartItem {
     image: string;
     name: string;
     numReviews: number;
+    product?: string;
     price: number;
     qty: number;
     rating: number;
@@ -49,11 +50,10 @@ export interface OrderItem {
     taxPrice: number;
     totalPrice: number;
     updatedAt: string;
-    user: string;
+    user: UserInfo;
     _v: number;
     _id: string;
 }
-
 
 export interface OrderRootState {
     orders: OrderItem[];
@@ -71,6 +71,10 @@ export interface CartRootState {
     cartItems: CartItem[];
     shippingAddress: shippingAddress | null;
     paymentMethod: string | null;
+    itemsPrice: number;
+    shippingPrice: number;
+    taxPrice: number;
+    totalPrice: number;
 }
 
 export interface RootState {

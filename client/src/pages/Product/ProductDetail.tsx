@@ -106,8 +106,6 @@ const ProductDetail = (): JSX.Element => {
     }
   }, [showMessage]);
 
-  console.log("review => ", reviews);
-
   const props: ProductDetailPropsType = {
     product,
     qty,

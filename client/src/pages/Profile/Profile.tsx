@@ -15,8 +15,7 @@ import { OrderItem } from "../../types/redux";
 
 const Profile = (): JSX.Element => {
   const navigate = useNavigate();
-  const { data, isLoading, error, refetch }: { data?: { orders: OrderItem[] }; isLoading: boolean; error?: any; refetch: () => void; } = useGetOrdersQuery(undefined);
-  const orders = data?.orders ?? [];
+  const { data: orders, isLoading, error, refetch }: { data?: OrderItem[]; isLoading: boolean; error?: any; refetch: () => void; } = useGetOrdersQuery({});
 
   useEffect(() => {
     refetch();
@@ -34,7 +33,7 @@ const Profile = (): JSX.Element => {
     >
       <CustomContainer>
         <Row className="profile-row">
-          {orders.length >= 1 ? (
+          {orders && orders.length >= 1 ? (
             <Col sm={12} lg={8} className="mx-sm-auto my-4">
               <Alert
                 className="profile-alert"

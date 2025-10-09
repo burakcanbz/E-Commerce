@@ -4,7 +4,7 @@ import { CartRootState, CartItem, shippingAddress } from "../types/redux.ts";
 
 const initialState: CartRootState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart")!)
-  : { cartItems: [], shippingAddress: {}, paymentMethod: "Credit Card" };
+  : { cartItems: [], shippingAddress: {}, paymentMethod: "Credit Card", itemsPrice: 0, shippingPrice: 0, taxPrice: 0, totalPrice: 0 };
 
 const cartSlice = createSlice({
   name: "cart",

@@ -2,6 +2,7 @@ import { useState, useEffect, JSX } from "react";
 import { useSelector } from "react-redux";
 
 import { useGetProductCategoriesQuery } from "../../slices/productsApiSlice";
+import { HomePropsType } from "../../types/components";
 import { RootState } from "../../types/redux";
 import HomePresenter from "./HomePresenter";
 import './main.scss';
@@ -12,9 +13,7 @@ const Home = (): JSX.Element => {
     refetchOnMountOrArgChange: true,
   });
   const { searchedProducts } = useSelector((state: RootState) => state.product);
-  // const searchedProducts = useSelector(
-  //   (state) => state.product?.searchedProducts
-  // );
+
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 768);
@@ -26,7 +25,7 @@ const Home = (): JSX.Element => {
     };
   }, []);
 
-  const props = {
+  const props: HomePropsType = {
     isDesktop,
     categories,
     searchedProducts,

@@ -1,0 +1,218 @@
+import { useEffect, JSX } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
+import { clearCartItems } from "../../slices/cartSlice.ts";
+import { AppDispatch } from "../../store/store.ts";
+import { RootState } from "../../types/redux.ts";
+import { setOrder } from "../../slices/orderSlice";
+
+import Message from "../../components/Common/Message";
+import Loading from "../../components/Common/Loading";
+import CheckoutStepper from "../../components/Common/CheckoutStepper";
+import CustomContainer from "../../components/Common/CustomContainer";
+
+const PlaceOrder = (): JSX.Element => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const cart = useSelector((state: RootState) => state.cart);
+
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+
+  useEffect(() => {
+    if (
+      !cart.shippingAddress ||
+      Object.keys(cart.shippingAddress).length === 0
+    ) {
+      navigate("/shipping");
+    } else if (!cart.paymentMethod) {
+      navigate("/payment");
+    }
+  }, [cart.shippingAddress, cart.paymentMethod, navigate]);
+
+  const placeOrderHandler = async (): Promise<void> => {
+    try {
+      const resp = await createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      }).unwrap();
+      navigate(`/order/${resp._id}`);
+      dispatch(setOrder(resp));
+      dispatch(clearCartItems());
+    } catch (err) {
+      if ((err as FetchBaseQueryError)?.data) {
+        toast.error(
+          ((err as FetchBaseQueryError)?.data as any)?.message ||
+            "Something went wrong"
+        );
+      } else {
+        toast.error(
+          (err as SerializedError)?.message || "Something went wrong"
+        );
+      }
+    }
+  };
+
+  return (
+    <>
+      <CustomContainer>
+        <Row className="justify-content-md-center">
+          <Col xs={12} md={6}>
+            <div
+              className="p-4 rounded-4 mt-1 mt-md-5"
+              style={{
+                maxWidth: 600,
+                background: "#f1f5f9",
+                width: "100%",
+                margin: "auto",
+              }}
+            >
+              <CheckoutStepper activeStep={2} />
+            </div>
+          </Col>
+        </Row>
+      </CustomContainer>
+      <CustomContainer>
+        <Row>
+          <Col xs={10} md={8} className="mx-auto mt-2 mt-md-4 mb-4">
+            <ListGroup variant="flush" className="border rounded-2">
+              <ListGroup.Item>
+                <h2>Shipping</h2>
+                <p>
+                  <strong>Address:</strong>
+                  {cart.shippingAddress && (
+                    <>
+                      <span>{cart.shippingAddress.address}, </span>
+                      <span>{cart.shippingAddress.city}, </span>
+                      <span>{cart.shippingAddress.postalCode}, </span>
+                      <span>{cart.shippingAddress.country}</span>
+                    </>
+                  )}
+                </p>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <h2>Payment Method</h2>
+                <strong>Method: </strong>
+                {cart.paymentMethod}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <h2>Order Items</h2>
+                {cart.cartItems.length === 0 ? (
+                  <Message>Your Cart is empty</Message>
+                ) : (
+                  <ListGroup variant="flush">
+                    {cart.cartItems.map((item, index) => {
+                      return (
+                        <ListGroup.Item key={index}>
+                          <Row>
+                            <Col md={1}>
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                fluid
+                                rounded
+                              />
+                            </Col>
+                            <Col className="mt-2 mt-md-0">
+                              <strong>
+                                <Link to={`/product/${item._id}`}>
+                                  {item.name}
+                                </Link>
+                              </strong>
+                            </Col>
+                            <Col md={4} className="mt-2 mt-md-0">
+                              {item.qty} x ${item.price} =
+                              <strong>
+                                {" "}
+                                ${(item.qty * item.price).toFixed(2)}
+                              </strong>
+                            </Col>
+                          </Row>
+                        </ListGroup.Item>
+                      );
+                    })}
+                  </ListGroup>
+                )}
+              </ListGroup.Item>
+            </ListGroup>
+          </Col>
+          <Col xs={10} md={4} className="mx-auto mt-0 mt-md-4">
+            <Card>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <h2>Order Summary</h2>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      <strong>Items:</strong>
+                    </Col>
+                    <Col>${cart.itemsPrice}</Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      <strong>Shipping:</strong>
+                    </Col>
+                    <Col>${cart.shippingPrice}</Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      <strong>Tax:</strong>
+                    </Col>
+                    <Col>${cart.taxPrice}</Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      <strong>Total:</strong>
+                    </Col>
+                    <Col>${cart.totalPrice}</Col>
+                  </Row>
+                </ListGroup.Item>
+
+                {error && (
+                  <ListGroup.Item>
+                    <Message variant="danger">
+                      {"status" in error
+                        ? JSON.stringify((error as FetchBaseQueryError).data)
+                        : (error as SerializedError)?.message ||
+                          "An error occurred"}
+                    </Message>
+                  </ListGroup.Item>
+                )}
+
+                <ListGroup.Item>
+                  <Button
+                    type="button"
+                    className="btn-block"
+                    disabled={cart.cartItems.length === 0}
+                    onClick={placeOrderHandler}
+                  >
+                    Place Order
+                  </Button>
+                  {isLoading && <Loading />}
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+          </Col>
+        </Row>
+      </CustomContainer>
+    </>
+  );
+};
+
+export default PlaceOrder;
