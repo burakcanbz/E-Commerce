@@ -1,16 +1,19 @@
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
+import { HomePropsType } from "../../types/components.ts";
 import ProductCarousel from "../../components/Product/ProductCarousel";
-import HomeCategory from "./HomeCategory";
+import HomeCategory from "./HomeCategory.tsx";
 import ProductCard from "../../components/Product/ProductCard.tsx";
 import CustomContainer from "../../components/Common/CustomContainer";
+import { Product } from "../../types/redux.ts";
 
-const HomePresenter = ({ isDesktop, categories, searchedProducts }) => {
+const HomePresenter = ({ isDesktop, categories, searchedProducts }: HomePropsType) => {
+
   const renderSearchedProducts = () => (
     <CustomContainer>
       <Row>
-        {searchedProducts.map((product, index) => (
+        {searchedProducts?.map((product: Product, index: number) => (
           <Col className="col-custom" key={index}>
             <ProductCard product={product} />
           </Col>

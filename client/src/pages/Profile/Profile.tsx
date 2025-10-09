@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import { Table, Row, Col, Button, Alert } from "react-bootstrap";
 import { motion } from "framer-motion";
@@ -11,17 +11,12 @@ import StatusIcon from "../../components/Common/StatusIcon";
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
 import './main.scss';
+import { OrderItem } from "../../types/redux";
 
-const Profile = () => {
+const Profile = (): JSX.Element => {
   const navigate = useNavigate();
-  const {
-    data: orders,
-    isLoading,
-    error,
-    refetch,
-  } = useGetOrdersQuery(undefined, {
-    select: (data) => data.orders,
-  });
+  const { data, isLoading, error, refetch }: { data?: { orders: OrderItem[] }; isLoading: boolean; error?: any; refetch: () => void; } = useGetOrdersQuery(undefined);
+  const orders = data?.orders ?? [];
 
   useEffect(() => {
     refetch();
@@ -39,7 +34,7 @@ const Profile = () => {
     >
       <CustomContainer>
         <Row className="profile-row">
-          {orders?.length >= 1 ? (
+          {orders.length >= 1 ? (
             <Col sm={12} lg={8} className="mx-sm-auto my-4">
               <Alert
                 className="profile-alert"
@@ -61,7 +56,7 @@ const Profile = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders?.map((item) => {
+                  {orders?.map((item: OrderItem) => {
                     return (
                       <tr key={item._id}>
                         <td className="text-center">{item._id}</td>

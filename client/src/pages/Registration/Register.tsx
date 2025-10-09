@@ -1,28 +1,31 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect, JSX } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
 import { Card, Form, Button, Row, Col, Image } from "react-bootstrap";
 import { BiUserCircle } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 
 import { useRegisterMutation } from "../../slices/usersApiSlice";
+import { RootState, UserInfo } from "../../types/redux";
+
 import CustomContainer from "../../components/Common/CustomContainer";
 import Loading from "../../components/Common/Loading";
 import Logo from "../../assets/buyzy.png";
-import './main.scss';
+import "./main.scss";
 
-const Register = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const Register = (): JSX.Element => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const navigate = useNavigate();
 
   const [register, { isLoading }] = useRegisterMutation();
-
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo }: {userInfo : UserInfo | null } = useSelector((state: RootState) => state.auth);
 
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
@@ -34,7 +37,7 @@ const Register = () => {
     }
   }, [userInfo, redirect, navigate]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
@@ -44,7 +47,16 @@ const Register = () => {
         toast.success("Successfully registered.");
         navigate(redirect);
       } catch (err) {
-        toast.error(err?.data?.message || err.error);
+        if ((err as FetchBaseQueryError)?.data) {
+          toast.error(
+            ((err as FetchBaseQueryError)?.data as any)?.message ||
+              "Something went wrong"
+          );
+        } else {
+          toast.error(
+            (err as SerializedError)?.message || "Something went wrong"
+          );
+        }
       }
     }
   };
@@ -59,15 +71,15 @@ const Register = () => {
     >
       <CustomContainer>
         <div className="text-center">
-        <Image
-          src={`${Logo}`}
-          alt="Buyzy Logo"
-          style={{ width: 150, marginBottom: 20, borderRadius: "50%" }}
-        />
-        <h2 className="mb-4">
-          Sign Up to{" "}
-          <span style={{ fontFamily: "Fredoka One, sans-serif" }}>Buyzy</span>
-        </h2>
+          <Image
+            src={`${Logo}`}
+            alt="Buyzy Logo"
+            style={{ width: 150, marginBottom: 20, borderRadius: "50%" }}
+          />
+          <h2 className="mb-4">
+            Sign Up to{" "}
+            <span style={{ fontFamily: "Fredoka One, sans-serif" }}>Buyzy</span>
+          </h2>
         </div>
         {isLoading ? (
           <Loading />

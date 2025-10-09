@@ -1,4 +1,6 @@
-export const convertToUTC = (time) => {
+import { UserInfo } from "../types/redux";
+
+export const convertToUTC = (time: string | null | undefined) => {
   if (time) {
     const date = new Date(time);
     date.setHours(date.getHours() + 3);
@@ -7,6 +9,14 @@ export const convertToUTC = (time) => {
   return "";
 };
 
+export const getQueryParams = (queryParams: URLSearchParams) => {
+  const rawCategory = queryParams.get("category");
+  const category = rawCategory
+    ? rawCategory[0].toUpperCase() + rawCategory.slice(1)
+    : "Default";
+  return { category };
+};
+ 
 export const slickSettings = {
   dots: true,
   infinite: true,
@@ -148,7 +158,7 @@ export const slickSettings = {
   ],
 };
 
-export const imageToBase64 = async (img) => {
+export const imageToBase64 = async (img: File) => {
   const reader = new FileReader();
   reader.readAsDataURL(img);
 
@@ -160,14 +170,13 @@ export const imageToBase64 = async (img) => {
   return data;
 };
 
-export const getUserInfoFromLocalStorage = () => {
-  const userInfo = localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo"))
-    : null;
+export const getUserInfoFromLocalStorage = (): UserInfo | null => {
+  const stored = localStorage.getItem("userInfo");
+  const userInfo = stored ? JSON.parse(stored) : null;
   return userInfo;
 };
 
-export const hideUserName = (name) => {
+export const hideUserName = (name: string): string => {
   if (!name) return "";
   const names = name.split(" ");
   if (names.length === 1) {
@@ -177,14 +186,14 @@ export const hideUserName = (name) => {
   }
 };
 
-export const spacer = () => {
+export const spacer = (): string => {
   const length = 18;
   return "\u00A0".repeat(length);
 };
 
 export const bottomNavigationPaths = ["/", "/electronics", "/casual"];
 
-export const createPaymentData = (orderDetails, state) => {
+export const createPaymentData = (orderDetails: any, state: any): {[key: string]: string | number | boolean | {}} => {
   return {
     locale: "",
     conversationId: "123456789",
@@ -232,7 +241,7 @@ export const createPaymentData = (orderDetails, state) => {
       address: orderDetails?.shippingAddress.address,
       zipCode: orderDetails?.shippingAddress.postalCode,
     },
-    basketItems: orderDetails?.orderItems.map((item) => ({
+    basketItems: orderDetails?.orderItems.map((item: any) => ({
       id: item._id,
       name: item.name,
       category1: item.category || "General",

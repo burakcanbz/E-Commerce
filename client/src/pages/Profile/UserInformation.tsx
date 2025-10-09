@@ -1,21 +1,22 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, JSX } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Button, Card, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import { useUpdateMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
+import { RootState } from "../../types/redux";
 
-const UserInformation = () => {
-  const user = useSelector((state) => state.auth?.userInfo);
+const UserInformation = (): JSX.Element => {
+  const user = useSelector((state: RootState) => state.auth?.userInfo);
 
   const dispatch = useDispatch();
   const [update] = useUpdateMutation();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const setInitials = useCallback(() => {
     setName(user?.name ?? "");
@@ -24,7 +25,7 @@ const UserInformation = () => {
     setConfirmPassword("");
   }, [user?.name, user?.email]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setInitials();
@@ -36,7 +37,7 @@ const UserInformation = () => {
       const resp = await update({
         name,
         email,
-        image: user.image,
+        image: user?.image,
       }).unwrap();
       if (resp) {
         toast.success("Updated successfully!");
@@ -74,7 +75,7 @@ const UserInformation = () => {
               placeholder="Enter your name"
               className="rounded-3 py-2"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             />
           </Form.Group>
 
@@ -85,7 +86,7 @@ const UserInformation = () => {
               placeholder="Enter your email"
               className="rounded-3 py-2"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -96,7 +97,7 @@ const UserInformation = () => {
               placeholder="Enter new password"
               className="rounded-3 py-2"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -107,7 +108,7 @@ const UserInformation = () => {
               placeholder="Confirm your password"
               className="rounded-3 py-2"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
 

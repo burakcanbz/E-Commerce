@@ -1,28 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, JSX } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { saveShippingAddress } from "../../slices/cartSlice.ts";
+import { AppDispatch } from "../../store/store.ts";
+import { RootState } from "../../types/redux.ts";
+
 import FormContainer from "../../components/Common/FormContainer";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
 import './main.scss';
 
-const Shipping = () => {
-  const { shippingAddress } = useSelector((state) => state.cart);
-  const { cartItems } = useSelector((state) => state.cart);
+const Shipping = (): JSX.Element => {
+  const { shippingAddress } = useSelector((state: RootState) => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
 
-  const [address, setAddress] = useState(shippingAddress?.address || "");
-  const [city, setCity] = useState(shippingAddress?.city || "");
-  const [postalCode, setPostalCode] = useState(
+  const [address, setAddress] = useState<string>(shippingAddress?.address || "");
+  const [city, setCity] = useState<string>(shippingAddress?.city || "");
+  const [postalCode, setPostalCode] = useState<string>(
     shippingAddress?.postalCode || ""
   );
-  const [country, setCountry] = useState(shippingAddress?.country || "");
+  const [country, setCountry] = useState<string>(shippingAddress?.country || "");
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     navigate("/payment");
@@ -55,7 +58,7 @@ const Shipping = () => {
                 borderColor: "#68a7e6ff",
               }}
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="city" className="my-2">
@@ -70,7 +73,7 @@ const Shipping = () => {
                 borderColor: "#68a7e6ff",
               }}
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="postalCode" className="my-2">
@@ -85,7 +88,7 @@ const Shipping = () => {
                 borderColor: "#68a7e6ff",
               }}
               value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPostalCode(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="country" className="my-2">
@@ -100,12 +103,12 @@ const Shipping = () => {
                 borderColor: "#68a7e6ff",
               }}
               value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCountry(e.target.value)}
             ></Form.Control>
           </Form.Group>
         </Form>
         <Button
-          onClick={submitHandler}
+          onClick={(e) => submitHandler(e as unknown as React.FormEvent<HTMLFormElement>)}
           variant="primary"
           className="mt-5 mx-auto"
         >

@@ -11,10 +11,11 @@ import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Product } from "../../types/redux.ts";
 
-const HomeCategory = ({ category }) => {
+const HomeCategory = ({ category }: { category: string }) => {
   const navigate = useNavigate();
-  const { data, isLoading, error } = useGetCategorizedProductsQuery({
+  const { data, isLoading, error }: { data?: any; isLoading: boolean; error?: any; } = useGetCategorizedProductsQuery({
     category,
     page: PAGE,
     limit: LIMIT,
@@ -38,7 +39,7 @@ const HomeCategory = ({ category }) => {
         </button>
         </span>
       <Slider {...changedSlickSettings}>
-        {products?.map((product, index) => {
+        {products?.map((product: Product, index: number) => {
           return (
               <Col sm={12} md={6} lg={4} xl={3} key={index}>
                 <ProductCard product={product} />

@@ -1,44 +1,41 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, JSX } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Form,
-  Button,
-  Row,
-  Col,
-  Card,
-  Image,
-} from "react-bootstrap";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
+import { Form, Button, Row, Col, Card, Image } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { BiLogIn } from "react-icons/bi";
 import { toast } from "react-toastify";
 
 import { useLoginMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
+import { AppDispatch } from "../../store/store";
+import { RootState } from "../../types/redux";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Loading from "../../components/Common/Loading";
 import Logo from "../../assets/buyzy.png";
-import './main.scss';
+import "./main.scss";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = (): JSX.Element => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginMutation();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
 
   const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
+  const searchParams: URLSearchParams = new URLSearchParams(search);
   const redirect = searchParams.get("redirect") || "/";
 
   useEffect(() => {
     if (userInfo) navigate(redirect);
   }, [userInfo, redirect, navigate]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
@@ -46,7 +43,16 @@ const Login = () => {
       dispatch(setCredentials({ ...user }));
       navigate(redirect);
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      if ((err as FetchBaseQueryError)?.data) {
+        toast.error(
+          ((err as FetchBaseQueryError)?.data as any)?.message ||
+            "Something went wrong"
+        );
+      } else {
+        toast.error(
+          (err as SerializedError)?.message || "Something went wrong"
+        );
+      }
     }
   };
 
@@ -96,7 +102,9 @@ const Login = () => {
                   type="email"
                   placeholder="Enter your email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setEmail(e.target.value)
+                  }
                   style={{ borderRadius: 8, padding: "10px 12px" }}
                   required
                 />
@@ -109,7 +117,7 @@ const Login = () => {
                   type="password"
                   placeholder="Enter your password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                   style={{ borderRadius: 8, padding: "10px 12px" }}
                   required
                 />

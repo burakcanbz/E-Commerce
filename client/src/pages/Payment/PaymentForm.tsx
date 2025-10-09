@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import Cards from "react-credit-cards-2";
 
@@ -9,26 +9,36 @@ import { createPaymentData } from "../../utils/helpers";
 import { toast } from "react-toastify";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 
+type Focused = "number" | "name" | "expiry" | "cvc" | undefined;
+
+interface CardState {
+  number: string;
+  expiry: string;
+  cvc: string;
+  name: string;
+  focus?: Focused;
+}
+
 const PaymentForm = () => {
   const { id: orderId } = useParams();
   const { data: orderDetails } = useGetOrderDetailsQuery(orderId);
   console.log(orderDetails && orderDetails);
-  const [ payOrder, { isLoading } ] = usePayOrderMutation();
-  const [state, setState] = useState({
+  const [ payOrder] = usePayOrderMutation();
+  const [state, setState] = useState<CardState>({
     number: "",
     expiry: "",
     cvc: "",
     name: "",
-    focus: "",
+    focus: undefined,
   });
 
-  const handleInputChange = (evt) => {
+  const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = evt.target;
     setState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleInputFocus = (evt) => {
-    setState((prev) => ({ ...prev, focus: evt.target.name }));
+  const handleInputFocus = (evt: React.FocusEvent<HTMLInputElement>): void => {
+    setState((prev) => ({ ...prev, focus: evt.target.name as Focused }) );
   };
 
   const handlePayment = async() => {
@@ -49,7 +59,7 @@ const PaymentForm = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Payment data:", state);
   };
@@ -72,7 +82,7 @@ const PaymentForm = () => {
                 expiry={state.expiry}
                 cvc={state.cvc}
                 name={state.name}
-                focused={state.focus !== "cvc"}
+                focused={(state.focus !== "cvc" ? state.focus : undefined)}
               />
             </Row>
             <Row>
@@ -116,7 +126,7 @@ const PaymentForm = () => {
                 placeholder: "CVC",
                 maxLength: 3,
               },
-            ].map((field) => (
+            ].map((field: { id: string; label: string; name: string; placeholder: string; maxLength?: number }) => (
               <Form.Group className="mb-3" controlId={field.id} key={field.id}>
                 <Form.Label
                   className="fw-semibold"
@@ -128,7 +138,7 @@ const PaymentForm = () => {
                   type="text"
                   name={field.name}
                   placeholder={field.placeholder}
-                  value={state[field.name]}
+                  value={(state[field.name as keyof CardState] as string)}
                   onChange={handleInputChange}
                   onFocus={handleInputFocus}
                   maxLength={field.maxLength || undefined}

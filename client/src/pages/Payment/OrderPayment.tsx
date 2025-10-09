@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaLock } from "react-icons/fa";
@@ -5,7 +6,7 @@ import { FaLock } from "react-icons/fa";
 import CustomContainer from "../../components/Common/CustomContainer";
 import PaymentForm from "./PaymentForm";
 
-const OrderPayment = () => {
+const OrderPayment = (): JSX.Element => {
 
   return (
     <motion.div

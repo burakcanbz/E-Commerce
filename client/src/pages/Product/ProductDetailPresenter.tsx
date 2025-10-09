@@ -11,10 +11,13 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { hideUserName } from "../../utils/helpers";
+import { ProductDetailPropsType } from "../../types/components.ts";
+
 import CustomContainer from "../../components/Common/CustomContainer";
 import Rating from "../../components/Common/Rating";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
+import { Review } from "../../types/redux.ts";
 
 const ProductDetailPresenter = ({
   product,
@@ -34,7 +37,7 @@ const ProductDetailPresenter = ({
   productLoading,
   productLoadingError,
   showMessage,
-}) => (
+}: ProductDetailPropsType ) => (
   <motion.div
     initial={{ x: -200, opacity: 0 }}
     animate={{ x: 0, opacity: 1 }}
@@ -57,8 +60,8 @@ const ProductDetailPresenter = ({
           <Row>
             <Col xs={10} md={5} className="mx-auto">
               <Image
-                src={product.image}
-                alt={product.name}
+                src={product?.image}
+                alt={product?.name}
                 fluid
                 className="shadow-lg"
                 rounded
@@ -68,20 +71,20 @@ const ProductDetailPresenter = ({
               <Card className="shadow-sm">
                 <ListGroup variant="flush" className="rounded mx-3">
                   <ListGroup.Item className="my-2 p-3 rounded">
-                    <h3>{product.name}</h3>
+                    <h3>{product?.name}</h3>
                   </ListGroup.Item>
                   <ListGroup.Item className="my-2 p-3 rounded">
                     <Rating
-                      value={product.rating}
-                      text={`${product.numReviews} reviews`}
+                      value={product?.rating ?? null}
+                      text={`${product?.numReviews} reviews`}
                     />
                   </ListGroup.Item>
                   <ListGroup.Item className="my-2 p-3 rounded fs-5">
-                    <strong>Price: {product.price}$</strong>
+                    <strong>Price: {product?.price}$</strong>
                   </ListGroup.Item>
                   <ListGroup.Item className="my-2 p-3 rounded">
                     <strong>Description: </strong>
-                    <i>{product.description}</i>
+                    <i>{product?.description}</i>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
@@ -95,7 +98,7 @@ const ProductDetailPresenter = ({
                         <strong>Price:</strong>
                       </Col>
                       <Col>
-                        <strong>{product.price}$</strong>
+                        <strong>{product?.price}$</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -106,7 +109,7 @@ const ProductDetailPresenter = ({
                       </Col>
                       <Col>
                         <strong>
-                          {product.countInStock > 0
+                          {product && product?.countInStock > 0
                             ? "In Stock"
                             : "Out Of Stock"}
                         </strong>
@@ -114,19 +117,19 @@ const ProductDetailPresenter = ({
                     </Row>
                   </ListGroup.Item>
 
-                  {product.countInStock > 0 && (
+                  {product && product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
                         <Col style={{ display: "flex", alignItems: "center" }}>
                           <strong>Quantity:</strong>
                         </Col>
                         <Col>
-                          <Form.Control
+                          <Form.Select
                             as="select"
                             value={qty}
-                            onChange={(e) => setQty(Number(e.target.value))}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setQty(Number(e.target.value))}
                           >
-                            {[...Array(product.countInStock).keys()].map(
+                            {[...Array(product?.countInStock).keys()].map(
                               (x) => (
                                 <option key={x + 1} value={x + 1}>
                                   {" "}
@@ -134,7 +137,7 @@ const ProductDetailPresenter = ({
                                 </option>
                               )
                             )}
-                          </Form.Control>
+                          </Form.Select>
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -144,7 +147,7 @@ const ProductDetailPresenter = ({
                     <Button
                       className="my-2"
                       variant="secondary"
-                      disabled={product.countInStock === 0}
+                      disabled={product?.countInStock === 0}
                       onClick={addToCartHandler}
                     >
                       Add to Cart
@@ -163,7 +166,7 @@ const ProductDetailPresenter = ({
             <Col className="mt-5" md={6}>
               {loadingReviews ? (
                 <Loading />
-              ) : reviews?.length === 0 ? (
+              ) : reviews?.reviews?.length === 0 ? (
                 <Message>No Reviews</Message>
               ) : (
                 <>
@@ -189,7 +192,7 @@ const ProductDetailPresenter = ({
                       <Button
                         className="mt-0 mb-1 mx-2"
                         variant="primary"
-                        onClick={commentSubmitHandler}
+                        onClick={(e) => commentSubmitHandler(e as unknown as React.FormEvent<HTMLFormElement>)}
                       >
                         Comment
                       </Button>
@@ -197,7 +200,7 @@ const ProductDetailPresenter = ({
                   </div>
                   {reviews?.reviews.length !== 0 ? <h3>User Reviews</h3> : null}
                   <ListGroup>
-                    {reviews?.reviews.map((review, index) => (
+                    {reviews?.reviews?.map((review: Review, index: number) => (
                       <ListGroup.Item
                         key={index}
                         className="review-item mb-2 rounded shadow-sm"

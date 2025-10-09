@@ -1,9 +1,10 @@
+import { JSX } from "react";
 import { Row, Col, Image } from "react-bootstrap";
 
 import notFound from "../../assets/404.png";
 import './main.scss';
 
-const NotFound = () => {
+const NotFound = (): JSX.Element => {
   return (
     <Row>
       <Col md={10} sx={12} className="mx-auto text-center">

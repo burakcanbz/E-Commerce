@@ -16,6 +16,7 @@ import {
   useGetOrderDetailsQuery,
 } from "../../slices/ordersApiSlice";
 import { convertToUTC } from "../../utils/helpers";
+import { OrderItem } from "../../types/redux";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
@@ -25,7 +26,7 @@ const Order = () => {
   const { id: orderId } = useParams();
   const navigate = useNavigate();
   const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
-  const [cancelOrder, { isLoading: isCancelling }] = useCancelOrderMutation();
+  const [cancelOrder] = useCancelOrderMutation();
   const [hasError, setHasError] = useState(false);
 
   if (hasError) {
@@ -46,7 +47,7 @@ const Order = () => {
   return isLoading ? (
     <Loading />
   ) : error ? (
-    <Message variant="danger" />
+    <Message variant="danger">{(error.error || error.message || error.data)}</Message>
   ) : (
     <motion.div
       initial={{ y: -200, opacity: 0 }}
@@ -60,20 +61,20 @@ const Order = () => {
               <ListGroup.Item className="order-details">
                 <h2 className="mb-4">Shipping Details</h2>
                 <p>
-                  <strong>Name: </strong> {order.user.name}
+                  <strong>Name: </strong> {order?.user?.name}
                 </p>
                 <p>
-                  <strong>Email: </strong> {order.user.email}
+                  <strong>Email: </strong> {order?.user?.email}
                 </p>
                 <p>
-                  <strong>Address: </strong> {order.shippingAddress.address} ,{" "}
-                  {order.shippingAddress.city},{" "}
-                  {order.shippingAddress.postalCode},{" "}
-                  {order.shippingAddress.country}
+                  <strong>Address: </strong> {order?.shippingAddress?.address} ,{" "}
+                  {order?.shippingAddress?.city},{" "}
+                  {order?.shippingAddress?.postalCode},{" "}
+                  {order?.shippingAddress?.country}
                 </p>
-                {order.isDelivered ? (
+                {order?.isDelivered ? (
                   <Message variant="success">
-                    Delivered on {order.deliveredAt}
+                    Delivered on {order?.deliveredAt}
                   </Message>
                 ) : (
                   <Message variant="danger">Not delivered yet.</Message>
@@ -84,9 +85,9 @@ const Order = () => {
                 <p>
                   <strong>Method: </strong> Credit Card
                 </p>
-                {order.isPaid ? (
+                {order?.isPaid ? (
                   <Message variant="success">
-                    Paid at {convertToUTC(order.paidAt)}
+                    Paid at {convertToUTC(order?.paidAt)}
                   </Message>
                 ) : (
                   <Message variant="danger">Not paid yet.</Message>
@@ -94,7 +95,7 @@ const Order = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <h2>Order Items</h2>
-                {order.orderItems.map((item, index) => (
+                {order?.orderItems.map((item, index) => (
                   <ListGroup.Item
                     key={index}
                     style={{

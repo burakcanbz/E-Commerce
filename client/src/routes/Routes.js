@@ -5,22 +5,22 @@ import {
   Route,
 } from "react-router-dom";
 import App from "../App.tsx";
-import Home from "../pages/Home/Home.jsx";
+import Home from "../pages/Home/Home.tsx";
 import PrivateRoute from "../components/Auth/PrivateRoute.tsx";
 import Loading from "../components/Common/Loading";
 
-const ProductDetail = lazy(() => import("../pages/Product/ProductDetail.jsx"));
-const Cart = lazy(() => import("../pages/Cart/Cart.jsx"));
-const Login = lazy(() => import("../pages/Registration/Login.jsx"));
-const Register = lazy(() => import("../pages/Registration/Register.jsx"));
-const Shipping = lazy(() => import("../pages/Shipping/Shipping.jsx"));
-const Payment = lazy(() => import("../pages/Payment/Payment.jsx"));
+const ProductDetail = lazy(() => import("../pages/Product/ProductDetail.tsx"));
+const Cart = lazy(() => import("../pages/Cart/Cart.tsx"));
+const Login = lazy(() => import("../pages/Registration/Login.tsx"));
+const Register = lazy(() => import("../pages/Registration/Register.tsx"));
+const Shipping = lazy(() => import("../pages/Shipping/Shipping.tsx"));
+const Payment = lazy(() => import("../pages/Payment/Payment.tsx"));
 const PlaceOrder = lazy(() => import("../pages/Order/PlaceOrder.jsx"));
 const Order = lazy(() => import("../pages/Order/Order.jsx"));
-const OrderPayment = lazy(() => import("../pages/Payment/OrderPayment.jsx"));
-const Profile = lazy(() => import("../pages/Profile/Profile.jsx"));
-const NotFound = lazy(() => import("../pages/NotFound/NotFound.jsx"));
-const CategoryPage = lazy(() => import("../pages/Category/CategoryPage.jsx"));
+const OrderPayment = lazy(() => import("../pages/Payment/OrderPayment.tsx"));
+const Profile = lazy(() => import("../pages/Profile/Profile.tsx"));
+const NotFound = lazy(() => import("../pages/NotFound/NotFound.tsx"));
+const CategoryPage = lazy(() => import("../pages/Category/CategoryPage.tsx"));
 
 const withSuspense = (Component) => (
   <Suspense fallback={<div style={{height: '100dvh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}><Loading /></div>}>

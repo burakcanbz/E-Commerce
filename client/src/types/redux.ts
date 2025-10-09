@@ -38,6 +38,7 @@ export interface AuthRootState {
 export interface OrderItem {
     createdAt: string;
     isPaid: boolean;
+    paidAt?: string | null;
     itemsPrice: number;
     orderItems: CartItem[];
     paidAmount: number;
@@ -59,7 +60,7 @@ export interface OrderRootState {
     paymentMethod: string | null;
 }
 
-export type Product = Omit<CartItem, 'qty'>;
+export type Product = Omit<CartItem, 'qty'> ;
 
 export interface ProductRootState {
     product?: Product[];
@@ -77,4 +78,15 @@ export interface RootState {
     auth: AuthRootState;
     order: OrderRootState;
     product: ProductRootState;
+}
+
+export interface Review {
+    _id: string;
+    user: Omit<UserInfo, 'image'>;
+    product: string;
+    rating: number;
+    comment: string;
+    createdAt: string;
+    updatedAt: string;
+    _v: number;
 }

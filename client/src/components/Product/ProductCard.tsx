@@ -4,15 +4,12 @@ import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { FaCartShopping } from "react-icons/fa6";
 
+import { ProductCardPropsType } from "../../types/components.ts";
+import { RootState } from "../../types/redux.ts";
 import { addToCart } from "../../slices/cartSlice.ts";
-import { RootState, CartItem, Product } from "../../types/redux.ts";
 import Rating from "../Common/Rating";
 
-type ProductCardProps =
-  | { product: CartItem; searchedProduct?: never }
-  | { searchedProduct: Product; product?: never };
-
-const ProductCard = React.memo(({ product, searchedProduct }: ProductCardProps) => {
+const ProductCard = React.memo(({ product, searchedProduct }: ProductCardPropsType) => {
   const p = product || searchedProduct;
   const { cartItems, shippingAddress, paymentMethod } = useSelector((state: RootState) => state.cart);
   const productExist = cartItems?.find((item) => item._id === p._id);

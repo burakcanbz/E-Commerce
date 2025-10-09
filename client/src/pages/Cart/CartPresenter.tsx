@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { JSX } from 'react'
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Row,
@@ -12,40 +11,19 @@ import {
   Card,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { CartPropsType } from "../../types/components.ts";
 import { FaTrash } from "react-icons/fa";
-
-import { addToCart, removeFromCart, setCart } from "../../slices/cartSlice.ts";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
-import './main.scss';
 
-const Cart = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { cartItems, qty } = useSelector((state) => state.cart);
-
-  const addToCartHandler = (product, qty) => {
-    dispatch(addToCart({ ...product, qty }));
-  };
-
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
-  };
-
-  const checkoutHandler = () => {
-    navigate("/login?redirect=/shipping");
-  };
-
-  useEffect(() => {
-    const items = localStorage.getItem("cart")
-      ? JSON.parse(localStorage.getItem("cart")).cartItems
-      : [];
-    dispatch(setCart(items));
-  }, [dispatch]);
-
-  return (
-    <motion.div
+const CartPresenter = ({
+    cartItems,
+    addToCartHandler,
+    removeFromCartHandler,
+    checkoutHandler
+}: CartPropsType): JSX.Element => {
+    return (
+  <motion.div
       initial={{ y: -200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -168,9 +146,9 @@ const Cart = () => {
               <ListGroup.Item className="mt-1 mb-2">
                 <strong className="ms-3">
                   Shipping Price: $
-                  {cartItems
+                  {Number(cartItems
                     .reduce((acc, item) => acc + item.qty * item.price, 0)
-                    .toFixed(2) > 100
+                    .toFixed(2)) > 100
                     ? 0
                     : 10}
                 </strong>
@@ -186,10 +164,10 @@ const Cart = () => {
                     Number(
                       cartItems
                         .reduce((acc, item) => acc + item.qty * item.price, 0)
-                        .toFixed(2) > 100
+                        .toFixed(2)) > 100
                         ? 0
                         : 10
-                    )}
+                    }
                 </strong>
               </ListGroup.Item>
             </ListGroup>
@@ -207,6 +185,6 @@ const Cart = () => {
       </CustomContainer>
     </motion.div>
   );
-};
+}
 
-export default Cart;
+export default CartPresenter

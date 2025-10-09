@@ -1,42 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, JSX } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+import { RootState, shippingAddress } from "../../types/redux.ts";
 import { savePaymentMethod } from "../../slices/cartSlice.ts";
+import { AppDispatch } from "../../store/store.ts";
 import FormContainer from "../../components/Common/FormContainer";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
 import './main.scss';
 
-const Payment = () => {
-  const [paymentMethod, setPaymentMethod] = useState("Credit Card");
-  const { shippingAddress } = useSelector((state) => state.cart);
+const Payment = (): JSX.Element => {
+  const [paymentMethod, setPaymentMethod] = useState<string>("Credit Card");
+  const { shippingAddress } = useSelector((state: RootState) => state.cart);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
   };
 
-  const validateAddress = (data) => {
-    const errors = {};
-
-    if (!shippingAddress.address || shippingAddress.address.trim() === "") {
+  const validateAddress = (data?: shippingAddress | null): {} => {
+    const errors: Record<string, string> = {address: "", city: "", postalCode: "", country: ""};
+    if (!data?.address || data.address.trim() === "") {
       errors.address = "Address is required.";
     }
-    if (!shippingAddress.city || shippingAddress.city.trim() === "") {
+    if (!data?.city || data.city.trim() === "") {
       errors.city = "City is required.";
     }
     if (
-      !shippingAddress.postalCode ||
-      shippingAddress.postalCode.trim() === ""
+      !data?.postalCode ||
+      data.postalCode.trim() === ""
     ) {
       errors.postalCode = "Postal Code is required.";
     }
-    if (!shippingAddress.country || shippingAddress.country.trim() === "") {
+    if (!data?.country || data.country.trim() === "") {
       errors.country = "Country is required.";
     }
 
@@ -44,7 +45,7 @@ const Payment = () => {
   };
 
   useEffect(() => {
-    const errors = validateAddress(shippingAddress);
+    const errors = validateAddress(shippingAddress ?? null);
     if (Object.keys(errors).length > 0) {
       navigate("/shipping");
     }
@@ -69,7 +70,7 @@ const Payment = () => {
               name="paymentMethod"
               value="Credit Card"
               checked
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPaymentMethod(e.target.value)}
             ></Form.Check>
           </Col>
         </Form.Group>

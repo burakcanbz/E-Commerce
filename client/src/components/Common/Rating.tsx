@@ -1,7 +1,9 @@
 import { JSX } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
-const Rating = ({ value, text, onChange }: { value: number; text?: string; onChange?: (newValue: number) => void }): JSX.Element => {
+import { RatingPropsType } from "../../types/components";
+
+const Rating = ({ value, text, onChange }: RatingPropsType): JSX.Element => {
   const stars = [];
   const starStyle = { color: 'gold', marginRight: '2px' };
 
@@ -11,7 +13,8 @@ const Rating = ({ value, text, onChange }: { value: number; text?: string; onCha
         onChange(i);
       }
     };
-
+    
+    if (typeof value !== 'number') continue;
     if (value >= i) {
       stars.push(
         <FaStar key={i} style={starStyle} onClick={handleClick} />
