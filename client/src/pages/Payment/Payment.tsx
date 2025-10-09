@@ -13,7 +13,7 @@ import './main.scss';
 const Payment = (): JSX.Element => {
   const [paymentMethod, setPaymentMethod] = useState<string>("Credit Card");
   const { shippingAddress } = useSelector((state: RootState) => state.cart);
-
+  console.log("Shipping Address in Payment Page:", shippingAddress);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const Payment = (): JSX.Element => {
   };
 
   const validateAddress = (data?: shippingAddress | null): {} => {
-    const errors: Record<string, string> = {address: "", city: "", postalCode: "", country: ""};
+    const errors: Record<string, string> = {};
     if (!data?.address || data.address.trim() === "") {
       errors.address = "Address is required.";
     }
@@ -46,6 +46,7 @@ const Payment = (): JSX.Element => {
 
   useEffect(() => {
     const errors = validateAddress(shippingAddress ?? null);
+    console.log(errors);
     if (Object.keys(errors).length > 0) {
       navigate("/shipping");
     }

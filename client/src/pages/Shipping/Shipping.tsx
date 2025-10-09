@@ -43,6 +43,7 @@ const Shipping = (): JSX.Element => {
         <CheckoutStepper activeStep={0} />
         <h1 className="text-center"> Address </h1>
         <Form
+          onSubmit={submitHandler}
           id="checkout"
           className="d-flex flex-column justify-content-center align-items-center"
         >
@@ -106,14 +107,13 @@ const Shipping = (): JSX.Element => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCountry(e.target.value)}
             ></Form.Control>
           </Form.Group>
-        </Form>
         <Button
-          onClick={(e) => submitHandler(e as unknown as React.FormEvent<HTMLFormElement>)}
+          type="submit"
           variant="primary"
-          className="mt-5 mx-auto"
-        >
+          className="mt-5 mx-auto">
           Continue
         </Button>
+        </Form>
       </FormContainer>
     </>
   );

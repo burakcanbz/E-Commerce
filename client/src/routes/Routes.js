@@ -7,7 +7,7 @@ import {
 import App from "../App.tsx";
 import Home from "../pages/Home/Home.tsx";
 import PrivateRoute from "../components/Auth/PrivateRoute.tsx";
-import Loading from "../components/Common/Loading";
+import Loading from "../components/Common/Loading.tsx";
 
 const ProductDetail = lazy(() => import("../pages/Product/ProductDetail.tsx"));
 const Cart = lazy(() => import("../pages/Cart/Cart.tsx"));

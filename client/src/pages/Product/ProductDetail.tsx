@@ -52,7 +52,7 @@ const ProductDetail = (): JSX.Element => {
     skip: !productId
   }); // run this if productId is defined
 
-  const addToCartHandler = () => {
+  const addToCartHandler = (): void => {
     const updatedProduct: CartItem | undefined = cartItems.find(
       (item: CartItem) => item._id === productId
     );
@@ -67,6 +67,12 @@ const ProductDetail = (): JSX.Element => {
           setShowMessage(true);
         }
         return count;
+      }
+      else{
+        if (product) {
+          dispatch(addToCart({ ...(product), qty: prevQty }));
+          navigate("/");
+        }
       }
       return prevQty;
     });
