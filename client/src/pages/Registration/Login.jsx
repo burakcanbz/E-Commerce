@@ -42,7 +42,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
+      const { isAdmin, ...user } = res;
+      dispatch(setCredentials({ ...user }));
       navigate(redirect);
     } catch (err) {
       toast.error(err?.data?.message || err.error);

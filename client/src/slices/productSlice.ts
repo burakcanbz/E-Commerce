@@ -1,20 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { ProductRootState, Product } from './../types/redux';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {};
+
+const initialState: ProductRootState = {};
 
 const productSlice = createSlice({
     name:'product',
     initialState,
     reducers: {
-        setProduct: (state, action) => {
-            state.products = action.payload;
+        setProduct: (state, action: PayloadAction<Product[]>) => {
+            state.product = action.payload;
             return state;
         },
-        updateProduct: (state, action) => {
+        updateProduct: (state, action: PayloadAction<{filteredProducts: Product[]}>) => {
             state.searchedProducts = action.payload.filteredProducts;
             return state;
         },
-        clearProduct: (state, action) => {
+        clearProduct: (state, action: PayloadAction<void>) => {
             state.searchedProducts = [];
             return state;
         }

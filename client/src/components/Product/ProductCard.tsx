@@ -5,12 +5,12 @@ import { Card } from "react-bootstrap";
 import { FaCartShopping } from "react-icons/fa6";
 
 import { addToCart } from "../../slices/cartSlice.ts";
-import { RootState, CartItem, SearchedProducts } from "../../types/redux.ts";
+import { RootState, CartItem, Product } from "../../types/redux.ts";
 import Rating from "../Common/Rating";
 
 type ProductCardProps =
   | { product: CartItem; searchedProduct?: never }
-  | { searchedProduct: SearchedProducts; product?: never };
+  | { searchedProduct: Product; product?: never };
 
 const ProductCard = React.memo(({ product, searchedProduct }: ProductCardProps) => {
   const p = product || searchedProduct;

@@ -1,14 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { OrderItem, OrderRootState } from "../types/redux";
 
-const initialState = localStorage.getItem("order")
-  ? JSON.parse(localStorage.getItem("order"))
-  : { orders: [], paymentMethod: "Stripe" };
+const storedOrder = localStorage.getItem("order");
+
+const initialState: OrderRootState = storedOrder ? (JSON.parse(storedOrder) as OrderRootState) : { orders: [], paymentMethod: "" };
 
 const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    setOrder(state, action) {
+    setOrder(state, action: PayloadAction<OrderItem>) {
       const order = action.payload;
 
       const existOrder = state.orders.find(
@@ -25,11 +26,10 @@ const orderSlice = createSlice({
         state.orders = [...state.orders, order];
       }
       localStorage.setItem('order', JSON.stringify(state))
-
-      return state;
     },
-    setPaidAmount: (state, action) => {
-        const { orderId, paidAmount } = action.payload; // Destructure the orderId and amount from the payload
+
+    setPaidAmount: (state, action: PayloadAction<OrderItem>) => {
+        const { _id: orderId, paidAmount } = action.payload; // Destructure the orderId and amount from the payload
 
         state.orders = state.orders.map(order => {
           if (order._id === orderId) { 
@@ -41,16 +41,13 @@ const orderSlice = createSlice({
           return order; 
         });
       
-      
       localStorage.setItem('order', JSON.stringify(state))
-      return state;
     },
-    clearOrder: (state, action) => {
+
+    clearOrder: (state, action: PayloadAction<void>) => {
       state.orders = [];
       localStorage.setItem('order', JSON.stringify(state));
-      return state;
     }
-
   },
 });
 

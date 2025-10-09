@@ -24,17 +24,15 @@ export interface shippingAddress {
     country?: string;
 }
 
+export interface UserInfo {
+    _id: string;
+    name: string;
+    email: string;
+    image: string;
+};
+
 export interface AuthRootState {
-    auth: {
-        userInfo: {
-            _id: string;
-            name: string;
-            email: string;
-            isAdmin: boolean;
-            createdAt?: string;
-            updatedAt?: string;
-        } | null;
-    };
+    userInfo: UserInfo | null;
 }
 
 export interface OrderItem {
@@ -55,20 +53,17 @@ export interface OrderItem {
     _id: string;
 }
 
+
 export interface OrderRootState {
-    order: {
-        orders: OrderItem[];
-        paymentMethod: string | null;
-    }
-    
+    orders: OrderItem[];
+    paymentMethod: string | null;
 }
 
-export type SearchedProducts = Omit<CartItem, 'qty'>;
+export type Product = Omit<CartItem, 'qty'>;
 
 export interface ProductRootState {
-    product: {
-        searchedProducts: SearchedProducts[];
-     }
+    product?: Product[];
+    searchedProducts?: Product[];
 }
 
 export interface CartRootState {
@@ -79,7 +74,7 @@ export interface CartRootState {
 
 export interface RootState {
     cart: CartRootState;
-    auth: AuthRootState['auth'];
-    order: OrderRootState['order'];
-    product: ProductRootState['product'];
+    auth: AuthRootState;
+    order: OrderRootState;
+    product: ProductRootState;
 }

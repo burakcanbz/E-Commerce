@@ -36,9 +36,7 @@ const UserInformation = () => {
       const resp = await update({
         name,
         email,
-        password,
         image: user.image,
-        confirmPassword,
       }).unwrap();
       if (resp) {
         toast.success("Updated successfully!");
