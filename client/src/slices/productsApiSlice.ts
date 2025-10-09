@@ -1,45 +1,48 @@
 import { PRODUCTS_URL } from "../constants/constants";
 import { apiSlice } from "./apiSlice";
+import { CategorizedProductsParams, PaginatedProductsParams, Product } from "../types/redux"; 
+
+type Category = string;
 
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getProducts: builder.query({
+    getProducts: builder.query<Product[], void>({
       query: () => ({
         url: PRODUCTS_URL,
       }),
       keepUnusedDataFor: 5,
     }),
-    getPaginatedProducts: builder.query({
+    getPaginatedProducts: builder.query<Product[], PaginatedProductsParams>({
       query: ({ page, limit }) => ({
         url: `${PRODUCTS_URL}/paginated?page=${page}&limit=${limit}`,
       }),
       keepUnusedDataFor: 5,
     }),
-    getProductCategories : builder.query({
-        query: () => ({
-            url: `${PRODUCTS_URL}/categories`,
-        }),
-        keepUnusedDataFor: 5,
+    getProductCategories: builder.query<Category[], void>({
+      query: () => ({
+        url: `${PRODUCTS_URL}/categories`,
+      }),
+      keepUnusedDataFor: 5,
     }),
-    getProductDetails: builder.query({
+    getProductDetails: builder.query<Product, string>({
       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`,
       }),
       keepUnusedDataFor: 5,
     }),
-    getCategorizedProducts: builder.query({
+    getCategorizedProducts: builder.query<Product[], CategorizedProductsParams>({
       query: ({ category, page, limit }) => ({
         url: `${PRODUCTS_URL}/categorized?category=${category}&page=${page}&limit=${limit}`,
       }),
       keepUnusedDataFor: 5,
     }),
-    getAllProductsByCategory: builder.query({
+    getAllProductsByCategory: builder.query<Product[], string>({
       query: (category) => ({
         url: `${PRODUCTS_URL}/category?category=${category}`,
       }),
       keepUnusedDataFor: 5,
     }),
-    getTopRatedProducts: builder.query({
+    getTopRatedProducts: builder.query<Product[], void>({
       query: () => ({
         url: `${PRODUCTS_URL}/topRatedProducts`,
       }),

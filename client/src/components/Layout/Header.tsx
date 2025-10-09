@@ -34,15 +34,15 @@ const Header = (): JSX.Element => {
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const { data } = useGetPaginatedProductsQuery({ page: PAGE, limit: LIMIT });
 
-  const electronics = data?.electronics;
-  const casual = data?.casual;
+  const electronics = (data as any)?.electronics;
+  const casual = (data as any)?.casual;
   const products: Product[] | null = electronics && casual ? electronics.concat(casual) : null;
 
   const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async (): Promise<void> => {
     try {
-      await logoutApiCall({}).unwrap();
+      await logoutApiCall().unwrap();
       dispatch(logout());
       dispatch(clearOrder());
       dispatch(clearCartItems());

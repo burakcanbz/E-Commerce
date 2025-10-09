@@ -55,6 +55,21 @@ export interface OrderItem {
     _id: string;
 }
 
+export interface OrderCreateInput {
+    orderItems: Omit<CartItem, 'qty'>[];
+    shippingAddress: shippingAddress;
+    paymentMethod: string;
+    itemsPrice: number;
+    shippingPrice: number;
+    taxPrice: number;
+    totalPrice: number;
+}
+
+export interface OrderPayInput {
+    orderId: string;
+    paidAmount: number;
+}
+
 export interface OrderRootState {
     orders: OrderItem[];
     paymentMethod: string | null;
@@ -93,4 +108,62 @@ export interface Review {
     createdAt: string;
     updatedAt: string;
     _v: number;
+}
+
+export interface PaymentResponse {
+  success: boolean;
+  transactionId?: string;
+  message?: string;
+  status?: string;
+}
+
+export interface RefundResponse {
+  success: boolean;
+  refundedAmount?: number;
+  message?: string;
+}
+
+export interface PaginatedProductsParams {
+  page: number;
+  limit: number;
+}
+
+export interface CategorizedProductsParams {
+  category: string;
+  page: number;
+  limit: number;
+}
+
+export interface CreateReviewInput {
+  productId: string;
+  review: {
+    rating: number;
+    comment: string;
+  };
+}
+
+export interface UserLoginInput {
+  email: string;
+  password: string;
+}
+
+export interface UserRegisterInput {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface UserUpdateInput {
+  name?: string;
+  email?: string;
+  image?: string;
+  password?: string;
+}
+
+export interface UserInfo {
+  _id: string;
+  name: string;
+  email: string;
+  isAdmin?: boolean;
+  token?: string;
 }

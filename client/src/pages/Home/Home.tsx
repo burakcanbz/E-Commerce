@@ -27,7 +27,7 @@ const Home = (): JSX.Element => {
 
   const props: HomePropsType = {
     isDesktop,
-    categories,
+    categories: categories || [],
     searchedProducts,
   };
 

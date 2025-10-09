@@ -38,8 +38,8 @@ const PlaceOrder = (): JSX.Element => {
     try {
       const resp = await createOrder({
         orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
+        shippingAddress: cart.shippingAddress!,
+        paymentMethod: cart.paymentMethod!,
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,

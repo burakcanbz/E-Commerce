@@ -15,7 +15,7 @@ import { OrderItem } from "../../types/redux";
 
 const Profile = (): JSX.Element => {
   const navigate = useNavigate();
-  const { data: orders, isLoading, error, refetch }: { data?: OrderItem[]; isLoading: boolean; error?: any; refetch: () => void; } = useGetOrdersQuery({});
+  const { data: orders, isLoading, error, refetch }: { data?: OrderItem[]; isLoading: boolean; error?: any; refetch: () => void; } = useGetOrdersQuery();
 
   useEffect(() => {
     refetch();

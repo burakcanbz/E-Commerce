@@ -21,7 +21,7 @@ interface CardState {
 
 const PaymentForm = () => {
   const { id: orderId } = useParams();
-  const { data: orderDetails } = useGetOrderDetailsQuery(orderId);
+  const { data: orderDetails } = useGetOrderDetailsQuery(orderId!, { skip: !orderId });
   const [ payOrder] = usePayOrderMutation();
   const [state, setState] = useState<CardState>({
     number: "",

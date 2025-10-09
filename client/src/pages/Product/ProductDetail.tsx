@@ -37,7 +37,9 @@ const ProductDetail = (): JSX.Element => {
     data: reviews,
     isLoading: loadingReviews,
   }: { data?: { reviews: Review[] }; isLoading: boolean } =
-    useGetProductReviewsQuery(productId);
+    useGetProductReviewsQuery(productId!, {
+      skip: !productId
+    }); // run this if productId is defined
   const {
     data: product,
     isLoading: productLoading,
@@ -46,7 +48,9 @@ const ProductDetail = (): JSX.Element => {
     data?: Product;
     isLoading: boolean;
     error?: any;
-  } = useGetProductDetailsQuery(productId);
+  } = useGetProductDetailsQuery(productId! , {
+    skip: !productId
+  }); // run this if productId is defined
 
   const addToCartHandler = () => {
     const updatedProduct: CartItem | undefined = cartItems.find(
@@ -85,9 +89,14 @@ const ProductDetail = (): JSX.Element => {
       navigate("/login?redirect=/product/" + productId);
       return;
     }
+    if (!productId) {
+      toast.error("Product not found");
+      return;
+    }
+
     try {
       await createReview({
-        productId,
+        productId: productId,
         review: { comment, rating: rating },
       }).unwrap();
       toast.success("Review submitted successfully");

@@ -26,7 +26,7 @@ import './main.scss';
 const Order = (): JSX.Element => {
   const { id: orderId } = useParams();
   const navigate = useNavigate();
-  const { data: order, isLoading, error }: { data?: OrderItem; isLoading: boolean; error?: any } = useGetOrderDetailsQuery(orderId);
+  const { data: order, isLoading, error }: { data?: OrderItem; isLoading: boolean; error?: any } = useGetOrderDetailsQuery(orderId!, { skip: !orderId });
   const [cancelOrder] = useCancelOrderMutation();
   const [hasError, setHasError] = useState(false);
 
@@ -36,6 +36,7 @@ const Order = (): JSX.Element => {
   }
 
   const handleCancelOrder = async () => {
+    if (!orderId) return;
     try {
       await cancelOrder(orderId).unwrap();
       toast.success("Order cancelled");

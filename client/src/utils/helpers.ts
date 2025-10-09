@@ -1,3 +1,4 @@
+import { CardInfo, PaymentData } from "../types/payment";
 import { UserInfo } from "../types/redux";
 
 export const convertToUTC = (time: string | null | undefined) => {
@@ -193,7 +194,7 @@ export const spacer = (): string => {
 
 export const bottomNavigationPaths = ["/", "/electronics", "/casual"];
 
-export const createPaymentData = (orderDetails: any, state: any): {[key: string]: string | number | boolean | {}} => {
+export const createPaymentData = (orderDetails: any, state: CardInfo): PaymentData => {
   return {
     locale: "",
     conversationId: "123456789",
