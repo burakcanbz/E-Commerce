@@ -1,25 +1,28 @@
+import { JSX } from "react";
 import { Carousel, Row, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { useGetTopRatedProductsQuery } from "../../slices/productsApiSlice";
+import { Product } from "../../types/redux.ts";
 import Loading from "../Common/Loading";
 import Message from "../Common/Message";
 import './main.scss';
 
-const ProductCarousel = () => {
-  const { data: products, isLoading, error } = useGetTopRatedProductsQuery();
+const ProductCarousel = (): JSX.Element => {
+  const { data: products, isLoading, error }: { data?: Product[]; isLoading: boolean; error?: any } = useGetTopRatedProductsQuery(undefined);
   return (
     <Row className="mx-auto">
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <Message variant="danger">{error.error}</Message>
+        <Message variant="danger">{error?.data || error?.message || error?.error}</Message>
       ) : (
         <div>
           <Carousel
             hover="pause"
             className="bg-dark mb-5 shadow-lg rounded"
             style={{ position: "relative" }}
+            {...({} as any)} 
           >
             {products?.map((item) => {
               return (

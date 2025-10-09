@@ -11,6 +11,7 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import { HeaderPropsType } from "../../types/components.ts";
 import { spacer } from "../../utils/helpers";
 import Typewriter from "typewriter-effect";
 import logo from "../../assets/buyzy.png";
@@ -27,8 +28,7 @@ const HeaderPresenter = ({
     handleSearch,
     searchItem,
     removeFromCartHandler
-}) => 
-  (
+  }: HeaderPropsType) => (
     <header>
       <Navbar
         expand="lg"
@@ -65,20 +65,18 @@ const HeaderPresenter = ({
               />
             </Form>
           ) : ( isDesktop &&
-            <Typewriter
-              className="buyzy"
-              options={{
-                strings: [`${spacer()}Welcome to Buyzy!`, `${spacer()}Enjoy your shopping`, `${spacer()}Fast delivery to your door`],
-                autoStart: true,
-                loop: true,
-                delay: 100,
-                pauseFor: 5000,
-                deleteSpeed: 100,
-                cursor: "",
-                wrapperClassName: "buyzy",
-                cursorClassName: "typewriter-cursor",
-              }}
-            />
+              <Typewriter
+                options={{
+                  strings: [`${spacer()}Welcome to Buyzy!`, `${spacer()}Enjoy your shopping`, `${spacer()}Fast delivery to your door`],
+                  autoStart: true,
+                  loop: true,
+                  delay: 100,
+                  pauseFor: 5000,
+                  deleteSpeed: 100,
+                  cursor: "",
+                  wrapperClassName: "buyzy",
+                  cursorClassName: "typewriter-cursor",
+                } as any} />
           )}
           <div className="d-flex align-items-center">
             <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShowOffcanvas} />
@@ -167,7 +165,7 @@ const HeaderPresenter = ({
                           <FaTrash
                             className="ms-2"
                             color="red"
-                            onClick={(e) => removeFromCartHandler(e, item._id)}
+                            onClick={(e: React.MouseEvent<any>) => removeFromCartHandler(e, item._id)}
                           />
                         </NavDropdown.Item>
                       ))

@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import App from "../App.tsx";
 import Home from "../pages/Home/Home.jsx";
-import PrivateRoute from "../components/Auth/PrivateRoute.jsx";
+import PrivateRoute from "../components/Auth/PrivateRoute.tsx";
 import Loading from "../components/Common/Loading";
 
 const ProductDetail = lazy(() => import("../pages/Product/ProductDetail.jsx"));
