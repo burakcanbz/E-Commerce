@@ -13,7 +13,7 @@
 - Order Creation 
 - Checkout process (shipping, payment method, etc)
 - User profile with orders
-- Payment Integration with iyzico
+- Demo Payment Integration with iyzico
 - Authentication - Authorization with JWT
 - Database seeder (products & users)
 
@@ -21,25 +21,28 @@
 ### Prerequisites
 Ensure you have the following installed on your system:
 
-1- Node.js (v14 or higher)
+1- Node.js (v14 or higher)<br>
   Download Node.js
   
-2- MongoDB
+2- React 18 + required<br>
+  Upgrade your react version to react 18 for local development.
+  
+4- MongoDB<br>
   Download MongoDB or use a cloud service like MongoDB Atlas.
   
-3- Git
+5- Git<br>
   Download Git
 
-4- Package Manager
-   Comes with Node.js. Use either npm or install yarn
+6- Package Manager<br>
+   Comes with Node.js. Use either npm or install yarn. Select which one is suitable with your OS.
 
-### Clone the Repository
+### Clone the Repository<br>
   Open a terminal and navigate to the directory where you want to store the project.
   Clone the repository:
 ```
-git clone https://github.com/burakcanbz/E-Commerce.git
+git clone https://github.com/burakcanbz/Buyzy-e-commerce.git
 
-cd ecommerce-web-app
+cd your_project_name
 ```
 ### Env Variables
   Rename the .env.example file to .env and add the following
