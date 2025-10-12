@@ -58,7 +58,7 @@ jobs:
       - name: Upload client build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: client-build
+          name: client-build-${{ github.run_id }}-${{ matrix.node-version }}
           path: ./client/dist
 
   cd:
