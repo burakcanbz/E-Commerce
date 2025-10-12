@@ -1,10 +1,10 @@
-FROM node:18-alpine as builder
+FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN npm cache clean --force
 RUN npm install --legacy-peer-deps
 
-FROM node:18-alpine as production
+FROM node:18-alpine
 WORKDIR /app
 COPY --from=builder /app .
 EXPOSE 3000
