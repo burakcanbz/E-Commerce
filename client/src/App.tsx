@@ -43,10 +43,6 @@ const App = (): JSX.Element => {
     <Profiler id="App" onRender={onRenderCallback}>
       <ErrorBoundary>
         <div className="main-div">
-          <div>
-            <Flag side="left" />
-            <Flag side="right" />
-          </div>
           <Header />
           <main className="py-3" style={{ flexGrow: 1, marginTop: 120 }}>
             <Outlet />
