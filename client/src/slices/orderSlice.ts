@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { OrderItem, OrderRootState } from "../types/redux";
+import { createSlice } from "@reduxjs/toolkit";
+
+import type { PayloadAction } from "@reduxjs/toolkit"; 
+import type { OrderItem, OrderRootState } from "../types/redux";
 
 const storedOrder = localStorage.getItem("order");
 
@@ -44,7 +46,7 @@ const orderSlice = createSlice({
       localStorage.setItem('order', JSON.stringify(state))
     },
 
-    clearOrder: (state, action: PayloadAction<void>) => {
+    clearOrder: (state) => {
       state.orders = [];
       localStorage.setItem('order', JSON.stringify(state));
     }

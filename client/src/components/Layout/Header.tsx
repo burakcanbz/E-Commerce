@@ -1,4 +1,4 @@
-import React, { useDeferredValue, useState, useMemo, useEffect, JSX } from "react";
+import React, { useDeferredValue, useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -9,15 +9,17 @@ import {
 } from "../../slices/cartSlice.ts";
 import { useGetPaginatedProductsQuery } from "../../slices/productsApiSlice";
 import { updateProduct, clearProduct } from "../../slices/productSlice";
-import { RootState, Product } from "../../types/redux.ts";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
-import { HeaderPropsType } from "../../types/components.ts";
 import { LIMIT, PAGE } from "../../constants/constants";
 import { clearOrder } from "../../slices/orderSlice";
 import { logout } from "../../slices/authSlice";
-import { AppDispatch } from "../../store/store.ts";
 import HeaderPresenter from "./HeaderPresenter";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { RootState, Product } from "../../types/redux.ts";
+import type { HeaderPropsType } from "../../types/components.ts";
+import type { AppDispatch } from "../../store/store.ts";
 
 const Header = (): JSX.Element => {
   const isDesktop = window.innerWidth >= 1400;

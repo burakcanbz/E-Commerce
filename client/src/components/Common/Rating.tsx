@@ -1,7 +1,7 @@
-import { JSX } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
-import { RatingPropsType } from "../../types/components";
+import type { JSX } from "react";
+import type { RatingPropsType } from "../../types/components";
 
 const Rating = ({ value, text, onChange }: RatingPropsType): JSX.Element => {
   const stars = [];

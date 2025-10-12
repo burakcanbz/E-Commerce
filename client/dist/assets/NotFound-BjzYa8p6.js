@@ -1,0 +1,1 @@
+import{j as s,b as t,d as e,I as o}from"./index-BR7e0FAz.js";const a="/assets/404-B_g2XvwE.png",d=()=>s.jsx(t,{children:s.jsx(e,{md:10,sx:12,className:"mx-auto text-center",children:s.jsx(o,{src:a,alt:"404 Not Found",fluid:!0,className:"my-5",style:{borderRadius:"20px",height:"70vh",width:"80vw"}})})});export{d as default};

@@ -1,12 +1,9 @@
-import { JSX } from "react";
 import FlagPortal from "./FlagPortal.tsx";
 import rightFlag from "../../assets/flag-right.jpg";
 import leftFlag from "../../assets/flag-left.jpg";
 
-
-interface FlagProps {
-  side: "left" | "right";
-}
+import type { JSX } from "react";
+import type { FlagProps } from "../../types/components";
 
 const Flag = ({ side }: FlagProps): JSX.Element => {
   const bg = side === "left" ? leftFlag : rightFlag;

@@ -1,11 +1,12 @@
-import { JSX } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
-import { RootState, CartItem } from "../../types/redux";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { RootState, CartItem } from "../../types/redux";
 
 
 const CardCheckoutBanner = (): JSX.Element => {

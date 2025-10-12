@@ -1,6 +1,7 @@
 import { apiSlice } from './apiSlice';
 import { ORDERS_URL } from '../constants/constants';
-import { OrderItem, OrderCreateInput, OrderPayInput } from '../types/redux';
+
+import type { OrderItem, OrderCreateInput, OrderPayInput } from '../types/redux';
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

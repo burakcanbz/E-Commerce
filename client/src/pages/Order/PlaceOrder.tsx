@@ -1,20 +1,22 @@
-import { useEffect, JSX } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { SerializedError } from "@reduxjs/toolkit";
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { toast } from "react-toastify";
 import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
 import { clearCartItems } from "../../slices/cartSlice.ts";
-import { AppDispatch } from "../../store/store.ts";
-import { RootState } from "../../types/redux.ts";
 import { setOrder } from "../../slices/orderSlice";
 
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
 import CustomContainer from "../../components/Common/CustomContainer";
+
+import type { JSX } from "react";
+import type { AppDispatch } from "../../store/store.ts";
+import type { RootState } from "../../types/redux.ts";
+import type { SerializedError } from "@reduxjs/toolkit";
 
 const PlaceOrder = (): JSX.Element => {
   const navigate = useNavigate();

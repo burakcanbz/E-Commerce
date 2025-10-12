@@ -1,5 +1,7 @@
-import React, { JSX } from "react";
+import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+
+import type { JSX } from "react"
 
 const FormContainer = ({ children }: {children: React.ReactNode}): JSX.Element => {
   return (

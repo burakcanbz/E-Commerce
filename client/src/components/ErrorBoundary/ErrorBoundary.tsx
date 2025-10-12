@@ -1,9 +1,9 @@
 import React from "react";
 import * as Sentry from "@sentry/react";
 
-import { ErrorBoundaryProps, ErrorBoundaryState } from "../../types/components";
 import Fallback from "./Fallback.tsx";
 
+import type{ ErrorBoundaryProps, ErrorBoundaryState } from "../../types/components";
 
 class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {

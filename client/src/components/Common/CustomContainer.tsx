@@ -1,5 +1,7 @@
-import React, { useEffect, useState, JSX } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+
+import type { JSX } from "react"
 
 const CustomContainer = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);

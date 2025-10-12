@@ -9,17 +9,10 @@ import { createPaymentData } from "../../utils/helpers";
 import { toast } from "react-toastify";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 
-type Focused = "number" | "name" | "expiry" | "cvc" | undefined;
+import type { JSX } from "react";
+import type { Focused, CardState } from "../../types/payment"; 
 
-interface CardState {
-  number: string;
-  expiry: string;
-  cvc: string;
-  name: string;
-  focus?: Focused;
-}
-
-const PaymentForm = () => {
+const PaymentForm = (): JSX.Element => {
   const { id: orderId } = useParams();
   const { data: orderDetails } = useGetOrderDetailsQuery(orderId!, { skip: !orderId });
   const [ payOrder] = usePayOrderMutation();

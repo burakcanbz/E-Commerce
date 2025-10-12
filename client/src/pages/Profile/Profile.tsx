@@ -1,4 +1,4 @@
-import { useEffect, JSX } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Table, Row, Col, Button, Alert } from "react-bootstrap";
 import { motion } from "framer-motion";
@@ -11,7 +11,9 @@ import StatusIcon from "../../components/Common/StatusIcon";
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
 import './main.scss';
-import { OrderItem } from "../../types/redux";
+
+import type { JSX } from "react";
+import type { OrderItem } from "../../types/redux";
 
 const Profile = (): JSX.Element => {
   const navigate = useNavigate();

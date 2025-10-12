@@ -1,14 +1,16 @@
-import { useEffect, useState, JSX } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import { RootState, shippingAddress } from "../../types/redux.ts";
 import { savePaymentMethod } from "../../slices/cartSlice.ts";
-import { AppDispatch } from "../../store/store.ts";
 import FormContainer from "../../components/Common/FormContainer";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { RootState, shippingAddress } from "../../types/redux.ts";
+import type{ AppDispatch } from "../../store/store.ts";
 
 const Payment = (): JSX.Element => {
   const [paymentMethod, setPaymentMethod] = useState<string>("Credit Card");
@@ -23,7 +25,7 @@ const Payment = (): JSX.Element => {
     navigate("/placeorder");
   };
 
-  const validateAddress = (data?: shippingAddress | null): {} => {
+  const validateAddress = (data?: shippingAddress | null): Record<string, string> => {
     const errors: Record<string, string> = {};
     if (!data?.address || data.address.trim() === "") {
       errors.address = "Address is required.";

@@ -1,15 +1,17 @@
-import { useState, useEffect, JSX } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { saveShippingAddress } from "../../slices/cartSlice.ts";
-import { AppDispatch } from "../../store/store.ts";
-import { RootState } from "../../types/redux.ts";
 
 import FormContainer from "../../components/Common/FormContainer";
 import CheckoutStepper from "../../components/Common/CheckoutStepper";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { AppDispatch } from "../../store/store.ts";
+import type { RootState } from "../../types/redux.ts";
 
 const Shipping = (): JSX.Element => {
   const { shippingAddress } = useSelector((state: RootState) => state.cart);

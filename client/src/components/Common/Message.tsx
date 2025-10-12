@@ -1,5 +1,6 @@
-import { JSX } from "react";
 import { Alert } from 'react-bootstrap';
+
+import type { JSX } from "react";
 
 interface MessageProps {
     variant?: string;

@@ -1,6 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "../utils/cartUtils.ts";
-import { CartRootState, CartItem, shippingAddress } from "../types/redux.ts";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { CartRootState, CartItem, shippingAddress } from "../types/redux.ts";
 
 const initialState: CartRootState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart")!)
@@ -44,12 +46,12 @@ const cartSlice = createSlice({
       return updateCart(state);
     },
 
-    clearCartItems: (state, action: PayloadAction<void>) => {
+    clearCartItems: (state) => {
       state.cartItems = [];
       return updateCart(state);
     },
 
-    clearShippingAddress: (state, action: PayloadAction<void>) => {
+    clearShippingAddress: (state) => {
       state.shippingAddress = {};
       return updateCart(state);
     },

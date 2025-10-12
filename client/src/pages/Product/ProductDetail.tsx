@@ -1,4 +1,4 @@
-import { useEffect, useState, JSX } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -8,13 +8,15 @@ import {
   useCreateReviewMutation,
 } from "../../slices/reviewsApiSlice";
 import { useGetProductDetailsQuery } from "../../slices/productsApiSlice";
-import { AppDispatch } from "../../store/store.ts";
-import { CartItem, Product, Review, RootState } from "../../types/redux.ts";
 import { addToCart } from "../../slices/cartSlice.ts";
 
 import ProductDetailPresenter from "./ProductDetailPresenter";
 import "./main.scss";
-import { ProductDetailPropsType } from "../../types/components.ts";
+
+import type { JSX } from "react";
+import type { ProductDetailPropsType } from "../../types/components.ts";
+import type { AppDispatch } from "../../store/store.ts";
+import type { CartItem, Product, Review, RootState } from "../../types/redux.ts";
 
 const ProductDetail = (): JSX.Element => {
   const [rating, setRating] = useState<number>(0);

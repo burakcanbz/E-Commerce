@@ -1,12 +1,13 @@
-import { JSX } from "react";
 import { Carousel, Row, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { useGetTopRatedProductsQuery } from "../../slices/productsApiSlice";
-import { Product } from "../../types/redux.ts";
 import Loading from "../Common/Loading";
 import Message from "../Common/Message";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { Product } from "../../types/redux.ts";
 
 const ProductCarousel = (): JSX.Element => {
   const { data: products, isLoading, error }: { data?: Product[]; isLoading: boolean; error?: any } = useGetTopRatedProductsQuery(undefined);

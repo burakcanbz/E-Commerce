@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { USERS_URL } from "../constants/constants";
-import { UserInfo, UserLoginInput, UserRegisterInput, UserUpdateInput } from "../types/redux"; // define these types
+
+import type { UserInfo, UserLoginInput, UserRegisterInput, UserUpdateInput } from "../types/redux"; // define these types
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

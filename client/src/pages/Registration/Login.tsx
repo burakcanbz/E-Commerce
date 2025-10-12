@@ -1,8 +1,6 @@
-import { useState, useEffect, JSX } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { SerializedError } from "@reduxjs/toolkit";
 import { Form, Button, Row, Col, Card, Image } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { BiLogIn } from "react-icons/bi";
@@ -10,12 +8,16 @@ import { toast } from "react-toastify";
 
 import { useLoginMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
-import { AppDispatch } from "../../store/store";
-import { RootState } from "../../types/redux";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Loading from "../../components/Common/Loading";
 import Logo from "../../assets/buyzy.png";
 import "./main.scss";
+
+import type { JSX } from "react";
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import type { SerializedError } from "@reduxjs/toolkit";
+import type { AppDispatch } from "../../store/store";
+import type { RootState } from "../../types/redux";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");

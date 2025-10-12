@@ -1,10 +1,11 @@
-import { JSX } from "react";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaLock } from "react-icons/fa";
 
 import CustomContainer from "../../components/Common/CustomContainer";
 import PaymentForm from "./PaymentForm";
+
+import type { JSX } from "react";
 
 const OrderPayment = (): JSX.Element => {
 

@@ -1,0 +1,1 @@
+import{j as s,bL as a,b as e,d as n,e as r}from"./index-BR7e0FAz.js";const i=({children:t})=>s.jsx(a,{children:s.jsx(e,{className:"justify-content-md-center",children:s.jsx(n,{xs:12,md:6,children:s.jsx(r,{className:"p-4 shadow-lg rounded-4 mt-5",style:{maxWidth:600,minHeight:300,width:"100%",margin:"auto",background:"white"},children:t})})})});export{i as F};

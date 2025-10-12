@@ -1,5 +1,7 @@
-import { createApi, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { logout } from './authSlice';
 import { BASE_URL } from '../constants/constants';
 
@@ -8,7 +10,7 @@ type BaseQueryArgs = string | { url: string; method?: string; body?: any };
 type BaseQueryCustomError = FetchBaseQueryError | { status: number; data: unknown } | undefined;
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NODE_ENV === 'development' ? BASE_URL : BASE_URL,
+  baseUrl: import.meta.env.VITE_BASE_URL,
   credentials: 'include',
 });
 
@@ -29,5 +31,5 @@ const baseQueryWithReauth: BaseQueryFn<BaseQueryArgs, unknown, BaseQueryCustomEr
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Product', 'Order', 'User', 'Payment', "Reviews"],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });

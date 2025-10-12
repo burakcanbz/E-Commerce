@@ -1,5 +1,6 @@
-import { JSX } from "react";
 import { Spinner } from "react-bootstrap";
+
+import type { JSX } from "react";
 
 const Loading = (): JSX.Element => {
   return (

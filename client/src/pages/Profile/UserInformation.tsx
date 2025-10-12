@@ -1,11 +1,13 @@
-import { useEffect, useState, useCallback, JSX } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Button, Card, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import { useUpdateMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
-import { RootState } from "../../types/redux";
+
+import type { JSX } from "react";
+import type { RootState } from "../../types/redux";
 
 const UserInformation = (): JSX.Element => {
   const user = useSelector((state: RootState) => state.auth?.userInfo);

@@ -1,5 +1,4 @@
-import { lazy, Suspense} from "react";
-import type { ReactNode } from "react";
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,6 +9,9 @@ import Home from "../pages/Home/Home";
 import PrivateRoute from "../components/Auth/PrivateRoute";
 import Loading from "../components/Common/Loading";
 
+import type { ReactElement } from "react";
+
+// Lazy load sayfalar
 const ProductDetail = lazy(() => import("../pages/Product/ProductDetail"));
 const Cart = lazy(() => import("../pages/Cart/Cart"));
 const Login = lazy(() => import("../pages/Registration/Login"));
@@ -23,10 +25,10 @@ const Profile = lazy(() => import("../pages/Profile/Profile"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 const CategoryPage = lazy(() => import("../pages/Category/CategoryPage"));
 
+// Suspense wrapper
 const withSuspense = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Component: React.LazyExoticComponent<React.ComponentType<any>>
-): ReactNode => (
+): ReactElement => (
   <Suspense
     fallback={
       <div
@@ -45,11 +47,14 @@ const withSuspense = (
   </Suspense>
 );
 
+// Router tanımı
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      {/* Ana sayfa */}
       <Route index element={<Home />} />
 
+      {/* Public lazy sayfalar */}
       <Route path="/product/:id" element={withSuspense(ProductDetail)} />
       <Route path="/cart" element={withSuspense(Cart)} />
       <Route path="/login" element={withSuspense(Login)} />
@@ -57,6 +62,7 @@ const router = createBrowserRouter(
       <Route path="/category" element={withSuspense(CategoryPage)} />
       <Route path="/*" element={withSuspense(NotFound)} />
 
+      {/* Private routes */}
       <Route element={<PrivateRoute />}>
         <Route path="/shipping" element={withSuspense(Shipping)} />
         <Route path="/payment" element={withSuspense(Payment)} />

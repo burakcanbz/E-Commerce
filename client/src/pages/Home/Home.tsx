@@ -1,11 +1,13 @@
-import { useState, useEffect, JSX } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { useGetProductCategoriesQuery } from "../../slices/productsApiSlice";
-import { HomePropsType } from "../../types/components";
-import { RootState } from "../../types/redux";
 import HomePresenter from "./HomePresenter";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { HomePropsType } from "../../types/components";
+import type { RootState } from "../../types/redux";
 
 const Home = (): JSX.Element => {
   const [isDesktop, setIsDesktop] = useState<boolean>(window.innerWidth >= 768);

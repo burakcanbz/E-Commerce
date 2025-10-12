@@ -1,5 +1,7 @@
-import { ProductRootState, Product } from './../types/redux';
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { ProductRootState, Product } from './../types/redux';
 
 
 const initialState: ProductRootState = {};
@@ -16,7 +18,7 @@ const productSlice = createSlice({
             state.searchedProducts = action.payload.filteredProducts;
             return state;
         },
-        clearProduct: (state, action: PayloadAction<void>) => {
+        clearProduct: (state) => {
             state.searchedProducts = [];
             return state;
         }

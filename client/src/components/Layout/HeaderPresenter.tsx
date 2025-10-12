@@ -11,10 +11,11 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import { HeaderPropsType } from "../../types/components.ts";
 import { spacer } from "../../utils/helpers";
 import Typewriter from "typewriter-effect";
 import logo from "../../assets/buyzy.png";
+
+import type { HeaderPropsType } from "../../types/components.ts";
 
 const HeaderPresenter = ({
     pathName,

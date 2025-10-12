@@ -1,4 +1,4 @@
-import { CartRootState } from "../types/redux";
+import type { CartRootState } from "../types/redux";
 
 const addDecimals = (num: number) => {
     return (num * 100 / 100).toFixed(2)

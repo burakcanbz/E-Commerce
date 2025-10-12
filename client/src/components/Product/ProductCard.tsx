@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { FaCartShopping } from "react-icons/fa6";
 
-import { ProductCardPropsType } from "../../types/components.ts";
-import { RootState } from "../../types/redux.ts";
 import { addToCart } from "../../slices/cartSlice.ts";
 import Rating from "../Common/Rating";
+
+import type { ProductCardPropsType } from "../../types/components.ts";
+import type { RootState } from "../../types/redux.ts";
 
 const ProductCard = React.memo(({ product, searchedProduct }: ProductCardPropsType) => {
   const p = product || searchedProduct;

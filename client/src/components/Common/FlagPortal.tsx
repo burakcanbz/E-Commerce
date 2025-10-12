@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
-import { FlagPortalProps } from "../../types/components";
+
+import type { FlagPortalProps } from "../../types/components";
 
 const FlagPortal = ({ render, id }: FlagPortalProps) => {
   const portalRoot = document.getElementById(id);

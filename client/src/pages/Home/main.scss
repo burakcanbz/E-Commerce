@@ -20,3 +20,27 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.swiper-button-prev {
+  left: 10px !important; /* default 0, değeri arttırarak içeri alırsın */
+}
+
+.swiper-button-next {
+  right: 10px !important; /* default 0, değeri arttırarak içeri alırsın */
+}
+
+/* Swiper butonlarının boyutunu değiştir */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 30px;   
+  height: 30px;
+  background-size: 30px 30px;
+  color: rgb(89, 86, 86);
+}
+
+/* optional: arrow icon rengini değiştir */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+  color: #333;
+}

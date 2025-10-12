@@ -1,8 +1,9 @@
-import { JSX } from "react";
 import { Row, Col, Image } from "react-bootstrap";
 
 import notFound from "../../assets/404.png";
 import './main.scss';
+
+import type { JSX } from "react";
 
 const NotFound = (): JSX.Element => {
   return (

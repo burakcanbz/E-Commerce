@@ -11,13 +11,13 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { hideUserName } from "../../utils/helpers";
-import { ProductDetailPropsType } from "../../types/components.ts";
-
 import CustomContainer from "../../components/Common/CustomContainer";
 import Rating from "../../components/Common/Rating";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
-import { Review } from "../../types/redux.ts";
+
+import type { Review } from "../../types/redux.ts";
+import type { ProductDetailPropsType } from "../../types/components.ts";
 
 const ProductDetailPresenter = ({
   product,

@@ -39,30 +39,17 @@ type BasketItem = {
   price: string;
 };
 
-type OrderDetails = {
-  _id: string;
-  itemsPrice: number;
-  totalPrice: number;
-  user: {
-    _id: string;
-    email: string;
-    phone?: string;
-  };
-  shippingAddress: {
-    address?: string;
-    city?: string;
-    country?: string;
-    postalCode?: string;
-  };
-  orderItems: {
-    _id: string;
-    name: string;
-    category?: string;
-    price: number;
-  }[];
-};
+export type Focused = "number" | "name" | "expiry" | "cvc" | undefined;
 
-export type CardInfo = {
+export interface CardState {
+  number: string;
+  expiry: string;
+  cvc: string;
+  name: string;
+  focus?: Focused;
+}
+
+export interface CardInfo {
   name: string;
   number: string;
   expiry: string;

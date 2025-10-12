@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { REVIEWS_URL } from "../constants/constants";
-import { CreateReviewInput, Review } from "../types/redux"; // make sure Review type is defined in your redux types
+
+import type { CreateReviewInput, Review } from "../types/redux";
 
 
 export const reviewsApiSlice = apiSlice.injectEndpoints({

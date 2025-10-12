@@ -1,20 +1,22 @@
-import { useState, useEffect, JSX } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { SerializedError } from "@reduxjs/toolkit";
 import { Card, Form, Button, Row, Col, Image } from "react-bootstrap";
 import { BiUserCircle } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 
 import { useRegisterMutation } from "../../slices/usersApiSlice";
-import { RootState, UserInfo } from "../../types/redux";
 
 import CustomContainer from "../../components/Common/CustomContainer";
 import Loading from "../../components/Common/Loading";
 import Logo from "../../assets/buyzy.png";
 import "./main.scss";
+
+import type { JSX } from "react";
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import type { SerializedError } from "@reduxjs/toolkit";
+import type { RootState, UserInfo } from "../../types/redux";
 
 const Register = (): JSX.Element => {
   const [name, setName] = useState<string>("");

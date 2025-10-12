@@ -1,5 +1,6 @@
-import { JSX } from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
+
+import type { JSX } from "react";
 
 const Fallback = (): JSX.Element => {
   return (

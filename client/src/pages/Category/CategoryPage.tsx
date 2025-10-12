@@ -1,16 +1,17 @@
-import { JSX } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { useGetAllProductsByCategoryQuery } from "../../slices/productsApiSlice";
 import { motion } from "framer-motion";
 
 import { getQueryParams } from "../../utils/helpers.ts";
-import { Product } from "../../types/redux.ts";
 import CustomContainer from "../../components/Common/CustomContainer";
 import ProductCard from "../../components/Product/ProductCard.tsx";
 import Loading from "../../components/Common/Loading";
 import Message from "../../components/Common/Message";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { Product } from "../../types/redux.ts";
 
 const CategoryPage = (): JSX.Element => {
   const location = useLocation();

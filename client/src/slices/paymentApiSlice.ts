@@ -1,7 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { PAYMENT_URL } from "../constants/constants";
-import { PaymentResponse, RefundResponse } from "../types/redux";
-import { PaymentData } from "../types/payment";
+import type { PaymentResponse, RefundResponse } from "../types/redux";
+import type { PaymentData } from "../types/payment";
 
 export const paymentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

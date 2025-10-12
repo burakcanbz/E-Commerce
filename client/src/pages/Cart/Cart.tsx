@@ -1,13 +1,15 @@
-import { useEffect, JSX } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { addToCart, removeFromCart, setCart } from "../../slices/cartSlice.ts";
-import { RootState, Product } from "../../types/redux.ts";
-import { AppDispatch } from "../../store/store.ts";
-import { CartPropsType } from "../../types/components.ts";
 import CartPresenter from "./CartPresenter.tsx";
 import './main.scss';
+
+import type { JSX } from "react";
+import type { RootState, Product } from "../../types/redux.ts";
+import type { AppDispatch } from "../../store/store.ts";
+import type { CartPropsType } from "../../types/components.ts";
 
 const Cart = (): JSX.Element => {
   const navigate = useNavigate();

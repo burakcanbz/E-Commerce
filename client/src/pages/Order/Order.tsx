@@ -1,4 +1,4 @@
-import { useState, JSX } from "react";
+import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Row,
@@ -16,12 +16,14 @@ import {
   useGetOrderDetailsQuery,
 } from "../../slices/ordersApiSlice";
 import { convertToUTC } from "../../utils/helpers";
-import { OrderItem } from "../../types/redux";
 
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
 import Loading from "../../components/Common/Loading";
 import './main.scss';
+
+import type { JSX } from "react";
+import type{ OrderItem } from "../../types/redux";
 
 const Order = (): JSX.Element => {
   const { id: orderId } = useParams();

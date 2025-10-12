@@ -1,6 +1,7 @@
 import { PRODUCTS_URL } from "../constants/constants";
 import { apiSlice } from "./apiSlice";
-import { CategorizedProductsParams, PaginatedProductsParams, Product } from "../types/redux"; 
+
+import type { CategorizedProductsParams, PaginatedProductsParams, Product } from "../types/redux"; 
 
 type Category = string;
 

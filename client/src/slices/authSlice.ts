@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthRootState, UserInfo } from '../types/redux';
+import { createSlice } from '@reduxjs/toolkit';
+
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { AuthRootState, UserInfo } from '../types/redux';
 
 const storedUserInfo = localStorage.getItem('userInfo');
 
@@ -15,7 +17,7 @@ const authSlice = createSlice({
             state.userInfo = action.payload;
             localStorage.setItem('userInfo', JSON.stringify(action.payload));
         },
-        logout: (state, action: PayloadAction<void>) => {
+        logout: (state) => {
              state.userInfo = null;
              localStorage.removeItem('userInfo');
         }

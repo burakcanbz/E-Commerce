@@ -1,4 +1,3 @@
-import { JSX } from 'react'
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -11,10 +10,12 @@ import {
   Card,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { CartPropsType } from "../../types/components.ts";
 import { FaTrash } from "react-icons/fa";
 import CustomContainer from "../../components/Common/CustomContainer";
 import Message from "../../components/Common/Message";
+
+import type { JSX } from 'react'
+import type { CartPropsType } from "../../types/components.ts";
 
 const CartPresenter = ({
     cartItems,

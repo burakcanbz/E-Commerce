@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { CartItem, UserInfo, Product, Review } from "./redux";
+import type { ReactNode } from "react";
+import type { CartItem, UserInfo, Product, Review } from "./redux";
 
 export interface ErrorBoundaryProps {
   children: ReactNode;
@@ -13,6 +13,11 @@ export interface ErrorBoundaryState {
 export interface FlagPortalProps {
   render: () => ReactNode;
   id: string;
+}
+
+
+export interface FlagProps {
+  side: "left" | "right";
 }
 
 export interface HeaderPropsType {
