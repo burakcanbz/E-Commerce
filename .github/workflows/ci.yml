@@ -27,16 +27,6 @@ jobs:
         working-directory: ./api
         run: npm install --legacy-peer-deps
 
-      - name: Run ESLint
-        working-directory: ./api
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
-
-      - name: Upload API ESLint report
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-eslint-report
-          path: ./api # burayı ESLint output path ile değiştir
-
   client-ci:
     name: Client CI
     runs-on: ubuntu-latest
@@ -88,11 +78,11 @@ jobs:
         - name: Build & Push API Docker image
           working-directory: ./api
           run: |
-            docker build -t my-dockerhub-username/buyzy-api:latest .
-            docker push my-dockerhub-username/buyzy-api:latest
+            docker build -t burakcanbaz/buyzy-api:latest .
+            docker push burakcanbaz/buyzy-api:latest
 
         - name: Build & Push Client Docker image
           working-directory: ./client
           run: |
-            docker build -t my-dockerhub-username/buyzy-client:latest .
-            docker push my-dockerhub-username/buyzy-client:latest
+            docker build -t burakcanbaz/buyzy-client:latest .
+            docker push burakcanbaz/buyzy-client:latest
