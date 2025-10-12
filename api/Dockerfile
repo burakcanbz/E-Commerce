@@ -1,8 +1,8 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
+COPY . .
 RUN npm cache clean --force
 RUN npm install --legacy-peer-deps
-COPY . .
 
 FROM node:18-alpine
 WORKDIR /app
