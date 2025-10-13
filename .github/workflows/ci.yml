@@ -91,13 +91,8 @@ jobs:
             docker build -t burakcanbaz/buyzy-api:latest .
             docker push burakcanbaz/buyzy-api:latest
         
-        - name: Download client build artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: client-build-${{ github.run_id }}-18
-            path: ./client/dist
-
         - name: Build & Push Client Docker image
+          working-directory: ./client
           run: |
-            docker build -t burakcanbaz/buyzy-client:latest ./client/dist
+            docker build -t burakcanbaz/buyzy-client:latest .
             docker push burakcanbaz/buyzy-client:latest
