@@ -81,7 +81,7 @@ jobs:
             echo "IYZICO_API_KEY=${{ secrets.IYZICO_API_KEY }}" >> .env
             echo "IYZICO_API_KEY_SECRET=${{ secrets.IYZICO_API_KEY_SECRET }}" >> .env
             echo "IYZICO_BASE_URL=${{ secrets.IYZICO_BASE_URL }}" >> .env
-            echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
+            echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
           working-directory: ./api
 
