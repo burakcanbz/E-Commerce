@@ -47,14 +47,13 @@ const withSuspense = (
   </Suspense>
 );
 
-// Router tanımı
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      {/* Ana sayfa */}
+      {/* Home page */}
       <Route index element={<Home />} />
 
-      {/* Public lazy sayfalar */}
+      {/* Public lazy pages */}
       <Route path="/product/:id" element={withSuspense(ProductDetail)} />
       <Route path="/cart" element={withSuspense(Cart)} />
       <Route path="/login" element={withSuspense(Login)} />

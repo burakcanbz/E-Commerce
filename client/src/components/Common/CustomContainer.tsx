@@ -20,6 +20,7 @@ const CustomContainer = ({ children }: { children: React.ReactNode }): JSX.Eleme
         maxWidth: "1475px",
         paddingLeft: isDesktop ? "20px" : "7px",
         paddingRight: isDesktop ? "20px" : "7px",
+        overflowX: "auto",
       }}
     >
       {children}

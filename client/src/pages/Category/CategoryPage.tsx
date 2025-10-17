@@ -17,7 +17,6 @@ const CategoryPage = (): JSX.Element => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const { category } = getQueryParams(queryParams);
-
   const { data: products, isLoading, isError }: { data?: Product[]; isLoading: boolean; isError?: any; } = useGetAllProductsByCategoryQuery(category);
 
   return isLoading ? (
@@ -25,11 +24,12 @@ const CategoryPage = (): JSX.Element => {
   ) : isError ? (
     <Message variant="danger">{(isError.error || isError.message || isError.data)}</Message>
   ) : (
-    <motion.div
-      initial={{ y: -200, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="category-page"
+    <>
+      <motion.div
+        initial={{ y: -200, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="category-page"
     >
       <div className="category-div">
         <h2
@@ -51,6 +51,7 @@ const CategoryPage = (): JSX.Element => {
         </Row>
       </CustomContainer>
     </motion.div>
+    </>
   );
 };
 

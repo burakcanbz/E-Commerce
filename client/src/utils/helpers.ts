@@ -51,7 +51,7 @@ export const spacer = (): string => {
   return "\u00A0".repeat(length);
 };
 
-export const bottomNavigationPaths = ["/", "/electronics", "/casual"];
+export const bottomNavigationPaths = ["/", "/category"];
 
 export const createPaymentData = (orderDetails: any, state: CardInfo): PaymentData => {
   return {

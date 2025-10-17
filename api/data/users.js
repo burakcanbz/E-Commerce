@@ -22,6 +22,27 @@ const users = [
         password: bcrypt.hashSync('123456', 10),
         image: { data: null, contentType: null},
         isAdmin: false,
+    },
+    {
+        name: 'Aziz Vefa',
+        email: 'vefa@gmail.com',
+        password: bcrypt.hashSync('123456', 10),
+        image: { data: null, contentType: null},
+        isAdmin: false,
+    },
+    {
+        name: 'Lemi Galip',
+        email: 'lemi@gmail.com',
+        password: bcrypt.hashSync('123456', 10),
+        image: { data: null, contentType: null},
+        isAdmin: false,
+    },
+    {
+        name: 'Chuck',
+        email: 'chuck@gmail.com',
+        password: bcrypt.hashSync('123456', 10),
+        image: { data: null, contentType: null},
+        isAdmin: false,
     }
 ];
 

@@ -49,9 +49,9 @@ const OrderPayment = (): JSX.Element => {
           </Col>
         </Row>
         </div>
-        <Row className="d-flex justify-content-center text-muted" style={{ marginTop: "100px" }}>
+        <Row className="d-flex justify-content-center text-center text-muted" style={{ marginTop: "50px" }}>
           We are here to help! If you have any questions or need assistance,
-          please contact our customer support team at{" "}
+          please contact our customer support team{" "}
           <p className="text-center mt-2">
           <a href="mailto:burak.canbaz.web@gmail.com">burak.canbaz.web@gmail.com</a>
           </p>
@@ -61,4 +61,4 @@ const OrderPayment = (): JSX.Element => {
   );
 };
 
-export default OrderPayment;
+export default OrderPayment; 

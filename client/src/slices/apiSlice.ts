@@ -3,7 +3,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { logout } from './authSlice';
-import { BASE_URL } from '../constants/constants';
 
 type BaseQueryArgs = string | { url: string; method?: string; body?: any };
 

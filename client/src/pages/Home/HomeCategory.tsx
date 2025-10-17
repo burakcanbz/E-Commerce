@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 
 import { useGetCategorizedProductsQuery } from "../../slices/productsApiSlice";
-import { FaArrowRight } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
 import { LIMIT, PAGE } from "../../constants/constants";
 import ProductCard from "../../components/Product/ProductCard.tsx";
 import Loading from "../../components/Common/Loading";
@@ -40,26 +40,25 @@ const HomeCategory = ({ category }: { category: string }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <span>
-        <button
-          className="btn btn-secondary mb-3"
-          onClick={(e) => {
+      <p
+      className="category-header"
+       onClick={(e) => {
             e.preventDefault();
             navigate(`/category?category=${category.toLowerCase()}`);
           }}
         >
-          {category}&nbsp;&nbsp;
-          <FaArrowRight />
-        </button>
-      </span>
+          See All&nbsp;
+          <IoIosArrowForward style={{ marginTop: "-2px" }} size={20}/>
+        </p>
       <Swiper
+        className="swiper-container"
         modules={[Autoplay, Navigation, Pagination]}
         slidesPerView={1.5}
         spaceBetween={10} 
         navigation
         pagination={{ clickable: true }}
         loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: ((Math.random() * 5) + 1) * 1000 , disableOnInteraction: false }}
         breakpoints={{
           344: { slidesPerView: 1.7 },
           365: { slidesPerView: 1.9 },

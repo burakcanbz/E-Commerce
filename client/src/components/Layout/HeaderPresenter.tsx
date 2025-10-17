@@ -121,6 +121,13 @@ const HeaderPresenter = ({
                     >
                       Casual
                     </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/category?category=home"
+                      onClick={handleCloseOffcanvas}
+                    >
+                      Home
+                    </NavDropdown.Item>
                   </NavDropdown>
 
                   {/* Cart */}

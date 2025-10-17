@@ -203,6 +203,141 @@ const products = [
     rating: 2,
     numReviews: 1,
   },
+  {
+    name: 'Pasyone Shoes',
+    image: '/images/pasyone.jpg',
+    description:
+      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
+    brand: 'Pasyone',
+    category: 'Casual',
+    price: 34.99,
+    countInStock: 0,
+    rating: 2,
+    numReviews: 1,
+  },
+  {
+    name: 'Pasyone Shoes',
+    image: '/images/pasyone.jpg',
+    description:
+      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
+    brand: 'Pasyone',
+    category: 'Casual',
+    price: 34.99,
+    countInStock: 0,
+    rating: 2,
+    numReviews: 1,
+  },
+  {
+    name: 'Lg Air Conditioner',
+    image: '/images/air-conditioner.jpg',
+    description:
+      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
+    brand: 'Lg',
+    category: 'Home',
+    price: 399.99,
+    countInStock: 54,
+    rating: 4.5,
+    numReviews: 6,
+  },
+  {
+    name: 'Philips Airfryer',
+    image: '/images/airfryer.jpg',
+    description:
+      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
+    brand: 'Philips',
+    category: 'Home',
+    price: 95.99,
+    countInStock: 30,
+    rating: 4,
+    numReviews: 6,
+  },
+  {
+    name: 'Arnica Blender',
+    image: '/images/blender.jpg',
+    description:
+      "Versatile and powerful, the Arnica blender is perfect for smoothies, soups, and sauces, making meal prep a breeze.",
+    brand: 'Arnica',
+    category: 'Home',
+    price: 199.99,
+    countInStock: 25,
+    rating: 3,
+    numReviews: 8,
+  },
+  {
+    name: 'Dyson Broom Vacuum Cleaner',
+    image: '/images/dyson.jpg',
+    description:
+      "Powerful and efficient, the Dyson Broom Vacuum Cleaner is designed for quick clean-ups and everyday messes.",
+    brand: 'Dyson',
+    category: 'Home',
+    price: 399.99,
+    countInStock: 54,
+    rating: 4.5,
+    numReviews: 6,
+  },
+  {
+    name: 'Breville Espresso Machine',
+    image: '/images/espresso.jpg',
+    description:
+      "Brew café-quality coffee at home with the Breville Espresso Machine, featuring precise temperature control and a built-in grinder.",
+    brand: 'Breville',
+    category: 'Home',
+    price: 299.99,
+    countInStock: 32,
+    rating: 5,
+    numReviews: 7,
+  },
+  {
+    name: 'Geepas Filter Machine',
+    image: '/images/filter-coffee.jpg',
+    description:
+      "Cook delicious coffee with the Geepas Filter Machine, featuring rapid air technology for healthier frying.",
+    brand: 'Geepas',
+    category: 'Home',
+    price: 399.99,
+    countInStock: 54,
+    rating: 4.5,
+    numReviews: 6,
+  },
+  {
+    name: 'Fakir Mixer',
+    image: '/images/mixer.jpg',
+    description:
+      "Cook delicious meals with the Fakir Mixer, featuring rapid air technology for healthier frying.",
+    brand: 'Fakir',
+    category: 'Home',
+    price: 59.99,
+    countInStock: 42,
+    rating: 3.5,
+    numReviews: 2,
+  },
+  {
+    name: 'Hausberg Tea Maker',
+    image: '/images/tea.jpg',
+    description:
+      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
+    brand: 'Philips',
+    category: 'Home',
+    price: 45.99,
+    countInStock: 54,
+    rating: 4.5,
+    numReviews: 6,
+  },
+  {
+    name: 'Arnice Toaster',
+    image: '/images/toast.jpg',
+    description:
+      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
+    brand: 'Philips',
+    category: 'Home',
+    price: 55.99,
+    countInStock: 54,
+    rating: 2,
+    numReviews: 1,
+  }
+
+
+
 ]
 
 module.exports = products;

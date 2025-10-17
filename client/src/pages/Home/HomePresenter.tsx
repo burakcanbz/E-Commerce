@@ -8,6 +8,7 @@ import CustomContainer from "../../components/Common/CustomContainer";
 
 import type { HomePropsType } from "../../types/components.ts";
 import type { Product } from "../../types/redux.ts";
+import TopCategories from "./TopCategories.tsx";
 
 const HomePresenter = ({ isDesktop, categories, searchedProducts }: HomePropsType) => {
 
@@ -33,11 +34,13 @@ const HomePresenter = ({ isDesktop, categories, searchedProducts }: HomePropsTyp
         <CustomContainer>
           <Row>
             <ProductCarousel />
+            <TopCategories />
           </Row>
         </CustomContainer>
       ) : (
         <Row>
           <ProductCarousel />
+          <TopCategories />
         </Row>
       )}
       <CustomContainer>

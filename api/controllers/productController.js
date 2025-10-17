@@ -36,6 +36,9 @@ exports.getPaginatedProducts = asyncHandler(async (req, res) => {
   const casual = await Product.find({ category: "Casual" })
     .skip(startIndex)
     .limit(limit);
+  const home = await Product.find({ category: "Home" })
+    .skip(startIndex)
+    .limit(limit);
   const totalProductCount = await Product.countDocuments();
   const totalPages = Math.ceil(totalProductCount / limit);
 
@@ -44,7 +47,8 @@ exports.getPaginatedProducts = asyncHandler(async (req, res) => {
     .json({
       electronics,
       casual,
-      categories: ["Electronics", "Casual"],
+      home,
+      categories: ["Electronics", "Casual", "Home"],
       totalProductCount,
       totalPages,
       currentPage: page,
@@ -61,6 +65,7 @@ exports.getPaginatedProducts = asyncHandler(async (req, res) => {
  */
 
 exports.getProductCategories = asyncHandler(async (req, res) => {
+  console.log(categories);
   res.status(200).json(categories);
 });
 
