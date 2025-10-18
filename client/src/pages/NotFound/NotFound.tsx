@@ -14,7 +14,7 @@ const NotFound = (): JSX.Element => {
           alt="404 Not Found"
           fluid
           className="my-5"
-          style={{ borderRadius: "20px", height: "70vh", width: "80vw" }}
+          style={{ borderRadius: "20px", height: "70vh", width: "40vw" }}
         />
       </Col>
     </Row>
