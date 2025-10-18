@@ -58,7 +58,7 @@ const HomeCategory = ({ category }: { category: string }) => {
         navigation
         pagination={{ clickable: true }}
         loop={true}
-        autoplay={{ delay: ((Math.random() * 5) + 1) * 1000 , disableOnInteraction: false, pauseOnMouseEnter: true }}
+        autoplay={{ delay: ((Math.random() * 2) + 3) * 1000 , disableOnInteraction: false, pauseOnMouseEnter: true }}
         breakpoints={{
           344: { slidesPerView: 1.7 },
           365: { slidesPerView: 1.9 },
