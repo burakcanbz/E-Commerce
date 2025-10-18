@@ -57,6 +57,7 @@ const CartPresenter = ({
                           <Col xs={11} sm={2} md={3} className="mx-auto">
                             <Link to={`/product/${item._id}`}>
                               <Image
+                                style={{ height: '200px', width: '200px',objectFit: 'contain' }}
                                 src={item.image}
                                 alt={item.name}
                                 fluid

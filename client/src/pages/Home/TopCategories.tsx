@@ -5,7 +5,7 @@ import categoriesData from "./CategoriesData.tsx";
 const TopCategories: React.FC = () => {
   return (
     <Container
-      className="d-flex justify-content-center my-3 mx-2"
+      className="d-flex justify-content-start my-3 mx-2"
       style={{ overflowX: "auto" }}
     >
       <Row
@@ -18,7 +18,7 @@ const TopCategories: React.FC = () => {
           <Col
             key={idx}
             xs="auto"
-            className="d-flex flex-column align-items-center"
+            className="category d-flex flex-column align-items-center"
             style={{ marginRight: 16 }}
           >
             <div className="top-categories-icon">{category.icon}</div>

@@ -1,5 +1,5 @@
 .swiper-button-prev {
-  left: 10px !important; 
+  left: 10px !important;
 }
 
 .swiper-button-next {
@@ -8,7 +8,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  width: 30px;   
+  width: 30px;
   height: 30px;
   background-size: 30px 30px;
   color: rgb(89, 86, 86);
@@ -26,8 +26,8 @@
 }
 
 .swiper-container {
-  padding-top: 20px !important;
-  height: 380px !important;
+  padding-top: 0px !important;
+  height: 360px !important;
   background: linear-gradient(to bottom, #e9e5e2, #ffffff) !important;
   border-radius: 10px;
 }
@@ -39,31 +39,38 @@
   cursor: pointer !important;
 }
 
-.top-categories-icon {
+.category {
   cursor: pointer;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
 
-.top-categories-icon:hover {
-  border: 2px solid rgb(185, 139, 170);
-}
+  .top-categories-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
 
-.top-categories-name {
-  width: 50px;
-  text-align: center;
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: 500;
-}
+  .top-categories-name {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    white-space: normal;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
 
+  &:hover .top-categories-icon {
+    border: 2px solid rgb(185, 139, 170);
+  }
 
-.category-name:hover {
-  text-decoration: dashed underline;
+  &:hover .top-categories-name {
+    color: rgb(203, 102, 19);
+  }
 }

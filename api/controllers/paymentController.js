@@ -16,7 +16,6 @@ const {
  */
 exports.getPayment = asyncHandler(async (req, res) => {
   const fulfilledPaymentReqBody = fillPaymentRequestBody(req.body.paymentInfo);
-  console.log(fulfilledPaymentReqBody)
 
   try {
     const result = await paymentCreate(fulfilledPaymentReqBody);

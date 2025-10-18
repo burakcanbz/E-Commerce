@@ -65,7 +65,6 @@ exports.getPaginatedProducts = asyncHandler(async (req, res) => {
  */
 
 exports.getProductCategories = asyncHandler(async (req, res) => {
-  console.log(categories);
   res.status(200).json(categories);
 });
 

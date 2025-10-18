@@ -21,7 +21,7 @@ const ProductCarousel = (): JSX.Element => {
         <div>
           <Carousel
             hover="pause"
-            className="bg-dark mb-5 shadow-lg rounded"
+            className="bg-dark mb-5 shadow rounded"
             style={{ position: "relative" }}
             {...({} as any)} 
           >

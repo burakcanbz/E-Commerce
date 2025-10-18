@@ -15,7 +15,6 @@ import type{ AppDispatch } from "../../store/store.ts";
 const Payment = (): JSX.Element => {
   const [paymentMethod, setPaymentMethod] = useState<string>("Credit Card");
   const { shippingAddress } = useSelector((state: RootState) => state.cart);
-  console.log("Shipping Address in Payment Page:", shippingAddress);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
