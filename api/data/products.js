@@ -204,30 +204,6 @@ const products = [
     numReviews: 1,
   },
   {
-    name: 'Pasyone Shoes',
-    image: '/images/pasyone.jpg',
-    description:
-      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
-    brand: 'Pasyone',
-    category: 'Casual',
-    price: 34.99,
-    countInStock: 0,
-    rating: 2,
-    numReviews: 1,
-  },
-  {
-    name: 'Pasyone Shoes',
-    image: '/images/pasyone.jpg',
-    description:
-      "Comfortable and trendy, women's casual shoes are designed for everyday wear, blending effortless style with all-day support.",
-    brand: 'Pasyone',
-    category: 'Casual',
-    price: 34.99,
-    countInStock: 0,
-    rating: 2,
-    numReviews: 1,
-  },
-  {
     name: 'Lg Air Conditioner',
     image: '/images/air-conditioner.jpg',
     description:
