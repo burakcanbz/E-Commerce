@@ -8,7 +8,7 @@
     "dev": "vite --host",
     "test": "vitest run",
     "client": "vite",
-    "build": "tsc -b && vite build --mode production",
+    "build": "tsc && vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview"
   },
