@@ -1,9 +1,56 @@
-.caption{
-    background-color: rgba(0, 0, 0, 0.5) !important;
+.caption {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .carousel-caption {
-    bottom: 10px !important;
-    left: 30% !important;
-    right: 30% !important;
+  bottom: 10px !important;
+  left: 30% !important;
+  right: 30% !important;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.card-text-container {
+  position: relative;
+  overflow: hidden;
+  height: 20px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 10px;
+
+}
+
+.card-text-inner-contents-animation {
+  white-space: nowrap;
+  text-align: center;
+  transform: translate(0%, -48%);
+  font-size: 13px;
+  font-weight: 500;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.8);
+  animation: fadeInOut 5s ease-in-out infinite;
+}
+
+.card-text-inner-contents {
+  white-space: nowrap;
+  text-align: center;
+  transform: translate(0%, -48%);
+  font-size: 13px;
+  font-weight: 500;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.8);
 }

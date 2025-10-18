@@ -53,6 +53,16 @@ export const spacer = (): string => {
 
 export const bottomNavigationPaths = ["/", "/category"];
 
+export const getRandomText = (): string => {
+  const texts = [
+    "New Arrival",
+    "Best Seller",
+    "Limited Offer",
+  ];
+  const randomIndex = Math.floor(Math.random() < 0.5 ? Math.random() * texts.length : Math.random() * texts.length);
+  return texts[randomIndex];
+}
+
 export const createPaymentData = (orderDetails: any, state: CardInfo): PaymentData => {
   return {
     locale: "",
