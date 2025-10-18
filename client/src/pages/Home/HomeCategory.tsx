@@ -54,11 +54,11 @@ const HomeCategory = ({ category }: { category: string }) => {
         className="swiper-container"
         modules={[Autoplay, Navigation, Pagination]}
         slidesPerView={1.5}
-        spaceBetween={10} 
+        spaceBetween={10}
         navigation
         pagination={{ clickable: true }}
         loop={true}
-        autoplay={{ delay: ((Math.random() * 5) + 1) * 1000 , disableOnInteraction: false }}
+        autoplay={{ delay: ((Math.random() * 5) + 1) * 1000 , disableOnInteraction: false, pauseOnMouseEnter: true }}
         breakpoints={{
           344: { slidesPerView: 1.7 },
           365: { slidesPerView: 1.9 },

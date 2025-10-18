@@ -8,6 +8,16 @@
   right: 30% !important;
 }
 
+.card {
+  transition: transform 0.3s ease; 
+  transform-origin: center;       
+  will-change: transform;         
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
 @keyframes fadeInOut {
   0% {
     opacity: 0;

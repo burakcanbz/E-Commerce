@@ -40,7 +40,7 @@ const ProductCard = React.memo(
 
     return (
       <Card
-        className="my-3 p-2 rounded shadow-lg"
+        className="card my-3 p-2 rounded shadow-lg"
         style={{
           minWidth: 180,
           maxWidth: 180,
