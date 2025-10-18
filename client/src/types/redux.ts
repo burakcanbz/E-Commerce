@@ -128,6 +128,14 @@ export interface PaginatedProductsParams {
   limit: number;
 }
 
+export interface PaginatedProductsType {
+  totalPages: number;
+  totalProductionCount: number;
+  currentPage: number;
+  categories: string[];
+  [key: string]: Product[] | string | string[] | number;
+};
+
 export interface CategorizedProductsParams {
   category: string;
   page: number;

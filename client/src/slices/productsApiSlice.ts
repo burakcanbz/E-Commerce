@@ -2,6 +2,7 @@ import { PRODUCTS_URL } from "../constants/constants";
 import { apiSlice } from "./apiSlice";
 
 import type { CategorizedProductsParams, PaginatedProductsParams, Product } from "../types/redux"; 
+import type { PaginatedProductsType } from "../types/redux";
 
 type Category = string;
 
@@ -13,7 +14,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
-    getPaginatedProducts: builder.query<Product[], PaginatedProductsParams>({
+    getPaginatedProducts: builder.query<PaginatedProductsType, PaginatedProductsParams>({
       query: ({ page, limit }) => ({
         url: `${PRODUCTS_URL}/paginated?page=${page}&limit=${limit}`,
       }),
