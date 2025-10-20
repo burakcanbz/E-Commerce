@@ -1,4 +1,6 @@
 # Buyzy E-commerce Web Application
+**Important Note:** Auth is provided for Android devices, Chrome, and Mozilla.  
+iOS devices and Safari have limitations regarding cross-site cookies due to [Intelligent Tracking Prevention](https://www.apple.com/safari/docs/Safari_White_Paper_Nov_2019.pdf).
 
 ## Description
  Buyzy is a full-stack responsive e-commerce web application designed to provide a smooth and intuitive shopping experience for users. The platform supports features like browsing products, managing a shopping cart, and secure checkout. It built using modern web technologies to ensure high performance, scalability, and ease of use for both customers and administrators.
