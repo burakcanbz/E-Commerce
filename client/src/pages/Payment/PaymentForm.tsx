@@ -3,19 +3,22 @@ import { useParams } from "react-router-dom";
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import Cards from "react-credit-cards-2";
 
-import { useGetOrderDetailsQuery } from "../../slices/ordersApiSlice";
+import { useGetOrderDetailsQuery, usePaySelectedOrderMutation } from "../../slices/ordersApiSlice";
 import { usePayOrderMutation } from "../../slices/paymentApiSlice";
 import { createPaymentData } from "../../utils/helpers";
 import { toast } from "react-toastify";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 import type { JSX } from "react";
-import type { Focused, CardState } from "../../types/payment"; 
+import type { Focused, CardState } from "../../types/payment";
 
 const PaymentForm = (): JSX.Element => {
   const { id: orderId } = useParams();
   const { data: orderDetails } = useGetOrderDetailsQuery(orderId!, { skip: !orderId });
-  const [ payOrder] = usePayOrderMutation();
+
+  const [payOrder] = usePayOrderMutation();
+  const [paySelectedOrder] = usePaySelectedOrderMutation();
+
   const [state, setState] = useState<CardState>({
     number: "",
     expiry: "",
@@ -24,34 +27,55 @@ const PaymentForm = (): JSX.Element => {
     focus: undefined,
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = evt.target;
     setState((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleInputFocus = (evt: React.FocusEvent<HTMLInputElement>): void => {
-    setState((prev) => ({ ...prev, focus: evt.target.name as Focused }) );
+    setState((prev) => ({ ...prev, focus: evt.target.name as Focused }));
   };
 
-  const handlePayment = async() => {
-    try{
-      if(!orderDetails) throw new Error("Order details not found");
-      const paymentResult = await payOrder(createPaymentData(orderDetails, state)).unwrap();
-      if (paymentResult.status === "success") {
-        toast.success("Payment successful!");
-      }
-      else {
-        toast.error("Payment failed. Please try again.");
-      }
-    }
-    catch(err){
-      console.error("Payment failed:", err);
-      toast.error("Payment failed. Please try again.");
-    }
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!state.number || !state.name || !state.expiry || !state.cvc) {
+      toast.error("Lütfen tüm alanları doldurun");
+      return;
+    }
+
+    if (!orderDetails) {
+      toast.error("Order bulunamadı");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // 1) Ödeme isteği
+      const paymentResult = await payOrder(
+        createPaymentData(orderDetails, state)
+      ).unwrap();
+
+      if (paymentResult.status === "success") {
+        // 2) Order isPaid ve paidAmount güncelle
+        await paySelectedOrder({
+          orderId: orderDetails._id,
+          paidAmount: orderDetails.totalPrice,
+        }).unwrap();
+
+        toast.success("Ödeme başarılı ve sipariş güncellendi!");
+      } else {
+        toast.error("Ödeme başarısız. Lütfen tekrar deneyin.");
+      }
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      toast.error(err?.data?.message || "Ödeme başarısız!");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -72,7 +96,7 @@ const PaymentForm = (): JSX.Element => {
                 expiry={state.expiry}
                 cvc={state.cvc}
                 name={state.name}
-                focused={(state.focus !== "cvc" ? state.focus : undefined)}
+                focused={state.focus !== "cvc" ? state.focus : undefined}
               />
             </Row>
             <Row>
@@ -116,7 +140,7 @@ const PaymentForm = (): JSX.Element => {
                 placeholder: "245",
                 maxLength: 3,
               },
-            ].map((field: { id: string; label: string; name: string; placeholder: string; maxLength?: number }) => (
+            ].map((field) => (
               <Form.Group className="mb-3" controlId={field.id} key={field.id}>
                 <Form.Label
                   className="fw-semibold"
@@ -128,7 +152,7 @@ const PaymentForm = (): JSX.Element => {
                   type="text"
                   name={field.name}
                   placeholder={field.placeholder}
-                  value={(state[field.name as keyof CardState] as string)}
+                  value={state[field.name as keyof CardState] as string}
                   onChange={handleInputChange}
                   onFocus={handleInputFocus}
                   maxLength={field.maxLength || undefined}
@@ -142,15 +166,15 @@ const PaymentForm = (): JSX.Element => {
                 type="submit"
                 className="w-50 py-2 rounded-3"
                 style={{
-                  backgroundColor: "#343a40", 
+                  backgroundColor: "#343a40",
                   color: "#fff",
                   border: "none",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                   transition: "all 0.3s",
                 }}
-                onClick={handlePayment}
+                disabled={isLoading}
               >
-                Pay Now
+                {isLoading ? "İşleniyor..." : "Pay Now"}
               </Button>
             </div>
           </Form>

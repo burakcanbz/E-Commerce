@@ -88,11 +88,11 @@ exports.getOrderById = asyncHandler(async (req, res) => {
  */
 exports.updateOrderToPaid = asyncHandler(async (req, res) => {
   try {
-    const { amount } = req.body;
+    const { paidAmount } = req.body;
     const order = await Order.findById(req.params.id);
     if (order) {
       order.isPaid = true;
-      order.paidAmount = amount;
+      order.paidAmount = paidAmount;
       order.paidAt = Date.now();
       order.paymentResult = {
         id: req.body.id,
@@ -126,6 +126,7 @@ exports.cancelOrder = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: "Order not found." });
   }
   order.status = "Cancelled";
+  order.isPaid = false;
   order.cancelledAt = Date.now();
   const cancelledOrder = await order.save();
   return res.status(200).json({ cancelledOrder });
